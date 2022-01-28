@@ -14,7 +14,7 @@ public class HoldableItem : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject != GameObject.FindGameObjectWithTag("Player"))
+        if (col.gameObject != GameObject.FindGameObjectWithTag("Player") && pickup.heldItem == this.gameObject)
         {
             pickup.DropHeldItem();
         }

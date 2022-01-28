@@ -16,7 +16,7 @@ public class PlayerPickup : MonoBehaviour
 {
     Transform playerCameraTransform;
     [SerializeField] LayerMask rayMask;
-    [SerializeField] GameObject heldItem;
+    public GameObject heldItem;
 
     void Awake()
     {
@@ -48,7 +48,10 @@ public class PlayerPickup : MonoBehaviour
 
     void LateUpdate()
     {
-        heldItem.transform.localPosition = new Vector3(0, 0, 1.5f);
+        if (heldItem != null)
+        {
+            heldItem.transform.localPosition = new Vector3(0, 0, 1.5f);
+        }
     }
 
     public void DropHeldItem()
