@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
 /*
 Quick^tm note from Cam:
 All holdable items should have the "HoldableItem" script on it
@@ -12,11 +7,17 @@ hits an object, the player drops it. Can change this in the future if we want.
 I was also thinking that we should maybe make an "Interact" script that any script can call and it would find the item infront of it (instead of
 having one in a bunch of different scripts)
 */
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class PlayerPickup : MonoBehaviour
 {
     Transform playerCameraTransform;
     [SerializeField] LayerMask rayMask;
     public GameObject heldItem;
+    Vector3 mouseRotateStartPoint;
+    Quaternion itemStartRotation;
 
     void Awake()
     {
@@ -43,6 +44,28 @@ public class PlayerPickup : MonoBehaviour
         else if(Input.GetButtonDown("Interact") && heldItem != null)
         {
             DropHeldItem();
+        }
+        RotateHeldItem();
+    }
+
+    void RotateHeldItem()
+    {
+        if (Input.GetButtonDown("Fire1") && heldItem != null)
+        {
+            mouseRotateStartPoint = Input.mousePosition;
+            itemStartRotation = heldItem.transform.rotation;
+            Cursor.lockState = CursorLockMode.None;
+            playerCameraTransform.GetComponent<PlayerLook>().canLook = false;
+        }
+        else if (Input.GetButton("Fire1") && heldItem != null)
+        {
+            Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
+            heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.x / Screen.width) * -360, (distBetweenStartPoint.y / Screen.width) * -360, 0));
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            playerCameraTransform.GetComponent<PlayerLook>().canLook = true;
         }
     }
 
