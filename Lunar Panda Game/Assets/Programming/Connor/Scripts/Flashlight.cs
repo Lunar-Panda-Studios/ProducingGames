@@ -6,47 +6,47 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
-    public GameObject lightSource;
+    public KeyCode toggleLightButton; //assign this in the Unity Editor
+    private Light lightSource; //creating lightsource to assign at runtime
 
     const float maxBatteryLife = 60; //total battery life 
+    public float powerUsage = 1f;
     float batteryLife = maxBatteryLife; //current battery life will change this later after designers say what they want
     bool powerOn = false; //Flashlight starts disabled
 
     void Start()
     {
-        
+        lightSource = this.gameObject.GetComponent<Light>(); //assigning the spotlight to access it
     }
 
     void Update()
     {
-        toggleLight();
+        toggleLight(); //runs the toggleLight function.
     }
 
     void toggleLight()
     {
-        if (Input.GetKeyDown("")) //Insert key here (I didn't want to mess with project settings on my branch)
+        if (Input.GetKeyDown(toggleLightButton) && batteryLife > 0) //press key assigned in unity editor to run this code.
         {
             switch (powerOn)
             {
-                case false:
+                case false: //if flashlight off, turn on
                     powerOn = true;
+                    lightSource.intensity = 10;
                     break;
 
-                case true:
+                case true: //if flashlight on turn off
                     powerOn = false;
+                    lightSource.intensity = 0;
                     break;
             }
         }
 
-        if (!powerOn)
+        if (powerOn && batteryLife > 0) //uses battery when flashlight is on.
         {
-            lightSource.SetActive(false);
-        }
-
-        else
-        {
-            lightSource.SetActive(true);
+            batteryLife -= (powerUsage * Time.deltaTime); //set usage to 1 in Unity inspector for it to lose 1 batteryLife/second. batteryLife is set to 60.
         }
     }
+
 
 }
