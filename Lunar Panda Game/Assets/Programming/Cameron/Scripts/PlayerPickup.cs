@@ -57,7 +57,7 @@ public class PlayerPickup : MonoBehaviour
             mouseRotateStartPoint = Input.mousePosition;
             itemStartRotation = heldItem.transform.rotation;
             Cursor.lockState = CursorLockMode.None;
-            playerCameraTransform.GetComponent<PlayerLook>().canLook = false;
+            playerCameraTransform.GetComponent<lockMouse>().canLook = false;
         }
         else if (Input.GetButton("Fire1") && heldItem != null)
         {
@@ -67,7 +67,7 @@ public class PlayerPickup : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             Cursor.lockState = CursorLockMode.Locked;
-            playerCameraTransform.GetComponent<PlayerLook>().canLook = true;
+            playerCameraTransform.GetComponent<lockMouse>().canLook = true;
         }
     }
 
