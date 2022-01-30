@@ -6,6 +6,8 @@ I tested this in my own scene and it worked well. Due to the lack of information
 hits an object, the player drops it. Can change this in the future if we want.
 I was also thinking that we should maybe make an "Interact" script that any script can call and it would find the item infront of it (instead of
 having one in a bunch of different scripts)
+
+With the rotation, I will have to integrate it with the character looking code but it works pretty well. I could also change the keybindings if needed
 */
 using System.Collections;
 using System.Collections.Generic;
