@@ -21,6 +21,7 @@ public class PlayerPickup : MonoBehaviour
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
     [SerializeField] float pickupDist = 3f;
+    [SerializeField] float holdDist = 1.5f;
 
     void Awake()
     {
@@ -84,7 +85,7 @@ public class PlayerPickup : MonoBehaviour
     {
         if (heldItem != null)
         {
-            heldItem.transform.localPosition = new Vector3(0, 0, 1.5f);
+            heldItem.transform.localPosition = new Vector3(0, 0, holdDist);
         }
     }
 
