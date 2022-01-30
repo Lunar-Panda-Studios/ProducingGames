@@ -18,6 +18,7 @@ public class Flashlight : MonoBehaviour
     void Start()
     {
         lightSource = this.gameObject.GetComponent<Light>(); //assigning the spotlight to access it
+        lightSource.intensity = 0;
     }
 
     void Update()
