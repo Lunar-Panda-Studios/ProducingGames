@@ -20,6 +20,7 @@ public class PlayerPickup : MonoBehaviour
     public GameObject heldItem;
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
+    [SerializeField] float pickupDist = 3f;
 
     void Awake()
     {
@@ -31,13 +32,13 @@ public class PlayerPickup : MonoBehaviour
         Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward) * 4f, Color.green);
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {
-            print("Interact Key/Button Pressed");
             RaycastHit hit;
-            if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, 3f))
+            //Casts a ray from the camera
+            if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
-                    //could put the below in its own function
+                    //if the ray hits a holdable item, the player picks it up
                     PickupItem(hit.transform);
                 }
                 
@@ -45,6 +46,7 @@ public class PlayerPickup : MonoBehaviour
         }
         else if(Input.GetButtonDown("Interact") && heldItem != null)
         {
+            //if the player is holding an item and presses 'e', it drops said item
             DropHeldItem();
         }
         RotateHeldItem();
@@ -52,20 +54,27 @@ public class PlayerPickup : MonoBehaviour
 
     void RotateHeldItem()
     {
+        //the frame the player clicks and is holding an item
         if (Input.GetButtonDown("Fire1") && heldItem != null)
         {
+            //setup/start the rotation mode
             mouseRotateStartPoint = Input.mousePosition;
             itemStartRotation = heldItem.transform.rotation;
             Cursor.lockState = CursorLockMode.None;
             playerCameraTransform.GetComponent<lockMouse>().canLook = false;
         }
+        //while the mouse button is down and player is holding an item
         else if (Input.GetButton("Fire1") && heldItem != null)
         {
+            //get the distance between the first clicks mouse position, and the current mouse position
             Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
+            //rotate the held item based on the distance between the start mouse pos and the current mouse pos
             heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.x / Screen.width) * -360, (distBetweenStartPoint.y / Screen.width) * -360, 0));
         }
+        //the frame the player stops pressing the mouse button
         if (Input.GetButtonUp("Fire1"))
         {
+            //stop rotating the object
             Cursor.lockState = CursorLockMode.Locked;
             playerCameraTransform.GetComponent<lockMouse>().canLook = true;
         }
