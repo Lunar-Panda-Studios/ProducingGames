@@ -12,23 +12,19 @@ public class lockMouse : MonoBehaviour
     private float mouseY;
 
     private float xRotation = 0.0f;
+    private float newYRotation = 0;
 
     public float cameraUpperBoundsX;
     public float cameraLowerBoundsX;
     public float cameraUpperBoundsY;
     public float cameraLowerBoundsY;
-
-    public bool canLook;
     
     void Start()
     {
-        canLook = true;
     }
 
     void Update()
     {
-        if (canLook)
-        {
             Cursor.lockState = CursorLockMode.Locked;
             mouseX = Input.GetAxis("Mouse X") * cameraRotateSpeed;
             mouseY = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
@@ -36,26 +32,7 @@ public class lockMouse : MonoBehaviour
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, cameraLowerBoundsX, cameraUpperBoundsX);
 
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            playerObj.Rotate(Vector3.up * mouseX);
-
-            //if ((Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0))
-            //{
-            //    transform.eulerAngles += new Vector3(cameraRotateSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, -cameraRotateSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0);
-            //}
-            //checkBounds();
-        }
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        playerObj.Rotate(Vector3.up * mouseX);
     }
-
-    private void checkBounds()
-    {
-        if (transform.eulerAngles.x > cameraUpperBoundsX)
-        {
-            transform.eulerAngles = new Vector3(cameraUpperBoundsX, transform.eulerAngles.y, 0);
-        }
-        if (transform.eulerAngles.x < cameraLowerBoundsX)
-        {
-            transform.eulerAngles = new Vector3(cameraLowerBoundsX, transform.eulerAngles.y, 0);
-        }
-    }
-}
+ }

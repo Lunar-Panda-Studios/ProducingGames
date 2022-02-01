@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     private Rigidbody p_rigidbody;
+    private float jumpValue;
     public float p_speed;
 
     void Start()
@@ -14,13 +15,16 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Horizontal"))
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        if (gameObject.GetComponent<playerJump>().getJumpStatus() == true)
         {
-            transform.Translate(p_speed * Time.deltaTime * (Input.GetAxis("Horizontal")), 0, 0);
+            
         }
-        if (Input.GetButton("Vertical"))
+        else
         {
-            transform.Translate(0, 0, p_speed * Time.deltaTime * (Input.GetAxis("Vertical")));
+            //jumpValue = (-1 * transform.up)
         }
+        p_rigidbody.velocity = ((transform.forward * z) * p_speed) + ((transform.right * x) * p_speed) + (new Vector3 (0, p_rigidbody.velocity.y, 0));
     }
 }
