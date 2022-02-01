@@ -21,21 +21,18 @@ public class lockMouse : MonoBehaviour
     
     void Start()
     {
-        
     }
 
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            mouseX = Input.GetAxis("Mouse X") * cameraRotateSpeed;
+            mouseY = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
 
-        mouseX = Input.GetAxis("Mouse X") * cameraRotateSpeed;
-        mouseY = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, cameraLowerBoundsX, cameraUpperBoundsX);
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, cameraLowerBoundsX, cameraUpperBoundsX);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerObj.Rotate(Vector3.up * mouseX);
     }
-}
+ }
