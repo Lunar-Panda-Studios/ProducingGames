@@ -5,15 +5,11 @@ using UnityEngine;
 public class cameraAttach : MonoBehaviour
 {
     public GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
+        //The camera's position is snapped onto the player's on every frame
         transform.position = player.transform.position;
     }
 }
