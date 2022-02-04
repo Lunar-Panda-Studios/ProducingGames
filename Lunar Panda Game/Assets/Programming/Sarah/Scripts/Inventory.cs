@@ -71,7 +71,6 @@ public class Inventory : MonoBehaviour
     {
         player.enabled = !player.enabled;
         mouse.canLook = !mouse.canLook;
-        print(docInventory.activeInHierarchy);
         docInventory.SetActive(!docInventory.activeInHierarchy);
 
         //Can't toggle thus needed to be an if statement to check if opening or closing inventory
@@ -124,7 +123,6 @@ public class Inventory : MonoBehaviour
     void addSlot(GameObject data)
     {
         //slots[slotAmount].GetComponent<Image>().sourceImage = data.GetComponent<DocumentData>().inventoryIcon;
-        print(slotAmount);
         slots[slotAmount].SetActive(true);
         slotAmount++;
     }
