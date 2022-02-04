@@ -7,6 +7,7 @@ public class HoldableItem : MonoBehaviour
 
     [SerializeField] PlayerPickup pickup;
 
+
     void Awake()
     {
         pickup = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPickup>();
@@ -19,6 +20,7 @@ public class HoldableItem : MonoBehaviour
         {
             pickup.DropHeldItem();
         }
-        
     }
+
+    
 }

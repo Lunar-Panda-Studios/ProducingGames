@@ -22,6 +22,7 @@ public class PlayerPickup : MonoBehaviour
     Quaternion itemStartRotation;
     [SerializeField] float pickupDist = 3f;
     [SerializeField] float holdDist = 1.5f;
+    [SerializeField] GameObject GOLookingAt = null;
 
     void Awake()
     {
@@ -41,6 +42,10 @@ public class PlayerPickup : MonoBehaviour
                 {
                     //if the ray hits a holdable item, the player picks it up
                     PickupItem(hit.transform);
+                    if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                    GOLookingAt = null;
+                    
                 }
                 
             }
@@ -51,6 +56,41 @@ public class PlayerPickup : MonoBehaviour
             DropHeldItem();
         }
         RotateHeldItem();
+        CheckInfront();
+        
+    }
+
+    void CheckInfront()
+    {
+        RaycastHit hit;
+        //Casts a ray from the camera
+        if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
+        {
+            //if the item is holdable, toggle the glowing material
+            if (hit.transform.GetComponent<HoldableItem>() && heldItem == null)
+            {
+                if (GOLookingAt != hit.transform.gameObject || GOLookingAt == null)
+                {
+                    GOLookingAt = hit.transform.gameObject;
+                    if (GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+
+                }
+            }
+            else
+            {
+                if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                GOLookingAt = null;
+            }
+        }
+        else
+        {
+            if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+            GOLookingAt = null;
+        }
+        
     }
 
     void RotateHeldItem()
