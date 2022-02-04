@@ -7,14 +7,18 @@ public class ViewDocument : MonoBehaviour
 {
     private bool showText = false;
     private bool showDoc = false;
+    [Header("Document UI")]
     public GameObject text;
     public GameObject document;
     internal bool inInventory = false;
+    [Tooltip("Enter the corrisponding data (scripable object) for this document")]
     public DocumentData data;
+
+    [Header("Inputs")]
     public KeyCode keyInteract; //temp
     public KeyCode keyText; //temp
     private bool overDoc; //temp
-    private Inventory inventory; //
+    private Inventory inventory;
 
     private void Start()
     {

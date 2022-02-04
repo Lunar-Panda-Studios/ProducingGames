@@ -12,12 +12,23 @@ public class Inventory : MonoBehaviour
     private List<GameObject> slots;
 
     private int itemsIn;
+
+    [Header ("Inputs")]
+    [Tooltip("Key to drop item")]
     public KeyCode drop;
+    [Tooltip("Key to change select inventory item")]
     public KeyCode changeItem;
+    [Tooltip("Key to open the document inventory")]
     public KeyCode openDocKey;
+
+    [Header("Inventory UI")]
+    [Tooltip("This would the gameobject that has the UI for the document inventory in")]
     public GameObject docInventory;
     lockMouse mouse;
     playerMovement player;
+
+    [Header("Item Dropping")]
+    [Tooltip("Location that the item is spawned when dropped from your inventory")]
     public GameObject itemLocation;
     PlayerPickup pickupControl;
 
@@ -38,6 +49,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    //Likely a temp untill placed elsewhere
     private void Update()
     {
         if (Input.GetKeyDown(drop) && itemsIn != 0)
@@ -54,6 +66,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    //Toggles the inventory from open/close and changing settings so that mouse can be used
     public void toggleDocInventory()
     {
         player.enabled = !player.enabled;
@@ -61,6 +74,7 @@ public class Inventory : MonoBehaviour
         print(docInventory.activeInHierarchy);
         docInventory.SetActive(!docInventory.activeInHierarchy);
 
+        //Can't toggle thus needed to be an if statement to check if opening or closing inventory
         if (player.enabled)
         {
             
@@ -73,6 +87,8 @@ public class Inventory : MonoBehaviour
             pickupControl.enabled = false;
         }
     }
+
+    //Changes settings to regular view controls
     public void closeDocInventory()
     {
         player.enabled = true;
@@ -96,6 +112,7 @@ public class Inventory : MonoBehaviour
         addSlot(data);
     }
 
+    //Shows document based on the index of the selected item which is linked to the inventory list
     public void viewDoc(int index)
     {
         //int index = documentInventory.IndexOf(data);
@@ -112,6 +129,7 @@ public class Inventory : MonoBehaviour
         slotAmount++;
     }
 
+    //Finds doc in inventory then displays them
     public void hidDoc(GameObject data)
     {
         int index = documentInventory.IndexOf(data);

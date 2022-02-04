@@ -8,6 +8,7 @@ public class DocumentData : ScriptableObject
 {  
     public string id;
     public string documentName;
+    [Tooltip("Any that that is on the document")]
     public string docText;
     public bool isClue;
     public Image inventoryIcon;
