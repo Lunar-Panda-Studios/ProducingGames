@@ -21,23 +21,28 @@ public class lockMouse : MonoBehaviour
     [Tooltip("The maximum and minimum angle the player can look vertically respectively")]
     public float cameraUpperBoundsX;
     public float cameraLowerBoundsX;
+
+    internal bool canLook;
     
     void Update()
     {
-        //Locks the cursor to the center of the screen and makes it invisible
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (canLook)
+        {
+            //Locks the cursor to the center of the screen and makes it invisible
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
-        //Collects the current movement of the mouse on this frame multiplied by the speed variable
-        mouseX = Input.GetAxis("Mouse X") * cameraRotateSpeed;
-        mouseY = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
+            //Collects the current movement of the mouse on this frame multiplied by the speed variable
+            mouseX = Input.GetAxis("Mouse X") * cameraRotateSpeed;
+            mouseY = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
 
-        //Locks the player to only being able to look up and down within the set boundaries
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, cameraLowerBoundsX, cameraUpperBoundsX);
+            //Locks the player to only being able to look up and down within the set boundaries
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, cameraLowerBoundsX, cameraUpperBoundsX);
 
-        //Rotates the camera and player by the values collected previously
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerObj.Rotate(Vector3.up * mouseX);
+            //Rotates the camera and player by the values collected previously
+            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            playerObj.Rotate(Vector3.up * mouseX);
+        }
     }
 }
