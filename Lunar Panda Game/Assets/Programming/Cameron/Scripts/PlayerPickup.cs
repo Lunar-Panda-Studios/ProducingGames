@@ -16,13 +16,18 @@ using UnityEngine;
 public class PlayerPickup : MonoBehaviour
 {
     Transform playerCameraTransform;
+    [Tooltip("The layers that the raycasts will ignore")]
     [SerializeField] LayerMask rayMask;
+    [Header("Pickup/Hold System")]
     public GameObject heldItem;
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
     [SerializeField] float pickupDist = 3f;
     [SerializeField] float holdDist = 1.5f;
+    [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
+    [Header("Throw System")]
+    [SerializeField] float throwForce;
 
     void Awake()
     {
@@ -55,6 +60,12 @@ public class PlayerPickup : MonoBehaviour
             //if the player is holding an item and presses 'e', it drops said item
             DropHeldItem();
         }
+
+        if (Input.GetButtonDown("Throw") && heldItem != null)
+        {
+            ThrowItem();
+        }
+
         RotateHeldItem();
         CheckInfront();
         
@@ -119,6 +130,13 @@ public class PlayerPickup : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             playerCameraTransform.GetComponent<lockMouse>().canLook = true;
         }
+    }
+
+    void ThrowItem()
+    {
+        Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
+        heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
+        DropHeldItem();
     }
 
     void LateUpdate()
