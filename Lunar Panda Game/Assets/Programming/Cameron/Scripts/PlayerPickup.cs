@@ -111,6 +111,8 @@ public class PlayerPickup : MonoBehaviour
         {
             //setup/start the rotation mode
             mouseRotateStartPoint = Input.mousePosition;
+            heldItem.transform.localRotation = Quaternion.identity;
+            heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             itemStartRotation = heldItem.transform.rotation;
             Cursor.lockState = CursorLockMode.None;
             playerCameraTransform.GetComponent<lockMouse>().canLook = false;
@@ -121,7 +123,7 @@ public class PlayerPickup : MonoBehaviour
             //get the distance between the first clicks mouse position, and the current mouse position
             Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
             //rotate the held item based on the distance between the start mouse pos and the current mouse pos
-            heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.x / Screen.width) * -360, (distBetweenStartPoint.y / Screen.width) * -360, 0));
+            heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
         }
         //the frame the player stops pressing the mouse button
         if (Input.GetButtonUp("Fire1"))
@@ -129,6 +131,13 @@ public class PlayerPickup : MonoBehaviour
             //stop rotating the object
             Cursor.lockState = CursorLockMode.Locked;
             playerCameraTransform.GetComponent<lockMouse>().canLook = true;
+            if (heldItem)
+            {
+                heldItem.transform.localRotation = Quaternion.identity;
+                heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
+            }
+
+
         }
     }
 
@@ -159,6 +168,8 @@ public class PlayerPickup : MonoBehaviour
     {
         item.parent = playerCameraTransform;
         item.localPosition = new Vector3(0, 0, 1.5f);
+        item.transform.localRotation = Quaternion.identity;
+        item.transform.eulerAngles = new Vector3(item.transform.localEulerAngles.x, item.transform.localEulerAngles.y + transform.localEulerAngles.y, item.transform.localEulerAngles.z);
         item.GetComponent<Rigidbody>().useGravity = false;
         item.GetComponent<Rigidbody>().freezeRotation = true;
         heldItem = item.gameObject;
