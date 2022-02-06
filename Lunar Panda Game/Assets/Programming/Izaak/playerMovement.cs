@@ -26,5 +26,11 @@ public class playerMovement : MonoBehaviour
             //jumpValue = (-1 * transform.up)
         }
         p_rigidbody.velocity = ((transform.forward * z) * p_speed) + ((transform.right * x) * p_speed) + (new Vector3 (0, p_rigidbody.velocity.y, 0));
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            StaminaBar.instance.staminaUsage(15);
+        }
+
     }
 }
