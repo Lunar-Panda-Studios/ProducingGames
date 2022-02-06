@@ -24,14 +24,12 @@ public class lockMouse : MonoBehaviour
     public float cameraUpperBoundsY;
     public float cameraLowerBoundsY;
 
-    public bool canLook;
-    
+    internal bool canLook;
+
     void Start()
     {
         canLook = true;
     }
-
-    internal bool canLook;
     
     void Update()
     {
