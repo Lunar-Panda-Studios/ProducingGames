@@ -21,6 +21,15 @@ public class lockMouse : MonoBehaviour
     [Tooltip("The maximum and minimum angle the player can look vertically respectively")]
     public float cameraUpperBoundsX;
     public float cameraLowerBoundsX;
+    public float cameraUpperBoundsY;
+    public float cameraLowerBoundsY;
+
+    public bool canLook;
+    
+    void Start()
+    {
+        canLook = true;
+    }
 
     internal bool canLook;
     
