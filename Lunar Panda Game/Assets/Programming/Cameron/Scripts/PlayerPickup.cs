@@ -36,7 +36,6 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward) * 4f, Color.green);
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {
             RaycastHit hit;
@@ -88,6 +87,8 @@ public class PlayerPickup : MonoBehaviour
 
                 }
             }
+            //if the ray sees and object but it cant be picked up, toggle the glowing material
+            //i've used this code 4 times so I could maybe think about making this a function. If I use it anymore I probably will
             else
             {
                 if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
@@ -141,6 +142,7 @@ public class PlayerPickup : MonoBehaviour
         }
     }
 
+    //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
@@ -167,9 +169,11 @@ public class PlayerPickup : MonoBehaviour
     void PickupItem(Transform item)
     {
         item.parent = playerCameraTransform;
-        item.localPosition = new Vector3(0, 0, 1.5f);
+        item.localPosition = new Vector3(0, 0, holdDist);
+        //the below code is needed so that the rotation is user-friendly and feels more natural to the player
         item.transform.localRotation = Quaternion.identity;
         item.transform.eulerAngles = new Vector3(item.transform.localEulerAngles.x, item.transform.localEulerAngles.y + transform.localEulerAngles.y, item.transform.localEulerAngles.z);
+        
         item.GetComponent<Rigidbody>().useGravity = false;
         item.GetComponent<Rigidbody>().freezeRotation = true;
         heldItem = item.gameObject;
