@@ -20,12 +20,17 @@ public class Inventory : MonoBehaviour
     public KeyCode changeItem;
     [Tooltip("Key to open the document inventory")]
     public KeyCode openDocKey;
+    [Tooltip("Key to put away or take out item")]
+    public KeyCode putAwayKey;
 
     [Header("Inventory UI")]
     [Tooltip("This would the gameobject that has the UI for the document inventory in")]
     public GameObject docInventory;
+    public GameObject itemInventoryUI;
     lockMouse mouse;
     playerMovement player;
+    public GameObject itemIndicator;
+    List<GameObject> itemSpace;
 
     [Header("Item Dropping")]
     [Tooltip("Location that the item is spawned when dropped from your inventory")]
@@ -42,10 +47,20 @@ public class Inventory : MonoBehaviour
         itemInventory = new List<ItemData>();
         documentInventory = new List<GameObject>();
         slots = new List<GameObject>();
+        itemSpace = new List<GameObject>();
 
         foreach (Transform child in docInventory.transform)
         {
             slots.Add(child.gameObject);
+        }
+
+        foreach(Transform child in itemInventoryUI.transform)
+        {
+            if(child.tag != "Ignore")
+            {
+                itemSpace.Add(child.gameObject);
+                itemInventory.Add(null);
+            }
         }
     }
 
@@ -54,15 +69,35 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(drop) && itemsIn != 0)
         {
-            removeItem(itemInventory[selectedItem], true);
+            removeItem(itemInventory[selectedItem]);
         }
-        if (Input.GetKeyDown(changeItem))
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
-            selectItem();
+            selectItem(true);
+        }
+        if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        {
+            selectItem(false);
         }
         if(Input.GetKeyDown(openDocKey))
         {
             toggleDocInventory();
+        }
+        if(Input.GetKeyDown(putAwayKey))
+        {
+            toggleHeldItem();
+        }
+    }
+
+    public void toggleHeldItem()
+    {
+        if(pickupControl.heldItem == null)
+        {
+            takeout();
+        }
+        else
+        {
+            putAway();
         }
     }
 
@@ -97,9 +132,15 @@ public class Inventory : MonoBehaviour
 
     public void addItem(ItemData data)
     {
-        itemInventory.Add(data);
-
-        itemsIn++;
+        for(int i = 0; i < itemInventory.Count; i++)
+        {
+            if(itemInventory[i] == null)
+            {
+                itemInventory[i] = data;
+                itemsIn++;
+                break;
+            }
+        }
     }
 
     public void addItem(GameObject data)
@@ -136,36 +177,67 @@ public class Inventory : MonoBehaviour
         document.GetComponent<ViewDocument>().hideDocument();
     }
 
-    public void removeItem(ItemData data, bool dropped)
+    public void removeItem(ItemData data)
     {
         //If item is used then it will not be dropped on the floor
-        if (dropped)
-        {
-            //Drops item just infront of the player
-            Instantiate(data.prefab, itemLocation.transform.position , Quaternion.identity);
-        }
         itemInventory.Remove(data);
         itemsIn--;
 
-        //checks if the selected item is still in range then 
-        if(selectedItem > itemsIn - 1)
+        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
+    }
+
+    private void selectItem(bool positive)
+    {
+        if(positive)
+        {
+            selectedItem++;
+        }
+        else
         {
             selectedItem--;
         }
-        if(selectedItem < 0)
+
+
+       if (selectedItem > itemSpace.Count - 1)
         {
             selectedItem = 0;
         }
+
+       if(selectedItem < 0)
+        {
+            selectedItem = itemSpace.Count - 1;
+        }
+
+       if(pickupControl.heldItem != null)
+        {
+            Destroy(pickupControl.heldItem);
+
+            if(itemInventory[selectedItem] != null)
+            {
+                takeout();
+            }
+        }
+
+        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
-    private void selectItem()
+    private void putAway()
     {
-        selectedItem++;
-
-       if (selectedItem > itemsIn - 1)
+        if(pickupControl.heldItem != null)
         {
-            selectedItem = 0;
+            Destroy(pickupControl.heldItem);
+            pickupControl.heldItem = null;
         }
     }
+
+    private void takeout()
+    {
+        if(itemInventory[selectedItem] != null)
+        {
+            GameObject heldItem = Instantiate(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
+            pickupControl.PickupItem(heldItem.transform);
+        }
+    }
+
 
 }

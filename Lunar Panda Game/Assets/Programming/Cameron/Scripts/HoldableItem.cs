@@ -6,6 +6,7 @@ public class HoldableItem : MonoBehaviour
 {
 
     [SerializeField] PlayerPickup pickup;
+    public ItemData data;
 
 
     void Awake()
