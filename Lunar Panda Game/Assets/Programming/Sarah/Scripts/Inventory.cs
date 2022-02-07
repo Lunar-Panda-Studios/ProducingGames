@@ -87,6 +87,47 @@ public class Inventory : MonoBehaviour
         {
             toggleHeldItem();
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            selectedNumberItem(9);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedNumberItem(0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedNumberItem(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            selectedNumberItem(2);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            selectedNumberItem(3);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            selectedNumberItem(4);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            selectedNumberItem(5);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            selectedNumberItem(6);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            selectedNumberItem(7);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            selectedNumberItem(8);
+        }
     }
 
     public void toggleHeldItem()
@@ -186,6 +227,12 @@ public class Inventory : MonoBehaviour
         itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
+    public void selectedNumberItem(int number)
+    {
+        selectedItem = number;
+        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
+    }
+
     private void selectItem(bool positive)
     {
         if(positive)
@@ -235,7 +282,7 @@ public class Inventory : MonoBehaviour
         if(itemInventory[selectedItem] != null)
         {
             GameObject heldItem = Instantiate(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
-            pickupControl.PickupItem(heldItem.transform);
+            //pickupControl.PickupItem(heldItem.transform);
         }
     }
 
