@@ -12,55 +12,78 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     LineRenderer line;
     [Tooltip("The distance between the camera and the cable while the players holding it")]
     [SerializeField] float lineHoldDist;
+    [SerializeField] GameObject button;
+    [SerializeField] Light completionLight;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
+        completionLight.enabled = false;
     }
 
     void Update()
     {
-        RaycastHit hit;
-        if (Input.GetButtonDown("Interact"))
+        //if the power isnt on
+        if (!button.GetComponent<switchChanger>().isPowerOn)
         {
+            RaycastHit hit;
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (inputCurrentlyConnecting)
+                {
+                    //just realised this is irrelevent. I'll fix after prototype is out
+                    if (Input.GetButtonDown("Interact") && (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist)))
+                    {
+                        if (hit.transform.CompareTag("OutputNode"))
+                        {
+                            //if the raycast hits an output node, lock the line renderer to it and update the input node so it knows
+                            //that its connected now
+                            inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, hit.transform.position);
+                            inputCurrentlyConnecting.GetComponent<Node>().connectedNode = hit.transform.gameObject;
+
+                        }
+                        inputCurrentlyConnecting = null;
+                    }
+                }
+
+                if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+                {
+                    //loop through all the input nodes, and if the raycast hit one of em, set up the line renderer and stuff
+                    foreach (GameObject i in InputNodes)
+                    {
+                        if (hit.transform.gameObject == i)
+                        {
+                            inputCurrentlyConnecting = i;
+                            inputCurrentlyConnecting.GetComponent<Node>().connectedNode = null;
+                            SetUpLine();
+                        }
+                    }
+                    if (hit.transform.gameObject == button)
+                    {
+                        print("working");
+                        button.GetComponent<switchChanger>().changeSwitchState();
+                        if (button.GetComponent<switchChanger>().getSwitchState())
+                        {
+                            if (CheckCombination())
+                            {
+                                completionLight.enabled = true;
+                                button.GetComponent<switchChanger>().TurnPowerOn();
+                            }
+                            else
+                            {
+                                button.GetComponent<switchChanger>().changeSwitchState();
+                            }
+                        }
+                    }
+                }
+            }
             if (inputCurrentlyConnecting)
             {
-                if (Input.GetButtonDown("Interact") && (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist)))
-                {
-                    if (hit.transform.CompareTag("OutputNode"))
-                    {
-                        //if the raycast hits an output node, lock the line renderer to it and update the input node so it knows
-                        //that its connected now
-                        inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, hit.transform.position);
-                        inputCurrentlyConnecting.GetComponent<Node>().connectedNode = hit.transform.gameObject;
-
-                    }
-                    inputCurrentlyConnecting = null;
-                }
-            }
-
-            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
-            {
-                //loop through all the input nodes, and if the raycast hit one of em, set up the line renderer and stuff
-                foreach(GameObject i in InputNodes)
-                {
-                    if (hit.transform.gameObject == i)
-                    {
-                        inputCurrentlyConnecting = i;
-                        inputCurrentlyConnecting.GetComponent<Node>().connectedNode = null;
-                        SetUpLine();
-                        print("working");
-                    }
-                }
+                DrawLine();
             }
         }
-        if (inputCurrentlyConnecting)
-        {
-            DrawLine();
-        }
-        
-        
+
     }
 
     void SetUpLine()
@@ -97,5 +120,10 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         }
         //if all the nodes are connected to the right nodes, return true
         return true;
+    }
+
+    void ButtonInteract()
+    {
+
     }
 }

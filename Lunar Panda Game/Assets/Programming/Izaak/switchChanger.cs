@@ -8,6 +8,7 @@ public class switchChanger : MonoBehaviour
     private bool switchMode = true;
     [Tooltip("The wires that will be used after the switch is off")]
     public GameObject amogus;
+    public bool isPowerOn = false;
 
     // Update is called once per frame
     void Update()
@@ -34,5 +35,16 @@ public class switchChanger : MonoBehaviour
     public bool getSwitchState()
     {
         return switchMode;
+    }
+
+    public void TurnPowerOn()
+    {
+        isPowerOn = true;
+        //call a function from another script that handles power
+    }
+
+    public void TurnPowerOff()
+    {
+        isPowerOn = false;
     }
 }
