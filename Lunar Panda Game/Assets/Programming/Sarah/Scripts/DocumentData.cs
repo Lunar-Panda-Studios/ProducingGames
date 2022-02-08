@@ -11,5 +11,5 @@ public class DocumentData : ScriptableObject
     [Tooltip("Any that that is on the document")]
     public string docText;
     public bool isClue;
-    public Image inventoryIcon;
+    public Sprite inventoryIcon;
 }

@@ -7,6 +7,12 @@ public class TempSelect : MonoBehaviour
     CodeLock codeLock;
 
     int reachRange = 100;
+    switchChanger button;
+
+    private void Start()
+    {
+        button = FindObjectOfType<switchChanger>();
+    }
 
     void Update()
     {
@@ -27,8 +33,11 @@ public class TempSelect : MonoBehaviour
 
             if(codeLock != null)
             {
-                string value = hit.transform.name;
-                codeLock.SetValue(value);
+                if(button.isPowerOn)
+                {
+                    string value = hit.transform.name;
+                    codeLock.SetValue(value);
+                }
             }
         }
     }

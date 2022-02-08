@@ -21,26 +21,36 @@ public class typeWriterTest : MonoBehaviour
     public float timeBetweenLetters;
     private float timeBetweenLettersCounter;
 
+    bool playText = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        //Sets up a timer that acts when it hits 0
-        timeBetweenLettersCounter = timeBetweenLetters;
-        //Empties the current dialogue ready for use
-        currentDialogue = ("");
+        setupText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeBetweenLettersCounter -= Time.deltaTime;
-        //If timer runs out and there are still more letters to print, print the next letter
-        if ((timeBetweenLettersCounter<=0) && (currentDialogue.Length<dialogue.Length))
+        if (playText)
         {
-            revealedLetters++;
-            currentDialogue = dialogue.Substring(0, revealedLetters);
-            timeBetweenLettersCounter = timeBetweenLetters;
-            dialogueText.text = currentDialogue;
+            timeBetweenLettersCounter -= Time.deltaTime;
+            //If timer runs out and there are still more letters to print, print the next letter
+            if ((timeBetweenLettersCounter <= 0) && (currentDialogue.Length < dialogue.Length))
+            {
+                revealedLetters++;
+                currentDialogue = dialogue.Substring(0, revealedLetters);
+                timeBetweenLettersCounter = timeBetweenLetters;
+                dialogueText.text = currentDialogue;
+            }
         }
+    }
+
+    public void setupText()
+    {
+        //Sets up a timer that acts when it hits 0
+        timeBetweenLettersCounter = timeBetweenLetters;
+        //Empties the current dialogue ready for use
+        currentDialogue = ("");
     }
 }
