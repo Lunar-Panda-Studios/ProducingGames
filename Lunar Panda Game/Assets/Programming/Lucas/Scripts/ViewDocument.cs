@@ -54,6 +54,7 @@ public class ViewDocument : MonoBehaviour
 
     public void showDocument()
     {
+        document.GetComponent<Image>().sprite = data.inventoryIcon;
         showDoc = true;
         document.SetActive(true);
         inventory.addItem(this.gameObject);
