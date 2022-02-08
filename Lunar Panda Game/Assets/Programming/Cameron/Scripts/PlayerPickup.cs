@@ -22,16 +22,18 @@ public class PlayerPickup : MonoBehaviour
     public GameObject heldItem;
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
-    [SerializeField] float pickupDist = 3f;
-    [SerializeField] float holdDist = 1.5f;
+    public float pickupDist = 3f;
+    public float holdDist = 1.5f;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
     [SerializeField] float throwForce;
+    Inventory inventory;
 
     void Awake()
     {
         playerCameraTransform = Camera.main.transform;
+        inventory = FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -45,18 +47,19 @@ public class PlayerPickup : MonoBehaviour
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
                     //if the ray hits a holdable item, the player picks it up
+                    inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
                         GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
                     
-                }
-                
+                }                
             }
         }
         else if(Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
+            
             DropHeldItem();
         }
 
@@ -76,8 +79,8 @@ public class PlayerPickup : MonoBehaviour
         //Casts a ray from the camera
         if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
         {
-            //if the item is holdable, toggle the glowing material
-            if (hit.transform.GetComponent<HoldableItem>() && heldItem == null)
+            //if the item is glowable, toggle the glowing material
+            if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
             {
                 if (GOLookingAt != hit.transform.gameObject || GOLookingAt == null)
                 {
@@ -87,22 +90,19 @@ public class PlayerPickup : MonoBehaviour
 
                 }
             }
-            //if the ray sees and object but it cant be picked up, toggle the glowing material
-            //i've used this code 4 times so I could maybe think about making this a function. If I use it anymore I probably will
-            else
+            else if (GOLookingAt)
             {
-                if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+                if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
                     GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                 GOLookingAt = null;
             }
         }
-        else
+        else if (GOLookingAt)
         {
-            if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
+            if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
                 GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
             GOLookingAt = null;
         }
-        
     }
 
     void RotateHeldItem()
@@ -145,6 +145,7 @@ public class PlayerPickup : MonoBehaviour
     //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
+        
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
         heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
         DropHeldItem();
@@ -160,13 +161,14 @@ public class PlayerPickup : MonoBehaviour
 
     public void DropHeldItem()
     {
+        inventory.removeItem();
         heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
     }
 
-    void PickupItem(Transform item)
+    internal void PickupItem(Transform item)
     {
         item.parent = playerCameraTransform;
         item.localPosition = new Vector3(0, 0, holdDist);
