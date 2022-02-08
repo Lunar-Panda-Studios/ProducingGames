@@ -8,7 +8,7 @@ public class StaminaBar : MonoBehaviour
     public Slider staminaBar;
     [Tooltip("maximum stamina value")]
     public int maxStam = 100;
-    public int currentStam;
+    public float currentStam;
     [Tooltip("delay before player starts regaining stamina")]
     public int regenDelay = 1;
     [Tooltip("higher the number the smaller the regeneration")]
@@ -31,7 +31,7 @@ public class StaminaBar : MonoBehaviour
         staminaBar.value = maxStam;
     }
 
-    public void staminaUsage(int amount)
+    public void staminaUsage(float amount)
     {
         if(currentStam - amount >= 0) // checks to see if you have enough stamina to perform action
         {
