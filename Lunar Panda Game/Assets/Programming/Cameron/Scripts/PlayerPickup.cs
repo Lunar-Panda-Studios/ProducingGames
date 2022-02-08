@@ -60,7 +60,7 @@ public class PlayerPickup : MonoBehaviour
         else if(Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
-            inventory.removeItem(heldItem.GetComponent<HoldableItem>().data);
+            
             DropHeldItem();
         }
 
@@ -149,7 +149,7 @@ public class PlayerPickup : MonoBehaviour
     //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
-        inventory.removeItem(heldItem.GetComponent<HoldableItem>().data);
+        
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
         heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
         DropHeldItem();
@@ -165,6 +165,7 @@ public class PlayerPickup : MonoBehaviour
 
     public void DropHeldItem()
     {
+        inventory.removeItem();
         heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;

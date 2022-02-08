@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(drop) && itemsIn != 0)
         {
-            removeItem(itemInventory[selectedItem]);
+            removeItem();
         }
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
@@ -152,13 +152,14 @@ public class Inventory : MonoBehaviour
         //Can't toggle thus needed to be an if statement to check if opening or closing inventory
         if (player.enabled)
         {
-            
+            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             pickupControl.enabled = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             pickupControl.enabled = false;
         }
     }
@@ -218,13 +219,14 @@ public class Inventory : MonoBehaviour
         document.GetComponent<ViewDocument>().hideDocument();
     }
 
-    public void removeItem(ItemData data)
+    public void removeItem()
     {
         //If item is used then it will not be dropped on the floor
-        itemInventory.Remove(data);
+        itemInventory[selectedItem] = null;
+        //print(itemInventory[])
         itemsIn--;
 
-        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
+        //itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
     public void selectedNumberItem(int number)
@@ -282,7 +284,7 @@ public class Inventory : MonoBehaviour
         if(itemInventory[selectedItem] != null)
         {
             GameObject heldItem = Instantiate(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
-            //pickupControl.PickupItem(heldItem.transform);
+            pickupControl.PickupItem(heldItem.transform);
         }
     }
 
