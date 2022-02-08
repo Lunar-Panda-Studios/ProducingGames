@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class TempSelect : MonoBehaviour
 {
     CodeLock codeLock;
 
@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void CheckHitObj()
+    void CheckHitObj() //Temporary Raycast to check the buttons
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
