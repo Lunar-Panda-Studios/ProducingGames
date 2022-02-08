@@ -28,10 +28,12 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
     [SerializeField] float throwForce;
+    Inventory inventory;
 
     void Awake()
     {
         playerCameraTransform = Camera.main.transform;
+        inventory = FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -45,6 +47,7 @@ public class PlayerPickup : MonoBehaviour
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
                     //if the ray hits a holdable item, the player picks it up
+                    inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
                         GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
@@ -56,6 +59,7 @@ public class PlayerPickup : MonoBehaviour
         else if(Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
+            
             DropHeldItem();
         }
 
@@ -141,6 +145,7 @@ public class PlayerPickup : MonoBehaviour
     //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
+        
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
         heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
         DropHeldItem();
@@ -156,15 +161,16 @@ public class PlayerPickup : MonoBehaviour
 
     public void DropHeldItem()
     {
-        //heldItem.transform.parent = null;
+        inventory.removeItem();
+        heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
     }
 
-    void PickupItem(Transform item)
+    internal void PickupItem(Transform item)
     {
-        //item.parent = playerCameraTransform;
+        item.parent = playerCameraTransform;
         item.localPosition = new Vector3(0, 0, holdDist);
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
         item.transform.localRotation = Quaternion.identity;
