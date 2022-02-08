@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlowWhenLookedAt : MonoBehaviour
 {
     bool isGlowing;
-    Material baseMaterial;
+    [HideInInspector] public Material baseMaterial; //need this for the input script thingie but dont want in inspector
     [SerializeField] Material glowingMaterial;
 
     void Awake()
