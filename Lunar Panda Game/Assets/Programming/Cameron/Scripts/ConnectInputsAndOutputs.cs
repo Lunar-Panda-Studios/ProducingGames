@@ -24,8 +24,9 @@ public class ConnectInputsAndOutputs : MonoBehaviour
 
     void Update()
     {
-        //if the power isnt on
-        if (!button.GetComponent<switchChanger>().isPowerOn)
+        CheckForButtonPress();
+        //if the switch is set to off
+        if (!button.GetComponent<switchChanger>().getSwitchState())
         {
             RaycastHit hit;
             if (Input.GetButtonDown("Interact"))
@@ -33,7 +34,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 if (inputCurrentlyConnecting)
                 {
                     //just realised this is irrelevent. I'll fix after prototype is out
-                    if (Input.GetButtonDown("Interact") && (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist)))
+                    if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
                     {
                         if (hit.transform.CompareTag("OutputNode"))
                         {
@@ -59,23 +60,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                             SetUpLine();
                         }
                     }
-                    if (hit.transform.gameObject == button)
-                    {
-                        print("working");
-                        button.GetComponent<switchChanger>().changeSwitchState();
-                        if (button.GetComponent<switchChanger>().getSwitchState())
-                        {
-                            if (CheckCombination())
-                            {
-                                completionLight.enabled = true;
-                                button.GetComponent<switchChanger>().TurnPowerOn();
-                            }
-                            else
-                            {
-                                button.GetComponent<switchChanger>().changeSwitchState();
-                            }
-                        }
-                    }
+                    
                 }
             }
             if (inputCurrentlyConnecting)
@@ -85,6 +70,31 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         }
 
     }
+
+    void CheckForButtonPress()
+    {
+        RaycastHit hit;
+        if (Input.GetButtonDown("Interact"))
+        {
+            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            {
+                if (hit.transform.gameObject == button)
+                {
+                    button.GetComponent<switchChanger>().changeSwitchState();
+                    if (CheckCombination())
+                    {
+                        completionLight.enabled = true;
+                        button.GetComponent<switchChanger>().TurnPowerOn();
+                    }
+                    else
+                    {
+                        completionLight.enabled = false;
+                        button.GetComponent<switchChanger>().TurnPowerOff();
+                    }
+                }
+            }
+        }
+        }
 
     void SetUpLine()
     {
