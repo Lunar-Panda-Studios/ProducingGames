@@ -12,9 +12,9 @@ public class Pickup : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
     }
 
-    private void OnMouseDown()
-    {
-        inventory.addItem(data);
-        Destroy(gameObject);
-    }
+    //private void OnMouseDown()
+    //{
+    //    inventory.addItem(data);
+    //    //Destroy(gameObject);
+    //}
 }

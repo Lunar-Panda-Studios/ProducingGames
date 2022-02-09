@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class TempSelect : MonoBehaviour
 {
     CodeLock codeLock;
 
     int reachRange = 100;
+    switchChanger button;
+
+    private void Start()
+    {
+        button = FindObjectOfType<switchChanger>();
+    }
 
     void Update()
     {
@@ -16,7 +22,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void CheckHitObj()
+    void CheckHitObj() //Temporary Raycast to check the buttons
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -27,8 +33,11 @@ public class Controller : MonoBehaviour
 
             if(codeLock != null)
             {
-                string value = hit.transform.name;
-                codeLock.SetValue(value);
+                if (button.isPowerOn)
+                {
+                    string value = hit.transform.name;
+                    codeLock.SetValue(value);
+                }
             }
         }
     }

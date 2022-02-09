@@ -34,7 +34,7 @@ public class Flashlight : MonoBehaviour
             {
                 case false: //if flashlight off, turn on
                     powerOn = true;
-                    lightSource.intensity = 10;
+                    lightSource.intensity = 20000;
                     break;
 
                 case true: //if flashlight on turn off
