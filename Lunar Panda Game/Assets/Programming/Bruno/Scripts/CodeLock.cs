@@ -32,11 +32,11 @@ public class CodeLock : MonoBehaviour
 
     IEnumerator Open() //Rotates the door
     {
-        toOpen.Rotate(new Vector3(0, -90, 0), Space.World);        
+        toOpen.Rotate(new Vector3(0, 90, 0), Space.World);        
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
 
-        //toOpen.Rotate(new Vector3(0, 90, 0), Space.World);
+        //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
     }
 
     public void SetValue(string value)

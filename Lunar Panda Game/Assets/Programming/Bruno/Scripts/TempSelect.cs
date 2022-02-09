@@ -33,11 +33,14 @@ public class TempSelect : MonoBehaviour
 
             if(codeLock != null)
             {
-                if(button.isPowerOn)
-                {
-                    string value = hit.transform.name;
-                    codeLock.SetValue(value);
-                }
+                //if(button.isPowerOn)
+                //{
+                //    //string value = hit.transform.name;
+                //    //codeLock.SetValue(value);
+                //}
+
+                string value = hit.transform.name;
+                codeLock.SetValue(value);
             }
         }
     }
