@@ -47,7 +47,8 @@ public class PlayerPickup : MonoBehaviour
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
                     //if the ray hits a holdable item, the player picks it up
-                    inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
+                    if (hit.transform.GetComponent<HoldableItem>().data)
+                        inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
                         GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
