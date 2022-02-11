@@ -49,8 +49,10 @@ public class PlayerPickup : MonoBehaviour
                     //if the ray hits a holdable item, the player picks it up
                     inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
+                    //if the player is looking at an object that can glow, and if the object is currently glowing, toggle the glow effect
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                        if(GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
+                            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
                     
                 }                
@@ -79,28 +81,31 @@ public class PlayerPickup : MonoBehaviour
         //Casts a ray from the camera
         if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
         {
-            //if the item is glowable, toggle the glowing material
+            //all these if's and elses are to handle all edge cases so that when you stop looking at a glowable object, it stops glowing properly
             if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
             {
-                if (GOLookingAt != hit.transform.gameObject || GOLookingAt == null)
+                print("Working?");
+                if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
+                {
+
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                    GOLookingAt = null;
+                }
+                if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
                 {
                     GOLookingAt = hit.transform.gameObject;
-                    if (GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
-
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                 }
             }
             else if (GOLookingAt)
             {
-                if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
-                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                 GOLookingAt = null;
             }
         }
         else if (GOLookingAt)
-        {
-            if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
-                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+        { 
+            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
             GOLookingAt = null;
         }
     }
