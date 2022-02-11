@@ -23,7 +23,7 @@ public class HoldableItem : MonoBehaviour
         */
         if (col.gameObject != GameObject.FindGameObjectWithTag("Player") && pickup.heldItem == this.gameObject)
         {
-            pickup.currentLerpSpeed = pickup.slowLerpSpeed;
+            
         }
     }
 
@@ -31,7 +31,7 @@ public class HoldableItem : MonoBehaviour
     {
         if (col.gameObject != GameObject.FindGameObjectWithTag("Player") && pickup.heldItem == this.gameObject)
         {
-            pickup.currentLerpSpeed = pickup.lerpSpeed;
+            
         }
     }
 

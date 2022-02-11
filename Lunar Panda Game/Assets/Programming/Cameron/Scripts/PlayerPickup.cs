@@ -26,8 +26,6 @@ public class PlayerPickup : MonoBehaviour
     public float holdDist = 1.5f;
     [SerializeField] float lerpAmnt;
     public float lerpSpeed;
-    [HideInInspector] public float slowLerpSpeed;
-    [HideInInspector] public float currentLerpSpeed;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
@@ -38,8 +36,6 @@ public class PlayerPickup : MonoBehaviour
     {
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
-        slowLerpSpeed = lerpSpeed / 4;
-        currentLerpSpeed = lerpSpeed;
     }
 
     void Update()
@@ -163,7 +159,7 @@ public class PlayerPickup : MonoBehaviour
         if (heldItem != null)
         {
             Vector3 vel = new Vector3(heldItem.GetComponent<Rigidbody>().velocity.x, heldItem.GetComponent<Rigidbody>().velocity.y, heldItem.GetComponent<Rigidbody>().velocity.z);
-            heldItem.GetComponent<Rigidbody>().position = Vector3.SmoothDamp(heldItem.transform.position, playerCameraTransform.position + playerCameraTransform.forward * holdDist, ref vel, Time.deltaTime * lerpAmnt, currentLerpSpeed);
+            heldItem.GetComponent<Rigidbody>().position = Vector3.SmoothDamp(heldItem.transform.position, playerCameraTransform.position + playerCameraTransform.forward * holdDist, ref vel, Time.deltaTime * lerpAmnt, lerpSpeed);
         }
     }
 
