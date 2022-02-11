@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class HoldableItem : MonoBehaviour
 {
-
-    [SerializeField] PlayerPickup pickup;
+    PlayerPickup pickup;
     public ItemData data;
 
 
@@ -24,9 +23,17 @@ public class HoldableItem : MonoBehaviour
         */
         if (col.gameObject != GameObject.FindGameObjectWithTag("Player") && pickup.heldItem == this.gameObject)
         {
-            pickup.DropHeldItem();
+            pickup.currentLerpSpeed = pickup.slowLerpSpeed;
         }
     }
 
-    
+    void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject != GameObject.FindGameObjectWithTag("Player") && pickup.heldItem == this.gameObject)
+        {
+            pickup.currentLerpSpeed = pickup.lerpSpeed;
+        }
+    }
+
+
 }

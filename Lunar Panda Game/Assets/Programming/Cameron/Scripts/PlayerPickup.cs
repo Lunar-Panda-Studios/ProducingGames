@@ -24,6 +24,10 @@ public class PlayerPickup : MonoBehaviour
     Quaternion itemStartRotation;
     public float pickupDist = 3f;
     public float holdDist = 1.5f;
+    [SerializeField] float lerpAmnt;
+    public float lerpSpeed;
+    [HideInInspector] public float slowLerpSpeed;
+    [HideInInspector] public float currentLerpSpeed;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
@@ -34,6 +38,8 @@ public class PlayerPickup : MonoBehaviour
     {
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
+        slowLerpSpeed = lerpSpeed / 4;
+        currentLerpSpeed = lerpSpeed;
     }
 
     void Update()
@@ -54,7 +60,6 @@ public class PlayerPickup : MonoBehaviour
                         if(GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
                             GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
-                    
                 }                
             }
         }
@@ -64,15 +69,12 @@ public class PlayerPickup : MonoBehaviour
             
             DropHeldItem();
         }
-
         if (Input.GetButtonDown("Throw") && heldItem != null)
         {
             ThrowItem();
         }
-
         RotateHeldItem();
         CheckInfront();
-        
     }
 
     void CheckInfront()
@@ -160,14 +162,15 @@ public class PlayerPickup : MonoBehaviour
     {
         if (heldItem != null)
         {
-            heldItem.transform.localPosition = new Vector3(0, 0, holdDist);
+            Vector3 vel = new Vector3(heldItem.GetComponent<Rigidbody>().velocity.x, heldItem.GetComponent<Rigidbody>().velocity.y, heldItem.GetComponent<Rigidbody>().velocity.z);
+            heldItem.GetComponent<Rigidbody>().position = Vector3.SmoothDamp(heldItem.transform.position, playerCameraTransform.position + playerCameraTransform.forward * holdDist, ref vel, Time.deltaTime * lerpAmnt, currentLerpSpeed);
         }
     }
 
     public void DropHeldItem()
     {
         inventory.removeItem();
-        heldItem.transform.parent = null;
+        //heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
@@ -175,11 +178,11 @@ public class PlayerPickup : MonoBehaviour
 
     internal void PickupItem(Transform item)
     {
-        item.parent = playerCameraTransform;
-        item.localPosition = new Vector3(0, 0, holdDist);
+        //item.parent = playerCameraTransform;
+        //item.localPosition = new Vector3(0, 0, holdDist);
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
-        item.transform.localRotation = Quaternion.identity;
-        item.transform.eulerAngles = new Vector3(item.transform.localEulerAngles.x, item.transform.localEulerAngles.y + transform.localEulerAngles.y, item.transform.localEulerAngles.z);
+        item.transform.rotation = Quaternion.identity;
+        item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
         
         item.GetComponent<Rigidbody>().useGravity = false;
         item.GetComponent<Rigidbody>().freezeRotation = true;
