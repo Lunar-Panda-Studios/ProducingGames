@@ -57,7 +57,7 @@ public class ViewDocument : MonoBehaviour
         document.GetComponent<Image>().sprite = data.inventoryIcon;
         showDoc = true;
         document.SetActive(true);
-        inventory.addItem(this.gameObject);
+        inventory.addItem(data);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
     }

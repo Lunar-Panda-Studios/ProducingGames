@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ConnectInputsAndOutputs : MonoBehaviour
 {
+    public int id;
     Transform player;
     Transform cam; //not referring to me, referring to the camera
     [SerializeField] List<GameObject> InputNodes;
@@ -20,6 +21,11 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
         completionLight.enabled = false;
+    }
+
+    private void Start()
+    {
+        GameEvents.current.puzzleCompleted += puzzleCompleted;
     }
 
     void Update()
@@ -84,12 +90,13 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     if (CheckCombination())
                     {
                         completionLight.enabled = true;
-                        button.GetComponent<switchChanger>().TurnPowerOn();
+                        GameEvents.current.onPowerTurnedOn(id);
+                        GameEvents.current.onPuzzleComplete(id);
                     }
                     else
                     {
                         completionLight.enabled = false;
-                        button.GetComponent<switchChanger>().TurnPowerOff();
+                        GameEvents.current.onPowerTurnedOff(id);
                     }
                 }
             }
@@ -132,8 +139,22 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         return true;
     }
 
-    void ButtonInteract()
+    public void puzzleCompleted(int id)
     {
+        if(id == this.id)
+        {
+            if (!CheckCombination())
+            {
+                for (int i = 0; i < InputNodes.Count; i++)
+                {
+                    InputNodes[i].GetComponent<LineRenderer>().SetPosition(1, InputNodes[i].GetComponent<Node>().desiredNode.transform.position);
+                    InputNodes[i].GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;
+                    print("Auto Completed");
+                }
+            }
 
+            PuzzleData.current.completedEvents[id] = true;
+            PuzzleData.current.isCompleted[id - 1] = true;
+        }
     }
 }

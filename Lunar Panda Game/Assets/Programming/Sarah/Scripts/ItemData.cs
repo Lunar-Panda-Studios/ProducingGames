@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Item Data")]
+[System.Serializable]
 public class ItemData : ScriptableObject
 {
-    public string id;
+    internal int id;
+    public ItemData database;
     public string itemName;
+    public Sprite itemImage;
     public GameObject prefab;
 }

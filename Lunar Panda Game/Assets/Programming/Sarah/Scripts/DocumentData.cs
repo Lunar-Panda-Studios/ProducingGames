@@ -12,4 +12,5 @@ public class DocumentData : ScriptableObject
     public string docText;
     public bool isClue;
     public Sprite inventoryIcon;
+    public GameObject prefab;
 }

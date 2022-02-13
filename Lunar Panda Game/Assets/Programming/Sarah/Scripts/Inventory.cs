@@ -5,8 +5,10 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //inventory system that can hold multiple items 
+    [SerializeField] 
     internal List<ItemData> itemInventory;
-    internal List<GameObject> documentInventory;
+    [SerializeField] 
+    internal List<DocumentData> documentInventory;
     private int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
@@ -45,7 +47,7 @@ public class Inventory : MonoBehaviour
         mouse = FindObjectOfType<lockMouse>();
         player = FindObjectOfType<playerMovement>();
         itemInventory = new List<ItemData>();
-        documentInventory = new List<GameObject>();
+        documentInventory = new List<DocumentData>();
         slots = new List<GameObject>();
         itemSpace = new List<GameObject>();
 
@@ -185,13 +187,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void addItem(GameObject data)
+    public void addItem(DocumentData data)
     {
         documentInventory.Add(data);
 
-        data.GetComponent<ViewDocument>().inInventory = true;
+        data.prefab.GetComponent<ViewDocument>().inInventory = true;
 
-        addSlot(data);
+        //addSlot(data);
     }
 
     //Shows document based on the index of the selected item which is linked to the inventory list
@@ -199,8 +201,8 @@ public class Inventory : MonoBehaviour
     {
         //int index = documentInventory.IndexOf(data);
 
-        GameObject document = documentInventory[index];
-        document.GetComponent<ViewDocument>().showDocument();
+        DocumentData document = documentInventory[index];
+        document.prefab.GetComponent<ViewDocument>().showDocument();
     }
 
     void addSlot(GameObject data)
@@ -211,11 +213,11 @@ public class Inventory : MonoBehaviour
     }
 
     //Finds doc in inventory then displays them
-    public void hidDoc(GameObject data)
+    public void hidDoc(DocumentData data)
     {
         int index = documentInventory.IndexOf(data);
 
-        GameObject document = documentInventory[index];
+        GameObject document = documentInventory[index].prefab;
         document.GetComponent<ViewDocument>().hideDocument();
     }
 

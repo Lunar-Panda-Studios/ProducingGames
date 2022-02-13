@@ -27,7 +27,7 @@ public class OpenClose : MonoBehaviour
         }
     }
 
-    void openCloseObject()
+    public void openCloseObject()
     {
         switch (isOpen) // checks to see if you're opening or closing
         {
