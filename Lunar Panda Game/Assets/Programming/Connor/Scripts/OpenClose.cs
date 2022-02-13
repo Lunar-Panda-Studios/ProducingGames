@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class OpenClose : MonoBehaviour
 {
+    public int id;
     [Tooltip("Assign key for opening and closing")]
     public KeyCode openCloseKey;
     public Animator anim;
@@ -16,6 +17,8 @@ public class OpenClose : MonoBehaviour
 
     void Start()
     {
+        GameEvents.current.triggerCloseDoor += openCloseObject;
+        GameEvents.current.triggerOpenDoor += openCloseObject;
     }
 
 
@@ -23,11 +26,11 @@ public class OpenClose : MonoBehaviour
     {
         if (Input.GetKeyDown(openCloseKey) /*&& animDone*/) // press key and it opens or closes object (add to camerons script when merged)
         {
-            openCloseObject();
+            openCloseObject(id);
         }
     }
 
-    public void openCloseObject()
+    public void openCloseObject(int id)
     {
         switch (isOpen) // checks to see if you're opening or closing
         {
