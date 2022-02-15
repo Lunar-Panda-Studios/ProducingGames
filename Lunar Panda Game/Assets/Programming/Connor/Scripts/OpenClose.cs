@@ -32,18 +32,22 @@ public class OpenClose : MonoBehaviour
 
     public void openCloseObject(int id)
     {
-        switch (isOpen) // checks to see if you're opening or closing
+        if(id == this.id)
         {
-            case false:
-                isOpen = true;
-                anim.SetTrigger("Open");
-                break;
+            switch (isOpen) // checks to see if you're opening or closing
+            {
+                case false:
+                    isOpen = true;
+                    anim.SetTrigger("Open");
+                    break;
 
-            case true:
-                isOpen = false;
-                anim.SetTrigger("Close");
-                break;
+                case true:
+                    isOpen = false;
+                    anim.SetTrigger("Close");
+                    break;
+            }
         }
+
         //animWait();
     }
     //Code waiting between animations that failed miserably

@@ -5,45 +5,24 @@ using UnityEngine;
 public class BoxToDoor : MonoBehaviour
 {
     public int id;
-    public GameObject boxLinked;
+    bool switchState = true;
 
-    private void Start()
+    private void OnMouseDown()
     {
-        GameEvents.current.triggerOpenDoor += openDoor;
-        GameEvents.current.triggerCloseDoor += closeDoor;
-        GameEvents.current.powerOff += powerOff;
-        GameEvents.current.powerOn += powerOff;
-    }
-
-    public void openDoor(int id)
-    {
-        if (id == this.id)
+        if(GetComponent<Interaction>().canInteract)
         {
-            GetComponent<OpenClose>().openCloseObject(id);
+            if (switchState)
+            {
+                GameEvents.current.onTriggerOpenDoor(id);
+                GameEvents.current.onPowerTurnedOff(id);
+            }
+            else
+            {
+                GameEvents.current.onTriggerCloseDoor(id);
+                GameEvents.current.onPowerTurnedOn(id);
+            }
         }
-    }
 
-    public void closeDoor(int id)
-    {
-        if (id == this.id)
-        {
-            GetComponent<OpenClose>().openCloseObject(id);
-        }
-    }
-
-    public void powerOn(int id)
-    {
-        if (id == this.id)
-        {
-            boxLinked.GetComponent<DoorToLights>().enabled = true;
-        }
-    }
-
-    public void powerOff(int id)
-    {
-        if (id == this.id)
-        {
-            boxLinked.GetComponent<DoorToLights>().enabled = false;
-        }
+        switchState = !switchState;
     }
 }
