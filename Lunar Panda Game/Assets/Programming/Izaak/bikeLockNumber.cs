@@ -8,9 +8,7 @@ public class bikeLockNumber : MonoBehaviour
     [Tooltip("Where this number places in the sequence")]
     public int digitPlacement;
 
-    [Header("Rotation Values")]
-    [Tooltip("The amount in degrees the object rotates when the number is changed by 1")]
-    public float rotationIncrement;
+    private float rotationIncrement = 36;
     private int currentNumber = 5;
     private GameObject bikeLockParent;
     private bikeLock bikeLockScript;
@@ -35,27 +33,35 @@ public class bikeLockNumber : MonoBehaviour
         {
             if (bikeLockScript.getSelectedElement() == digitPlacement)
             {
-                if (currentNumber > 0)
+                if (currentNumber <= 0)
                 {
-                    transform.Rotate(rotationIncrement, 0, 0);
+                    currentNumber = 9;
+                }
+                else
+                {
                     currentNumber--;
+                }
+                    transform.Rotate(rotationIncrement, 0, 0);
                     //Changes the code value the parent has and then checks if the puzzle is complete
                     bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
                     bikeLockScript.checkPuzzleComplete();
-                }
             }
         }
         if (Input.GetKeyDown("z"))
         {
             if (bikeLockScript.getSelectedElement() == digitPlacement)
             {
-                if (currentNumber < 9)
+                if (currentNumber >= 9)
                 {
-                    transform.Rotate(-rotationIncrement, 0, 0);
+                    currentNumber = 0;
+                }
+                else
+                {
                     currentNumber++;
+                }
+                    transform.Rotate(-rotationIncrement, 0, 0);
                     bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
                     bikeLockScript.checkPuzzleComplete();
-                }
             }
         }
     }
