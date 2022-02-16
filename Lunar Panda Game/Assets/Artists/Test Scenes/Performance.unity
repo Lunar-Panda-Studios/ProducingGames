@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: fe62c10104cdb03438fd487f1ae0f2a2
+  m_OcclusionCullingData: {fileID: 36300000, guid: 2126fcbd6f9363c4b910ab5f117041be, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -229,12 +229,13 @@ GameObject:
   - component: {fileID: 661354583}
   - component: {fileID: 661354582}
   - component: {fileID: 661354581}
+  - component: {fileID: 661354586}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!54 &661354581
 Rigidbody:
@@ -328,6 +329,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &661354586
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661354580}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.46061948
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.21886675
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.09721777
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &738270025
 GameObject:
   m_ObjectHideFlags: 0
