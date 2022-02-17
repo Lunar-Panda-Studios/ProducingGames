@@ -24,6 +24,8 @@ public class PlayerPickup : MonoBehaviour
     Quaternion itemStartRotation;
     public float pickupDist = 3f;
     public float holdDist = 1.5f;
+    [SerializeField] float dropDist;
+    [SerializeField] float lerpSpeed;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
@@ -50,10 +52,11 @@ public class PlayerPickup : MonoBehaviour
                     if (hit.transform.GetComponent<HoldableItem>().data)
                         inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
+                    //if the player is looking at an object that can glow, and if the object is currently glowing, toggle the glow effect
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                        if(GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
+                            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
-                    
                 }                
             }
         }
@@ -63,15 +66,12 @@ public class PlayerPickup : MonoBehaviour
             
             DropHeldItem();
         }
-
         if (Input.GetButtonDown("Throw") && heldItem != null)
         {
             ThrowItem();
         }
-
         RotateHeldItem();
         CheckInfront();
-        
     }
 
     void CheckInfront()
@@ -80,30 +80,33 @@ public class PlayerPickup : MonoBehaviour
         //Casts a ray from the camera
         if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
         {
-            //if the item is glowable, toggle the glowing material
+            //all these if's and elses are to handle all edge cases so that when you stop looking at a glowable object, it stops glowing properly
             if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
             {
-                if (GOLookingAt != hit.transform.gameObject || GOLookingAt == null)
+                if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
+                {
+
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                    GOLookingAt = null;
+                }
+                if (!hit.transform.GetComponent<GlowWhenLookedAt>().isGlowing)
                 {
                     GOLookingAt = hit.transform.gameObject;
-                    if (GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
-
+                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                 }
             }
             else if (GOLookingAt)
             {
-                if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
-                    GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                 GOLookingAt = null;
             }
         }
         else if (GOLookingAt)
-        {
-            if (GOLookingAt.GetComponent<GlowWhenLookedAt>())
-                GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
+        { 
+            GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
             GOLookingAt = null;
         }
+        //this shit needs to be optimised badly. wtf cameron - cameron
     }
 
     void RotateHeldItem()
@@ -146,24 +149,36 @@ public class PlayerPickup : MonoBehaviour
     //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
-        
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
         heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
         DropHeldItem();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (heldItem != null)
         {
-            heldItem.transform.localPosition = new Vector3(0, 0, holdDist);
+
+            //why did these 3 lines of code give me so much trouble.... fuck this
+            //finds the direction that the object needs to go
+            Vector3 direction = (playerCameraTransform.position + (playerCameraTransform.forward * holdDist)) - heldItem.transform.position;
+            //finds the distance between the held object and where it needs to go
+            float dist = Vector3.Distance(heldItem.transform.position, playerCameraTransform.position + (playerCameraTransform.forward * holdDist));
+            //if the object is too far away, drop it
+            if (dist > dropDist)
+            {
+                DropHeldItem();
+                return;
+            }
+            //sets the velocity of the object to the direction times the lerp speed times the distance between them
+            heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
         }
     }
 
     public void DropHeldItem()
     {
         inventory.removeItem();
-        heldItem.transform.parent = null;
+        //heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
@@ -171,11 +186,11 @@ public class PlayerPickup : MonoBehaviour
 
     internal void PickupItem(Transform item)
     {
-        item.parent = playerCameraTransform;
-        item.localPosition = new Vector3(0, 0, holdDist);
+        //item.parent = playerCameraTransform;
+        //item.localPosition = new Vector3(0, 0, holdDist);
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
-        item.transform.localRotation = Quaternion.identity;
-        item.transform.eulerAngles = new Vector3(item.transform.localEulerAngles.x, item.transform.localEulerAngles.y + transform.localEulerAngles.y, item.transform.localEulerAngles.z);
+        item.transform.rotation = Quaternion.identity;
+        item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
         
         item.GetComponent<Rigidbody>().useGravity = false;
         item.GetComponent<Rigidbody>().freezeRotation = true;

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    public Slider staminaBar;
     [Tooltip("maximum stamina value")]
     public int maxStam = 100;
     public float currentStam;
@@ -17,18 +16,19 @@ public class StaminaBar : MonoBehaviour
     public static StaminaBar instance;
 
     private WaitForSeconds regenPerFrame = new WaitForSeconds(0.1f);
-    private Coroutine regenCr; 
+    private Coroutine regenCr;
+
+    UIManager uimanager;
 
     private void Awake()
     {
         instance = this;
+        uimanager = UIManager.Instance;
     }
 
     void Start()
     {
         currentStam = maxStam;
-        staminaBar.maxValue = maxStam;
-        staminaBar.value = maxStam;
     }
 
     public void staminaUsage(float amount)
@@ -36,7 +36,7 @@ public class StaminaBar : MonoBehaviour
         if(currentStam - amount >= 0) // checks to see if you have enough stamina to perform action
         {
             currentStam -= amount;
-            staminaBar.value = currentStam;
+            UIManager.Instance.ChangeStaminaUsage(currentStam);
 
             if(regenCr != null)
             {
@@ -54,7 +54,7 @@ public class StaminaBar : MonoBehaviour
         while(currentStam < maxStam)
         {
             currentStam += maxStam / regenAmount;
-            staminaBar.value = currentStam;
+            UIManager.Instance.ChangeStaminaUsage(currentStam);
 
             yield return regenPerFrame;
         }
