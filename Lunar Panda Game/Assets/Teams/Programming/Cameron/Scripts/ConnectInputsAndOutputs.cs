@@ -93,6 +93,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     button.GetComponent<switchChanger>().changeSwitchState();
                     if (CheckCombination())
                     {
+                        button.GetComponent<switchChanger>().TurnPowerOn();
                         completionLight.enabled = true;
                         GameEvents.current.onPowerTurnedOn(id);
                         GameEvents.current.onPuzzleComplete(id);
@@ -101,6 +102,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     {
                         completionLight.enabled = false;
                         GameEvents.current.onPowerTurnedOff(id);
+                        button.GetComponent<switchChanger>().TurnPowerOff();
                     }
                 }
             }
