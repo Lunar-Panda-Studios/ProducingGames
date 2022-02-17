@@ -24,8 +24,8 @@ public class PlayerPickup : MonoBehaviour
     Quaternion itemStartRotation;
     public float pickupDist = 3f;
     public float holdDist = 1.5f;
-    [SerializeField] float lerpAmnt;
-    public float lerpSpeed;
+    [SerializeField] float dropDist;
+    [SerializeField] float lerpSpeed;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
@@ -82,7 +82,6 @@ public class PlayerPickup : MonoBehaviour
             //all these if's and elses are to handle all edge cases so that when you stop looking at a glowable object, it stops glowing properly
             if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
             {
-                print("Working?");
                 if (GOLookingAt && GOLookingAt != hit.transform.gameObject)
                 {
 
@@ -106,6 +105,7 @@ public class PlayerPickup : MonoBehaviour
             GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
             GOLookingAt = null;
         }
+        //this shit needs to be optimised badly. wtf cameron - cameron
     }
 
     void RotateHeldItem()
@@ -148,18 +148,29 @@ public class PlayerPickup : MonoBehaviour
     //yeets held object using the throwForce variable that the designers can balance
     void ThrowItem()
     {
-        
         Rigidbody heldItemRB = heldItem.GetComponent<Rigidbody>();
         heldItemRB.AddForce(playerCameraTransform.forward * throwForce, ForceMode.Impulse);
         DropHeldItem();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (heldItem != null)
         {
-            Vector3 vel = new Vector3(heldItem.GetComponent<Rigidbody>().velocity.x, heldItem.GetComponent<Rigidbody>().velocity.y, heldItem.GetComponent<Rigidbody>().velocity.z);
-            heldItem.GetComponent<Rigidbody>().position = Vector3.SmoothDamp(heldItem.transform.position, playerCameraTransform.position + playerCameraTransform.forward * holdDist, ref vel, Time.deltaTime * lerpAmnt, lerpSpeed);
+
+            //why did these 3 lines of code give me so much trouble.... fuck this
+            //finds the direction that the object needs to go
+            Vector3 direction = (playerCameraTransform.position + (playerCameraTransform.forward * holdDist)) - heldItem.transform.position;
+            //finds the distance between the held object and where it needs to go
+            float dist = Vector3.Distance(heldItem.transform.position, playerCameraTransform.position + (playerCameraTransform.forward * holdDist));
+            //if the object is too far away, drop it
+            if (dist > dropDist)
+            {
+                DropHeldItem();
+                return;
+            }
+            //sets the velocity of the object to the direction times the lerp speed times the distance between them
+            heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
         }
     }
 
