@@ -48,8 +48,12 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                             //that its connected now
                             inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, hit.transform.position);
                             inputCurrentlyConnecting.GetComponent<Node>().connectedNode = hit.transform.gameObject;
-
                         }
+                        else
+                        {
+                            Destroy(inputCurrentlyConnecting.GetComponent<LineRenderer>());
+                        }
+
                         inputCurrentlyConnecting = null;
                     }
                 }
@@ -119,9 +123,13 @@ public class ConnectInputsAndOutputs : MonoBehaviour
 
     void DrawLine()
     {
-        //render the line from the input node, to where the player is looking at
-        inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(0, inputCurrentlyConnecting.transform.position);
-        inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, cam.position + (cam.forward * lineHoldDist));
+        //doing this if statement each frame while connecting thingies sucks, but to fix it id need at least a small brain
+        if (inputCurrentlyConnecting.GetComponent<LineRenderer>())
+        {
+            //render the line from the input node, to where the player is looking at
+            inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(0, inputCurrentlyConnecting.transform.position);
+            inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, cam.position + (cam.forward * lineHoldDist));
+        }
     }
 
     public bool CheckCombination()
