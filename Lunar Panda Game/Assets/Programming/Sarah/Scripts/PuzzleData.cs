@@ -6,7 +6,7 @@ using UnityEngine;
 public class PuzzleData: MonoBehaviour
 {
     public static PuzzleData current;
-    [Tooltip("Breakdown of the puzzles and if it is completed")]
+    [Tooltip("ID of each puzzle element in order of completion and if it is completed")]
     public List<int> eventsID;
     public List<bool> isCompleted;
     public Dictionary<int,bool> completedEvents = new Dictionary<int, bool>();

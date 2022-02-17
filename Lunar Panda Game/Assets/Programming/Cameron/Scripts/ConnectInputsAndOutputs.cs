@@ -147,10 +147,21 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             {
                 for (int i = 0; i < InputNodes.Count; i++)
                 {
-                    InputNodes[i].GetComponent<LineRenderer>().SetPosition(1, InputNodes[i].GetComponent<Node>().desiredNode.transform.position);
-                    InputNodes[i].GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;
-                    print("Auto Completed");
+                    if(InputNodes[i].GetComponent<LineRenderer>() == null)
+                    {
+                        line = InputNodes[i].AddComponent<LineRenderer>();
+                        line.startWidth = lineWidth;
+                        line.endWidth = lineWidth;
+                        line.positionCount = 2;
+                        line.material = InputNodes[i].GetComponent<Node>().lineMat;
+                        line.useWorldSpace = true;
+                    }
+                    line.SetPosition(0, InputNodes[i].GetComponent<Node>().desiredNode.transform.position);
+                    line.SetPosition(1, InputNodes[i].GetComponent<Node>().transform.position);
+                    line.GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;
                 }
+
+                print("Auto Completed");
             }
 
             PuzzleData.current.completedEvents[id] = true;
