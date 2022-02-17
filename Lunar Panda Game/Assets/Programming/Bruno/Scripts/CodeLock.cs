@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CodeLock : MonoBehaviour
 {
+    [Tooltip("id in relation to the event manager")]
+    public int id;
+
     int codeLenght;
     int placeinCode;
 
@@ -15,6 +18,7 @@ public class CodeLock : MonoBehaviour
     public void Start()
     {
         codeLenght = code.Length;
+        GameEvents.current.puzzleCompleted += puzzleComplete;
     }
 
 
@@ -22,7 +26,7 @@ public class CodeLock : MonoBehaviour
     {
         if(attemptedCode == code)
         {
-            StartCoroutine(Open());
+            GameEvents.current.onPuzzleComplete(id);
         }
         else
         {
@@ -54,6 +58,15 @@ public class CodeLock : MonoBehaviour
 
             attemptedCode = "";
             placeinCode = 0;
+        }
+    }
+
+    public void puzzleComplete(int id)
+    {
+        if(id == this.id)
+        {
+            StartCoroutine(Open());
+            PuzzleData.current.completedEvents[id] = true;
         }
     }
 }
