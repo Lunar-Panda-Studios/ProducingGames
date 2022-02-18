@@ -5,6 +5,12 @@ using UnityEngine;
 public class NotesTrigger : MonoBehaviour
 {
     public StoryData notesData;
+    Inventory inventory;
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Story Data")]
 public class StoryData : ScriptableObject
 {
-    internal int id;
     public string storyDataName;
+    [TextArea]
     public string description;
+    public Room roomGottenIn;
 }

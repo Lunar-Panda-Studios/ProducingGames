@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] 
     internal List<DocumentData> documentInventory;
     [SerializeField]
-    internal List<StoryData> storyNotes;
+    internal List<StoryData> storyNotesInventory;
     private int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
@@ -52,11 +52,6 @@ public class Inventory : MonoBehaviour
         documentInventory = new List<DocumentData>();
         slots = new List<GameObject>();
         itemSpace = new List<GameObject>();
-
-        foreach (Transform child in docInventory.transform)
-        {
-            slots.Add(child.gameObject);
-        }
 
         foreach(Transform child in itemInventoryUI.transform)
         {
@@ -205,13 +200,6 @@ public class Inventory : MonoBehaviour
 
         DocumentData document = documentInventory[index];
         document.prefab.GetComponent<ViewDocument>().showDocument();
-    }
-
-    void addSlot(GameObject data)
-    {
-        //slots[slotAmount].GetComponent<Image>().sourceImage = data.GetComponent<DocumentData>().inventoryIcon;
-        slots[slotAmount].SetActive(true);
-        slotAmount++;
     }
 
     //Finds doc in inventory then displays them

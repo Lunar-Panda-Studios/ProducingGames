@@ -7,6 +7,7 @@ public class TestingSave : MonoBehaviour
     internal GameObject player;
     public Inventory inventory;
     public PuzzleData completion;
+    internal bool canSave;
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class TestingSave : MonoBehaviour
                 index += 1;
             }
 
-            //inventory.documentInventory = data.docInven;
+            //Document aka clues or red hering or stuff with images
 
             index = 0;
 
@@ -54,6 +55,20 @@ public class TestingSave : MonoBehaviour
                 index += 1;
             }
 
+            index = 0;
+
+            //Story documents inventory 
+            foreach (string storyID in data.docInven)
+            {
+                if (storyID != null)
+                {
+                    inventory.storyNotesInventory.Add(Database.current.allStoryNotes[int.Parse(storyID)]);
+                }
+
+                index += 1;
+            }
+
+            //Puzzle status
             completion.eventsID = data.puzzlesEvents;
             completion.isCompleted = data.puzzleCompleted;
 

@@ -10,6 +10,7 @@ public class GameData
     public float[] rotation;
     public List<string> itemInven;
     public List<string> docInven;
+    public List<string> storyInven;
     public List<int> puzzlesEvents;
     public List<bool> puzzleCompleted;
 
@@ -54,6 +55,20 @@ public class GameData
             else
             {
                 docInven.Add(null);
+            }
+        }
+
+        storyInven = new List<string>();
+
+        for (int i = 0; i < data.inventory.storyNotesInventory.Count; i++)
+        {
+            if (data.inventory.storyNotesInventory[i] != null)
+            {
+                storyInven.Add(Database.getStoryID[data.inventory.storyNotesInventory[i]]);
+            }
+            else
+            {
+                storyInven.Add(null);
             }
         }
 
