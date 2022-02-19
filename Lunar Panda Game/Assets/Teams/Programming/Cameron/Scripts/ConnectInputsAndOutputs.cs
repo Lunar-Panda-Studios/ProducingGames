@@ -14,13 +14,16 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [Tooltip("The distance between the camera and the cable while the players holding it")]
     [SerializeField] float lineHoldDist;
     [SerializeField] GameObject button;
-    [SerializeField] Light completionLight;
+    [SerializeField] List<Light> completionLights;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
-        completionLight.enabled = false;
+        foreach (Light light in completionLights)
+        {
+            light.enabled = false;
+        }
     }
 
     private void Start()
@@ -94,13 +97,19 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     if (CheckCombination())
                     {
                         button.GetComponent<switchChanger>().TurnPowerOn();
-                        completionLight.enabled = true;
+                        foreach (Light light in completionLights)
+                        {
+                            light.enabled = true;
+                        }
                         GameEvents.current.onPowerTurnedOn(id);
                         GameEvents.current.onPuzzleComplete(id);
                     }
                     else
                     {
-                        completionLight.enabled = false;
+                        foreach (Light light in completionLights)
+                        {
+                            light.enabled = false;
+                        }
                         GameEvents.current.onPowerTurnedOff(id);
                         button.GetComponent<switchChanger>().TurnPowerOff();
                     }
