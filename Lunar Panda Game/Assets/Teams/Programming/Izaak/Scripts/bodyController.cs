@@ -17,6 +17,7 @@ public class bodyController : MonoBehaviour
     public ItemData scalpelData;
     [Tooltip("Screwdriver game object (only needed for the body with the screwdriver)")]
     public GameObject screwdriver;
+    private bool collected = false;
     private GameObject player;
     private Transform cam;
 
@@ -44,13 +45,20 @@ public class bodyController : MonoBehaviour
             {
                 if (hit.transform.gameObject == gameObject)
                 {
-                    if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Database.current.itemsInScene[inventoryScript.itemInventory[inventoryScript.selectedItem].id].data)
+                    if (inventoryScript.itemInventory[inventoryScript.selectedItem] != null)
                     {
-                        //Cutscene or animation or whatever will go here
-                        isCut = true;
-                        if (isCorrect == true)
+                        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Database.current.itemsInScene[inventoryScript.itemInventory[inventoryScript.selectedItem].id].data)
                         {
-                            screwdriver.SetActive(true);
+                            //Cutscene or animation or whatever will go here
+                            isCut = true;
+                            if (isCorrect == true)
+                            {
+                                if (collected == false)
+                                {
+                                    screwdriver.SetActive(true);
+                                    collected = true;
+                                }
+                            }
                         }
                     }
                 }
