@@ -29,6 +29,12 @@ public class playerJump : MonoBehaviour
 
     void Update()
     {
+
+
+    }
+
+    private bool isGrounded()
+    {
         //Sets a raycast for this frame
         bool rayDown = Physics.Raycast(groundDetection.transform.position, Vector3.down, groundDistance, groundLayer);
         //Checks if the player pressed jump this frame and acts on the jump if the player is considered on the ground
@@ -36,8 +42,10 @@ public class playerJump : MonoBehaviour
         {
             if (rayDown == true)
             {
-                p_rigidbody.AddForce(transform.up * p_speed, ForceMode.Impulse);  
+                p_rigidbody.AddForce(transform.up* p_speed, ForceMode.Impulse);  
             }
         }
+        return rayDown;
     }
 }
+

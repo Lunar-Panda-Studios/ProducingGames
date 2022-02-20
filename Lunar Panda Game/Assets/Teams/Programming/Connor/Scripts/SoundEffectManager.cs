@@ -10,6 +10,9 @@ public class SoundEffectManager : MonoBehaviour
     private Dictionary<string, AudioClip> SFX_Library = new Dictionary<string, AudioClip>();
 
     public GameObject SFX_Prefab;
+    AudioSource TheSFX;
+    public AudioSource stopSFX;
+
 
     public static SoundEffectManager GlobalSFXManager;
     void Start()
@@ -26,10 +29,9 @@ public class SoundEffectManager : MonoBehaviour
     {
         if (SFX_Library.ContainsKey(ClipName))
         {
-            AudioSource TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
+            TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
             TheSFX.PlayOneShot(SFX_Library[ClipName]); // Sets clip and plays it
             Destroy(TheSFX.gameObject, SFX_Library[ClipName].length);
-
         }
     }
 
