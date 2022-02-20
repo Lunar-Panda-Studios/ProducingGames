@@ -98,13 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda1bc79662463d4abfabd6e976ad122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRotateSpeed: 8
   playerObj: {fileID: 8207024237382381628}
+  cameraRotateSpeed: 8
   cameraUpperBoundsX: 90
   cameraLowerBoundsX: -75
   cameraUpperBoundsY: 0
   cameraLowerBoundsY: 0
-  canLook: 0
 --- !u!114 &5700612682732266378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p_speed: 5
+  runStamReq: 0.02
 --- !u!114 &973075566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +398,10 @@ MonoBehaviour:
   heldItem: {fileID: 0}
   pickupDist: 3
   holdDist: 1.5
+  dropDist: 0
+  lerpSpeed: 0
+  GOLookingAt: {fileID: 0}
+  throwForce: 0
 --- !u!114 &973075567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,12 +414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a3176bfe34399489cec3ef778609dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundDetection: {fileID: 1475630742}
   p_speed: 5
+  groundDetection: {fileID: 1475630742}
   groundDistance: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  TestGrounded: {fileID: 13400000, guid: 6ea87c414314e9e4193a2ae77145a8f6, type: 2}
+  TestNotGrounded: {fileID: 13400000, guid: a62ec60da64033e4eb6fe0e0fc7c1334, type: 2}
 --- !u!1 &8207024238241460757
 GameObject:
   m_ObjectHideFlags: 0

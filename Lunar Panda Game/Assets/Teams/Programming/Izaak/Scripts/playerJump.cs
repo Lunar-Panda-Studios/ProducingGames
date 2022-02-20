@@ -17,9 +17,13 @@ public class playerJump : MonoBehaviour
     public float groundDistance;
     private bool grounded;
     private bool isJumping;
+    private bool rayDown;
 
     [Tooltip("The layer the game considers to be ground")]
     public LayerMask groundLayer;
+
+    public PhysicMaterial TestGrounded;
+    public PhysicMaterial TestNotGrounded;
 
     void Start()
     {
@@ -29,14 +33,13 @@ public class playerJump : MonoBehaviour
 
     void Update()
     {
-
-
+        isGrounded();
     }
 
     private bool isGrounded()
     {
         //Sets a raycast for this frame
-        bool rayDown = Physics.Raycast(groundDetection.transform.position, Vector3.down, groundDistance, groundLayer);
+        rayDown = Physics.Raycast(groundDetection.transform.position, Vector3.down, groundDistance, groundLayer);
         //Checks if the player pressed jump this frame and acts on the jump if the player is considered on the ground
         if (Input.GetButtonDown("Jump"))
         {
@@ -47,5 +50,18 @@ public class playerJump : MonoBehaviour
         }
         return rayDown;
     }
+
+    void slideyWalls()
+    {
+        if (!rayDown)
+        {
+            GetComponent<CapsuleCollider>().sharedMaterial = TestNotGrounded;
+        }
+        else
+        {
+            GetComponent<CapsuleCollider>().sharedMaterial = TestGrounded;
+        }
+    }
+
 }
 
