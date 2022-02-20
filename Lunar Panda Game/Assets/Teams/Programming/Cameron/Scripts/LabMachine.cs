@@ -35,7 +35,9 @@ public class LabMachine : MonoBehaviour
                     if (switchWall.CheckAllCombos())
                     {
                         //change the antidote so that it can be picked up and stuff
-
+                        //add holdableitem and item data
+                        //add glowyinteractthingie
+                        //
                     }
                 }
             }

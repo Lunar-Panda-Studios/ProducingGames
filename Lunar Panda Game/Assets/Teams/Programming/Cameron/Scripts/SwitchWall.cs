@@ -14,7 +14,7 @@ public class SwitchWall : MonoBehaviour
     [SerializeField] bool[] combination2 = new bool[4];
     [SerializeField] bool[] combination3 = new bool[4];
     bool[] completedCombinations = new bool[3];
-    List<bool[]> combinations;
+    List<bool[]> combinations = new List<bool[]>();
     bool[] currentCombination = new bool[4];
 
     void Awake()
