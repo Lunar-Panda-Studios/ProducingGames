@@ -11,8 +11,13 @@ using UnityEngine;
 public class LabMachine : MonoBehaviour
 {
     [SerializeField] List<GameObject> tubes;
+    [SerializeField] List<Material> startingTubeMats;
+    [SerializeField] List<Material> completeTubeMats;
     [SerializeField] SwitchWall switchWall;
     [SerializeField] GameObject button;
+    [SerializeField] ItemData antidoteData;
+    [SerializeField] GameObject antidote;
+    [SerializeField] Material antidoteGlowMat;
     Transform cam;
     Transform player;
 
@@ -36,11 +41,38 @@ public class LabMachine : MonoBehaviour
                     {
                         //change the antidote so that it can be picked up and stuff
                         //add holdableitem and item data
+                        HoldableItem holdableItem = antidote.AddComponent<HoldableItem>();
+                        holdableItem.data = antidoteData;
                         //add glowyinteractthingie
-                        //
+                        GlowWhenLookedAt glowy = antidote.AddComponent<GlowWhenLookedAt>();
+                        glowy.glowingMaterial = antidoteGlowMat;
+                        antidote.AddComponent<Rigidbody>();
+                        antidote.transform.parent = null;
                     }
                 }
             }
+        }
+    }
+
+    //tube num has to be 0, 1, or 2
+    public void TurnTubeOn(bool[] completedCombos)
+    {
+        //goes through the bool array of completed combos, and if any are true, change em to be "on"
+        for(int i = 0; i < completedCombos.Length; i++)
+        {
+            if (completedCombos[i])
+            {
+                tubes[i].GetComponent<MeshRenderer>().material = completeTubeMats[i];
+                //I think they want to play a sound here
+            }
+        }
+    }
+
+    public void ResetMachine()
+    {
+        for (int i = 0; i < tubes.Count; i++)
+        {
+            tubes[i].GetComponent<MeshRenderer>().material = startingTubeMats[i];
         }
     }
 }

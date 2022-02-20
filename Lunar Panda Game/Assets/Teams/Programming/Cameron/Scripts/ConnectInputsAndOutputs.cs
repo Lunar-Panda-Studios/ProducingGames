@@ -117,7 +117,15 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TurnOffLights()
+    {
+        foreach (Light light in completionLights)
+        {
+            light.enabled = false;
         }
+    }
 
     void SetUpLine()
     {
@@ -142,6 +150,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 Destroy(inputNode.GetComponent<LineRenderer>());
                 inputNode.GetComponent<Node>().connectedNode = null;
             }
+            button.GetComponent<switchChanger>().TurnPowerOff();
         }
     }
 

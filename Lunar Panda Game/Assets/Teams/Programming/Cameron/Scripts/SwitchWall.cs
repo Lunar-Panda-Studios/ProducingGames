@@ -6,6 +6,8 @@ public class SwitchWall : MonoBehaviour
 {
     Transform cam;
     GameObject player;
+    [SerializeField] switchChanger amogusComplete;
+    [SerializeField] ConnectInputsAndOutputs amogusPuzzle;
     [SerializeField] List<switchChanger> buttons;
     [SerializeField] switchChanger submitButton;
     //I would make a list of a bool array for the combinations to make it more modifiable, but they dont show in inspector without doing 
@@ -13,9 +15,10 @@ public class SwitchWall : MonoBehaviour
     [SerializeField] bool[] combination1 = new bool[4];
     [SerializeField] bool[] combination2 = new bool[4];
     [SerializeField] bool[] combination3 = new bool[4];
-    bool[] completedCombinations = new bool[3];
+    [SerializeField] LabMachine labMachine;
+    [SerializeField] bool[] completedCombinations = new bool[3];
     List<bool[]> combinations = new List<bool[]>();
-    bool[] currentCombination = new bool[4];
+    [SerializeField] bool[] currentCombination = new bool[4];
 
     void Awake()
     {
@@ -24,20 +27,50 @@ public class SwitchWall : MonoBehaviour
         combinations.Add(combination3);
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
+        for (int i = 0; i < currentCombination.Length; i++)
+        {
+            currentCombination[i] = false;
+        }
+    }
+
+    void Update()
+    {
+        if (amogusComplete.isPowerOn)
+        {
+            CheckForButtonPress();
+        }
     }
 
     public bool[] CheckCombination()
     {
+        //this bool keeps track to see if the player inputted a correct guess
+        bool madeCorrectGuess = false;
+        //gets the current combination
         for(int i = 0; i < currentCombination.Length; i++)
         {
             currentCombination[i] = buttons[i].GetComponent<switchChanger>().getSwitchState();
         }
+        //for each combination, check if the current combo is the same. If it is, set the completed combo to true
         for(int i = 0; i < combinations.Count; i++)
         {
             if (CompareBoolArray(combinations[i], currentCombination))
             {
                 completedCombinations[i] = true;
+                madeCorrectGuess = true;
             }
+        }
+        //if the player didnt make a correct guess, reset the lab machine and the completed combo array
+        if (!madeCorrectGuess)
+        {
+            print("didnt make correct guess");
+            print(completedCombinations.Length);
+            for (int i = 0; i < completedCombinations.Length; i++)
+            {
+                completedCombinations[i] = false;
+            }
+            labMachine.ResetMachine();
+            amogusPuzzle.resetPuzzle(amogusPuzzle.id);
+            amogusPuzzle.TurnOffLights();
         }
         return completedCombinations;
     }
@@ -54,7 +87,7 @@ public class SwitchWall : MonoBehaviour
 
     bool CompareBoolArray(bool[] x, bool[] y)
     {
-        for (int i = 0; i <= x.Length; i++)
+        for (int i = 0; i < x.Length; i++)
         {
             if (x[i] != y[i])
                 return false;
@@ -76,11 +109,20 @@ public class SwitchWall : MonoBehaviour
                     {
                         button.changeSwitchState();
                     }
-                    else if (hit.transform.gameObject == submitButton.gameObject)
+                }
+                //if the submit button is pressed, Check the current combination. Turn on the tubes whos combos have been completed
+                if (hit.transform.gameObject == submitButton.gameObject)
+                {
+                    bool[] x = CheckCombination();
+                    //for each button, if its true, set it to false (reset the buttons)
+                    foreach(switchChanger button in buttons)
                     {
-                        bool[] x = CheckCombination();
-
+                        if (button.getSwitchState())
+                        {
+                            button.changeSwitchState();
+                        }
                     }
+                    labMachine.TurnTubeOn(x);
                 }
             }
         }
