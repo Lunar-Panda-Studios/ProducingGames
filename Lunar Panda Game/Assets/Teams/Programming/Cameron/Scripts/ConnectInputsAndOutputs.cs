@@ -29,6 +29,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     private void Start()
     {
         GameEvents.current.puzzleCompleted += puzzleCompleted;
+        GameEvents.current.puzzleReset += resetPuzzle;
     }
 
     void Update()
@@ -129,6 +130,18 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             line.positionCount = 2;
             line.material = inputCurrentlyConnecting.GetComponent<Node>().lineMat;
             line.useWorldSpace = true;
+        }
+    }
+
+    public void resetPuzzle(int id)
+    {
+        if(id == this.id)
+        {
+            foreach (GameObject inputNode in InputNodes)
+            {
+                Destroy(inputNode.GetComponent<LineRenderer>());
+                inputNode.GetComponent<Node>().connectedNode = null;
+            }
         }
     }
 
