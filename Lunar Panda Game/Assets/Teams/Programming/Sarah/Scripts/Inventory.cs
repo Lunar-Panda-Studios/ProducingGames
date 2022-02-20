@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     internal List<DocumentData> documentInventory;
     [SerializeField]
     internal List<StoryData> storyNotesInventory;
-    private int selectedItem = 0;
+    internal int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
 
