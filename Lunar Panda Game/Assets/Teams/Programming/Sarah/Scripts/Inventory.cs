@@ -189,8 +189,11 @@ public class Inventory : MonoBehaviour
         documentInventory.Add(data);
 
         data.prefab.GetComponent<ViewDocument>().inInventory = true;
+    }
 
-        //addSlot(data);
+    public void addItem(StoryData data)
+    {
+        storyNotesInventory.Add(data);
     }
 
     //Shows document based on the index of the selected item which is linked to the inventory list
@@ -251,7 +254,7 @@ public class Inventory : MonoBehaviour
 
        if(pickupControl.heldItem != null)
         {
-            Destroy(pickupControl.heldItem);
+            pickupControl.heldItem.SetActive(false);
 
             if(itemInventory[selectedItem] != null)
             {
@@ -266,7 +269,7 @@ public class Inventory : MonoBehaviour
     {
         if(pickupControl.heldItem != null)
         {
-            Destroy(pickupControl.heldItem);
+            pickupControl.heldItem.SetActive(false);
             pickupControl.heldItem = null;
         }
     }
@@ -275,8 +278,11 @@ public class Inventory : MonoBehaviour
     {
         if(itemInventory[selectedItem] != null)
         {
-            GameObject heldItem = Instantiate(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
+            GameObject heldItem = Database.current.itemsInScene[itemInventory[selectedItem].id].gameObject;
+            heldItem.transform.position = player.transform.position;
+            //(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
             pickupControl.PickupItem(heldItem.transform);
+            heldItem.SetActive(true);
         }
     }
 

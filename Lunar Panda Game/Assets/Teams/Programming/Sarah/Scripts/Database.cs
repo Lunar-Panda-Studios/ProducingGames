@@ -8,7 +8,9 @@ public class Database: MonoBehaviour
     public List<ItemData> allItems;
     public List<DocumentData> allDocs;
     public List<StoryData> allStoryNotes;
-    //public List<int> id;
+    public List<GameObject> itemsInScene;
+    public static List<Vector3> itemLocation;
+    public static Dictionary<HoldableItem, Vector3> getLocation;
     public static Dictionary<ItemData, string> getItemID;
     public static Dictionary<DocumentData, string> getDocID;
     public static Dictionary<StoryData, string> getStoryID;
@@ -20,6 +22,7 @@ public class Database: MonoBehaviour
 
     private void Start()
     {
+        getLocation = new Dictionary<HoldableItem, Vector3>();
         getDocID = new Dictionary<DocumentData, string>();
         getItemID = new Dictionary<ItemData, string>();
         getStoryID = new Dictionary<StoryData, string>();
@@ -37,6 +40,48 @@ public class Database: MonoBehaviour
         for (int i = 0; i < allStoryNotes.Count; i++)
         {
             getStoryID.Add(allStoryNotes[i], i.ToString());
+        }
+
+        itemUpdate();
+        locationDicUpdate();
+    }
+
+    public void itemUpdate()
+    {
+        HoldableItem[] temp = FindObjectsOfType<HoldableItem>();
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            itemsInScene.Add(temp[i].gameObject);
+        }
+
+        itemLocation = new List<Vector3>();
+
+        for (int i = 0; i < itemsInScene.Count; i++)
+        {
+            itemLocation.Add(itemsInScene[i].transform.position);
+        }
+    }
+
+    public void locationDicUpdate()
+    {
+        for(int i = 0; i < itemsInScene.Count; i++)
+        {
+            getLocation.Add(itemsInScene[i].GetComponent<HoldableItem>(), itemLocation[i]);
+        }
+    }
+
+    public void locationUpdate()
+    {
+        foreach(HoldableItem item in FindObjectsOfType<HoldableItem>())
+        {
+            for(int i = 0; i < itemsInScene.Count; i++)
+            {
+                if (itemsInScene[i].GetComponent<HoldableItem>().data == item.data)
+                {
+                    itemLocation[i] = item.gameObject.transform.position;
+                }
+            }
         }
     }
 

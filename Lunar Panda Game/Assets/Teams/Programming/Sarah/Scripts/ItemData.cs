@@ -11,5 +11,7 @@ public class ItemData : ScriptableObject
     [TextArea]
     public string description;
     public Sprite itemImage;
+    public bool isUtility;
     public GameObject prefab;
+    public Room foundInRoom; 
 }
