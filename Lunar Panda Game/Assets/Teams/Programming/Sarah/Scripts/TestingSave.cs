@@ -50,13 +50,13 @@ public class TestingSave : MonoBehaviour
 
             index = 0;
 
-            foreach(GameObject item in Database.current.itemsInScene)
+            foreach(HoldableItem item in Database.current.itemsInScene)
             {
-                if(!inventory.itemInventory.Contains(item.GetComponent<HoldableItem>().data))
+                if(!inventory.itemInventory.Contains(item.data))
                 {
                     if(data.itemsInScene[index,0] != null)
                     {
-                        item.SetActive(true);
+                        item.gameObject.SetActive(true);
                         item.transform.position = new Vector3((float)data.itemsInScene[index, 0], (float)data.itemsInScene[index, 1], (float)data.itemsInScene[index, 2]);
                         item.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
                     }
