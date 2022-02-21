@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConnectInputsAndOutputs : MonoBehaviour
 {
     public int id;
+    public bool isSinglePuzzle = true;
     Transform player;
     Transform cam; //not referring to me, referring to the camera
     [SerializeField] List<GameObject> InputNodes;
@@ -14,13 +15,16 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [Tooltip("The distance between the camera and the cable while the players holding it")]
     [SerializeField] float lineHoldDist;
     [SerializeField] GameObject button;
-    [SerializeField] Light completionLight;
+    [SerializeField] List<Light> completionLights;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
-        completionLight.enabled = false;
+        foreach (Light light in completionLights)
+        {
+            light.enabled = false;
+        }
     }
 
     private void Start()
@@ -49,8 +53,12 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                             //that its connected now
                             inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, hit.transform.position);
                             inputCurrentlyConnecting.GetComponent<Node>().connectedNode = hit.transform.gameObject;
-
                         }
+                        else
+                        {
+                            Destroy(inputCurrentlyConnecting.GetComponent<LineRenderer>());
+                        }
+
                         inputCurrentlyConnecting = null;
                     }
                 }
@@ -90,19 +98,38 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     button.GetComponent<switchChanger>().changeSwitchState();
                     if (CheckCombination())
                     {
-                        completionLight.enabled = true;
+                        button.GetComponent<switchChanger>().TurnPowerOn();
+                        foreach (Light light in completionLights)
+                        {
+                            light.enabled = true;
+                        }
                         GameEvents.current.onPowerTurnedOn(id);
-                        GameEvents.current.onPuzzleComplete(id);
+                        if(isSinglePuzzle)
+                        {
+                            GameEvents.current.onPuzzleComplete(id);
+                        }
                     }
                     else
                     {
-                        completionLight.enabled = false;
+                        foreach (Light light in completionLights)
+                        {
+                            light.enabled = false;
+                        }
                         GameEvents.current.onPowerTurnedOff(id);
+                        button.GetComponent<switchChanger>().TurnPowerOff();
                     }
                 }
             }
         }
+    }
+
+    public void TurnOffLights()
+    {
+        foreach (Light light in completionLights)
+        {
+            light.enabled = false;
         }
+    }
 
     void SetUpLine()
     {
@@ -127,14 +154,21 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 Destroy(inputNode.GetComponent<LineRenderer>());
                 inputNode.GetComponent<Node>().connectedNode = null;
             }
+            button.GetComponent<switchChanger>().TurnPowerOff();
+            PuzzleData.current.completedEvents[id] = false;
+            PuzzleData.current.isCompleted[id - 1] = false;
         }
     }
 
     void DrawLine()
     {
-        //render the line from the input node, to where the player is looking at
-        inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(0, inputCurrentlyConnecting.transform.position);
-        inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, cam.position + (cam.forward * lineHoldDist));
+        //doing this if statement each frame while connecting thingies sucks, but to fix it id need at least a small brain
+        if (inputCurrentlyConnecting.GetComponent<LineRenderer>())
+        {
+            //render the line from the input node, to where the player is looking at
+            inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(0, inputCurrentlyConnecting.transform.position);
+            inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, cam.position + (cam.forward * lineHoldDist));
+        }
     }
 
     public bool CheckCombination()
