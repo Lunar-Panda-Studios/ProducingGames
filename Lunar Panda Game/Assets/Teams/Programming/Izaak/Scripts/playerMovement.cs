@@ -8,7 +8,7 @@ public class playerMovement : MonoBehaviour
 
     [Header("Move Settings")]
     [Tooltip("Speed the player moves at")]
-    public float p_speed = 5;
+    public float p_speed = 2f;
     public float runStamReq = 0.02f;
 
     void Start()
@@ -29,15 +29,15 @@ public class playerMovement : MonoBehaviour
         //{
         //    p_speed = 2.0f;
         //}
-        if (Input.GetKey(KeyCode.LeftShift) && (StaminaBar.instance.currentStam > runStamReq))
-        {
-            p_speed = 10.0f;
-            StaminaBar.instance.staminaUsage(runStamReq);
-        }
-        else if (true)
-        {
-            p_speed = 5.0f;        
-        }
+        //if (Input.GetKey(KeyCode.LeftShift) && (StaminaBar.instance.currentStam > runStamReq))
+        //{
+        //    p_speed = 10.0f;
+        //    StaminaBar.instance.staminaUsage(runStamReq);
+        //}
+        //else if (true)
+        //{
+        //    p_speed = 5.0f;        
+        //}
 
         move();
 
