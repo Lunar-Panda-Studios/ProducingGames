@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchWall : MonoBehaviour
 {
+    internal int id;
     Transform cam;
     GameObject player;
     [SerializeField] switchChanger amogusComplete;
@@ -31,6 +32,12 @@ public class SwitchWall : MonoBehaviour
         {
             currentCombination[i] = false;
         }
+    }
+
+    private void Start()
+    {
+        id = amogusPuzzle.id;
+        GameEvents.current.puzzleReset += resetPuzzle;
     }
 
     void Update()
@@ -68,7 +75,7 @@ public class SwitchWall : MonoBehaviour
             {
                 completedCombinations[i] = false;
             }
-            labMachine.ResetMachine();
+            labMachine.ResetMachine(amogusPuzzle.id);
             amogusPuzzle.resetPuzzle(amogusPuzzle.id);
             amogusPuzzle.TurnOffLights();
         }
@@ -128,5 +135,23 @@ public class SwitchWall : MonoBehaviour
         }
     }
     
-        
+     public void resetPuzzle(int id)
+    {
+        if (id == this.id)
+        {
+
+            amogusPuzzle.TurnOffLights();
+
+            for (int i = 0; i < completedCombinations.Length; i++)
+            {
+                completedCombinations[i] = false;
+            }
+
+            for(int i = 0; i < currentCombination.Length; i++)
+            {
+                currentCombination[i] = false;
+            }
+
+        }
+    }
 }

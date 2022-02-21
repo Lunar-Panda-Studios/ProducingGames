@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConnectInputsAndOutputs : MonoBehaviour
 {
     public int id;
+    public bool isSinglePuzzle = true;
     Transform player;
     Transform cam; //not referring to me, referring to the camera
     [SerializeField] List<GameObject> InputNodes;
@@ -103,7 +104,10 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                             light.enabled = true;
                         }
                         GameEvents.current.onPowerTurnedOn(id);
-                        GameEvents.current.onPuzzleComplete(id);
+                        if(isSinglePuzzle)
+                        {
+                            GameEvents.current.onPuzzleComplete(id);
+                        }
                     }
                     else
                     {
@@ -151,6 +155,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 inputNode.GetComponent<Node>().connectedNode = null;
             }
             button.GetComponent<switchChanger>().TurnPowerOff();
+            PuzzleData.current.completedEvents[id] = false;
+            PuzzleData.current.isCompleted[id - 1] = false;
         }
     }
 

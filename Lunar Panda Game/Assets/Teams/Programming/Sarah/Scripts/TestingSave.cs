@@ -111,12 +111,11 @@ public class TestingSave : MonoBehaviour
             completion.eventsID = data.puzzlesEvents;
             completion.isCompleted = data.puzzleCompleted;
 
+            print(data.puzzleCompleted.Count);
             for (int i = 0; i < data.puzzleCompleted.Count; i++)
             {
-                print(completion.isCompleted[i]);
                 if (completion.isCompleted[i])
                 {
-                    print("Completed");
                     GameEvents.current.onPuzzleComplete(i + 1);
                 }
                 else
@@ -124,8 +123,6 @@ public class TestingSave : MonoBehaviour
                     GameEvents.current.onPuzzleReset(i + 1);
                 }
             }
-
-            print("Load");
         }
         else
         {
