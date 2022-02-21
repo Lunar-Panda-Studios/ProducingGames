@@ -286,6 +286,4 @@ public class Inventory : MonoBehaviour
             heldItem.SetActive(true);
         }
     }
-
-
 }
