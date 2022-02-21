@@ -160,6 +160,7 @@ public class Inventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pickupControl.enabled = false;
+            UIManager.Instance.storyNotesDisplay();
         }
     }
 
