@@ -33,6 +33,7 @@ public class playerJump : MonoBehaviour
 
     void Update()
     {
+        slideyWalls();
         isGrounded();
     }
 
