@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class bodyController : MonoBehaviour
 {
+    public int id;
     [Header("Puzzle Values")]
     [Tooltip("The ID of this patient")]
     public int patientID;
@@ -13,6 +14,7 @@ public class bodyController : MonoBehaviour
     [Header("Meshes")]
     [Tooltip("The mesh of the body when it has been cut")]
     public Mesh cutBody;
+    Mesh startMesh;
     private MeshFilter mesh;
 
     private bool isCut;
@@ -33,12 +35,15 @@ public class bodyController : MonoBehaviour
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
         mesh = GetComponent<MeshFilter>();
+        startMesh = mesh.mesh;
     }
     // Start is called before the first frame update
     void Start()
     {
         inventoryScript = FindObjectOfType<Inventory>();
         isCut = false;
+        GameEvents.current.puzzleCompleted += puzzleCompleted;
+        GameEvents.current.puzzleReset += puzzleReset;
     }
 
     // Update is called once per frame
@@ -64,6 +69,8 @@ public class bodyController : MonoBehaviour
                                 {
                                     screwdriver.SetActive(true);
                                     collected = true;
+
+                                    PuzzleData.current.isCompleted[id - 1] = true;
                                 }
                             }
                         }
@@ -76,5 +83,37 @@ public class bodyController : MonoBehaviour
     public void changeMesh()
     {
         mesh.mesh = cutBody;
+    }
+
+    public void puzzleReset(int id)
+    {
+        if(id == this.id)
+        {
+            collected = false;
+            isCut = false;
+            mesh.mesh = startMesh;
+            if(screwdriver != null)
+            {
+                screwdriver.SetActive(false);
+            }
+        }
+    }
+
+    public void puzzleCompleted(int id)
+    {
+        if (id == this.id)
+        {
+            if(!isCut)
+            {
+                collected = true;
+                isCut = true;
+                if (isCorrect)
+                {
+                    mesh.mesh = cutBody;
+                    screwdriver.SetActive(true);
+                }
+            }
+
+        }
     }
 }
