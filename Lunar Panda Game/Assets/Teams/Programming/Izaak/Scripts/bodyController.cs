@@ -10,6 +10,11 @@ public class bodyController : MonoBehaviour
     [Tooltip("Whether this patient is the one with the screwdriver or not")]
     public bool isCorrect;
 
+    [Header("Meshes")]
+    [Tooltip("The mesh of the body when it has been cut")]
+    public Mesh cutBody;
+    private MeshFilter mesh;
+
     private bool isCut;
 
     [Header("Item Data")]
@@ -27,6 +32,7 @@ public class bodyController : MonoBehaviour
     {
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
+        mesh = GetComponent<MeshFilter>();
     }
     // Start is called before the first frame update
     void Start()
@@ -50,6 +56,7 @@ public class bodyController : MonoBehaviour
                         if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Database.current.itemsInScene[inventoryScript.itemInventory[inventoryScript.selectedItem].id].data)
                         {
                             //Cutscene or animation or whatever will go here
+                            changeMesh();
                             isCut = true;
                             if (isCorrect == true)
                             {
@@ -64,5 +71,10 @@ public class bodyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void changeMesh()
+    {
+        mesh.mesh = cutBody;
     }
 }
