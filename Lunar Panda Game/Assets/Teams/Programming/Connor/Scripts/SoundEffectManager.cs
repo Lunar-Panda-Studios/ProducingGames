@@ -15,9 +15,23 @@ public class SoundEffectManager : MonoBehaviour
 
 
     public static SoundEffectManager GlobalSFXManager;
+
+    private void Awake()
+    {
+        if (GlobalSFXManager == null)
+        {
+            GlobalSFXManager = this;
+        }
+        else if (GlobalSFXManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        //DontDestroyOnLoad(gameObject);
+        
+    }
     void Start()
     {
-        GlobalSFXManager = this;
 
         for (int i = 0; i <ClipNames.Count; i++)
         {
@@ -34,5 +48,7 @@ public class SoundEffectManager : MonoBehaviour
             Destroy(TheSFX.gameObject, SFX_Library[ClipName].length);
         }
     }
+
+    
 
 }

@@ -33,8 +33,8 @@ public class playerJump : MonoBehaviour
 
     void Update()
     {
-        slideyWalls();
         isGrounded();
+        //slideyWalls();
     }
 
     private bool isGrounded()
@@ -52,17 +52,19 @@ public class playerJump : MonoBehaviour
         return rayDown;
     }
 
-    void slideyWalls()
-    {
-        if (!rayDown)
-        {
-            GetComponent<CapsuleCollider>().sharedMaterial = TestNotGrounded;
-        }
-        else
-        {
-            GetComponent<CapsuleCollider>().sharedMaterial = TestGrounded;
-        }
-    }
+    //void slideyWalls()
+    //{
+    //    if (!rayDown)
+    //    {
+    //        GetComponent<CapsuleCollider>().sharedMaterial = TestNotGrounded;
+    //        Debug.Log("no");
+    //    }
+    //    else
+    //    {
+    //        GetComponent<CapsuleCollider>().sharedMaterial = TestGrounded;
+    //        Debug.Log("yes");
+    //    }
+    //}
 
 }
 
