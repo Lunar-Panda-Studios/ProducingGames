@@ -10,12 +10,6 @@ public class switchChanger : MonoBehaviour
     public GameObject amogus;
     public bool isPowerOn = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void changeSwitchState()
     {
         switchMode = !switchMode;
