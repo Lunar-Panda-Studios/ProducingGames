@@ -58,7 +58,7 @@ public class bodyController : MonoBehaviour
                 {
                     if (inventoryScript.itemInventory[inventoryScript.selectedItem] != null)
                     {
-                        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Database.current.itemsInScene[inventoryScript.itemInventory[inventoryScript.selectedItem].id].data)
+                        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == scalpelData)
                         {
                             //Cutscene or animation or whatever will go here
                             changeMesh();
