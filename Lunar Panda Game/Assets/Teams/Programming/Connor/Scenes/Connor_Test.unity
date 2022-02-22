@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 923892931}
   - component: {fileID: 923892930}
   - component: {fileID: 923892929}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c87721a5fdf344c9ae8e9ece85f86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaBar: {fileID: 1206195974}
   maxStam: 100
   currentStam: 0
   regenDelay: 1
@@ -1255,6 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e2669267ccc674eb7b1f49b9a55f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stopThisSound: {fileID: 0}
 --- !u!65 &1615727885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1350,21 +1350,29 @@ PrefabInstance:
       propertyPath: runStamReq
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 973075567, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: groundDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475630743, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.999
+      objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.77
+      value: 1.984
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.13
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.63
+      value: -3.98
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1398,6 +1406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MrCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8207024237382381631, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a62ec60da64033e4eb6fe0e0fc7c1334, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3daebf205d28d244948c2179be01d89, type: 3}
 --- !u!1 &1671361157
@@ -1761,6 +1773,7 @@ MonoBehaviour:
   ClipList:
   - {fileID: 8300000, guid: 75905b51f6ae25e4a97a0d14f1d5d10e, type: 3}
   SFX_Prefab: {fileID: 290389588640505361, guid: 9d1b7dfce0e8dbe4bbd472979ca13a1e, type: 3}
+  stopSFX: {fileID: 0}
 --- !u!1 &2014684629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,6 +1902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   openCloseKey: 108
   anim: {fileID: 1533866116}
   animTimer: 0.5
@@ -1904,6 +1918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   openCloseKey: 103
   anim: {fileID: 1533866116}
   animTimer: 0.5
