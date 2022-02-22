@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     internal List<DocumentData> documentInventory;
     [SerializeField]
     internal List<StoryData> storyNotesInventory;
-    private int selectedItem = 0;
+    internal int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
 
@@ -160,6 +160,7 @@ public class Inventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pickupControl.enabled = false;
+            UIManager.Instance.storyNotesDisplay();
         }
     }
 
@@ -285,6 +286,4 @@ public class Inventory : MonoBehaviour
             heldItem.SetActive(true);
         }
     }
-
-
 }
