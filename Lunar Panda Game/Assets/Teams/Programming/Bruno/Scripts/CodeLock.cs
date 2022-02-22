@@ -61,6 +61,15 @@ public class CodeLock : MonoBehaviour
         }
     }
 
+    public void resetPuzzle(int id)
+    {
+        if(id == this.id)
+        {
+            toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+            attemptedCode = "";
+        }
+    }
+
     public void puzzleComplete(int id)
     {
         if(id == this.id)
