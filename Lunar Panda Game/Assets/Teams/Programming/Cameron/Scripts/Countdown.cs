@@ -21,7 +21,6 @@ public class Countdown : MonoBehaviour
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         manager = FindObjectOfType<TestingSave>();
-        ray = new InteractRaycasting(); // this should be made a singleton
         inventoryScript = FindObjectOfType<Inventory>();
     }
 
