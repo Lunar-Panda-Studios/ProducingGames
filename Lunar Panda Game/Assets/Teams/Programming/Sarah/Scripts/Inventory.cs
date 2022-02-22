@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
     internal int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
+    private autoCombineScript autoCombine;
 
     private int itemsIn;
 
@@ -52,6 +53,7 @@ public class Inventory : MonoBehaviour
         documentInventory = new List<DocumentData>();
         slots = new List<GameObject>();
         itemSpace = new List<GameObject>();
+        autoCombine = FindObjectOfType<autoCombineScript>();
 
         foreach(Transform child in itemInventoryUI.transform)
         {
@@ -180,6 +182,7 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
+                autoCombine.itemChecking(data);
                 break;
             }
         }
