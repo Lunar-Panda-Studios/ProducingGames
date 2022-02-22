@@ -2236,7 +2236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2278,6 +2278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MrCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8207024237382381630, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c218a0732b8b4f4bba60273f2112e21, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3daebf205d28d244948c2179be01d89, type: 3}
 --- !u!115 &586665956
@@ -5214,7 +5218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e20fb4391ba2754eab2fe5f01693911, type: 2}
+  - {fileID: 2100000, guid: 664ea08309e3de64a8c61be7f05b09bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5424,6 +5428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInventory: []
   documentInventory: []
+  storyNotesInventory: []
   drop: 32
   changeItem: 113
   openDocKey: 105

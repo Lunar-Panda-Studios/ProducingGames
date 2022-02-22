@@ -17,12 +17,14 @@ public class GameEvents : MonoBehaviour
     public event Action<int> powerOn;
     public event Action<int> powerOff;
     public event Action<int> puzzleCompleted;
+    public event Action<int> puzzleReset;
     public event Action<int> triggerSound;
     public event Action<int> triggerDialog;
     public event Action<int> triggerOpenDoor;
     public event Action<int> triggerCloseDoor;
     public event Action<int> triggerLightsOn;
     public event Action<int> triggerLightsOff;
+    public event Action<int> triggerStoryNotes;
 
     public void onPowerTurnedOn(int id)
     {
@@ -45,6 +47,14 @@ public class GameEvents : MonoBehaviour
         if(puzzleCompleted != null)
         {
             puzzleCompleted(id);
+        }
+    }
+
+    public void onPuzzleReset(int id)
+    {
+        if (puzzleReset != null)
+        {
+            puzzleReset(id);
         }
     }
 
@@ -93,6 +103,14 @@ public class GameEvents : MonoBehaviour
         if (triggerLightsOff != null)
         {
             triggerLightsOff(id);
+        }
+    }
+
+    public void onTriggerStoryNotes(int id)
+    {
+        if (triggerStoryNotes != null)
+        {
+            triggerStoryNotes(id);
         }
     }
 }

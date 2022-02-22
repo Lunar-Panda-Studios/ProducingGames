@@ -2,10 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct DoorAndBox
+{
+    public OpenClose linkedDoor;
+    public PowerChanging linkedBox;
+}
+
 public class BoxToDoor : MonoBehaviour
 {
     public int id;
+    public DoorAndBox LinkedObjects;
     bool switchState = true;
+
+    private void Start()
+    {
+        LinkedObjects.linkedBox.id = id;
+        LinkedObjects.linkedDoor.id = id;
+    }
 
     private void OnMouseDown()
     {
