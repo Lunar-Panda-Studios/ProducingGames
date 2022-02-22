@@ -11,6 +11,9 @@ public class Countdown : MonoBehaviour
     Transform cam;
     Transform player;
     TestingSave manager;
+    InteractRaycasting ray;
+    Inventory inventoryScript;
+    [SerializeField] ItemData antidoteData;
 
     void Awake()
     {
@@ -18,6 +21,8 @@ public class Countdown : MonoBehaviour
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         manager = FindObjectOfType<TestingSave>();
+        ray = new InteractRaycasting(); // this should be made a singleton
+        inventoryScript = FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -29,6 +34,19 @@ public class Countdown : MonoBehaviour
             manager.load();
             this.GetComponent<Collider>().enabled = true;
             StopTimer();
+        }
+
+        if (Input.GetButtonDown("Interact"))
+        {
+            RaycastHit hit;
+            InteractRaycasting.Instance.raycastInteract(out hit);
+            if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
+            {
+                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+                {
+                    StartCoroutine(UIManager.Instance.FadePanelIn());
+                }
+            }
         }
     }
 
