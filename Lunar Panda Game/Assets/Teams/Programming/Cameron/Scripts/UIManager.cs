@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [Tooltip("Put the parent empty object of the document system here")]
     [SerializeField] GameObject docViewingSystem;
     [SerializeField] GameObject inventorySystem;
+    public Text storyNotes;
 
     void Awake()
     {
@@ -59,6 +60,18 @@ public class UIManager : MonoBehaviour
     {
         //toggles between active and inactive whenever this is called
         crosshair.gameObject.SetActive(!crosshair.gameObject.activeSelf);
+    }
+
+    public void storyNotesDisplay()
+    {
+        storyNotes.text = "";
+
+        for (int i = 0; i < inventorySystem.GetComponent<Inventory>().storyNotesInventory.Count; i++)
+        {
+            storyNotes.text += inventorySystem.GetComponent<Inventory>().storyNotesInventory[i].description;
+            storyNotes.text += "\n\n";
+
+        }
     }
 
     void InitUI()

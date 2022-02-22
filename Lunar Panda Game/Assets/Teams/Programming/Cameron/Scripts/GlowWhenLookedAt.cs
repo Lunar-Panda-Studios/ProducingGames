@@ -6,7 +6,7 @@ public class GlowWhenLookedAt : MonoBehaviour
 {
     [HideInInspector] public bool isGlowing;
     [HideInInspector] public Material baseMaterial; //need this for the input script thingie but dont want in inspector
-    [SerializeField] Material glowingMaterial;
+    [SerializeField] public Material glowingMaterial;
 
     void Awake()
     {
