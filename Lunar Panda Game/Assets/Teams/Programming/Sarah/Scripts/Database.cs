@@ -8,7 +8,7 @@ public class Database: MonoBehaviour
     public List<ItemData> allItems;
     public List<DocumentData> allDocs;
     public List<StoryData> allStoryNotes;
-    public HoldableItem[] itemsInScene;
+    public List<HoldableItem> itemsInScene;
     public static List<Vector3> itemLocation;
     public static Dictionary<HoldableItem, Vector3> getLocation;
     public static Dictionary<ItemData, string> getItemID;
@@ -48,20 +48,20 @@ public class Database: MonoBehaviour
 
     public void itemUpdate()
     {
-        itemsInScene = FindObjectsOfType<HoldableItem>();
+        HoldableItem[] temp = FindObjectsOfType<HoldableItem>();
 
         itemLocation = new List<Vector3>();
 
-        for (int i = 0; i < itemsInScene.Length; i++)
+        for (int i = 0; i < temp.Length; i++)
         {
             itemLocation.Add(itemsInScene[i].transform.position);
-            itemsInScene[i].data.id = i;
+            itemsInScene.Add(temp[i]);
         }
     }
 
     public void locationDicUpdate()
     {
-        for(int i = 0; i < itemsInScene.Length; i++)
+        for(int i = 0; i < itemsInScene.Count; i++)
         {
             getLocation.Add(itemsInScene[i].GetComponent<HoldableItem>(), itemLocation[i]);
         }
@@ -71,7 +71,7 @@ public class Database: MonoBehaviour
     {
         foreach(HoldableItem item in FindObjectsOfType<HoldableItem>())
         {
-            for(int i = 0; i < itemsInScene.Length; i++)
+            for(int i = 0; i < itemsInScene.Count; i++)
             {
                 if (itemsInScene[i].GetComponent<HoldableItem>().data == item.data)
                 {

@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [Tooltip("Put the parent empty object of the document system here")]
     [SerializeField] GameObject docViewingSystem;
     [SerializeField] GameObject inventorySystem;
+    [SerializeField] CanvasGroup fadeGroup;
+    [SerializeField] float fadeDuration;
     public Text storyNotes;
 
     void Awake()
@@ -83,5 +85,19 @@ public class UIManager : MonoBehaviour
         //init crosshair
         crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
         //init doc viewing system
+    }
+
+    //this is just temporary and should be removed or changed after the vertical slice. Not my problem tho
+    public IEnumerator FadePanelIn()
+    {
+
+        float elapsedTime = 0;
+        while(elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            fadeGroup.alpha = elapsedTime / fadeDuration;
+            yield return null;
+        }
+        Time.timeScale = 0;
     }
 }
