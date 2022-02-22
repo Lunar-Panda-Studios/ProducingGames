@@ -23,7 +23,7 @@ public class bodyController : MonoBehaviour
     [Tooltip("Item data for the scalpel")]
     public ItemData scalpelData;
     [Tooltip("Screwdriver game object (only needed for the body with the screwdriver)")]
-    public GameObject screwdriver;
+    public GameObject screwdriverTip;
     private bool collected = false;
     private GameObject player;
     private Transform cam;
@@ -67,7 +67,7 @@ public class bodyController : MonoBehaviour
                             {
                                 if (collected == false)
                                 {
-                                    screwdriver.SetActive(true);
+                                    screwdriverTip.SetActive(true);
                                     collected = true;
 
                                     PuzzleData.current.isCompleted[id - 1] = true;
@@ -92,9 +92,9 @@ public class bodyController : MonoBehaviour
             collected = false;
             isCut = false;
             mesh.mesh = startMesh;
-            if(screwdriver != null)
+            if(screwdriverTip != null)
             {
-                screwdriver.SetActive(false);
+                screwdriverTip.SetActive(false);
             }
         }
     }
@@ -110,7 +110,7 @@ public class bodyController : MonoBehaviour
                 if (isCorrect)
                 {
                     mesh.mesh = cutBody;
-                    screwdriver.SetActive(true);
+                    screwdriverTip.SetActive(true);
                 }
             }
 
