@@ -23,6 +23,7 @@ public class LabMachine : MonoBehaviour
     bool antidoteMade;
     Transform cam;
     Transform player;
+    Vector3 startAntidote;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class LabMachine : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         GameEvents.current.puzzleReset += ResetMachine;
         id = switchWall.id;
+        startAntidote = antidote.transform.position;
     }
 
     void Update()
@@ -60,6 +62,8 @@ public class LabMachine : MonoBehaviour
 
                         //Stop countdown
                         countdown.StopTimer();
+
+                        Database.current.itemsInScene.Add(holdableItem);
                     }
                 }
             }
@@ -87,8 +91,10 @@ public class LabMachine : MonoBehaviour
             for (int i = 0; i < tubes.Count; i++)
             {
                 tubes[i].GetComponent<MeshRenderer>().material = startingTubeMats[i];
-                
             }
+
+            Database.current.itemsInScene.Remove(antidote.GetComponent<HoldableItem>());
+            antidote.transform.position = startAntidote;
         }
     }
 }
