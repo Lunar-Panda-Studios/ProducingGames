@@ -10,10 +10,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] 
     internal List<DocumentData> documentInventory;
     [SerializeField]
-    internal List<StoryData> storyNotes;
-    private int selectedItem = 0;
+    internal List<StoryData> storyNotesInventory;
+    internal int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
+    private autoCombineScript autoCombine;
 
     private int itemsIn;
 
@@ -52,11 +53,7 @@ public class Inventory : MonoBehaviour
         documentInventory = new List<DocumentData>();
         slots = new List<GameObject>();
         itemSpace = new List<GameObject>();
-
-        foreach (Transform child in docInventory.transform)
-        {
-            slots.Add(child.gameObject);
-        }
+        autoCombine = FindObjectOfType<autoCombineScript>();
 
         foreach(Transform child in itemInventoryUI.transform)
         {
@@ -165,6 +162,7 @@ public class Inventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pickupControl.enabled = false;
+            UIManager.Instance.storyNotesDisplay();
         }
     }
 
@@ -184,6 +182,7 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
+                autoCombine.itemChecking(data);
                 break;
             }
         }
@@ -194,8 +193,11 @@ public class Inventory : MonoBehaviour
         documentInventory.Add(data);
 
         data.prefab.GetComponent<ViewDocument>().inInventory = true;
+    }
 
-        //addSlot(data);
+    public void addItem(StoryData data)
+    {
+        storyNotesInventory.Add(data);
     }
 
     //Shows document based on the index of the selected item which is linked to the inventory list
@@ -205,13 +207,6 @@ public class Inventory : MonoBehaviour
 
         DocumentData document = documentInventory[index];
         document.prefab.GetComponent<ViewDocument>().showDocument();
-    }
-
-    void addSlot(GameObject data)
-    {
-        //slots[slotAmount].GetComponent<Image>().sourceImage = data.GetComponent<DocumentData>().inventoryIcon;
-        slots[slotAmount].SetActive(true);
-        slotAmount++;
     }
 
     //Finds doc in inventory then displays them
@@ -263,7 +258,7 @@ public class Inventory : MonoBehaviour
 
        if(pickupControl.heldItem != null)
         {
-            Destroy(pickupControl.heldItem);
+            pickupControl.heldItem.SetActive(false);
 
             if(itemInventory[selectedItem] != null)
             {
@@ -278,7 +273,7 @@ public class Inventory : MonoBehaviour
     {
         if(pickupControl.heldItem != null)
         {
-            Destroy(pickupControl.heldItem);
+            pickupControl.heldItem.SetActive(false);
             pickupControl.heldItem = null;
         }
     }
@@ -287,10 +282,11 @@ public class Inventory : MonoBehaviour
     {
         if(itemInventory[selectedItem] != null)
         {
-            GameObject heldItem = Instantiate(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
+            GameObject heldItem = Database.current.itemsInScene[itemInventory[selectedItem].id].gameObject;
+            heldItem.transform.position = player.transform.position;
+            //(itemInventory[selectedItem].prefab, player.transform.position, Quaternion.identity);
             pickupControl.PickupItem(heldItem.transform);
+            heldItem.SetActive(true);
         }
     }
-
-
 }
