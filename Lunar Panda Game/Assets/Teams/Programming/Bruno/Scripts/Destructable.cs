@@ -9,12 +9,29 @@ public class Destructable : MonoBehaviour
     public List<ItemData> destroyer;
     private List<bool> inSlot;
 
+    public ItemData Hammer;
     public Inventory inventoryScript;
 
+    InteractRaycasting raycast;
 
-    private void Update()
+
+    void Update()
     {
-        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            CheckHitObj();
+        }
+    }
+
+    void CheckHitObj()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (raycast.raycastInteract(out hit))
+        {
+            //if(inventoryScript.itemInventory[inventoryScript.selectedItem])
+        }
     }
     //public void destroyerSelected(ItemData item)
     //{
