@@ -51,11 +51,12 @@ public class Database: MonoBehaviour
         HoldableItem[] temp = FindObjectsOfType<HoldableItem>();
 
         itemLocation = new List<Vector3>();
+        itemsInScene = new List<HoldableItem>();
 
         for (int i = 0; i < temp.Length; i++)
         {
-            itemLocation.Add(itemsInScene[i].transform.position);
             itemsInScene.Add(temp[i]);
+            itemLocation.Add(itemsInScene[i].transform.position);
         }
     }
 

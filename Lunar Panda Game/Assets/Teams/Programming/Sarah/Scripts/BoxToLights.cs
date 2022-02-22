@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxToDoor : MonoBehaviour
+public class BoxToLights : MonoBehaviour
 {
     public int id;
+    bool switchState = false;
     public GameObject LinkedDoor;
-    public GameObject LinkedBox;
-    bool switchState = true;
+    public GameObject LinkedLights;
     InteractRaycasting ray;
 
     private void Start()
     {
         ray = FindObjectOfType<InteractRaycasting>();
         LinkedDoor.GetComponent<OpenClose>().id = id;
-        LinkedBox.GetComponent<PowerChanging>().id = id;
+        LinkedLights.GetComponent<LightsChaging>().id = id;
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class BoxToDoor : MonoBehaviour
 
         if (ray.raycastInteract(out hit))
         {
-                if(Input.GetButtonDown("Interact"))
+                if (Input.GetButtonDown("Interact"))
                 {
                     interact();
                 }
@@ -36,16 +36,16 @@ public class BoxToDoor : MonoBehaviour
         {
             if (switchState)
             {
-                GameEvents.current.onTriggerOpenDoor(id);
-                GameEvents.current.onPowerTurnedOff(id);
+                GameEvents.current.onTriggerLightsOff(id);
+                GameEvents.current.onPowerTurnedOn(id);
             }
             else
             {
-                GameEvents.current.onTriggerCloseDoor(id);
-                GameEvents.current.onPowerTurnedOn(id);
+                GameEvents.current.onTriggerLightsOn(id);
+                GameEvents.current.onPowerTurnedOff(id);
             }
-        }
 
-        switchState = !switchState;
+            switchState = !switchState;
+        }
     }
 }
