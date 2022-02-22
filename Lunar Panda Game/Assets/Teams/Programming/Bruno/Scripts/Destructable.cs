@@ -4,47 +4,41 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-    public GameObject destroyedVersion;
-    PlayerPickup pickup;
-    public List<ItemData> destroyer;
-    private List<bool> inSlot;
+    public GameObject destroyedVersion;      
 
     public ItemData Hammer;
     public Inventory inventoryScript;
 
     InteractRaycasting raycast;
-
+    private void Start()
+    {
+        raycast = FindObjectOfType<InteractRaycasting>();
+    }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            CheckHitObj();
+            destroyObject();
         }
     }
 
-    void CheckHitObj()
+    void destroyObject()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (raycast.raycastInteract(out hit))
         {
-            //if(inventoryScript.itemInventory[inventoryScript.selectedItem])
+            if (hit.transform.gameObject == gameObject)
+            {
+                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
+                {
+                    Instantiate(destroyedVersion, transform.position, transform.rotation);
+                    Destroy(gameObject);
+                }
+            }            
         }
     }
-    //public void destroyerSelected(ItemData item)
-    //{
-    //    for (int i = 0; i < destroyer.Count; i++)
-    //    {
-    //        if (destroyer[i] == item)
-    //        {
-    //            if (Input.GetButtonDown("Fire1"))
-    //            {
-    //                Instantiate(destroyedVersion, transform.position, transform.rotation);
-    //                Destroy(gameObject);
-    //            }
-    //        }
-    //    }        
-    //}
+    
 }
