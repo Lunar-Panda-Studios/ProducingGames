@@ -16,14 +16,18 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [SerializeField] GameObject button;
     [SerializeField] List<Light> completionLights;
 
+    InteractRaycasting connectIORay;
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
+
         foreach (Light light in completionLights)
         {
             light.enabled = false;
         }
+        connectIORay = player.GetComponent<InteractRaycasting>();
     }
 
     private void Start()
@@ -44,7 +48,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 if (inputCurrentlyConnecting)
                 {
                     //just realised this is irrelevent. I'll fix after prototype is out
-                    if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+                    if (connectIORay.raycastInteract(out hit))
                     {
                         if (hit.transform.CompareTag("OutputNode"))
                         {

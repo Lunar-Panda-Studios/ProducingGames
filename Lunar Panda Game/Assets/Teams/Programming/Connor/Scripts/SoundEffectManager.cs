@@ -10,11 +10,28 @@ public class SoundEffectManager : MonoBehaviour
     private Dictionary<string, AudioClip> SFX_Library = new Dictionary<string, AudioClip>();
 
     public GameObject SFX_Prefab;
+    AudioSource TheSFX;
+    public AudioSource stopSFX;
+
 
     public static SoundEffectManager GlobalSFXManager;
+
+    private void Awake()
+    {
+        if (GlobalSFXManager == null)
+        {
+            GlobalSFXManager = this;
+        }
+        else if (GlobalSFXManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        //DontDestroyOnLoad(gameObject);
+        
+    }
     void Start()
     {
-        GlobalSFXManager = this;
 
         for (int i = 0; i <ClipNames.Count; i++)
         {
@@ -26,11 +43,12 @@ public class SoundEffectManager : MonoBehaviour
     {
         if (SFX_Library.ContainsKey(ClipName))
         {
-            AudioSource TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
+            TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
             TheSFX.PlayOneShot(SFX_Library[ClipName]); // Sets clip and plays it
             Destroy(TheSFX.gameObject, SFX_Library[ClipName].length);
-
         }
     }
+
+    
 
 }
