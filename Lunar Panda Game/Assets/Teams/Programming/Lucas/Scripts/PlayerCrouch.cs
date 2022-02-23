@@ -25,7 +25,7 @@ public class PlayerCrouch : MonoBehaviour
         var crouchButton = Input.GetKey(KeyCode.LeftControl);
 
        
-        if(!isCrouching && crouchButton)
+        if(!isCrouching && Input.GetButtonDown("Crouch"))
         {
             //Set player height to 0.5 when holding crouch key and center to 0.25
             playerCollider.height = 0.5f;
@@ -33,7 +33,7 @@ public class PlayerCrouch : MonoBehaviour
             isCrouching = true;
         }
 
-        if(isCrouching && !crouchButton)
+        if(isCrouching && !Input.GetButton("Crouch"))
         {
             var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
 
