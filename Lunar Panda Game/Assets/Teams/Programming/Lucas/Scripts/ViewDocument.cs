@@ -28,9 +28,16 @@ public class ViewDocument : MonoBehaviour
     //temp testing
     private void Update()
     {
-        if(Input.GetKeyDown(keyInteract) && !showDoc && overDoc)
+        if(Input.GetKeyDown(keyInteract) && !showDoc)
         {
-            showDocument();
+            RaycastHit hit;
+            if(InteractRaycasting.Instance.raycastInteract(out hit))
+            {
+                if(hit.transform.gameObject == gameObject)
+                {
+                    showDocument();
+                }
+            }
         }
 
         if(Input.GetKeyDown(keyText) && showDoc)
@@ -54,7 +61,7 @@ public class ViewDocument : MonoBehaviour
 
     public void showDocument()
     {
-        document.GetComponent<Image>().sprite = data.inventoryIcon;
+        document.GetComponent<Image>().sprite = data.documentImage;
         showDoc = true;
         document.SetActive(true);
         inventory.addItem(data);
