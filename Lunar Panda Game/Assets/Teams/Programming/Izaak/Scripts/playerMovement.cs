@@ -8,7 +8,7 @@ public class playerMovement : MonoBehaviour
 
     [Header("Move Settings")]
     [Tooltip("Speed the player moves at")]
-    public float p_speed = 5;
+    public float p_speed = 2f;
     public float runStamReq = 0.02f;
     public const float walkSpeed = 2.0f;
     public const float runSpeed = 5.0f;
