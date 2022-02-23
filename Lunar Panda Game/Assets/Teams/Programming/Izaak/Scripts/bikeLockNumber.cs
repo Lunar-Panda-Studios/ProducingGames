@@ -12,7 +12,9 @@ public class bikeLockNumber : MonoBehaviour
     private int currentNumber = 5;
     private GameObject bikeLockParent;
     private bikeLock bikeLockScript;
-    private bool currentlySelected;
+
+    private GameObject player;
+    private Transform cam;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,46 +24,32 @@ public class bikeLockNumber : MonoBehaviour
         //Matches the current value and rotation with the current code value in the parent script
         currentNumber = bikeLockScript.getCurrentCode(digitPlacement);
         transform.Rotate((-5 * rotationIncrement) + (currentNumber * rotationIncrement), 0, 0);
+        cam = Camera.main.transform;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Placeholder inputs to change the rotation and number of the element
-        //These controls could be changed later down the line when controls are finalised 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetButtonDown("Interact"))
         {
-            if (bikeLockScript.getSelectedElement() == digitPlacement)
+            RaycastHit hit;
+            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
             {
-                if (currentNumber <= 0)
+                if (hit.transform.gameObject == gameObject)
                 {
-                    currentNumber = 9;
+                        if (currentNumber >= 9)
+                        {
+                            currentNumber = 0;
+                        }
+                        else
+                        {
+                            currentNumber++;
+                        }
+                        transform.Rotate(-rotationIncrement, 0, 0);
+                        bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
+                        bikeLockScript.checkPuzzleComplete();
                 }
-                else
-                {
-                    currentNumber--;
-                }
-                    transform.Rotate(rotationIncrement, 0, 0);
-                    //Changes the code value the parent has and then checks if the puzzle is complete
-                    bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
-                    bikeLockScript.checkPuzzleComplete();
-            }
-        }
-        if (Input.GetKeyDown("z"))
-        {
-            if (bikeLockScript.getSelectedElement() == digitPlacement)
-            {
-                if (currentNumber >= 9)
-                {
-                    currentNumber = 0;
-                }
-                else
-                {
-                    currentNumber++;
-                }
-                    transform.Rotate(-rotationIncrement, 0, 0);
-                    bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
-                    bikeLockScript.checkPuzzleComplete();
             }
         }
     }
