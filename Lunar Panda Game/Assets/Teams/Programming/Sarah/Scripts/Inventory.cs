@@ -11,9 +11,10 @@ public class Inventory : MonoBehaviour
     internal List<DocumentData> documentInventory;
     [SerializeField]
     internal List<StoryData> storyNotesInventory;
-    private int selectedItem = 0;
+    internal int selectedItem = 0;
     private int slotAmount = 0;
     private List<GameObject> slots;
+    private autoCombineScript autoCombine;
 
     private int itemsIn;
 
@@ -52,6 +53,7 @@ public class Inventory : MonoBehaviour
         documentInventory = new List<DocumentData>();
         slots = new List<GameObject>();
         itemSpace = new List<GameObject>();
+        autoCombine = FindObjectOfType<autoCombineScript>();
 
         foreach(Transform child in itemInventoryUI.transform)
         {
@@ -78,16 +80,34 @@ public class Inventory : MonoBehaviour
         {
             selectItem(false);
         }
-        if(Input.GetKeyDown(openDocKey))
+        if(Input.GetButtonDown("OpenDocInv"))
         {
             toggleDocInventory();
         }
-        if(Input.GetKeyDown(putAwayKey))
+        if(Input.GetButtonDown("PutAway"))
         {
             toggleHeldItem();
         }
+        if (Input.GetButtonDown("NextInvSlot"))
+        {
+            ++selectedItem;
+            if(selectedItem > itemSpace.Count - 1)
+            {
+                selectedItem = 0;
+            }
+            selectedNumberItem(selectedItem);
+        }
+        if (Input.GetButtonDown("LastInvSlot"))
+        {
+            --selectedItem;
+            if (selectedItem < 0)
+            {
+                selectedItem = itemSpace.Count - 1;
+            }
+            selectedNumberItem(selectedItem);
+        }
 
-        if(Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             selectedNumberItem(9);
         }
@@ -160,6 +180,7 @@ public class Inventory : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pickupControl.enabled = false;
+            UIManager.Instance.storyNotesDisplay();
         }
     }
 
@@ -179,6 +200,8 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
+                if(autoCombine != null)
+                    autoCombine.itemChecking(data);
                 break;
             }
         }
@@ -285,6 +308,4 @@ public class Inventory : MonoBehaviour
             heldItem.SetActive(true);
         }
     }
-
-
 }

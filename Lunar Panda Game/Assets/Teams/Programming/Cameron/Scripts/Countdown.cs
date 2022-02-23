@@ -10,12 +10,18 @@ public class Countdown : MonoBehaviour
     [SerializeField] bool resetLevelOnCountdownEnd;
     Transform cam;
     Transform player;
+    TestingSave manager;
+    InteractRaycasting ray;
+    Inventory inventoryScript;
+    [SerializeField] ItemData antidoteData;
 
     void Awake()
     {
         timeLeft = countdownTime;
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        manager = FindObjectOfType<TestingSave>();
+        inventoryScript = FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -24,17 +30,21 @@ public class Countdown : MonoBehaviour
             timeLeft -= Time.deltaTime;
         if(timeLeft <= 0)
         {
-            //reset room/level/shit
+            manager.load();
+            this.GetComponent<Collider>().enabled = true;
             StopTimer();
         }
 
-        //please i need that raycast code i hate this xd
-        RaycastHit hit;
         if (Input.GetButtonDown("Interact"))
         {
-            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            RaycastHit hit;
+            InteractRaycasting.Instance.raycastInteract(out hit);
+            if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
             {
-                StartTimer();
+                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+                {
+                    StartCoroutine(UIManager.Instance.FadePanelIn());
+                }
             }
         }
     }
@@ -52,7 +62,17 @@ public class Countdown : MonoBehaviour
     public void StopTimer()
     {
         timerActive = false;
+        timeLeft = countdownTime;
     }
 
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Enter");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartTimer();
+            this.GetComponent<Collider>().enabled = false;
+        }
+    }
 }

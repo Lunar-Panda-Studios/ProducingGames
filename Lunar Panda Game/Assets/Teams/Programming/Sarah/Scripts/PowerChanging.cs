@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerChanging : MonoBehaviour
 {
-    public int id;
+    internal int id;
     //public int powerOffID;
     
     // Start is called before the first frame update

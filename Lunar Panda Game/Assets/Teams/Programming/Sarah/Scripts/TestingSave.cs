@@ -113,10 +113,8 @@ public class TestingSave : MonoBehaviour
 
             for (int i = 0; i < data.puzzleCompleted.Count; i++)
             {
-                print(completion.isCompleted[i]);
                 if (completion.isCompleted[i])
                 {
-                    print("Completed");
                     GameEvents.current.onPuzzleComplete(i + 1);
                 }
                 else

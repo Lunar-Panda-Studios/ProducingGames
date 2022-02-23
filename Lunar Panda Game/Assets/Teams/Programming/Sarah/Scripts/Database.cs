@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Database: MonoBehaviour
 {
+    private static Database _instance;
+
+    public static Database Instance { get { return _instance; } }
     public static Database current;
     public List<ItemData> allItems;
     public List<DocumentData> allDocs;
     public List<StoryData> allStoryNotes;
-    public HoldableItem[] itemsInScene;
+    public List<HoldableItem> itemsInScene;
     public static List<Vector3> itemLocation;
     public static Dictionary<HoldableItem, Vector3> getLocation;
     public static Dictionary<ItemData, string> getItemID;
@@ -18,6 +21,15 @@ public class Database: MonoBehaviour
     private void Awake()
     {
         current = this;
+        //setting up singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     private void Start()
@@ -48,20 +60,21 @@ public class Database: MonoBehaviour
 
     public void itemUpdate()
     {
-        itemsInScene = FindObjectsOfType<HoldableItem>();
+        HoldableItem[] temp = FindObjectsOfType<HoldableItem>();
 
         itemLocation = new List<Vector3>();
+        itemsInScene = new List<HoldableItem>();
 
-        for (int i = 0; i < itemsInScene.Length; i++)
+        for (int i = 0; i < temp.Length; i++)
         {
+            itemsInScene.Add(temp[i]);
             itemLocation.Add(itemsInScene[i].transform.position);
-            itemsInScene[i].data.id = i;
         }
     }
 
     public void locationDicUpdate()
     {
-        for(int i = 0; i < itemsInScene.Length; i++)
+        for(int i = 0; i < itemsInScene.Count; i++)
         {
             getLocation.Add(itemsInScene[i].GetComponent<HoldableItem>(), itemLocation[i]);
         }
@@ -71,7 +84,7 @@ public class Database: MonoBehaviour
     {
         foreach(HoldableItem item in FindObjectsOfType<HoldableItem>())
         {
-            for(int i = 0; i < itemsInScene.Length; i++)
+            for(int i = 0; i < itemsInScene.Count; i++)
             {
                 if (itemsInScene[i].GetComponent<HoldableItem>().data == item.data)
                 {
