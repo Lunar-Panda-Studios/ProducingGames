@@ -30,7 +30,7 @@ public class LabMachine : MonoBehaviour
         countdown = FindObjectOfType<Countdown>();
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        GameEvents.current.puzzleReset += ResetMachine;
+        //GameEvents.current.puzzleReset += ResetMachine;
         id = switchWall.id;
         startAntidote = antidote.transform.position;
     }
@@ -59,11 +59,13 @@ public class LabMachine : MonoBehaviour
                         glowy.glowingMaterial = antidoteGlowMat;
                         antidote.AddComponent<Rigidbody>();
                         antidote.transform.parent = null;
-
+                       
                         //Stop countdown
                         countdown.StopTimer();
 
                         Database.current.itemsInScene.Add(holdableItem);
+                        Database.Instance.itemsInScene.Add(holdableItem);
+                        print("Working?");
                     }
                 }
             }

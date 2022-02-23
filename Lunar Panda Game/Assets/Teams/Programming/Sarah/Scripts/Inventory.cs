@@ -80,16 +80,34 @@ public class Inventory : MonoBehaviour
         {
             selectItem(false);
         }
-        if(Input.GetKeyDown(openDocKey))
+        if(Input.GetButtonDown("OpenDocInv"))
         {
             toggleDocInventory();
         }
-        if(Input.GetKeyDown(putAwayKey))
+        if(Input.GetButtonDown("PutAway"))
         {
             toggleHeldItem();
         }
+        if (Input.GetButtonDown("NextInvSlot"))
+        {
+            ++selectedItem;
+            if(selectedItem > itemSpace.Count - 1)
+            {
+                selectedItem = 0;
+            }
+            selectedNumberItem(selectedItem);
+        }
+        if (Input.GetButtonDown("LastInvSlot"))
+        {
+            --selectedItem;
+            if (selectedItem < 0)
+            {
+                selectedItem = itemSpace.Count - 1;
+            }
+            selectedNumberItem(selectedItem);
+        }
 
-        if(Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             selectedNumberItem(9);
         }
@@ -182,7 +200,8 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
-                autoCombine.itemChecking(data);
+                if(autoCombine != null)
+                    autoCombine.itemChecking(data);
                 break;
             }
         }
