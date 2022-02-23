@@ -10,8 +10,10 @@ public class GameData
     public float[] rotation;
     public List<string> itemInven;
     public List<string> docInven;
+    public List<string> storyInven;
     public List<int> puzzlesEvents;
     public List<bool> puzzleCompleted;
+    public float?[,] itemsInScene;
 
     public GameData(TestingSave data)
     {
@@ -24,6 +26,24 @@ public class GameData
         rotation[0] = data.player.transform.rotation.x;
         rotation[1] = data.player.transform.rotation.y;
         rotation[2] = data.player.transform.rotation.z;
+
+        itemsInScene = new float?[Database.getLocation.Count, 3];
+
+        for(int i = 0; i < Database.getLocation.Count; i++)
+        {
+            if(!data.inventory.itemInventory.Contains(Database.current.itemsInScene[i].GetComponent<HoldableItem>().data))
+            {
+                itemsInScene[i,0] = Database.itemLocation[i].x;
+                itemsInScene[i,1] = Database.itemLocation[i].y;
+                itemsInScene[i,2] = Database.itemLocation[i].z;
+            }
+            else
+            {
+                itemsInScene[i, 0] = null;
+                itemsInScene[i, 1] = null;
+                itemsInScene[i, 2] = null;
+            }
+        }
 
         //itemInven = data.inventory.itemInventory;
 
@@ -54,6 +74,20 @@ public class GameData
             else
             {
                 docInven.Add(null);
+            }
+        }
+
+        storyInven = new List<string>();
+
+        for (int i = 0; i < data.inventory.storyNotesInventory.Count; i++)
+        {
+            if (data.inventory.storyNotesInventory[i] != null)
+            {
+                storyInven.Add(Database.getStoryID[data.inventory.storyNotesInventory[i]]);
+            }
+            else
+            {
+                storyInven.Add(null);
             }
         }
 

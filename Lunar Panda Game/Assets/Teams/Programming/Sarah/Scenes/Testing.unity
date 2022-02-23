@@ -1719,7 +1719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
   openCloseKey: 103
   anim: {fileID: 829647598}
   animTimer: 0.5
@@ -1753,7 +1752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
   openCloseKey: 108
   anim: {fileID: 829647598}
   animTimer: 0.5
@@ -1867,7 +1865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
   openCloseKey: 103
   anim: {fileID: 2126037209}
   animTimer: 0.5
@@ -1901,7 +1898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
   openCloseKey: 108
   anim: {fileID: 2126037209}
   animTimer: 0.5
@@ -2236,7 +2232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8207024237382381628, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2278,6 +2274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MrCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8207024237382381630, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c218a0732b8b4f4bba60273f2112e21, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3daebf205d28d244948c2179be01d89, type: 3}
 --- !u!115 &586665956
@@ -2643,9 +2643,8 @@ GameObject:
   - component: {fileID: 783381785}
   - component: {fileID: 783381784}
   - component: {fileID: 783381783}
-  - component: {fileID: 783381787}
   - component: {fileID: 783381782}
-  - component: {fileID: 783381788}
+  - component: {fileID: 783381787}
   m_Layer: 0
   m_Name: Switch (1)
   m_TagString: Untagged
@@ -2665,8 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f97368684bcc804bac8a3daec3445e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  canInteract: 0
+  canInteract: 1
 --- !u!65 &783381783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2755,20 +2753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb9b6b507811bb4b9d956723b56e48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
---- !u!114 &783381788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783381781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe8fa903f2a95042aa32d6cd7bf5596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
+  id: 2
+  LinkedDoor: {fileID: 466706663}
+  LinkedBox: {fileID: 1566995589}
 --- !u!1001 &810262808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4003,7 +3990,6 @@ GameObject:
   - component: {fileID: 1277088514}
   - component: {fileID: 1277088518}
   - component: {fileID: 1277088513}
-  - component: {fileID: 1277088519}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -4020,11 +4006,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277088512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f97368684bcc804bac8a3daec3445e4, type: 3}
+  m_Script: {fileID: 11500000, guid: cf2af40ee7b3d22408738974fa6d7e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  canInteract: 0
+  LinkedDoor1: {fileID: 1671975232}
+  LinkedDoor2: {fileID: 470142576}
 --- !u!65 &1277088514
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4110,23 +4097,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277088512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 136691d320a032e4e97e3b04f7cfe1a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f97368684bcc804bac8a3daec3445e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
---- !u!114 &1277088519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277088512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe8fa903f2a95042aa32d6cd7bf5596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
+  canInteract: 1
 --- !u!1001 &1366203777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4802,8 +4776,9 @@ GameObject:
   - component: {fileID: 1566995593}
   - component: {fileID: 1566995592}
   - component: {fileID: 1566995591}
-  - component: {fileID: 1566995595}
   - component: {fileID: 1566995590}
+  - component: {fileID: 1566995596}
+  - component: {fileID: 1566995595}
   m_Layer: 0
   m_Name: Switch (2)
   m_TagString: Untagged
@@ -4823,8 +4798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f97368684bcc804bac8a3daec3445e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  canInteract: 1
+  canInteract: 0
 --- !u!65 &1566995591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4910,10 +4884,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1566995589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb9b6b507811bb4b9d956723b56e48a, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe8fa903f2a95042aa32d6cd7bf5596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+--- !u!114 &1566995596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566995589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2af40ee7b3d22408738974fa6d7e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  LinkedDoor1: {fileID: 470142576}
+  LinkedDoor2: {fileID: 470142576}
 --- !u!1 &1640178532
 GameObject:
   m_ObjectHideFlags: 0
@@ -4997,7 +4985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   openCloseKey: 103
   anim: {fileID: 1194548108}
   animTimer: 0.5
@@ -5031,7 +5018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   openCloseKey: 108
   anim: {fileID: 1194548108}
   animTimer: 0.5
@@ -5156,6 +5142,18 @@ PrefabInstance:
       propertyPath: allDocs.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: eacc17303fa02424abcdd4c83dd3f2b9, type: 2}
+    - target: {fileID: 7691929871021169979, guid: bd659fc0188691241a6e1f7d6e11c11e, type: 3}
+      propertyPath: eventsID.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691929871021169979, guid: bd659fc0188691241a6e1f7d6e11c11e, type: 3}
+      propertyPath: eventsID.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691929871021169979, guid: bd659fc0188691241a6e1f7d6e11c11e, type: 3}
+      propertyPath: isCompleted.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7691929871021169982, guid: bd659fc0188691241a6e1f7d6e11c11e, type: 3}
       propertyPath: m_Name
       value: EventManager
@@ -5214,7 +5212,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e20fb4391ba2754eab2fe5f01693911, type: 2}
+  - {fileID: 2100000, guid: 664ea08309e3de64a8c61be7f05b09bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5424,6 +5422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInventory: []
   documentInventory: []
+  storyNotesInventory: []
   drop: 32
   changeItem: 113
   openDocKey: 105
