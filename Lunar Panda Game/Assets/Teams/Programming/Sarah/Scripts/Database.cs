@@ -54,8 +54,8 @@ public class Database: MonoBehaviour
 
         for (int i = 0; i < temp.Length; i++)
         {
-            itemLocation.Add(itemsInScene[i].transform.position);
             itemsInScene.Add(temp[i]);
+            itemLocation.Add(itemsInScene[i].transform.position);            
         }
     }
 
