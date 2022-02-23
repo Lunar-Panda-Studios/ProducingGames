@@ -10,10 +10,6 @@ public class bikeLock : MonoBehaviour
     [Tooltip("The combination displayed before the player has interacted with it")]
     public int[] currentCode;
 
-    [Header("Puzzle Selection")]
-    [Tooltip("Which element of the lock that is currently being used")]
-    public int currentSelectedElement;
-
     [Header("Puzzle State")]
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
@@ -21,27 +17,7 @@ public class bikeLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Placeholder inputs to change the selected element
-        if (Input.GetKeyDown("left"))
-        {
-            if (currentSelectedElement > 1)
-            {
-                currentSelectedElement--;
-            }
-        }
-        if (Input.GetKeyDown("right"))
-        {
-            if (currentSelectedElement < currentCode.Length)
-            {
-                currentSelectedElement++;
-            }
-        }
-    }
-
-    //Function that checks if the element controlled is available to move
-    public int getSelectedElement()
-    {
-        return currentSelectedElement;
+        
     }
 
     //Gives the element the current value of its place in the code

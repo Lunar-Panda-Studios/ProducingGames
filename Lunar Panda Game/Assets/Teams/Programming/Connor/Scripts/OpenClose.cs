@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OpenClose : MonoBehaviour
 {
-    public int id;
+    internal int id;
     [Tooltip("Assign key for opening and closing")]
     public KeyCode openCloseKey;
     public Animator anim;

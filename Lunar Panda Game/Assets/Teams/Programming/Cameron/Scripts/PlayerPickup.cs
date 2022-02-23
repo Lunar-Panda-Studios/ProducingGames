@@ -32,19 +32,25 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] float throwForce;
     Inventory inventory;
 
+    Transform player;
+    InteractRaycasting playerPickupRay;
+
     void Awake()
     {
         playerCameraTransform = Camera.main.transform;
         inventory = FindObjectOfType<Inventory>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPickupRay = player.GetComponent<InteractRaycasting>();
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {
-            RaycastHit hit;
             //Casts a ray from the camera
-            if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
+            RaycastHit hit;
+            if (playerPickupRay.raycastInteract(out hit))
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
@@ -78,7 +84,7 @@ public class PlayerPickup : MonoBehaviour
     {
         RaycastHit hit;
         //Casts a ray from the camera
-        if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.TransformDirection(Vector3.forward), out hit, pickupDist))
+        if (playerPickupRay.raycastInteract(out hit))
         {
             //all these if's and elses are to handle all edge cases so that when you stop looking at a glowable object, it stops glowing properly
             if (hit.transform.GetComponent<GlowWhenLookedAt>() && heldItem == null)
