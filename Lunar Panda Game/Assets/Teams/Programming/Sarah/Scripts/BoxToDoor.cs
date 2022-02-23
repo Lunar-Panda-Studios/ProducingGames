@@ -19,19 +19,22 @@ public class BoxToDoor : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-
-        if (ray.raycastInteract(out hit))
+        if (Input.GetButtonDown("Interact"))
         {
-                if(Input.GetButtonDown("Interact"))
+            RaycastHit hit;
+            if (InteractRaycasting.Instance.raycastInteract(out hit))
+            {
+                if(hit.transform.gameObject == gameObject)
                 {
                     interact();
                 }
+            }
         }
     }
 
     private void interact()
     {
+
         if(GetComponent<Interaction>().canInteract)
         {
             if (switchState)
