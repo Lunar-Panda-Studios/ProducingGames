@@ -9,9 +9,18 @@ public class TempSelect : MonoBehaviour
     int reachRange = 100;
     switchChanger button;
 
+    Transform player;
+    Transform cam;
+
+    InteractRaycasting tempSelectRay;
+
     private void Start()
     {
         button = FindObjectOfType<switchChanger>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        cam = Camera.main.transform;
+        tempSelectRay = player.GetComponent<InteractRaycasting>();
     }
 
     void Update()
@@ -27,7 +36,7 @@ public class TempSelect : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out hit, reachRange))
+        if(tempSelectRay.raycastInteract(out hit))
         {
             codeLock = hit.transform.gameObject.GetComponentInParent<CodeLock>();
 
