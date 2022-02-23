@@ -24,7 +24,7 @@ public class Destructable : MonoBehaviour
     void Update()
     {
         // Using left mouse button as the interactable key
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Interact"))
         {
             destroyObject();
         }
