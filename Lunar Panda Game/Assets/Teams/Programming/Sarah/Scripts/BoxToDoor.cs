@@ -5,10 +5,36 @@ using UnityEngine;
 public class BoxToDoor : MonoBehaviour
 {
     public int id;
+    public GameObject LinkedDoor;
+    public GameObject LinkedBox;
     bool switchState = true;
+    InteractRaycasting ray;
 
-    private void OnMouseDown()
+    private void Start()
     {
+        ray = FindObjectOfType<InteractRaycasting>();
+        LinkedDoor.GetComponent<OpenClose>().id = id;
+        LinkedBox.GetComponent<PowerChanging>().id = id;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            RaycastHit hit;
+            if (InteractRaycasting.Instance.raycastInteract(out hit))
+            {
+                if(hit.transform.gameObject == gameObject)
+                {
+                    interact();
+                }
+            }
+        }
+    }
+
+    private void interact()
+    {
+
         if(GetComponent<Interaction>().canInteract)
         {
             if (switchState)
