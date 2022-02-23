@@ -9,16 +9,24 @@ public class switchChanger : MonoBehaviour
     [Tooltip("The wires that will be used after the switch is off")]
     public GameObject amogus;
     public bool isPowerOn = false;
+    Animator anim;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     public void changeSwitchState()
     {
         switchMode = !switchMode;
+        if (switchMode && anim != null)
+        {
+            anim.SetTrigger("Up");
+        }
+        else if (anim != null)
+        {
+            anim.SetTrigger("Down");
+        }
     }
 
     public bool getSwitchState()
