@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4678056284577183233}
   - component: {fileID: 8009778770305779878}
   - component: {fileID: 262572738790643528}
+  - component: {fileID: 864261007}
   m_Layer: 0
   m_Name: BikeLockElement
   m_TagString: Untagged
@@ -110,9 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   digitPlacement: 1
-  rotationIncrement: 0
-  currentNumber: 5
-  bikeLockParent: {fileID: 8210881020370939763, guid: 9d3552c12704ba54d945bd53eff01587, type: 3}
 --- !u!54 &262572738790643528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,8 +122,23 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &864261007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253588272267799842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d45f575807806849a73c08c9abf5e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlowing: 0
+  baseMaterial: {fileID: 0}
+  glowingMaterial: {fileID: 2100000, guid: 6fe492403e4d83a4fa31b5c34ed5c9d0, type: 2}
