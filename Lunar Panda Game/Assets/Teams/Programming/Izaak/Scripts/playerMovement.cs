@@ -31,7 +31,7 @@ public class playerMovement : MonoBehaviour
         //{
         //    p_speed = 2.0f;
         //}
-        if (Input.GetKey(KeyCode.LeftShift) && (StaminaBar.instance.currentStam > runStamReq))
+        if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq))
         {
             p_speed = runSpeed;
             StaminaBar.instance.staminaUsage(runStamReq);

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OpenClose : MonoBehaviour
+public class LeverUP : MonoBehaviour
 {
-    internal int id;
+    // A copy from Connor's Door Open/Close Script
+
+
+    public int id;
     [Tooltip("Assign key for opening and closing")]
     public KeyCode openCloseKey;
     public Animator anim;
@@ -17,8 +20,8 @@ public class OpenClose : MonoBehaviour
 
     void Start()
     {
-        GameEvents.current.triggerCloseDoor += openCloseObject;
-        GameEvents.current.triggerOpenDoor += openCloseObject;
+        //GameEvents.current.triggerCloseDoor += openCloseObject;  Needs updating for the Lever
+        //GameEvents.current.triggerOpenDoor += openCloseObject;
     }
 
 
@@ -38,23 +41,16 @@ public class OpenClose : MonoBehaviour
             {
                 case false:
                     isOpen = true;
-                    anim.SetTrigger("Open");
+                    anim.SetTrigger("Down");
                     break;
 
                 case true:
                     isOpen = false;
-                    anim.SetTrigger("Close");
+                    anim.SetTrigger("Up");
                     break;
             }
         }
 
         //animWait();
-    }
-    //Code waiting between animations that failed miserably
-    //IEnumerator animWait()
-    //{
-    //    animDone = false;
-    //    yield return new WaitForSeconds(animTimer);
-    //    animDone = true;
-    //}
+    }    
 }
