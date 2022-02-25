@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class StaminaBar : MonoBehaviour
 {
     [Tooltip("maximum stamina value")]
-    public int maxStam = 100;
+    public float maxStam = 100f;
     public float currentStam;
     [Tooltip("delay before player starts regaining stamina")]
-    public int regenDelay = 1;
+    public float regenDelay = 1f;
     [Tooltip("higher the number the smaller the regeneration")]
-    public int regenAmount = 100;
+    public float regenAmount = 100f;
+  
 
     public static StaminaBar instance;
 
