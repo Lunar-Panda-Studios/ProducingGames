@@ -14,7 +14,12 @@ public class BoxToLights : MonoBehaviour
     {
         ray = FindObjectOfType<InteractRaycasting>();
         LinkedDoor.GetComponent<OpenClose>().id = id;
-        LinkedLights.GetComponent<LightsChaging>().id = id;
+
+        foreach(Transform child in LinkedLights.transform)
+        {
+            child.GetComponent<LightsChaging>().id = id;
+        }
+
     }
 
     private void Update()
