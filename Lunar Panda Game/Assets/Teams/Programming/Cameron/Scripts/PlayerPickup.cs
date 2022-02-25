@@ -125,7 +125,7 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.localRotation = Quaternion.identity;
             heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             itemStartRotation = heldItem.transform.rotation;
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
             playerCameraTransform.GetComponent<lockMouse>().canLook = false;
         }
         //while the mouse button is down and player is holding an item
@@ -137,10 +137,10 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
         }
         //the frame the player stops pressing the mouse button
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && Time.timeScale > 0f)
         {
             //stop rotating the object
-            Cursor.lockState = CursorLockMode.Locked;
+           // Cursor.lockState = CursorLockMode.Locked;
             playerCameraTransform.GetComponent<lockMouse>().canLook = true;
             if (heldItem)
             {

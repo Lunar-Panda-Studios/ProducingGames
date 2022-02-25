@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class playerMovement : MonoBehaviour
 {
     private Rigidbody p_rigidbody;
@@ -12,11 +12,14 @@ public class playerMovement : MonoBehaviour
     public float runStamReq = 0.02f;
     public const float walkSpeed = 2.0f;
     public const float runSpeed = 5.0f;
-
+    public Image RunningMan;
+    public Image BackgroundSprite;
+    public Image FillSprite;
     void Start()
     {
         //Collects the rigidbody so it can be used in code
         p_rigidbody = gameObject.GetComponent<Rigidbody>();
+        RunningMan.GetComponent<Image>();
 
 
     }
@@ -33,13 +36,31 @@ public class playerMovement : MonoBehaviour
         //}
         if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq))
         {
-            p_speed = runSpeed;
+                p_speed = runSpeed;
+                RunningMan.color = new Color(1f, 1f, 1f, 1f);
             StaminaBar.instance.staminaUsage(runStamReq);
         }
         else if (true)
         {
-            p_speed = walkSpeed;        
+            p_speed = walkSpeed;
+            RunningMan.color = new Color(0f, 0f, 0f, 1f);
+            BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 1f);
+            FillSprite.color = new Color(0f, 1f, 0f, 1f);
         }
+
+        if (StaminaBar.instance.currentStam <= 3f)
+        {
+                RunningMan.color = new Color(1f, 0f, 0f, 0.1f);
+            BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 0.1f);
+            FillSprite.color = new Color(0f, 1f, 0f, 0.1f);
+        }
+
+        if (StaminaBar.instance.currentStam <= 0f)
+        {
+                RunningMan.color = new Color(0f, 0f, 0f, 1f);
+        }
+
+
 
         move();
 

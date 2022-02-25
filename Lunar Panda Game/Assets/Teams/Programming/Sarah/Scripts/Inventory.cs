@@ -171,14 +171,14 @@ public class Inventory : MonoBehaviour
         //Can't toggle thus needed to be an if statement to check if opening or closing inventory
         if (player.enabled)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+           // Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
             pickupControl.enabled = true;
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
             pickupControl.enabled = false;
             UIManager.Instance.storyNotesDisplay();
         }
