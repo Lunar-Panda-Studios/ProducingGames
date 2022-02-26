@@ -200,8 +200,8 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
-                if(autoCombine != null)
-                    autoCombine.itemChecking(data);
+                //if(autoCombine != null)
+                //    autoCombine.itemChecking(data);
                 break;
             }
         }
@@ -241,7 +241,6 @@ public class Inventory : MonoBehaviour
     {
         //If item is used then it will not be dropped on the floor
         itemInventory[selectedItem] = null;
-        //print(itemInventory[])
         itemsIn--;
 
         //itemIndicator.transform.position = itemSpace[selectedItem].transform.position;

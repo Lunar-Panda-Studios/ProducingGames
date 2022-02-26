@@ -63,9 +63,8 @@ public class LabMachine : MonoBehaviour
                         //Stop countdown
                         countdown.StopTimer();
 
-                        Database.current.itemsInScene.Add(holdableItem);
-                        Database.Instance.itemsInScene.Add(holdableItem);
-                        print("Working?");
+                        Database.current.addToItemsInScene(holdableItem);
+                        Database.itemLocation[Database.current.itemsInScene.Count - 1] = holdableItem.gameObject.transform.position;
                     }
                 }
             }

@@ -35,18 +35,18 @@ public class Countdown : MonoBehaviour
             StopTimer();
         }
 
-        if (Input.GetButtonDown("Interact"))
-        {
-            RaycastHit hit;
-            InteractRaycasting.Instance.raycastInteract(out hit);
-            if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
-            {
-                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
-                {
-                    StartCoroutine(UIManager.Instance.FadePanelIn());
-                }
-            }
-        }
+        //if (Input.GetButtonDown("Interact"))
+        //{
+        //    RaycastHit hit;
+        //    InteractRaycasting.Instance.raycastInteract(out hit);
+        //    if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
+        //    {
+        //        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+        //        {
+        //            StartCoroutine(UIManager.Instance.FadePanelIn());
+        //        }
+        //    }
+        //}
     }
 
     public float TimeLeft()
