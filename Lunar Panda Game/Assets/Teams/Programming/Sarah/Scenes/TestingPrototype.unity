@@ -1627,6 +1627,8 @@ MonoBehaviour:
   fadeGroup: {fileID: 0}
   fadeDuration: 0
   storyNotes: {fileID: 2020415242}
+  notesText: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!4 &644541586
 Transform:
   m_ObjectHideFlags: 0
@@ -1906,17 +1908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715328482}
   m_CullTransparentMesh: 1
---- !u!114 &719346517 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7703551477892040647, guid: d909f322e867a6e48be8a44b42aaa869, type: 3}
-  m_PrefabInstance: {fileID: 7703551478590381202}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ffc495f37461ec43a9bb927b7fec21e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &721375521 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8207024237382381629, guid: d3daebf205d28d244948c2179be01d89, type: 3}
@@ -4221,8 +4212,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 719346517}
-        m_TargetAssemblyTypeName: TestingSave, Assembly-CSharp
+      - m_Target: {fileID: 1504532495}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: save
         m_Mode: 1
         m_Arguments:
@@ -4321,7 +4312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02a9a039054154da189b6c0bc5eec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1540612655}
   document: {fileID: 715328482}
   data: {fileID: 11400000, guid: 19da044b6f75c1443b854e2a0640eca5, type: 2}
   keyInteract: 101
@@ -4547,6 +4537,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495606027}
   m_CullTransparentMesh: 1
+--- !u!1 &1504532494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7703551477892040641, guid: d909f322e867a6e48be8a44b42aaa869, type: 3}
+  m_PrefabInstance: {fileID: 7703551478590381202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1504532495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504532494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3945848aa16d7409d9a3cc44556537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStates: 1
+  whichLevel: 1
+  inventory: {fileID: 1067282804}
+  completion: {fileID: 1504532497}
+--- !u!114 &1504532497 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7703551477892040644, guid: d909f322e867a6e48be8a44b42aaa869, type: 3}
+  m_PrefabInstance: {fileID: 7703551478590381202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504532494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a946908fe6bbc6648af7b078ed984bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1504532500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504532494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915887aba9467324baad008f2723736b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaBar: {fileID: 0}
+  crosshair: {fileID: 0}
+  docViewingSystem: {fileID: 0}
+  inventorySystem: {fileID: 0}
+  fadeGroup: {fileID: 0}
+  fadeDuration: 0
+  storyNotes: {fileID: 0}
+  notesText: {fileID: 1540612657}
+  inventory: {fileID: 1067282804}
 --- !u!1 &1526157419
 GameObject:
   m_ObjectHideFlags: 0
@@ -6381,8 +6424,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 719346517}
-        m_TargetAssemblyTypeName: TestingSave, Assembly-CSharp
+      - m_Target: {fileID: 1504532495}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: load
         m_Mode: 1
         m_Arguments:
@@ -6608,5 +6651,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7703551477892040647, guid: d909f322e867a6e48be8a44b42aaa869, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d909f322e867a6e48be8a44b42aaa869, type: 3}

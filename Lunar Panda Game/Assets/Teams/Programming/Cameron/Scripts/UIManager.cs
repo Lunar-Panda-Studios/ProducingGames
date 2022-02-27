@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup fadeGroup;
     [SerializeField] float fadeDuration;
     public Text storyNotes;
+    public Text notesText;
+    public Inventory inventory;
 
     void Awake()
     {
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //initialises all the UI stuffs
-        InitUI();
+        //InitUI();
     }
 
     public void ChangeStaminaUsage(float value)
@@ -76,16 +78,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void InitUI()
-    {
-        //init stamina
-        staminaBar.maxValue = StaminaBar.instance.maxStam;
-        staminaBar.value = staminaBar.maxValue;
-        staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
-        //init crosshair
-        crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
-        //init doc viewing system
-    }
+    //void InitUI()
+    //{
+    //    //init stamina
+    //    staminaBar.maxValue = StaminaBar.instance.maxStam;
+    //    staminaBar.value = staminaBar.maxValue;
+    //    staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
+    //    //init crosshair
+    //    crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
+    //    //init doc viewing system
+    //}
 
     //this is just temporary and should be removed or changed after the vertical slice. Not my problem tho
     public IEnumerator FadePanelIn()
@@ -99,5 +101,36 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         Time.timeScale = 0;
+    }
+
+    public void showDocument(GameObject document, DocumentData data, ViewDocument documentScript)
+    {
+        document.GetComponent<Image>().sprite = data.documentImage;
+        documentScript.showDoc = true;
+        document.SetActive(true);
+        inventory.addItem(data);
+        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+    }
+
+    public void hideDocument(GameObject document, ViewDocument documentScript)
+    {
+        documentScript.showDoc = false;
+        document.SetActive(false);
+    }
+
+    public void showingText(GameObject document, DocumentData data, ViewDocument documentScript)
+    {
+        notesText.GetComponent<Text>().text = data.docText;
+        documentScript.showText = true;
+        notesText.gameObject.SetActive(true);
+        //Show text when pressed
+    }
+
+    public void hideText(GameObject document, ViewDocument documentScript)
+    {
+        documentScript.showText = false;
+        notesText.gameObject.SetActive(false);
+        //Hide text when pressed
     }
 }

@@ -225,7 +225,7 @@ public class Inventory : MonoBehaviour
         //int index = documentInventory.IndexOf(data);
 
         DocumentData document = documentInventory[index];
-        document.prefab.GetComponent<ViewDocument>().showDocument();
+        //UIManager.Instance.showDocument();
     }
 
     //Finds doc in inventory then displays them
@@ -234,7 +234,7 @@ public class Inventory : MonoBehaviour
         int index = documentInventory.IndexOf(data);
 
         GameObject document = documentInventory[index].prefab;
-        document.GetComponent<ViewDocument>().hideDocument();
+        //document.GetComponent<ViewDocument>().hideDocument();
     }
 
     public void removeItem()

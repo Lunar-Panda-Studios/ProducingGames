@@ -10,7 +10,7 @@ public class Countdown : MonoBehaviour
     [SerializeField] bool resetLevelOnCountdownEnd;
     Transform cam;
     Transform player;
-    TestingSave manager;
+    GameManager manager;
     InteractRaycasting ray;
     Inventory inventoryScript;
     [SerializeField] ItemData antidoteData;
@@ -20,7 +20,7 @@ public class Countdown : MonoBehaviour
         timeLeft = countdownTime;
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        manager = FindObjectOfType<TestingSave>();
+        manager = FindObjectOfType<GameManager>();
         inventoryScript = FindObjectOfType<Inventory>();
     }
 
