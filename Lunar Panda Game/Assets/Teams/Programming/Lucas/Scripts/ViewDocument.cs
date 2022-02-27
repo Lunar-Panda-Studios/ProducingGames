@@ -7,8 +7,6 @@ public class ViewDocument : MonoBehaviour
 {
     internal bool showText = false;
     internal bool showDoc = false;
-    [Header("Document UI")]
-    public GameObject document;
     internal bool inInventory = false;
     [Tooltip("Enter the corrisponding data (scripable object) for this document")]
     public DocumentData data;
@@ -34,7 +32,7 @@ public class ViewDocument : MonoBehaviour
             {
                 if(hit.transform.gameObject == gameObject)
                 {
-                    UIManager.Instance.showDocument(document, data, this);
+                    UIManager.Instance.showDocument(data, this);
                 }
             }
         }
@@ -43,18 +41,18 @@ public class ViewDocument : MonoBehaviour
         {
             if(showText)
             {
-                UIManager.Instance.hideText(document, this);
+                UIManager.Instance.hideText(this);
             }
             else
             {
-                UIManager.Instance.showingText(document, data, this);
+                UIManager.Instance.showingText(data, this);
             }
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) && showDoc)
         {
-            UIManager.Instance.hideDocument(document, this);
-            UIManager.Instance.hideText(document, this);
+            UIManager.Instance.hideDocument(this);
+            UIManager.Instance.hideText(this);
         }
     }
 }

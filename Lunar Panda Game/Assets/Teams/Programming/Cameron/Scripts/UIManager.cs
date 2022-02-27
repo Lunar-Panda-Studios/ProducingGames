@@ -25,7 +25,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] float fadeDuration;
     public Text storyNotes;
     public Text notesText;
-    public Inventory inventory;
+    Inventory inventory;
+    public GameObject documentLandscape;
+    public GameObject documentPortrait;
 
     void Awake()
     {
@@ -44,6 +46,8 @@ public class UIManager : MonoBehaviour
     {
         //initialises all the UI stuffs
         //InitUI();
+
+        inventory = FindObjectOfType<Inventory>();
     }
 
     public void ChangeStaminaUsage(float value)
@@ -78,16 +82,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //void InitUI()
-    //{
-    //    //init stamina
-    //    staminaBar.maxValue = StaminaBar.instance.maxStam;
-    //    staminaBar.value = staminaBar.maxValue;
-    //    staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
-    //    //init crosshair
-    //    crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
-    //    //init doc viewing system
-    //}
+    void InitUI()
+    {
+        //init stamina
+        staminaBar.maxValue = StaminaBar.instance.maxStam;
+        staminaBar.value = staminaBar.maxValue;
+        staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
+        //init crosshair
+        crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
+        //init doc viewing system
+    }
 
     //this is just temporary and should be removed or changed after the vertical slice. Not my problem tho
     public IEnumerator FadePanelIn()
@@ -103,23 +107,41 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void showDocument(GameObject document, DocumentData data, ViewDocument documentScript)
+    public void showDocument(DocumentData data, ViewDocument documentScript)
     {
-        document.GetComponent<Image>().sprite = data.documentImage;
+        if (data.isLandscape)
+        {
+            documentLandscape.GetComponent<Image>().sprite = data.documentImage;
+            documentLandscape.SetActive(true);
+        }
+        else
+        {
+            documentPortrait.GetComponent<Image>().sprite = data.documentImage;
+            documentPortrait.SetActive(true);
+        }
+
         documentScript.showDoc = true;
-        document.SetActive(true);
         inventory.addItem(data);
         documentScript.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
     }
 
-    public void hideDocument(GameObject document, ViewDocument documentScript)
+    public void hideDocument(ViewDocument documentScript)
     {
         documentScript.showDoc = false;
-        document.SetActive(false);
+
+        if(documentScript.data.isLandscape)
+        {
+            documentLandscape.SetActive(false);
+        }
+        else
+        {
+            documentPortrait.SetActive(false);
+        }
+
     }
 
-    public void showingText(GameObject document, DocumentData data, ViewDocument documentScript)
+    public void showingText(DocumentData data, ViewDocument documentScript)
     {
         notesText.GetComponent<Text>().text = data.docText;
         documentScript.showText = true;
@@ -127,7 +149,7 @@ public class UIManager : MonoBehaviour
         //Show text when pressed
     }
 
-    public void hideText(GameObject document, ViewDocument documentScript)
+    public void hideText(ViewDocument documentScript)
     {
         documentScript.showText = false;
         notesText.gameObject.SetActive(false);
