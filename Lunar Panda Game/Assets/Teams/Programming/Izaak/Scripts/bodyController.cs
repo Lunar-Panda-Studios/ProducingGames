@@ -114,6 +114,10 @@ public class bodyController : MonoBehaviour
                 }
             }
 
+            if(Analysis.current.consent)
+            {
+                Analysis.current.resetTimer("Open Body");
+            }
         }
     }
 }

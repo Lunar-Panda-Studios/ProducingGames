@@ -63,12 +63,15 @@ public class Countdown : MonoBehaviour
     {
         timerActive = false;
         timeLeft = countdownTime;
+        if (Analysis.current.consent)
+        {
+            Analysis.current.resetTimer("Antidote Puzzle");
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Enter");
         if (other.gameObject.CompareTag("Player"))
         {
             StartTimer();

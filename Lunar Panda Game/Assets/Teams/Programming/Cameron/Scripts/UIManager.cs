@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //initialises all the UI stuffs
-        //InitUI();
+        InitUI();
 
         inventory = FindObjectOfType<Inventory>();
     }
