@@ -34,7 +34,7 @@ public class TempSelect : MonoBehaviour
         {
             codeLock = hit.transform.gameObject.GetComponentInParent<CodeLock>();
 
-            if (codeLock != null)
+            if (codeLock != null && hit.transform.CompareTag("NumberCode"))
             {
                 if (!needsActiveBtnToWork)
                 {
