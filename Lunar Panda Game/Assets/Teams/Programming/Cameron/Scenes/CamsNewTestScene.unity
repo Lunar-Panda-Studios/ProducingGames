@@ -158,6 +158,14 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1367311940, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: buttonNeeded
+      value: 
+      objectReference: {fileID: 1219130627}
+    - target: {fileID: 1367311940, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: needsActiveBtnToWork
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6954180438057201783, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_Intensity
       value: 2000
@@ -1170,7 +1178,6 @@ GameObject:
   - component: {fileID: 203747517}
   - component: {fileID: 203747516}
   - component: {fileID: 203747515}
-  - component: {fileID: 203747520}
   m_Layer: 0
   m_Name: CodeLock
   m_TagString: Untagged
@@ -1194,7 +1201,6 @@ MonoBehaviour:
   code: 3423
   attemptedCode: 
   toOpen: {fileID: 487467158}
-  needsActiveBtnToWork: 1
 --- !u!65 &203747516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1281,20 +1287,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &203747520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203747514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 1
-  buttonNeeded: {fileID: 1219130627}
 --- !u!1 &210962170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6582,30 +6574,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347715934}
   m_CullTransparentMesh: 1
---- !u!1 &1367311934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1218166216, guid: d3daebf205d28d244948c2179be01d89, type: 3}
-  m_PrefabInstance: {fileID: 15777718}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1367311935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1218166219, guid: d3daebf205d28d244948c2179be01d89, type: 3}
   m_PrefabInstance: {fileID: 15777718}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1367311940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367311934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 1
-  buttonNeeded: {fileID: 0}
 --- !u!1 &1397091845
 GameObject:
   m_ObjectHideFlags: 0
