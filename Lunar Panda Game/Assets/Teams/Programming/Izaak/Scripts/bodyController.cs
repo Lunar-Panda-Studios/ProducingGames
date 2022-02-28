@@ -71,6 +71,7 @@ public class bodyController : MonoBehaviour
                                     collected = true;
 
                                     PuzzleData.current.isCompleted[id - 1] = true;
+                                    GameEvents.current.onPuzzleComplete(id);
                                 }
                             }
                         }

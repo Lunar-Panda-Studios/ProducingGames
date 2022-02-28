@@ -34,7 +34,7 @@ public class Analysis : MonoBehaviour
     public bool completed()
     {
         AnalyticsResult result = AnalyticsEvent.Custom(Name, parameters);
-        print("Sent");
+        print(result.ToString());
         if (result == AnalyticsResult.Ok)
         {
             return true;
@@ -48,12 +48,14 @@ public class Analysis : MonoBehaviour
     public void resetTimer(string puzzleName)
     {
         parameters.Add(puzzleName, timer);
+        print(parameters[puzzleName]);
         timer = 0;
     }
 
     public void resetlevelTimer()
     {
         parameters.Add("Time to Complete Level", levelTimer);
+        print(parameters["Time to Complete Level"]);
         levelTimer = 0;
     }
 }
