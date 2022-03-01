@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class FrameRates : MonoBehaviour
 {
-    // Start is called before the first frame update
+    const int peasantFrameRate = 30;
+    const int defaultFrameRate = 60;
+    const int higherFrames = 144;
+
+    public int setGameFPS = defaultFrameRate;
+    private int chosenFPS;
+
     void Start()
     {
-        
+        Application.targetFrameRate = setGameFPS;
+        chosenFPS = setGameFPS;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (setGameFPS != chosenFPS)
+        {
+            Application.targetFrameRate = setGameFPS;
+        }
     }
 }
