@@ -7,6 +7,10 @@ public class StaminaBar : MonoBehaviour
 {
     [Tooltip("maximum stamina value")]
     public float maxStam = 100f;
+    public bool CanSprint;
+    public Transform ShowStaminaPos;
+    public Transform HideStaminaPos;
+    public GameObject Staminabarrr;
     public float currentStam;
     [Tooltip("delay before player starts regaining stamina")]
     public float regenDelay = 1f;
@@ -34,7 +38,7 @@ public class StaminaBar : MonoBehaviour
 
     public void staminaUsage(float amount)
     {
-        if(currentStam - amount >= 0) // checks to see if you have enough stamina to perform action
+        if(currentStam - amount >= 0 && CanSprint == true) // checks to see if you have enough stamina to perform action
         {
             currentStam -= amount;
             UIManager.Instance.ChangeStaminaUsage(currentStam);
@@ -52,7 +56,7 @@ public class StaminaBar : MonoBehaviour
     {
         yield return new WaitForSeconds(regenDelay);  
 
-        while(currentStam < maxStam)
+        while(currentStam < maxStam && CanSprint == true)
         {
             currentStam += maxStam / regenAmount;
             UIManager.Instance.ChangeStaminaUsage(currentStam);
@@ -62,4 +66,17 @@ public class StaminaBar : MonoBehaviour
         regenCr = null;
     }
 
+
+    private void Update()
+    {
+        if (CanSprint == false)
+        {
+            Staminabarrr.transform.position = HideStaminaPos.transform.position;
+        }
+
+        if (CanSprint == true)
+        {
+            Staminabarrr.transform.position = ShowStaminaPos.transform.position;
+        }
+    }
 }
