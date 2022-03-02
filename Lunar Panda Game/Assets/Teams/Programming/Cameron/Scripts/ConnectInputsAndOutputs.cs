@@ -16,11 +16,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [SerializeField] float lineHoldDist;
     [SerializeField] GameObject button;
     [SerializeField] List<Light> completionLights;
-    [SerializeField] Light Pass;
-    [SerializeField] Light Fail;
 
     InteractRaycasting connectIORay;
-
 
     void Awake()
     {
@@ -174,8 +171,6 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             button.GetComponent<switchChanger>().TurnPowerOff();
             PuzzleData.current.completedEvents[id] = false;
             PuzzleData.current.isCompleted[id - 1] = false;
-            Fail.gameObject.SetActive(false);
-            Pass.gameObject.SetActive(false);
         }
     }
 
@@ -200,7 +195,6 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             //if the currently connected node is not the right node, return false
             if (i.GetComponent<Node>().connectedNode != i.GetComponent<Node>().desiredNode)
             {
-                Fail.gameObject.SetActive(true);
                 return false;
             }
         }
@@ -229,10 +223,10 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     line.SetPosition(1, InputNodes[i].GetComponent<Node>().transform.position);
                     line.GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;
                 }
-                
+
                 print("Auto Completed");
             }
-            Pass.gameObject.SetActive(true);
+
             PuzzleData.current.completedEvents[id] = true;
             PuzzleData.current.isCompleted[id - 1] = true;
         }

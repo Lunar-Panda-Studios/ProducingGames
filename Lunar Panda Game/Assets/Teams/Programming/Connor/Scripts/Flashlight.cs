@@ -17,6 +17,7 @@ public class Flashlight : MonoBehaviour
     void Start()
     {
         lightSource = this.gameObject.GetComponent<Light>(); //assigning the spotlight to access it
+        lightSource.intensity = 0;
     }
 
     void Update()
@@ -32,7 +33,7 @@ public class Flashlight : MonoBehaviour
             {
                 case false: //if flashlight off, turn on
                     powerOn = true;
-                    lightSource.intensity = 2500;
+                    lightSource.intensity = 20000;
                     break;
 
                 case true: //if flashlight on turn off
