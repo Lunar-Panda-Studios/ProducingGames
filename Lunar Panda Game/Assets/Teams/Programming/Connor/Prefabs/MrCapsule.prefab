@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62510e4784fbca4bbe07aa2db05ec69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleLightButton: 102
   powerUsage: 1
 --- !u!1 &1218166216
 GameObject:
@@ -244,7 +243,6 @@ GameObject:
   - component: {fileID: 1218166217}
   - component: {fileID: 1218166220}
   - component: {fileID: 5700612682732266378}
-  - component: {fileID: 1367311940}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -451,18 +449,6 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
---- !u!114 &1367311940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218166216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1475630742
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +633,7 @@ MonoBehaviour:
   holdDist: 1.5
   dropDist: 3
   lerpSpeed: 10
+  ControllerItemRotateSens: 0
   GOLookingAt: {fileID: 0}
   throwForce: 20
 --- !u!114 &973075567
@@ -799,8 +786,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e62510e4784fbca4bbe07aa2db05ec69, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  toggleLightButton: 102
+  m_EditorClassIdentifier:
   powerUsage: 1
 --- !u!114 &6954180438057201783
 MonoBehaviour:

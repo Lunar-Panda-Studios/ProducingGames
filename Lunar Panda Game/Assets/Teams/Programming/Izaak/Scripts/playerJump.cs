@@ -17,7 +17,7 @@ public class playerJump : MonoBehaviour
     public float groundDistance;
     private bool grounded;
     private bool isJumping;
-    private bool rayDown;
+    public bool rayDown;
 
     [Tooltip("The layer the game considers to be ground")]
     public LayerMask groundLayer;
@@ -37,7 +37,7 @@ public class playerJump : MonoBehaviour
         //slideyWalls();
     }
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         //Sets a raycast for this frame
         rayDown = Physics.Raycast(groundDetection.transform.position, Vector3.down, groundDistance, groundLayer);
