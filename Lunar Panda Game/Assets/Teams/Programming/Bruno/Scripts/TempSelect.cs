@@ -7,45 +7,47 @@ public class TempSelect : MonoBehaviour
     CodeLock codeLock;
 
     int reachRange = 100;
-    switchChanger button;
 
     Transform player;
     Transform cam;
 
-    InteractRaycasting tempSelectRay;
+    public bool needsActiveBtnToWork = true;
+    [SerializeField] switchChanger buttonNeeded;
 
     private void Start()
     {
-        button = FindObjectOfType<switchChanger>();
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = Camera.main.transform;
-        tempSelectRay = player.GetComponent<InteractRaycasting>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Interact"))
         {
             CheckHitObj();
         }
     }
 
-    void CheckHitObj() //Temporary Raycast to check the buttons
+    void CheckHitObj()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if(tempSelectRay.raycastInteract(out hit))
+        if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
         {
             codeLock = hit.transform.gameObject.GetComponentInParent<CodeLock>();
 
-            if(codeLock != null)
+            if (codeLock != null && hit.transform.CompareTag("NumberCode"))
             {
-                if (button.isPowerOn)
+                if (!needsActiveBtnToWork)
                 {
                     string value = hit.transform.name;
                     codeLock.SetValue(value);
+                }
+                else if (buttonNeeded != null)
+                {
+                    if (buttonNeeded.isPowerOn)
+                    {
+                        string value = hit.transform.name;
+                        codeLock.SetValue(value);
+                    }
                 }
             }
         }

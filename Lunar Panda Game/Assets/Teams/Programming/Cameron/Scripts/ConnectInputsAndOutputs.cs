@@ -152,6 +152,16 @@ public class ConnectInputsAndOutputs : MonoBehaviour
         }
     }
 
+    void SetUpCable()
+    {
+
+    }
+
+    void UpdateCable()
+    {
+
+    }
+
     public void resetPuzzle(int id)
     {
         if(id == this.id)
@@ -179,6 +189,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             inputCurrentlyConnecting.GetComponent<LineRenderer>().SetPosition(1, cam.position + (cam.forward * lineHoldDist));
         }
     }
+
+    
 
     public bool CheckCombination()
     {
