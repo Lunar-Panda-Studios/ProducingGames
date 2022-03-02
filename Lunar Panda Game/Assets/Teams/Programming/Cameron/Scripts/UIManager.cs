@@ -24,6 +24,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup fadeGroup;
     [SerializeField] float fadeDuration;
     public Text storyNotes;
+    public Text notesText;
+    Inventory inventory;
+    public GameObject documentLandscape;
+    public GameObject documentPortrait;
 
     void Awake()
     {
@@ -42,6 +46,8 @@ public class UIManager : MonoBehaviour
     {
         //initialises all the UI stuffs
         InitUI();
+
+        inventory = FindObjectOfType<Inventory>();
     }
 
     public void ChangeStaminaUsage(float value)
@@ -99,5 +105,54 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         Time.timeScale = 0;
+    }
+
+    public void showDocument(DocumentData data, ViewDocument documentScript)
+    {
+        if (data.isLandscape)
+        {
+            documentLandscape.GetComponent<Image>().sprite = data.documentImage;
+            documentLandscape.SetActive(true);
+        }
+        else
+        {
+            documentPortrait.GetComponent<Image>().sprite = data.documentImage;
+            documentPortrait.SetActive(true);
+        }
+
+        documentScript.showDoc = true;
+        inventory.addItem(data);
+        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+    }
+
+    public void hideDocument(ViewDocument documentScript)
+    {
+        documentScript.showDoc = false;
+
+        if(documentScript.data.isLandscape)
+        {
+            documentLandscape.SetActive(false);
+        }
+        else
+        {
+            documentPortrait.SetActive(false);
+        }
+
+    }
+
+    public void showingText(DocumentData data, ViewDocument documentScript)
+    {
+        notesText.GetComponent<Text>().text = data.docText;
+        documentScript.showText = true;
+        notesText.gameObject.SetActive(true);
+        //Show text when pressed
+    }
+
+    public void hideText(ViewDocument documentScript)
+    {
+        documentScript.showText = false;
+        notesText.gameObject.SetActive(false);
+        //Hide text when pressed
     }
 }

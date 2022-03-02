@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-
+    public int id;
     [Header("Prefabs")]
     [Tooltip("Destroyable Version of the gameobject")]
     public GameObject destroyedVersion;
@@ -19,6 +19,7 @@ public class Destructable : MonoBehaviour
     private void Start()
     {
         raycast = FindObjectOfType<InteractRaycasting>(); // Needed to stop the object rotating from activating the script as well
+        GameEvents.current.puzzleCompleted += puzzleComplete;
     }
 
     void Update()
@@ -43,11 +44,27 @@ public class Destructable : MonoBehaviour
             {
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
                 {
-                    //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
-                    Instantiate(destroyedVersion, transform.position, transform.rotation);
-                    Destroy(gameObject);
+                    GameEvents.current.onPuzzleComplete(id);
                 }
             }            
+        }
+    }
+
+    void puzzleComplete(int id)
+    {
+        if(id == this.id)
+        {
+            //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
+            Instantiate(destroyedVersion, transform.position, transform.rotation);
+            Destroy(gameObject);
+
+            if (Analysis.current.consent)
+            {
+                Analysis.current.resetTimer("Destructable Object");
+            }
+
+            PuzzleData.current.completedEvents[id] = true;
+            PuzzleData.current.isCompleted[id - 1] = true;
         }
     }
     
