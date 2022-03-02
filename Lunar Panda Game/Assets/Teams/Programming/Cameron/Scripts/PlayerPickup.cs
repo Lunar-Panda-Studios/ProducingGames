@@ -26,11 +26,14 @@ public class PlayerPickup : MonoBehaviour
     public float holdDist = 1.5f;
     [SerializeField] float dropDist;
     [SerializeField] float lerpSpeed;
+    [Range(100f, 500f)]
+    [SerializeField] float ControllerItemRotateSens;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
     [SerializeField] float throwForce;
     Inventory inventory;
+    bool controllerRotating = false;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -147,8 +150,27 @@ public class PlayerPickup : MonoBehaviour
                 heldItem.transform.localRotation = Quaternion.identity;
                 heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             }
+        }
+        //controller support
+        if ((Input.GetAxisRaw("ItemRotateX") != 0 || Input.GetAxisRaw("ItemRotateY") != 0) && heldItem != null)
+        {
+            if (controllerRotating) //this acts as Input.getButton
+            {
+                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.up, Input.GetAxisRaw("ItemRotateX") * ControllerItemRotateSens * Time.deltaTime);
+                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.right, Input.GetAxisRaw("ItemRotateY") * ControllerItemRotateSens * Time.deltaTime);
 
+            }
+            else //this acts as "Input.getButtonDown" cos get axis doesnt have a "down" thingie
+            {
+                //also, why the fuck is the dpad an axis when theyre just buttons. U cant half-press the dpad, its either pressed down, or
+                //is up. Theres no in-between. shitty ass input shit. Still not gonna use the new input system
 
+                controllerRotating = true;
+            }
+        }
+        else if (Input.GetAxisRaw("ItemRotateX") == 0 && Input.GetAxisRaw("ItemRotateY") == 0)
+        {
+            controllerRotating = false;
         }
     }
 
