@@ -11482,6 +11482,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 973075565, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: RunningMan
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 973075566, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: throwForce
       value: 20
@@ -11651,6 +11655,7 @@ MonoBehaviour:
   p_speed: 1
   groundDetection: {fileID: 599216928}
   groundDistance: 0.2
+  rayDown: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -11680,6 +11685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needsActiveBtnToWork: 1
+  buttonNeeded: {fileID: 0}
 --- !u!1 &608374300
 GameObject:
   m_ObjectHideFlags: 0
@@ -26909,7 +26916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62510e4784fbca4bbe07aa2db05ec69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleLightButton: 102
   powerUsage: 1
 --- !u!114 &1475482449
 MonoBehaviour:
@@ -30414,6 +30420,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 723563837667943892, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
   m_PrefabInstance: {fileID: 1612781571}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1880774881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880774884}
+  - component: {fileID: 1880774883}
+  - component: {fileID: 1880774882}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1880774882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880774881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1880774883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880774881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1880774884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880774881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885446546
 GameObject:
   m_ObjectHideFlags: 0
