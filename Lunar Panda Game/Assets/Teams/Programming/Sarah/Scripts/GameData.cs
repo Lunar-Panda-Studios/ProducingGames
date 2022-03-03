@@ -15,7 +15,7 @@ public class GameData
     public List<bool> puzzleCompleted;
     public float?[,] itemsInScene;
 
-    public GameData(GameManager data)
+    public GameData(TestingSave data)
     {
         position = new float[3];
         position[0] = data.player.transform.position.x;

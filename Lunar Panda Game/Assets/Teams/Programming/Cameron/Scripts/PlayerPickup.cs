@@ -26,14 +26,11 @@ public class PlayerPickup : MonoBehaviour
     public float holdDist = 1.5f;
     [SerializeField] float dropDist;
     [SerializeField] float lerpSpeed;
-    [Range(100f, 500f)]
-    [SerializeField] float ControllerItemRotateSens;
     [Header("Lookat System")]
     [SerializeField] GameObject GOLookingAt = null;
     [Header("Throw System")]
     [SerializeField] float throwForce;
     Inventory inventory;
-    bool controllerRotating = false;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -128,7 +125,7 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.localRotation = Quaternion.identity;
             heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             itemStartRotation = heldItem.transform.rotation;
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
             playerCameraTransform.GetComponent<lockMouse>().canLook = false;
         }
         //while the mouse button is down and player is holding an item
@@ -140,37 +137,18 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
         }
         //the frame the player stops pressing the mouse button
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && Time.timeScale > 0f)
         {
             //stop rotating the object
-            Cursor.lockState = CursorLockMode.Locked;
+           // Cursor.lockState = CursorLockMode.Locked;
             playerCameraTransform.GetComponent<lockMouse>().canLook = true;
             if (heldItem)
             {
                 heldItem.transform.localRotation = Quaternion.identity;
                 heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             }
-        }
-        //controller support
-        if ((Input.GetAxisRaw("ItemRotateX") != 0 || Input.GetAxisRaw("ItemRotateY") != 0) && heldItem != null)
-        {
-            if (controllerRotating) //this acts as Input.getButton
-            {
-                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.up, Input.GetAxisRaw("ItemRotateX") * ControllerItemRotateSens * Time.deltaTime);
-                heldItem.transform.RotateAround(heldItem.transform.position, heldItem.transform.right, Input.GetAxisRaw("ItemRotateY") * ControllerItemRotateSens * Time.deltaTime);
 
-            }
-            else //this acts as "Input.getButtonDown" cos get axis doesnt have a "down" thingie
-            {
-                //also, why the fuck is the dpad an axis when theyre just buttons. U cant half-press the dpad, its either pressed down, or
-                //is up. Theres no in-between. shitty ass input shit. Still not gonna use the new input system
 
-                controllerRotating = true;
-            }
-        }
-        else if (Input.GetAxisRaw("ItemRotateX") == 0 && Input.GetAxisRaw("ItemRotateY") == 0)
-        {
-            controllerRotating = false;
         }
     }
 

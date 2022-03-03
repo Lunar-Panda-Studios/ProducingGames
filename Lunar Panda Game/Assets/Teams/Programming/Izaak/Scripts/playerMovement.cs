@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class playerMovement : MonoBehaviour
 {
     private Rigidbody p_rigidbody;
@@ -38,7 +38,8 @@ public class playerMovement : MonoBehaviour
         //}
         if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq) && BarOfStamina.CanSprint == true)
         {
-            p_speed = runSpeed;
+                p_speed = runSpeed;
+                RunningMan.color = new Color(1f, 1f, 1f, 1f);
             StaminaBar.instance.staminaUsage(runStamReq);
         }
         else if (true)
@@ -60,6 +61,8 @@ public class playerMovement : MonoBehaviour
         {
                 RunningMan.color = new Color(0f, 0f, 0f, 1f);
         }
+
+
 
         move();
 

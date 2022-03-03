@@ -540,63 +540,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testSound1: 0
   testSound2: 0
---- !u!1 &666283448
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666283450}
-  - component: {fileID: 666283449}
-  - component: {fileID: 666283451}
-  m_Layer: 0
-  m_Name: VsyncHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &666283449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666283448}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e79c3e50ae83e934480619f6a45cabec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &666283450
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666283448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.774376, y: -5.009362, z: 6.1173916}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &666283451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666283448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f5bbbfba9c8c4648b8ed2ea5946be18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  setGameFPS: 60
 --- !u!1 &701955928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,6 +1902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   openCloseKey: 108
   anim: {fileID: 1533866116}
   animTimer: 0.5
@@ -1974,6 +1918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7563c60466464da2d352a9b5adbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   openCloseKey: 103
   anim: {fileID: 1533866116}
   animTimer: 0.5

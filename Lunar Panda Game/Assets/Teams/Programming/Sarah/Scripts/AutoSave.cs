@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AutoSave : MonoBehaviour
 {
-    GameManager manager;
+    TestingSave manager;
 
     private void Start()
     {
-        manager = FindObjectOfType<GameManager>();
+        manager = FindObjectOfType<TestingSave>();
     }
 
     private void OnTriggerEnter(Collider other)
