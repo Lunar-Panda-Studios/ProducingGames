@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButtonToggle : MonoBehaviour
+public class FeedbackToggle : MonoBehaviour
 {
 
-    public bool IsPaused;
-    public bool IsOnRegularMenu;
+    public bool IsOnFeedbackMenu;
     public GameObject PauseMenu;
     public lockMouse MrCapsule;
     public GameObject BarOfStamina;
@@ -27,11 +26,10 @@ public class PauseButtonToggle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (IsPaused == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false)
+            if (IsOnFeedbackMenu == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false)
             {
-                IsPaused = true;
+                IsOnFeedbackMenu = true;
                 BarOfStamina.SetActive(false);
-                IsOnRegularMenu = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 print("Cursor is visible");
@@ -39,20 +37,16 @@ public class PauseButtonToggle : MonoBehaviour
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
-            else if (IsPaused == true)
+            else if (IsOnFeedbackMenu == true)
             {
-               if (IsOnRegularMenu == true)
-                {
-                    PauseMenu.SetActive(false);
-                    IsPaused = false;
-                    BarOfStamina.SetActive(true);
-                    IsOnRegularMenu = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    MrCapsule.canLook = true;
-                    Cursor.visible = false;
-                    print("Cursor is no longer visible");
-                    Time.timeScale = 1f;
-                }
+                PauseMenu.SetActive(false);
+                IsOnFeedbackMenu = false;
+                BarOfStamina.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                MrCapsule.canLook = true;
+                Cursor.visible = false;
+                print("Cursor is no longer visible");
+                Time.timeScale = 1f;
             }
         }
     }
