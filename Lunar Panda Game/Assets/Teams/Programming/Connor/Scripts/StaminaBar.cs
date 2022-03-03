@@ -79,4 +79,5 @@ public class StaminaBar : MonoBehaviour
             Staminabarrr.transform.position = ShowStaminaPos.transform.position;
         }
     }
+
 }
