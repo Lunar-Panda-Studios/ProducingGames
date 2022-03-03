@@ -12,6 +12,7 @@ public class JournalMenuToggle : MonoBehaviour
     public GameObject BarOfStamina;
     public PauseButtonToggle Pause;
     public InventoryMenuToggle Inventory;
+    public FeedbackToggle Feedback;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class JournalMenuToggle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (IsOnMenu == false && Pause.IsPaused == false && Inventory.IsOnInventory == false)
+            if (IsOnMenu == false && Pause.IsPaused == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
             {
                 IsOnMenu = true;
 

@@ -12,6 +12,8 @@ public class FeedbackToggle : MonoBehaviour
     public GameObject BarOfStamina;
     public JournalMenuToggle Journal;
     public InventoryMenuToggle Inventory;
+    public PauseButtonToggle Pause;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,14 +21,15 @@ public class FeedbackToggle : MonoBehaviour
         MrCapsule = FindObjectOfType<lockMouse>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
+        Pause = FindObjectOfType<PauseButtonToggle>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.F8))
         {
-            if (IsOnFeedbackMenu == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false)
+            if (IsOnFeedbackMenu == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Pause.IsPaused == false)
             {
                 IsOnFeedbackMenu = true;
                 BarOfStamina.SetActive(false);
