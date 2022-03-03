@@ -71,7 +71,6 @@ public class bodyController : MonoBehaviour
                                     collected = true;
 
                                     PuzzleData.current.isCompleted[id - 1] = true;
-                                    GameEvents.current.onPuzzleComplete(id);
                                 }
                             }
                         }
@@ -115,10 +114,6 @@ public class bodyController : MonoBehaviour
                 }
             }
 
-            if(Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Body"))
-            {
-                Analysis.current.resetTimer("Open Body");
-            }
         }
     }
 }

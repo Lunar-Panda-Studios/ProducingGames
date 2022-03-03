@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Database: MonoBehaviour
 {
+    private static Database _instance;
+
+    public static Database Instance { get { return _instance; } }
     public static Database current;
     public List<ItemData> allItems;
     public List<DocumentData> allDocs;
@@ -17,14 +20,15 @@ public class Database: MonoBehaviour
 
     private void Awake()
     {
+        current = this;
         //setting up singleton
-        if (current != null && current != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            current = this;
+            _instance = this;
         }
     }
 
@@ -63,7 +67,6 @@ public class Database: MonoBehaviour
 
         for (int i = 0; i < temp.Length; i++)
         {
-            temp[i].data.id = i;
             itemsInScene.Add(temp[i]);
             itemLocation.Add(itemsInScene[i].transform.position);
         }
@@ -89,12 +92,6 @@ public class Database: MonoBehaviour
                 }
             }
         }
-    }
-
-    public void addToItemsInScene(HoldableItem newItem)
-    {
-        newItem.data.id = itemsInScene.Count;
-        itemsInScene.Add(newItem);
     }
 
 }

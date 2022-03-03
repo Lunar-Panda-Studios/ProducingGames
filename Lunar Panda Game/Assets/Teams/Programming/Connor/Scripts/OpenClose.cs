@@ -24,10 +24,10 @@ public class OpenClose : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(openCloseKey) /*&& animDone*/) // press key and it opens or closes object (add to camerons script when merged)
-        //{
-        //    openCloseObject(id);
-        //}
+        if (Input.GetKeyDown(openCloseKey) /*&& animDone*/) // press key and it opens or closes object (add to camerons script when merged)
+        {
+            openCloseObject(id);
+        }
     }
 
     public void openCloseObject(int id)

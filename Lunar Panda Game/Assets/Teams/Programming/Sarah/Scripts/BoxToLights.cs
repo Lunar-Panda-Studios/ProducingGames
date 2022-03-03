@@ -6,20 +6,15 @@ public class BoxToLights : MonoBehaviour
 {
     public int id;
     bool switchState = false;
-    public GameObject LinkedBox;
+    public GameObject LinkedDoor;
     public GameObject LinkedLights;
     InteractRaycasting ray;
 
     private void Start()
     {
         ray = FindObjectOfType<InteractRaycasting>();
-        LinkedBox.GetComponent<PowerChanging>().id = id;
-
-        foreach (Transform child in LinkedLights.transform)
-        {
-            child.GetComponent<LightsChaging>().id = id;
-        }
-
+        LinkedDoor.GetComponent<OpenClose>().id = id;
+        LinkedLights.GetComponent<LightsChaging>().id = id;
     }
 
     private void Update()

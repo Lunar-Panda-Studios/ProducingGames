@@ -13,9 +13,10 @@ public class StaminaBar : MonoBehaviour
     public GameObject Staminabarrr;
     public float currentStam;
     [Tooltip("delay before player starts regaining stamina")]
-    public int regenDelay = 1;
+    public float regenDelay = 1f;
     [Tooltip("higher the number the smaller the regeneration")]
-    public int regenAmount = 100;
+    public float regenAmount = 100f;
+  
 
     public static StaminaBar instance;
 
