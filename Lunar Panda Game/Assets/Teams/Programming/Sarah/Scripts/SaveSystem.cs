@@ -6,14 +6,14 @@ using System.IO;
 
 public static class SaveSystem
 {
-    public static void save(TestingSave manager)
+    public static void save()
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.save";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         //Saved data here
-        GameData data = new GameData(manager);
+        GameData data = new GameData(GameManager.Instance);
         formatter.Serialize(stream, data);
         stream.Close();
     }

@@ -11,6 +11,7 @@ public class DocumentData : ScriptableObject
     [TextArea]
     public string docText;
     public Sprite documentImage;
+    public bool isLandscape;
     public GameObject prefab;
     public Room roomGottenIn;
 }

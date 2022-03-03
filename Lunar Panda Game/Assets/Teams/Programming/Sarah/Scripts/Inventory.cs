@@ -171,14 +171,14 @@ public class Inventory : MonoBehaviour
         //Can't toggle thus needed to be an if statement to check if opening or closing inventory
         if (player.enabled)
         {
-           // Cursor.visible = false;
-            //Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             pickupControl.enabled = true;
         }
         else
         {
-            //Cursor.lockState = CursorLockMode.None;
-            //Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             pickupControl.enabled = false;
             UIManager.Instance.storyNotesDisplay();
         }
@@ -200,8 +200,8 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
-                if(autoCombine != null)
-                    autoCombine.itemChecking(data);
+                //if(autoCombine != null)
+                //    autoCombine.itemChecking(data);
                 break;
             }
         }
@@ -225,7 +225,7 @@ public class Inventory : MonoBehaviour
         //int index = documentInventory.IndexOf(data);
 
         DocumentData document = documentInventory[index];
-        document.prefab.GetComponent<ViewDocument>().showDocument();
+        //UIManager.Instance.showDocument();
     }
 
     //Finds doc in inventory then displays them
@@ -234,14 +234,13 @@ public class Inventory : MonoBehaviour
         int index = documentInventory.IndexOf(data);
 
         GameObject document = documentInventory[index].prefab;
-        document.GetComponent<ViewDocument>().hideDocument();
+        //document.GetComponent<ViewDocument>().hideDocument();
     }
 
     public void removeItem()
     {
         //If item is used then it will not be dropped on the floor
         itemInventory[selectedItem] = null;
-        //print(itemInventory[])
         itemsIn--;
 
         //itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
