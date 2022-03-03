@@ -18,23 +18,12 @@ public class Inventory : MonoBehaviour
 
     private int itemsIn;
 
-    [Header ("Inputs")]
-    [Tooltip("Key to drop item")]
-    public KeyCode drop;
-    [Tooltip("Key to change select inventory item")]
-    public KeyCode changeItem;
-    [Tooltip("Key to open the document inventory")]
-    public KeyCode openDocKey;
-    [Tooltip("Key to put away or take out item")]
-    public KeyCode putAwayKey;
-
     [Header("Inventory UI")]
     [Tooltip("This would the gameobject that has the UI for the document inventory in")]
     public GameObject docInventory;
     public GameObject itemInventoryUI;
     lockMouse mouse;
     playerMovement player;
-    public GameObject itemIndicator;
     List<GameObject> itemSpace;
 
     [Header("Item Dropping")]
@@ -68,10 +57,10 @@ public class Inventory : MonoBehaviour
     //Likely a temp untill placed elsewhere
     private void Update()
     {
-        if (Input.GetKeyDown(drop) && itemsIn != 0)
+/*        if (Input.GetKeyDown(drop) && itemsIn != 0)
         {
             removeItem();
-        }
+        }*/
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
             selectItem(true);
@@ -242,14 +231,11 @@ public class Inventory : MonoBehaviour
         //If item is used then it will not be dropped on the floor
         itemInventory[selectedItem] = null;
         itemsIn--;
-
-        //itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
     public void selectedNumberItem(int number)
     {
         selectedItem = number;
-        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
     private void selectItem(bool positive)
@@ -283,8 +269,6 @@ public class Inventory : MonoBehaviour
                 takeout();
             }
         }
-
-        itemIndicator.transform.position = itemSpace[selectedItem].transform.position;
     }
 
     private void putAway()
