@@ -3,46 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FeedbackToggle : MonoBehaviour
+public class InventoryMenuToggle : MonoBehaviour
 {
 
-    public bool IsOnFeedbackMenu;
-    public GameObject PauseMenu;
+    public bool IsOnInventory;
+    public GameObject InventoryMenu;
     public lockMouse MrCapsule;
     public GameObject BarOfStamina;
     public JournalMenuToggle Journal;
-    public InventoryMenuToggle Inventory;
     public PauseButtonToggle Pause;
+    public FeedbackToggle Feedback;
+
 
     // Start is called before the first frame update
     void Start()
     {
         MrCapsule = FindObjectOfType<lockMouse>();
-        Journal = FindObjectOfType<JournalMenuToggle>();
-        Inventory = FindObjectOfType<InventoryMenuToggle>();
         Pause = FindObjectOfType<PauseButtonToggle>();
+        Journal = FindObjectOfType<JournalMenuToggle>();
+        Feedback = FindObjectOfType<FeedbackToggle>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F8))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (IsOnFeedbackMenu == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Pause.IsPaused == false)
+            if (IsOnInventory == false && Pause.IsPaused == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
             {
-                IsOnFeedbackMenu = true;
-                BarOfStamina.SetActive(false);
+                IsOnInventory = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+
+                BarOfStamina.SetActive(false);
+
                 print("Cursor is visible");
                 MrCapsule.canLook = false;
-                PauseMenu.SetActive(true);
+                InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
-            else if (IsOnFeedbackMenu == true)
+            else if (IsOnInventory == true)
             {
-                PauseMenu.SetActive(false);
-                IsOnFeedbackMenu = false;
+                InventoryMenu.SetActive(false);
+                IsOnInventory = false;
+
                 BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
