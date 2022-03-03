@@ -8,6 +8,7 @@ public class SubmitFeedback : MonoBehaviour
 {
     public Button yourButton;
     public GameObject FeedbackMenu;
+    public GameObject BarOfStamina;
 
 
     public FeedbackToggle EE;
@@ -27,6 +28,7 @@ public class SubmitFeedback : MonoBehaviour
         {
             EE.IsOnFeedbackMenu = false;
             FeedbackMenu.SetActive(false);
+            BarOfStamina.SetActive(true);
             if (Time.timeScale <= 0f)
             {
                 Time.timeScale = 1f;
