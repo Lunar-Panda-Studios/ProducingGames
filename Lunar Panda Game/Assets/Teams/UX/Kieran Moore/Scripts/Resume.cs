@@ -28,6 +28,10 @@ public class Resume : MonoBehaviour
             EE.IsPaused = false;
             EE.IsOnRegularMenu = false;
             PauseMenu.SetActive(false);
+            if (Time.timeScale <= 0f)
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 }
