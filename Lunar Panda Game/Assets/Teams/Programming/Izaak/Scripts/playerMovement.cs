@@ -38,8 +38,8 @@ public class playerMovement : MonoBehaviour
         //}
         if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq) && BarOfStamina.CanSprint == true)
         {
-                p_speed = runSpeed;
-                RunningMan.color = new Color(1f, 1f, 1f, 1f);
+            p_speed = runSpeed;
+            RunningMan.color = new Color(1f, 1f, 1f, 1f);
             StaminaBar.instance.staminaUsage(runStamReq);
         }
         else if (true)
@@ -52,14 +52,14 @@ public class playerMovement : MonoBehaviour
 
         if (StaminaBar.instance.currentStam <= 3f && BarOfStamina.CanSprint == true)
         {
-                RunningMan.color = new Color(1f, 0f, 0f, 0.1f);
+            RunningMan.color = new Color(1f, 0f, 0f, 0.1f);
             BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 0.1f);
             FillSprite.color = new Color(0f, 1f, 0f, 0.1f);
         }
 
         if (StaminaBar.instance.currentStam <= 0f && BarOfStamina.CanSprint == true)
         {
-                RunningMan.color = new Color(0f, 0f, 0f, 1f);
+            RunningMan.color = new Color(0f, 0f, 0f, 1f);
         }
 
 

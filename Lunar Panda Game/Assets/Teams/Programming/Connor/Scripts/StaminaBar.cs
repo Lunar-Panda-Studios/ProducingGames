@@ -16,7 +16,7 @@ public class StaminaBar : MonoBehaviour
     public float regenDelay = 1f;
     [Tooltip("higher the number the smaller the regeneration")]
     public float regenAmount = 100f;
-  
+
 
     public static StaminaBar instance;
 
@@ -43,7 +43,7 @@ public class StaminaBar : MonoBehaviour
             currentStam -= amount;
             UIManager.Instance.ChangeStaminaUsage(currentStam);
 
-            if(regenCr != null)
+            if (regenCr != null)
             {
                 StopCoroutine(regenCr);
             }
@@ -54,7 +54,7 @@ public class StaminaBar : MonoBehaviour
 
     private IEnumerator stamRegen()
     {
-        yield return new WaitForSeconds(regenDelay);  
+        yield return new WaitForSeconds(regenDelay);
 
         while(currentStam < maxStam && CanSprint == true)
         {
@@ -79,4 +79,5 @@ public class StaminaBar : MonoBehaviour
             Staminabarrr.transform.position = ShowStaminaPos.transform.position;
         }
     }
+
 }
