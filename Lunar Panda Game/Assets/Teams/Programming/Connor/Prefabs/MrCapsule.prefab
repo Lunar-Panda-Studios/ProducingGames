@@ -45,7 +45,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 24432.768
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 70
   m_InnerSpotAngle: 21.80208
@@ -335,6 +335,7 @@ MonoBehaviour:
   cameraLowerBoundsX: -75
   cameraUpperBoundsY: 0
   cameraLowerBoundsY: 0
+  canLook: 0
 --- !u!114 &5700612682732266378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +514,7 @@ Transform:
   m_GameObject: {fileID: 8207024237382381629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.35, y: 0, z: -5}
-  m_LocalScale: {x: 0.76878, y: 0.76878, z: 0.76878}
+  m_LocalScale: {x: 0.7687801, y: 1, z: 0.7687801}
   m_Children:
   - {fileID: 1218166219}
   - {fileID: 1475630743}
@@ -613,6 +614,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_speed: 2
   runStamReq: 0.02
+  RunningMan: {fileID: 0}
+  BackgroundSprite: {fileID: 0}
+  FillSprite: {fileID: 0}
+  BarOfStamina: {fileID: 0}
 --- !u!114 &973075566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,6 +656,7 @@ MonoBehaviour:
   p_speed: 5
   groundDetection: {fileID: 1475630742}
   groundDistance: 1
+  rayDown: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -786,7 +792,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e62510e4784fbca4bbe07aa2db05ec69, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   powerUsage: 1
 --- !u!114 &6954180438057201783
 MonoBehaviour:
