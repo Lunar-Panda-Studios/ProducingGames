@@ -46,17 +46,23 @@ public class ClockPuzzle : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            InteractRaycasting.Instance.raycastInteract(out RaycastHit hit);
-            if (hit.transform.gameObject == gameObject)
+            if(InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
             {
-                if (handsConnected)
+                if (hit.transform.gameObject == gameObject)
                 {
-                    RotateHand();
+                    if (handsConnected)
+                    {
+                        RotateHand();
+                    }
+                    else
+                    {
+                        PlaceHands();
+                    }
                 }
-                else
-                {
-                    PlaceHands();
-                }
+            }
+            else
+            {
+                return;
             }
         }
     }
