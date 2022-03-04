@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     void InitUI()
     {
         //init stamina
-        staminaBar.maxValue = StaminaBar.instance.maxStam;
+        //staminaBar.maxValue = StaminaBar.instance.maxStam;
         staminaBar.value = staminaBar.maxValue;
         staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
         //init crosshair
