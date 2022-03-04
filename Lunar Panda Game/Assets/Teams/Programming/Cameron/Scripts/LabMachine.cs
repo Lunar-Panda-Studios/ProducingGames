@@ -63,9 +63,15 @@ public class LabMachine : MonoBehaviour
                         //Stop countdown
                         countdown.StopTimer();
 
-                        Database.current.itemsInScene.Add(holdableItem);
-                        Database.Instance.itemsInScene.Add(holdableItem);
-                        print("Working?");
+                        Database.current.addToItemsInScene(holdableItem);
+                        Database.itemLocation.Add(holdableItem.gameObject.transform.position);
+
+                        if(Analysis.current.consent)
+                        {
+                            Analysis.current.resetlevelTimer();
+                            print(Analysis.current.completed());
+                        }
+
                     }
                 }
             }

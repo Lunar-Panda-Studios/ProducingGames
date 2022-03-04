@@ -10,7 +10,7 @@ public class Countdown : MonoBehaviour
     [SerializeField] bool resetLevelOnCountdownEnd;
     Transform cam;
     Transform player;
-    TestingSave manager;
+    GameManager manager;
     InteractRaycasting ray;
     Inventory inventoryScript;
     [SerializeField] ItemData antidoteData;
@@ -20,7 +20,7 @@ public class Countdown : MonoBehaviour
         timeLeft = countdownTime;
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        manager = FindObjectOfType<TestingSave>();
+        manager = FindObjectOfType<GameManager>();
         inventoryScript = FindObjectOfType<Inventory>();
     }
 
@@ -35,18 +35,18 @@ public class Countdown : MonoBehaviour
             StopTimer();
         }
 
-        if (Input.GetButtonDown("Interact"))
-        {
-            RaycastHit hit;
-            InteractRaycasting.Instance.raycastInteract(out hit);
-            if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
-            {
-                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
-                {
-                    StartCoroutine(UIManager.Instance.FadePanelIn());
-                }
-            }
-        }
+        //if (Input.GetButtonDown("Interact"))
+        //{
+        //    RaycastHit hit;
+        //    InteractRaycasting.Instance.raycastInteract(out hit);
+        //    if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
+        //    {
+        //        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+        //        {
+        //            StartCoroutine(UIManager.Instance.FadePanelIn());
+        //        }
+        //    }
+        //}
     }
 
     public float TimeLeft()
@@ -63,12 +63,15 @@ public class Countdown : MonoBehaviour
     {
         timerActive = false;
         timeLeft = countdownTime;
+        if (Analysis.current.consent)
+        {
+            Analysis.current.resetTimer("Antidote Puzzle");
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Enter");
         if (other.gameObject.CompareTag("Player"))
         {
             StartTimer();
