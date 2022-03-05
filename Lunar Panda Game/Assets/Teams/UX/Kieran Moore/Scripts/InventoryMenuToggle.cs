@@ -8,7 +8,7 @@ public class InventoryMenuToggle : MonoBehaviour
 
     public bool IsOnInventory;
     public GameObject InventoryMenu;
-    public lockMouse MrCapsule;
+    private lockMouse MrCapsule;
     public GameObject BarOfStamina;
     public JournalMenuToggle Journal;
     public PauseButtonToggle Pause;
