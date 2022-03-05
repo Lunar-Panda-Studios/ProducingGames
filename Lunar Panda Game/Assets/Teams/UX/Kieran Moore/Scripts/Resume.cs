@@ -8,6 +8,7 @@ public class Resume : MonoBehaviour
 {
     public Button yourButton;
     public GameObject PauseMenu;
+    public GameObject StaminaBarrrr;
 
 
     public PauseButtonToggle EE;
@@ -27,6 +28,7 @@ public class Resume : MonoBehaviour
         {
             EE.IsPaused = false;
             EE.IsOnRegularMenu = false;
+            StaminaBarrrr.SetActive(true);
             PauseMenu.SetActive(false);
             if (Time.timeScale <= 0f)
             {
