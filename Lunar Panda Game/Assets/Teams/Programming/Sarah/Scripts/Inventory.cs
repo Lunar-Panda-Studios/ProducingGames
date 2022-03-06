@@ -77,8 +77,8 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
-                //if(autoCombine != null)
-                //    autoCombine.itemChecking(data);
+                if (autoCombine != null)
+                    autoCombine.itemChecking(data);
                 break;
             }
         }

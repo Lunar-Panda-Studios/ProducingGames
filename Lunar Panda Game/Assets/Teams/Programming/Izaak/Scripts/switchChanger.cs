@@ -10,6 +10,7 @@ public class switchChanger : MonoBehaviour
     public GameObject amogus;
     public bool isPowerOn = false;
     Animator anim;
+    public string nameSound;
 
     void Awake()
     {
@@ -22,10 +23,12 @@ public class switchChanger : MonoBehaviour
         if (switchMode && anim != null)
         {
             anim.SetTrigger("Up");
+            SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
         }
         else if (anim != null)
         {
             anim.SetTrigger("Down");
+            SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
         }
     }
 
