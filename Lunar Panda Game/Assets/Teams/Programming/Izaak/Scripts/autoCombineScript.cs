@@ -27,13 +27,17 @@ public class autoCombineScript : MonoBehaviour
     void Start()
     {
         inInventory = new List<List<bool>>();
+        List<bool> temp = new List<bool>();
         inventoryScript = FindObjectOfType<Inventory>();
         for (int j = 0; j < autoCombineItemsList.Count; j++)
         {
+            temp = new List<bool>();
             for (int i = 0; i < autoCombineItemsList[j].itemParts.Count; i++)
             {
-                inInventory[j].Add(false);
+                temp.Add(false);
             }
+
+            inInventory.Add(temp);
         }
     }
 
