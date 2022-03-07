@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LeverDoorRaycast : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class LeverDoorRaycast : MonoBehaviour
     private bool doOnce;
 
     private const string interactableTag = "DoorLever";
+
+   // public UnityEvent OnInteract;
 
     private void Update()
     {
@@ -39,6 +42,7 @@ public class LeverDoorRaycast : MonoBehaviour
                 if(Input.GetKeyDown(openDoorKey))
                 {
                     raycastedObj.PlayAnimation();
+                    //OnInteract.Invoke();
 
                 }
             }
