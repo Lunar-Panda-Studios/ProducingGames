@@ -77,8 +77,6 @@ public class Inventory : MonoBehaviour
             {
                 itemInventory[i] = data;
                 itemsIn++;
-                if (autoCombine != null)
-                    autoCombine.itemChecking(data);
                 break;
             }
         }
@@ -140,7 +138,13 @@ public class Inventory : MonoBehaviour
     {
         if(pickupControl.heldItem != null)
         {
-            
+            if (pickupControl.heldItem != null)
+            {
+                if (autoCombine != null)
+                {
+                    autoCombine.itemChecking(pickupControl.heldItem.GetComponent<HoldableItem>().data);
+                }
+            }
             pickupControl.heldItem.SetActive(false);
             pickupControl.heldItem = null;
         }
