@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MovableObject : MonoBehaviour
 {
     public GameObject endObject;
@@ -10,6 +11,7 @@ public class MovableObject : MonoBehaviour
     private Vector3 teleportPosition = new Vector3();
     public float speed;
     public float smoothTime;
+    public bool disableAfterMove;
     Vector3 velocity;
 
     private bool isMoving;
@@ -20,11 +22,11 @@ public class MovableObject : MonoBehaviour
     }
     public void Update()
     {
-        if(GetIsMoving())Move();
+        if (GetIsMoving()) Move();
     }
     public void Move()
-    {    
-        transform.position = Vector3.SmoothDamp(transform.position, endPosition, ref velocity, smoothTime, speed); 
+    {
+        transform.position = Vector3.SmoothDamp(transform.position, endPosition, ref velocity, smoothTime, speed);
     }
     public void SetIsMoving(bool value)
     {
@@ -38,5 +40,9 @@ public class MovableObject : MonoBehaviour
     {
         transform.position = teleportPosition;
         transform.rotation = teleportObject.transform.rotation;
+    }
+    public bool GetDisableAM()
+    {
+        return disableAfterMove;
     }
 }
