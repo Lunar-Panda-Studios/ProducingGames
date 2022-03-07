@@ -6,8 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-namespace Unity.TubeRenderer
-{
+
     [RequireComponent(typeof(MeshFilter))]
     [ExecuteInEditMode]
     public class TubeRenderer : MonoBehaviour
@@ -46,9 +45,29 @@ namespace Unity.TubeRenderer
         public void SetPositions(Vector3[] positions)
         {
             this.positions = positions;
-        }
+        meshFilter.mesh = CreateMesh();
+    }
 
-        private void Awake()
+    public void worldPositions(Vector3[] worldPositions)
+    {
+        if(positions != worldPositions)
+        {
+            for (int i = 0; i < positions.Length; i++)
+            {
+                if (i == 0)
+                {
+                    positions[i] = worldPositions[i];
+                }
+                else
+                {
+                    positions[i] = transform.InverseTransformPoint(worldPositions[i]);
+                }
+            }
+            meshFilter.mesh = CreateMesh();
+        }
+    }
+
+    private void Awake()
         {
             meshFilter = GetComponent<MeshFilter>();
             if (mesh == null) mesh = new Mesh();
@@ -120,6 +139,8 @@ namespace Unity.TubeRenderer
             mesh.RecalculateBounds();
             return mesh;
         }
+    
+    
 
         private Vector3 GetVertexFwd(Vector3[] positions, int i)
         {
@@ -162,12 +183,13 @@ namespace Unity.TubeRenderer
             return positions.Aggregate(0, (total, it) => total ^ it.GetHashCode()) ^ positions.GetHashCode() ^ segments.GetHashCode() ^ subdivisions.GetHashCode() ^ startWidth.GetHashCode() ^ endWidth.GetHashCode();
         }
 
-        private void LateUpdate()
+        /*private void LateUpdate()
         {
+        this didnt work for some reason. PropHashCode never changed even though i was changing the positions so the mesh never generated. Fixed it by creating the mesh somewhere else
             if (lastUpdate != PropHashCode())
             {
-                meshFilter.mesh = CreateMesh();
-            }
-        }
+            meshFilter.mesh = CreateMesh();
+        }/*
+
+    }*/
     }
-}
