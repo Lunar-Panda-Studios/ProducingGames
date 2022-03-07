@@ -4,34 +4,37 @@ using UnityEngine;
 
 public class InteractSound : MonoBehaviour
 {
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    InteractRaycasting raycast;
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    public string audioClipName;    
 
-    //void playSound()
-    //{
-    //    RaycastHit hit;
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    private void Start()
+    {
+        raycast = FindObjectOfType<InteractRaycasting>(); // Needed to stop the object rotating from activating the script as well        
+    }
 
-    //    //Currently using Connor's raycast script
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            playSound();
+        }
+    }
 
-    //    if (raycast.raycastInteract(out hit))
-    //    {
-    //        if (hit.transform.gameObject == gameObject)
-    //        {
-    //            if (inventoryScript.itemInventory[inventoryScript.selectedItem] == PianoKey)
-    //            {
-    //                GameEvents.current.onPuzzleComplete(id);
-    //            }
-    //        }
-    //    }
-    //}
+    void playSound()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //Currently using Connor's raycast script
+
+        if (raycast.raycastInteract(out hit))
+        {
+            if (hit.transform.gameObject == gameObject)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+            }
+        }
+    }
 }

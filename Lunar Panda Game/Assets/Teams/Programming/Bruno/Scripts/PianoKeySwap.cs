@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PiankKeySwap : MonoBehaviour
+public class PianoKeySwap : MonoBehaviour
 {
     public int id;
     [Header("Prefabs")]
-    [Tooltip("Destroyable Version of the gameobject")]
-    public GameObject PuzzleKey;
-    public GameObject KeyScale;
+    [Tooltip("Interact Piano Key Version of the gameobject")]
+    public GameObject ReplaceKey;
+    public GameObject EmptyKey;
 
     [Header("Misc")]
     [Tooltip("Piano's item data")]
@@ -56,8 +56,8 @@ public class PiankKeySwap : MonoBehaviour
         if (id == this.id)
         {
             //It instantiates the real piano key version of the game object in the same position as the empty piano key object and destroys the original object
-            GameObject PuzzleKeyRescale = Instantiate(PuzzleKey, transform.position, transform.rotation);
-            PuzzleKeyRescale.transform.localScale = KeyScale.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
+            GameObject PuzzleKeyRescale = Instantiate(ReplaceKey, transform.position, transform.rotation);
+            PuzzleKeyRescale.transform.localScale = EmptyKey.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
 
             Destroy(gameObject);
 
