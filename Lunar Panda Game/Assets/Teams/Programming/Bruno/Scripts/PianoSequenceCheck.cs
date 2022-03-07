@@ -8,10 +8,10 @@ public class PianoSequenceCheck : MonoBehaviour
     public int id;
 
     int SequenceLenght;
-    int placeinCode;
+    int placeinSequence;
 
     public string sequence = "";
-    public string attemptedCode;    
+    public string attemptedSequence;    
 
     public void Start()
     {
@@ -22,7 +22,7 @@ public class PianoSequenceCheck : MonoBehaviour
 
     void CheckCode()
     {
-        if (attemptedCode == sequence)
+        if (attemptedSequence == sequence)
         {
             GameEvents.current.onPuzzleComplete(id);
         }
@@ -39,19 +39,19 @@ public class PianoSequenceCheck : MonoBehaviour
 
     public void SetValue(string value)
     {
-        placeinCode++;
+        placeinSequence++;
 
-        if (placeinCode <= SequenceLenght)
+        if (placeinSequence <= SequenceLenght)
         {
-            attemptedCode += value;
+            attemptedSequence += value;
         }
 
-        if (placeinCode == SequenceLenght)
+        if (placeinSequence == SequenceLenght)
         {
             CheckCode();
 
-            attemptedCode = "";
-            placeinCode = 0;
+            attemptedSequence = "";
+            placeinSequence = 0;
         }
     }
 
