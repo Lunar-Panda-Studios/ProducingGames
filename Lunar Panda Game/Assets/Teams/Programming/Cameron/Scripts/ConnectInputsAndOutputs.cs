@@ -122,8 +122,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             light.enabled = false;
                         }
-                        GameEvents.current.onPowerTurnedOff(id);
-                        button.GetComponent<switchChanger>().TurnPowerOff();
+                        GameEvents.current.onPowerTurnedOff(id);                        button.GetComponent<switchChanger>().TurnPowerOff();
                     }
                 }
             }
