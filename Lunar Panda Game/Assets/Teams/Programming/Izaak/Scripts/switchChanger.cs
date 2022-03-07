@@ -23,12 +23,12 @@ public class switchChanger : MonoBehaviour
         if (switchMode && anim != null)
         {
             anim.SetTrigger("Up");
-            SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
+            //SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
         }
         else if (anim != null)
         {
             anim.SetTrigger("Down");
-            SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
+            //SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
         }
     }
 
