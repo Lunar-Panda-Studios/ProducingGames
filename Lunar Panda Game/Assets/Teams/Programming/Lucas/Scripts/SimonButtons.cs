@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class SimonButtons : MonoBehaviour
 {
+    private SimonSays simonScript;
+    public GameObject simonPuzzle;
+
     private int sequenceNum = 0;
+
+    void Start()
+    {
+        simonScript = simonPuzzle.GetComponent<SimonSays>();
+    }
+
     void Update()
     {
         
     }
 
-    void OnMouseDown()
-    { 
-        if (sequenceNum == 0)
+    void checkAnswer()
+    {
+        int currentCorrectAnswers = simonScript.getCurrentCorrectAnswers();
+        if (gameObject == simonScript.sequenceOrder[currentCorrectAnswers])
         {
-            //Checking if button pressed is right sequence stuff, then moves on to next one
-            sequenceNum += 1;
+            currentCorrectAnswers++;
+            simonScript.changeCorrectAnswers(currentCorrectAnswers);
+            //gameObject.GetComponent<Image>().color = Color.green;
         }
-
-        if (sequenceNum == 1)
+        else
         {
-
-            sequenceNum += 1; 
-        }
-
-        if (sequenceNum == 2)
-        {
-
-            sequenceNum += 1;
-        }
-
-        if (sequenceNum == 3)
-        {
-
-            sequenceNum += 1;
+            currentCorrectAnswers = 0;
+            simonScript.resetPuzzle();
         }
     }
+
 }
