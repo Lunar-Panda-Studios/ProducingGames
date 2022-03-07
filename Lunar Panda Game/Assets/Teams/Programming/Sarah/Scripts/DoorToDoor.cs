@@ -13,8 +13,10 @@ public class DoorToDoor : MonoBehaviour
     private void Start()
     {
         ray = FindObjectOfType<InteractRaycasting>();
-        LinkedDoor1.GetComponent<OpenClose>().id = id;
-        LinkedDoor2.GetComponent<OpenClose>().id = id;
+        //LinkedDoor1.GetComponent<OpenClose>().id = id;
+        //LinkedDoor2.GetComponent<OpenClose>().id = id;
+        LinkedDoor1.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor2.GetComponent<TempSlidingDoors>().id = id;
     }
 
     private void Update()
@@ -39,12 +41,10 @@ public class DoorToDoor : MonoBehaviour
             if (switchState)
             {
                 GameEvents.current.onTriggerOpenDoor(id);
-                GameEvents.current.onPowerTurnedOff(id);
             }
             else
             {
                 GameEvents.current.onTriggerCloseDoor(id);
-                GameEvents.current.onPowerTurnedOn(id);
             }
         }
 

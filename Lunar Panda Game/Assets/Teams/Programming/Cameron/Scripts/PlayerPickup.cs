@@ -128,8 +128,13 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.localRotation = Quaternion.identity;
             heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             itemStartRotation = heldItem.transform.rotation;
-            Cursor.lockState = CursorLockMode.None;
-            playerCameraTransform.GetComponent<lockMouse>().canLook = false;
+            //this should only be a temp fix. Better fix needed
+            if(!FindObjectOfType<PauseButtonToggle>().IsPaused)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                playerCameraTransform.GetComponent<lockMouse>().canLook = false;
+            }
+            
         }
         //while the mouse button is down and player is holding an item
         else if (Input.GetButton("Fire1") && heldItem != null)
@@ -143,8 +148,13 @@ public class PlayerPickup : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             //stop rotating the object
-            Cursor.lockState = CursorLockMode.Locked;
-            playerCameraTransform.GetComponent<lockMouse>().canLook = true;
+            //this if statement should only be a temp fix. Better fix should be made
+            if (!FindObjectOfType<PauseButtonToggle>().IsPaused)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                playerCameraTransform.GetComponent<lockMouse>().canLook = true;
+            }
+            
             if (heldItem)
             {
                 heldItem.transform.localRotation = Quaternion.identity;

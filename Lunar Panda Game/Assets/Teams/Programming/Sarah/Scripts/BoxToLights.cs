@@ -7,7 +7,7 @@ public class BoxToLights : MonoBehaviour
     public int id;
     bool switchState = false;
     public GameObject LinkedBox;
-    public GameObject LinkedLights;
+    public List<GameObject> LinkedLights;
     InteractRaycasting ray;
 
     private void Start()
@@ -15,9 +15,12 @@ public class BoxToLights : MonoBehaviour
         ray = FindObjectOfType<InteractRaycasting>();
         LinkedBox.GetComponent<PowerChanging>().id = id;
 
-        foreach (Transform child in LinkedLights.transform)
+        for(int i = 0; i < LinkedLights.Count; i++)
         {
-            child.GetComponent<LightsChaging>().id = id;
+            foreach (Transform child in LinkedLights[i].transform)
+            {
+                child.GetComponent<LightsChaging>().id = id;
+            }
         }
 
     }
@@ -43,13 +46,13 @@ public class BoxToLights : MonoBehaviour
         {
             if (switchState)
             {
-                GameEvents.current.onTriggerLightsOff(id);
-                GameEvents.current.onPowerTurnedOn(id);
+                GameEvents.current.onTriggerLightsOn(id);
+                GameEvents.current.onPowerTurnedOff(id);
             }
             else
             {
-                GameEvents.current.onTriggerLightsOn(id);
-                GameEvents.current.onPowerTurnedOff(id);
+                GameEvents.current.onTriggerLightsOff(id);
+                GameEvents.current.onPowerTurnedOn(id);
             }
 
             switchState = !switchState;
