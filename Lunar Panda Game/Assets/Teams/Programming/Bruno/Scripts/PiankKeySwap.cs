@@ -8,9 +8,10 @@ public class PiankKeySwap : MonoBehaviour
     [Header("Prefabs")]
     [Tooltip("Destroyable Version of the gameobject")]
     public GameObject PuzzleKey;
+    public GameObject KeyScale;
 
     [Header("Misc")]
-    [Tooltip("Hammer's item data")]
+    [Tooltip("Piano's item data")]
     public ItemData PianoKey;
     [Tooltip("Inventory's script")]
     public Inventory inventoryScript;
@@ -27,11 +28,11 @@ public class PiankKeySwap : MonoBehaviour
         // Using left mouse button as the interactable key
         if (Input.GetButtonDown("Interact"))
         {
-            destroyObject();
+            destroyEmptyKey();
         }
     }
 
-    void destroyObject()
+    void destroyEmptyKey()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -55,7 +56,9 @@ public class PiankKeySwap : MonoBehaviour
         if (id == this.id)
         {
             //It instantiates the real piano key version of the game object in the same position as the empty piano key object and destroys the original object
-            Instantiate(PianoKey, transform.position, transform.rotation);
+            GameObject PuzzleKeyRescale = Instantiate(PuzzleKey, transform.position, transform.rotation);
+            PuzzleKeyRescale.transform.localScale = KeyScale.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
+
             Destroy(gameObject);
 
             //if (Analysis.current.consent)
