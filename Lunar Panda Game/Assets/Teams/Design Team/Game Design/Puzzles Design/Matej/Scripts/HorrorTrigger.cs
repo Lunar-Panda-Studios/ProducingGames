@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class HorrorTrigger : MonoBehaviour
 {
     private GameObject player;
+    //Rotating camera to the mirror settings
+    private float damping = 0.02f;
+    private Vector3 lookPos = new Vector3();
+
     public bool disableAtStart;
     public TypeOfTrigger type;
 
@@ -24,6 +28,11 @@ public class HorrorTrigger : MonoBehaviour
     public Image jumpSImage;
     public float stayOnScreenFor;
 
+    [Header("Mirror settings")]
+    public Transform mirror;
+    public GameObject mysteriousMan;
+    public float mirrorDelay;
+
     [Header("Enable other trigger")]
     public bool enableOtherTrigger;
     public HorrorTrigger otherTrigger;
@@ -33,7 +42,8 @@ public class HorrorTrigger : MonoBehaviour
         Move,
         Teleport,
         LightsOut,
-        Jumpscare
+        Jumpscare,
+        Mirror
     }
     
     public void Start()
@@ -59,6 +69,9 @@ public class HorrorTrigger : MonoBehaviour
                     break;
                 case TypeOfTrigger.Jumpscare:
                     Jumpscare();
+                    break;
+                case TypeOfTrigger.Mirror:
+                    Mirror();
                     break;
                 default:
                     break;
@@ -87,6 +100,14 @@ public class HorrorTrigger : MonoBehaviour
         jumpSImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
+    }
+    private IEnumerator LookAtMirror(float delay)
+    {
+        player.GetComponentInChildren<lockMouse>().enabled = false;
+        mysteriousMan.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        player.GetComponentInChildren<lockMouse>().enabled = true;
+        mysteriousMan.SetActive(false);
     }
     public void DisablePlayerMovement()
     {
@@ -117,6 +138,16 @@ public class HorrorTrigger : MonoBehaviour
     public void Jumpscare()
     {
         StartCoroutine(JumpscareStayOnScreen(stayOnScreenFor));
+    }
+    public void Mirror()
+    {
+        StartCoroutine(LookAtMirror(mirrorDelay));
+        lookPos = mirror.position - player.transform.position;
+        lookPos.y = 0;
+        player.transform.rotation = Quaternion.LookRotation(lookPos);
+        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, player.transform.rotation, 
+            Time.deltaTime * damping);
+        
     }
     public void ToggleTriggerCollider()
     {
