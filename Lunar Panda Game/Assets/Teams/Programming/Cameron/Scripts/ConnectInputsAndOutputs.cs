@@ -9,7 +9,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     Transform player;
     Transform cam; //not referring to me, referring to the camera
     [SerializeField] List<GameObject> InputNodes;
-     public GameObject inputCurrentlyConnecting;
+    [SerializeField] public GameObject inputCurrentlyConnecting;
     [SerializeField] float lineWidth;
     LineRenderer line;
     [Tooltip("The distance between the camera and the cable while the players holding it")]
@@ -19,6 +19,9 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     TubeRenderer currentCable;
     // Bit shift the index of the layer (8) to get a bit mask
     int cableMask = 1 << 8;
+
+    [SerializeField] Light passLight;
+    [SerializeField] Light failLight;
 
 
     void Awake()
@@ -111,6 +114,11 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     button.GetComponent<switchChanger>().changeSwitchState();
                     if (CheckCombination())
                     {
+                        if (failLight != null && passLight != null)
+                        {
+                            failLight.enabled = false;
+                            passLight.enabled = true;
+                        }
                         button.GetComponent<switchChanger>().TurnPowerOn();
                         foreach (Light light in completionLights)
                         {
@@ -121,6 +129,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             GameEvents.current.onPuzzleComplete(id);
                         }
+                        
+                        
                     }
                     else
                     {
@@ -130,6 +140,11 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         }
                         GameEvents.current.onPowerTurnedOff(id);
                         button.GetComponent<switchChanger>().TurnPowerOff();
+                        if(failLight != null && passLight != null)
+                        {
+                            failLight.enabled = true;
+                            passLight.enabled = false;
+                        }
                     }
                 }
             }
@@ -215,6 +230,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             button.GetComponent<switchChanger>().TurnPowerOff();
             PuzzleData.current.completedEvents[id] = false;
             PuzzleData.current.isCompleted[id - 1] = false;
+            passLight.enabled = false;
+            failLight.enabled = false;
         }
     }
 
