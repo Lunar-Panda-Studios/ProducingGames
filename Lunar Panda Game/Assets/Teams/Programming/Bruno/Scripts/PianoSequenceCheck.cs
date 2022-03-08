@@ -55,21 +55,21 @@ public class PianoSequenceCheck : MonoBehaviour
         }
     }
 
-    //public void resetPuzzle(int id)
-    //{
-    //    if (id == this.id)
-    //    {
-    //        toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
-    //        attemptedCode = "";
-    //    }
-    //}
+    public void resetPuzzle(int id)
+    {
+        if (id == this.id)
+        {
+            //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+            attemptedSequence = "";
+        }
+    }
 
-    //public void puzzleComplete(int id)
-    //{
-    //    if (id == this.id)
-    //    {
-    //        StartCoroutine(Open());
-    //        PuzzleData.current.completedEvents[id] = true;
-    //    }
-    //}
+    public void puzzleComplete(int id)
+    {
+        if (id == this.id)
+        {
+            //StartCoroutine(Open());
+            PuzzleData.current.completedEvents[id] = true;
+        }
+    }
 }
