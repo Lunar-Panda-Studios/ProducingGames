@@ -50,19 +50,19 @@ public class UIManager : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
     }
 
-    public void ChangeStaminaUsage(float value)
+  /*  public void ChangeStaminaUsage(float value)
     {
         if (staminaBar.gameObject.activeSelf)
         {
             staminaBar.value = value;
         }
-    }
+    }*/
 
-    public void ToggleStaminaBar()
+  /*  public void ToggleStaminaBar()
     {
         //toggles between active and inactive whenever this is called
         staminaBar.gameObject.SetActive(!staminaBar.gameObject.activeSelf);
-    }
+    }*/
 
     public void ToggleCrosshair()
     {
@@ -85,9 +85,9 @@ public class UIManager : MonoBehaviour
     void InitUI()
     {
         //init stamina
-        staminaBar.maxValue = StaminaBar.instance.maxStam;
+       /* staminaBar.maxValue = StaminaBar.instance.maxStam;
         staminaBar.value = staminaBar.maxValue;
-        staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);
+        staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);*/
         //init crosshair
         crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
         //init doc viewing system
