@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class LeverDoorController : MonoBehaviour
 {
-    [SerializeField] public Animator doorAnim = null;
+    public Animator doorAnim = null;
+    public Animator doorAnim2 = null;
 
     private bool doorOpen = false;
 
-    [SerializeField] public string OpenAnimationName = "DoorOpen";
-    [SerializeField] public string CloseAnimationName = "DoorClose";
+     public string OpenAnimationName = "DoorOpen";
+     public string CloseAnimationName = "DoorClose";
 
-    [SerializeField] public int waitTimer = 1;
+     public int waitTimer = 1;
 
-    [SerializeField] public bool pauseInteraction = false;
+    public bool pauseInteraction = false;
 
     private IEnumerator PauseDoorInteraction()
     {
@@ -30,10 +31,17 @@ public class LeverDoorController : MonoBehaviour
             doorOpen = true;
             StartCoroutine(PauseDoorInteraction());
 
+            doorAnim2.Play(OpenAnimationName, 0, 0.0f);
+            doorOpen = true;
+            StartCoroutine(PauseDoorInteraction());
         }
         else if (doorOpen && !pauseInteraction)
         {
             doorAnim.Play(CloseAnimationName, 0, 0.0f);
+            doorOpen = false;
+            StartCoroutine(PauseDoorInteraction());
+
+            doorAnim2.Play(CloseAnimationName, 0, 0.0f);
             doorOpen = false;
             StartCoroutine(PauseDoorInteraction());
 
