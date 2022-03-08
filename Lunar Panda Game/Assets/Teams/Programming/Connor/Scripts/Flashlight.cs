@@ -12,7 +12,7 @@ public class Flashlight : MonoBehaviour
     public float powerUsage = 1f;
     float batteryLife = maxBatteryLife; //current battery life will change this later after designers say what they want
 
-    bool powerOn = false; //Flashlight starts disabled this manages battery consumption 
+    bool powerOn = true; //Flashlight starts disabled this manages battery consumption 
 
     void Start()
     {
@@ -26,31 +26,10 @@ public class Flashlight : MonoBehaviour
 
     void toggleLight()
     {
-        if (Input.GetButtonDown("Flashlight") && batteryLife > 0) //press key assigned in unity editor to run this code.
+        if (Input.GetButtonDown("Flashlight"))
         {
-            switch (powerOn)
-            {
-                case false: //if flashlight off, turn on
-                    powerOn = true;
-                    lightSource.intensity = 2500;
-                    break;
-
-                case true: //if flashlight on turn off
-                    powerOn = false;
-                    lightSource.intensity = 0;
-                    break;
-            }
-        }
-
-        if (powerOn && batteryLife > 0) //uses battery when flashlight is on.
-        {
-            batteryLife -= (powerUsage * Time.deltaTime); //set usage to 1 in Unity inspector for it to lose 1 batteryLife/second. batteryLife is set to 60.
-
-            if (batteryLife <= 0)
-            {
-                powerOn = false;
-                lightSource.intensity = 0; // if battery hits 0 turn off flashlight
-            }
+            powerOn = !powerOn;
+            lightSource.enabled = powerOn;
         }
     }
 
