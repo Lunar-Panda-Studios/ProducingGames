@@ -9,7 +9,6 @@ public class HorrorTrigger : MonoBehaviour
     //Rotating camera to the mirror settings
     private float damping = 0.02f;
     private Vector3 lookPos = new Vector3();
-
     public bool disableAtStart;
     public TypeOfTrigger type;
 
