@@ -11,6 +11,7 @@ public class switchChanger : MonoBehaviour
     public bool isPowerOn = false;
     public string leverSound;
     Animator anim;
+    public string nameSound;
 
     void Awake()
     {

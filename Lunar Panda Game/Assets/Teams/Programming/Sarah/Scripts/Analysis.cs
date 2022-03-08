@@ -6,7 +6,7 @@ using UnityEngine.Analytics;
 public class Analysis : MonoBehaviour
 {
     internal static Analysis current;
-    internal bool consent = true;
+    internal bool consent = false;
     private const string Name = "Game Analystics";
     internal Dictionary<string, object> parameters = new Dictionary<string, object>();
 
