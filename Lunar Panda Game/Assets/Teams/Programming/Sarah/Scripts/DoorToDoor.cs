@@ -7,6 +7,8 @@ public class DoorToDoor : MonoBehaviour
     public int id;
     public GameObject LinkedDoor1;
     public GameObject LinkedDoor2;
+    public GameObject LinkedDoor3;
+    public GameObject LinkedDoor4;
     bool switchState = true;
     InteractRaycasting ray;
 
@@ -17,6 +19,8 @@ public class DoorToDoor : MonoBehaviour
         //LinkedDoor2.GetComponent<OpenClose>().id = id;
         LinkedDoor1.GetComponent<TempSlidingDoors>().id = id;
         LinkedDoor2.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor3.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor4.GetComponent<TempSlidingDoors>().id = id;
     }
 
     private void Update()
