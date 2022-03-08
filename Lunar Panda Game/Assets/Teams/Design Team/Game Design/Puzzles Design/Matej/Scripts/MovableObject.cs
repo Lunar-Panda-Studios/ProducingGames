@@ -15,6 +15,8 @@ public class MovableObject : MonoBehaviour
     Vector3 velocity;
 
     private bool isMoving;
+    //private bool isInEndPosition;
+ 
     private void Start()
     {
         endPosition = endObject.transform.position;
@@ -22,7 +24,7 @@ public class MovableObject : MonoBehaviour
     }
     public void Update()
     {
-        if (GetIsMoving()) Move();
+        if (isMoving) Move();
     }
     public void Move()
     {

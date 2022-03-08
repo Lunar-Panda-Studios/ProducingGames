@@ -14,12 +14,12 @@ public class HorrorTrigger : MonoBehaviour
     public TypeOfTrigger type;
 
     [Header("Disable Movement")]
-    public bool disableMovement;
+    public bool disablePlayerMovement;
     public float delayBeforeMovingAgain;
 
     [Header("Move object settings")]
     public MovableObject movableObject;
-    public float delayMove;
+    public float delayMoveObject;
 
     [Header("Lights out settings")]
     public List<Light> Lights = new List<Light>();
@@ -55,7 +55,7 @@ public class HorrorTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (disableMovement) DisablePlayerMovement();
+            if (disablePlayerMovement) DisablePlayerMovement();
             switch (type)
             {
                 case TypeOfTrigger.Move:
@@ -119,8 +119,9 @@ public class HorrorTrigger : MonoBehaviour
         //Disable the playerMovement and reset the rigidbody velocity
         //Starts the coroutine
         movableObject.gameObject.SetActive(true);
-        StartCoroutine(StopMoveObject(delayMove));
         movableObject.SetIsMoving(true);
+        StartCoroutine(StopMoveObject(delayMoveObject));
+
     }
     public void Teleport()
     {
