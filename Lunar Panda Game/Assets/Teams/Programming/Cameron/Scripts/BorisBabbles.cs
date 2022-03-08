@@ -41,7 +41,6 @@ public class BorisBabbles : MonoBehaviour
             {
                 if(!showingOrder && !playerCanInput)
                 {
-                    
                     CheckForInitialInteraction(hit);
                 }
                 else if (!showingOrder && playerCanInput) //the playerCanInput check may be irrelevent, but i dont care
@@ -55,11 +54,11 @@ public class BorisBabbles : MonoBehaviour
     void CheckForInitialInteraction(RaycastHit hit)
     {
         //if the player presses E on the main briefcase, or the base of the buttons
-        if(hit.transform.gameObject == gameObject || hit.transform.gameObject == transform.GetChild(0).gameObject)
+        if(hit.transform.CompareTag("BorisBox"))
         {
             StartCoroutine(DisplayOrder());
         }
-        else
+        /*else
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -68,7 +67,7 @@ public class BorisBabbles : MonoBehaviour
                     StartCoroutine(DisplayOrder());
                 }
             }
-        }
+        }*/
     }
 
     IEnumerator DisplayOrder()
@@ -97,7 +96,11 @@ public class BorisBabbles : MonoBehaviour
                 if (hit.transform.gameObject == buttons[i])
                 {
                     buttonInput.Add(i);
-                    if (buttonInput.Count >= buttonOrder.Count)
+                    if(buttonInput[buttonInput.Count - 1] != buttonOrder[buttonInput.Count - 1])
+                    {
+                        StartCoroutine(IncorrectInput());
+                    }
+                    else if (buttonInput.Count >= buttonOrder.Count)
                     {
                         //these nested if's are getting outta hand....
                         if (isInputCorrect())
