@@ -24,12 +24,18 @@ public class switchChanger : MonoBehaviour
         if (switchMode && anim != null)
         {
             anim.SetTrigger("Up");
-            SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+            if(SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+            }
         }
         else if (anim != null)
         {
-            anim.SetTrigger("Down");
-            SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+            anim.SetTrigger("Down"); 
+            if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+            }
         }
     }
 
