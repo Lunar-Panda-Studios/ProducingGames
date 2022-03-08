@@ -7,13 +7,14 @@ public class BoxToDoor : MonoBehaviour
     public int id;
     public GameObject LinkedDoor;
     public GameObject LinkedBox;
-    bool switchState = true;
+    bool switchState = false;
     InteractRaycasting ray;
 
     private void Start()
     {
         ray = FindObjectOfType<InteractRaycasting>();
-        LinkedDoor.GetComponent<OpenClose>().id = id;
+        //LinkedDoor.GetComponent<OpenClose>().id = id;
+        LinkedDoor.GetComponent<TempSlidingDoors>().id = id;
         LinkedBox.GetComponent<PowerChanging>().id = id;
     }
 
