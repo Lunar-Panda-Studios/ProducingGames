@@ -9,6 +9,7 @@ public class switchChanger : MonoBehaviour
     [Tooltip("The wires that will be used after the switch is off")]
     public GameObject amogus;
     public bool isPowerOn = false;
+    public string leverSound;
     Animator anim;
     public string nameSound;
 
@@ -23,12 +24,12 @@ public class switchChanger : MonoBehaviour
         if (switchMode && anim != null)
         {
             anim.SetTrigger("Up");
-            //SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
+            SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
         }
         else if (anim != null)
         {
             anim.SetTrigger("Down");
-            //SoundEffectManager.GlobalSFXManager.PlaySFX(nameSound);
+            SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
         }
     }
 
