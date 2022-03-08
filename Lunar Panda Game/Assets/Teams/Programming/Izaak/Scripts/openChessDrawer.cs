@@ -11,7 +11,7 @@ public class openChessDrawer : MonoBehaviour
 
     public Rigidbody r_body;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool puzzleCleared = false;
     private bool drawerOpened = false;
     // Start is called before the first frame update

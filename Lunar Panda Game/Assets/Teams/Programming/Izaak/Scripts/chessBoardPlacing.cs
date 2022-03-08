@@ -8,7 +8,15 @@ public class chessBoardPlacing : MonoBehaviour
     private GameObject instBoardSquare;
     public Vector2 pawnCorrectSpot;
     public Vector2 queenCorrectSpot;
+    public GameObject pawnPiece;
+    public GameObject queenPiece;
+    public GameObject drawer;
 
+    private bool puzzleComplete = false;
+
+    public GameObject chessPieceObj;
+    private GameObject instChessPiece;
+    [System.Serializable]
     public struct chessCharacteristics
     {
         public Vector2 pieceLocation;
@@ -19,15 +27,7 @@ public class chessBoardPlacing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                instBoardSquare = (GameObject)Instantiate(boardSquare, transform.position, transform.rotation);
-                instBoardSquare.transform.parent = gameObject.transform;
-                instBoardSquare.GetComponent<chessPuzzle>().moveToCorrectPosition(new Vector2(i, j), 0.52f);
-            }
-        }
+        createChessSpots();
         createChessPieces();
     }
 
@@ -37,12 +37,47 @@ public class chessBoardPlacing : MonoBehaviour
         
     }
 
+    public void createChessSpots()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                instBoardSquare = (GameObject)Instantiate(boardSquare, transform.position, transform.rotation);
+                instBoardSquare.transform.parent = gameObject.transform;
+                instBoardSquare.GetComponent<chessPuzzle>().moveToCorrectPosition(new Vector2(i, j), 0.52f);
+                instBoardSquare.GetComponent<chessPuzzle>().queenChessPiece = queenPiece;
+                instBoardSquare.GetComponent<chessPuzzle>().pawnChessPiece = pawnPiece;
+                for (int k = 0; k < chessPieces.Count; k++)
+                {
+                    if (chessPieces[k].pieceLocation == new Vector2(i,j))
+                    {
+                        instBoardSquare.GetComponent<chessPuzzle>().toggleOccupied();
+                    }
+                }
+            }
+        }
+    }
+
     public void createChessPieces()
     {
         for(int i = 0; i < chessPieces.Count; i++)
         {
-
+            instChessPiece = (GameObject)Instantiate(chessPieceObj, transform.position, transform.rotation);
+            instChessPiece.transform.parent = gameObject.transform;
+            instChessPiece.GetComponent<dummyChessPieceController>().setLocation(chessPieces[i].pieceLocation);
         }
+    }
+
+    public bool checkPuzzleCompletion()
+    {
+        if (queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() && pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot())
+        {
+            drawer.GetComponent<openChessDrawer>().puzzleCleared = true;
+            puzzleComplete = true;
+            return true;
+        }
+        return false;
     }
 
     public Vector2 getPawnSpot()

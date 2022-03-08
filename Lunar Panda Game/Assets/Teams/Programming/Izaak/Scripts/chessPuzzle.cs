@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class chessPuzzle : MonoBehaviour
 {
-    public Vector2 correctSpot;
+    public Vector2 currentSpot;
     public GameObject chessboardParent;
     public GameObject queenChessPiece;
     public GameObject pawnChessPiece;
-    public GameObject drawer;
+
+    private bool setOccupied = false;
 
     public List<GameObject> correctPieces;
 
@@ -30,60 +31,54 @@ public class chessPuzzle : MonoBehaviour
 
         if (Input.GetButtonDown("Interact"))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            if (!setOccupied)
             {
-                if (hit.transform.gameObject == gameObject)
+                RaycastHit hit;
+                if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
                 {
-                    if (player.GetComponent<PlayerPickup>().heldItem == pawnChessPiece)
-                    if (player.GetComponent<PlayerPickup>().heldItem == queenChessPiece)
+                    if (hit.transform.gameObject == gameObject)
                     {
+                        //player.GetComponent<PlayerPickup>().DropHeldItem();
                         
-                        player.GetComponent<PlayerPickup>().DropHeldItem();
-                        queenChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-                        queenChessPiece.GetComponent<HoldableItem>().enabled = false;
-                        queenChessPiece.GetComponent<GlowWhenLookedAt>().enabled = false;
-                        drawer.GetComponent<openChessDrawer>().puzzleCleared = true;
+                        if (pawnChessPiece.GetComponent<chessValuedItem>().checkIfRecent()>0)
+                        {
+                            pawnChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                            pawnChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
+                            if (pawnChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
+                            {
+                                chessboardParent.GetComponent<chessBoardPlacing>().checkPuzzleCompletion();
+                            }
+                        }
+                        if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0)
+                        {
+                            queenChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                            queenChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
+                            if (queenChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
+                            {
+                                chessboardParent.GetComponent<chessBoardPlacing>().checkPuzzleCompletion();
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
-    public void placeChessPiece(GameObject piece)
+    public bool getIfOccupied()
     {
-        player.GetComponent<PlayerPickup>().DropHeldItem();
-        piece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        if ((piece == queenChessPiece) || (piece == pawnChessPiece))
-        {
-            checkIfComplete(piece);
-        }
+        return setOccupied;
     }
 
-    public void checkIfComplete(GameObject piece)
+    public void toggleOccupied()
     {
-        if ((chessboardParent.GetComponent<chessBoardPlacing>().getQueenSpot() == correctSpot) || (chessboardParent.GetComponent<chessBoardPlacing>().getPawnSpot() == correctSpot))
-        {
-            correctPieces.Add(piece);
-            checkPuzzleCompletion();
-        }
-    }
-
-    public void checkPuzzleCompletion()
-    {
-        if (correctPieces.Count == 2)
-        {
-            drawer.GetComponent<openChessDrawer>().puzzleCleared = true;
-            puzzleComplete = true;
-        }
+        setOccupied = !setOccupied;
     }
 
     public void moveToCorrectPosition(Vector2 aBoardPosition, float yValue)
     {
         const float locationMult = 0.125f;
         const float offset = -0.4375f;
+        currentSpot = aBoardPosition;
         transform.localPosition = new Vector3(offset + (aBoardPosition.x * locationMult), yValue, offset + (aBoardPosition.y * locationMult));
-        Debug.Log(transform.position + "     " + transform.localPosition);
-        Debug.Log(transform.parent);
     }
 }
