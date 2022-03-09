@@ -9,17 +9,17 @@ public class HorrorTrigger : MonoBehaviour
     //Rotating camera to the mirror settings
     private float damping = 0.02f;
     private Vector3 lookPos = new Vector3();
-
     public bool disableAtStart;
     public TypeOfTrigger type;
+    public AudioSource audioSource;
 
     [Header("Disable Movement")]
-    public bool disableMovement;
+    public bool disablePlayerMovement;
     public float delayBeforeMovingAgain;
 
     [Header("Move object settings")]
     public MovableObject movableObject;
-    public float delayMove;
+    public float delayMoveObject;
 
     [Header("Lights out settings")]
     public List<Light> Lights = new List<Light>();
@@ -55,7 +55,7 @@ public class HorrorTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (disableMovement) DisablePlayerMovement();
+            if (disablePlayerMovement) DisablePlayerMovement();
             switch (type)
             {
                 case TypeOfTrigger.Move:
@@ -100,6 +100,7 @@ public class HorrorTrigger : MonoBehaviour
         jumpSImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
+        Destroy(this);
     }
     private IEnumerator LookAtMirror(float delay)
     {
@@ -119,8 +120,9 @@ public class HorrorTrigger : MonoBehaviour
         //Disable the playerMovement and reset the rigidbody velocity
         //Starts the coroutine
         movableObject.gameObject.SetActive(true);
-        StartCoroutine(StopMoveObject(delayMove));
         movableObject.SetIsMoving(true);
+        StartCoroutine(StopMoveObject(delayMoveObject));
+
     }
     public void Teleport()
     {
@@ -137,6 +139,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void Jumpscare()
     {
+        audioSource.Play();
         StartCoroutine(JumpscareStayOnScreen(stayOnScreenFor));
     }
     public void Mirror()

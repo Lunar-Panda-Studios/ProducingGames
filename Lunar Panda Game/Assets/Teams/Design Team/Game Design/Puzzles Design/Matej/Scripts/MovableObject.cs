@@ -12,9 +12,13 @@ public class MovableObject : MonoBehaviour
     public float speed;
     public float smoothTime;
     public bool disableAfterMove;
+
+    public AudioSource audioSource;
     Vector3 velocity;
 
     private bool isMoving;
+    //private bool isInEndPosition;
+ 
     private void Start()
     {
         endPosition = endObject.transform.position;
@@ -22,15 +26,17 @@ public class MovableObject : MonoBehaviour
     }
     public void Update()
     {
-        if (GetIsMoving()) Move();
+        if (isMoving) Move();
     }
     public void Move()
     {
+        if (!audioSource.isPlaying) audioSource.Play(); 
         transform.position = Vector3.SmoothDamp(transform.position, endPosition, ref velocity, smoothTime, speed);
     }
     public void SetIsMoving(bool value)
     {
         isMoving = value;
+
     }
     public bool GetIsMoving()
     {

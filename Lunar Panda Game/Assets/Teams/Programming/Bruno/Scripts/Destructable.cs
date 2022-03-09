@@ -59,10 +59,10 @@ public class Destructable : MonoBehaviour
             Instantiate(destroyedVersion, transform.position, transform.rotation);
             Destroy(gameObject);
 
-            if (Analysis.current.consent)
-            {
-                Analysis.current.resetTimer("Destructable Object");
-            }
+            //if (Analysis.current.consent)
+            //{
+            //    Analysis.current.resetTimer("Destructable Object");
+            //}
 
             PuzzleData.current.completedEvents[id] = true;
             PuzzleData.current.isCompleted[id - 1] = true;
