@@ -60,10 +60,13 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < maxItemsInInventory; i++)
             {
-                if(itemInventory[i].id == pickupControl.heldItem.GetComponent<HoldableItem>().data.id)
+                if(itemInventory[i] != null)
                 {
-                    putAway();
-                    break;
+                    if (itemInventory[i].id == pickupControl.heldItem.GetComponent<HoldableItem>().data.id)
+                    {
+                        putAway();
+                        break;
+                    }
                 }
             }
         }
