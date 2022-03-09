@@ -70,7 +70,6 @@ public class SwitchWall : MonoBehaviour
         if (!madeCorrectGuess)
         {
             print("didnt make correct guess");
-            print(completedCombinations.Length);
             for (int i = 0; i < completedCombinations.Length; i++)
             {
                 completedCombinations[i] = false;

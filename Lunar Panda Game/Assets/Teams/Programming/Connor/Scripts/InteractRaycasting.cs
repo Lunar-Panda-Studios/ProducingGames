@@ -30,4 +30,9 @@ public class InteractRaycasting : MonoBehaviour
     {
         return Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist);
     }
+
+    public bool raycastInteract(out RaycastHit hit, int layerMask)
+    {
+        return Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
+    }
 }
