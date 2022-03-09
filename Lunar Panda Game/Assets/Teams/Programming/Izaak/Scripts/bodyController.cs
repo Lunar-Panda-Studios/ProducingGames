@@ -115,10 +115,10 @@ public class bodyController : MonoBehaviour
                 }
             }
 
-            if(Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Body"))
+            /*if(Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Body"))
             {
                 Analysis.current.resetTimer("Open Body");
-            }
+            }*/
         }
     }
 }
