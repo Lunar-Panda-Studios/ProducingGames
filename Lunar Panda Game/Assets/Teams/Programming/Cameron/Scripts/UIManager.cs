@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get { return _instance; } }
 
     [Header("UI Elements")]
-    [SerializeField] Slider staminaBar;
+    //[SerializeField] Slider staminaBar;
     [SerializeField] Image crosshair;
     [Tooltip("Put the parent empty object of the document system here")]
     [SerializeField] GameObject docViewingSystem;
