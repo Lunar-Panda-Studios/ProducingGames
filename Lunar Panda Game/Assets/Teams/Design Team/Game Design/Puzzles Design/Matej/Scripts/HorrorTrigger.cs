@@ -48,7 +48,7 @@ public class HorrorTrigger : MonoBehaviour
     
     public void Start()
     {
-        if (disableAtStart) ToggleTriggerCollider();
+        if (disableAtStart) ActivateTriggerCollider();
         player = GameObject.FindWithTag("Player");
     }
     private void OnTriggerEnter(Collider other)
@@ -76,7 +76,7 @@ public class HorrorTrigger : MonoBehaviour
                 default:
                     break;
             }
-            if (enableOtherTrigger) otherTrigger.ToggleTriggerCollider();
+            if (enableOtherTrigger) otherTrigger.ActivateTriggerCollider();
         }
     }
     
@@ -152,9 +152,8 @@ public class HorrorTrigger : MonoBehaviour
             Time.deltaTime * damping);
         
     }
-    public void ToggleTriggerCollider()
+    public void ActivateTriggerCollider()
     {
-        this.gameObject.GetComponent<MeshCollider>().enabled = 
-           !this.gameObject.GetComponent<MeshCollider>().enabled;
+        this.gameObject.GetComponent<MeshCollider>().enabled = true;
     }
 }
