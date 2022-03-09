@@ -41,7 +41,7 @@ public class StaminaBar : MonoBehaviour
         if(currentStam - amount >= 0 && CanSprint == true) // checks to see if you have enough stamina to perform action
         {
             currentStam -= amount;
-            UIManager.Instance.ChangeStaminaUsage(currentStam);
+            //UIManager.Instance.ChangeStaminaUsage(currentStam);
 
             if (regenCr != null)
             {
@@ -59,7 +59,7 @@ public class StaminaBar : MonoBehaviour
         while(currentStam < maxStam && CanSprint == true)
         {
             currentStam += maxStam / regenAmount;
-            UIManager.Instance.ChangeStaminaUsage(currentStam);
+            //UIManager.Instance.ChangeStaminaUsage(currentStam);
 
             yield return regenPerFrame;
         }
