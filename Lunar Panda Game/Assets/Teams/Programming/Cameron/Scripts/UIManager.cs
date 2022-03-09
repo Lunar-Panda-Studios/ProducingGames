@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     Inventory inventory;
     public GameObject documentLandscape;
     public GameObject documentPortrait;
+    typeWriterTest twt;
 
     void Awake()
     {
@@ -46,8 +47,8 @@ public class UIManager : MonoBehaviour
     {
         //initialises all the UI stuffs
         InitUI();
-
         inventory = FindObjectOfType<Inventory>();
+        twt = GameObject.FindObjectOfType<typeWriterTest>();
     }
 
   /*  public void ChangeStaminaUsage(float value)
@@ -104,6 +105,7 @@ public class UIManager : MonoBehaviour
             fadeGroup.alpha = elapsedTime / fadeDuration;
             yield return null;
         }
+        twt.playText = true;
         Time.timeScale = 0;
     }
 

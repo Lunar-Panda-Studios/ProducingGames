@@ -30,7 +30,7 @@ public class Countdown : MonoBehaviour
             timeLeft -= Time.deltaTime;
         if(timeLeft <= 0)
         {
-            manager.load();
+            //manager.load();
             this.GetComponent<Collider>().enabled = true;
             StopTimer();
         }
@@ -38,12 +38,14 @@ public class Countdown : MonoBehaviour
         if (Input.GetButtonDown("Interact"))
         {
             RaycastHit hit;
-            InteractRaycasting.Instance.raycastInteract(out hit);
-            if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
+            if(InteractRaycasting.Instance.raycastInteract(out hit))
             {
-                if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+                if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
                 {
-                    StartCoroutine(UIManager.Instance.FadePanelIn());
+                    if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+                    {
+                        StartCoroutine(UIManager.Instance.FadePanelIn());
+                    }
                 }
             }
         }

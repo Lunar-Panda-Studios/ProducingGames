@@ -273,16 +273,16 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 {
                     if(InputNodes[i].GetComponent<LineRenderer>() == null)
                     {
-                        line = InputNodes[i].AddComponent<LineRenderer>();
-                        line.startWidth = lineWidth;
+                        /*line = InputNodes[i].AddComponent<LineRenderer>();*/
+                        /*line.startWidth = lineWidth;
                         line.endWidth = lineWidth;
                         line.positionCount = 2;
                         line.material = InputNodes[i].GetComponent<Node>().lineMat;
-                        line.useWorldSpace = true;
+                        line.useWorldSpace = true;*/
                     }
-                    line.SetPosition(0, InputNodes[i].GetComponent<Node>().desiredNode.transform.position);
+                    /*line.SetPosition(0, InputNodes[i].GetComponent<Node>().desiredNode.transform.position);
                     line.SetPosition(1, InputNodes[i].GetComponent<Node>().transform.position);
-                    line.GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;
+                    line.GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;*/
                 }
 
                 print("Auto Completed");
