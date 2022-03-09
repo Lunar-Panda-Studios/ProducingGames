@@ -8837,6 +8837,7 @@ Transform:
   - {fileID: 827308112}
   - {fileID: 575191725}
   - {fileID: 1001554067}
+  - {fileID: 1367946954}
   m_Father: {fileID: 1704478907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21272,7 +21273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 707649715552774419, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
       propertyPath: m_Intensity
-      value: 3000
+      value: 20233.729
       objectReference: {fileID: 0}
     - target: {fileID: 707649715552774419, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
       propertyPath: m_InnerSpotPercent
@@ -21323,8 +21324,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6175713165677053172, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
+      propertyPath: m_Range
+      value: 15.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175713165677053172, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
       propertyPath: m_Intensity
-      value: 6006.2144
+      value: 40509.37
       objectReference: {fileID: 0}
     - target: {fileID: 6175713165677053172, guid: a9ee335eb4930c84993f519aedf59341, type: 3}
       propertyPath: m_SpotAngle
@@ -32878,8 +32883,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 360114609}
   dialogue: You need to give me the stick
-  timeBetweenLetters: 0.1
+  timeBetweenLetters: 0.03
   playText: 0
+--- !u!1 &1367946953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6557993775565566994, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+  m_PrefabInstance: {fileID: 1674724510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1367946954 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+  m_PrefabInstance: {fileID: 1674724510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1367946955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367946953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086c7ea101bd11f45a91d4bd0d4f899f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  lightIntensity: 0
 --- !u!1001 &1369340101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33734,6 +33763,18 @@ PrefabInstance:
     - target: {fileID: 433246602, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 906557147, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Intensity
+      value: 8562.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 906557148, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Range
+      value: 27.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 906557148, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: m_Intensity
+      value: 7535.1064
       objectReference: {fileID: 0}
     - target: {fileID: 973075565, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: walkingSource
@@ -40074,10 +40115,12 @@ MonoBehaviour:
   - boing
   - walk
   - wheelchair
+  - kostas
   ClipList:
   - {fileID: 8300000, guid: 75905b51f6ae25e4a97a0d14f1d5d10e, type: 3}
   - {fileID: 8300000, guid: 2f2639f83d889134bb4979b7d32a4446, type: 3}
   - {fileID: 8300000, guid: 708421cc82a583f42a2f1cbc76accd24, type: 3}
+  - {fileID: 8300000, guid: ac0109028f511bc4dbdb0fb96f49b712, type: 3}
   SFX_Prefab: {fileID: 290389588640505361, guid: 9d1b7dfce0e8dbe4bbd472979ca13a1e, type: 3}
   stopSFX: {fileID: 0}
 --- !u!82 &1617924915
@@ -41452,6 +41495,119 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c731ce424039fb4691b68ce7a722c5a, type: 3}
+--- !u!1001 &1674724510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 410727300}
+    m_Modifications:
+    - target: {fileID: 385011182172430555, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Intensity
+      value: 3183.0989
+      objectReference: {fileID: 0}
+    - target: {fileID: 385011182172430555, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LightUnit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 385011182172430555, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_ShapeRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 385011182172430555, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_SpotLightShape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 385011182172430555, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_InnerSpotPercent
+      value: 72.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472697029330021404, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Range
+      value: 11.0716
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Intensity
+      value: 3183.0989
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_SpotAngle
+      value: 179
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_ShadowRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.0207615
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_UseBoundingSphereOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_UseCullingMatrixOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e00
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e11
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e22
+      value: 0.33898306
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e23
+      value: -1.0338982
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e32
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427002174168845628, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Shadows.m_CullingMatrixOverride.e33
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557993775565566994, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
+      propertyPath: m_Name
+      value: CeilingSpotLight (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f327f0ea92dc5047aba204bf655829a, type: 3}
 --- !u!1001 &1675420763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58967,6 +59123,10 @@ PrefabInstance:
     - target: {fileID: 8811309273188059445, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
       propertyPath: m_Name
       value: ----UI----
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811309275114768264, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: audioClipName
+      value: kostas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}

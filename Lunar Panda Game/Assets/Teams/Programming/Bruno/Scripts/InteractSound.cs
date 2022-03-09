@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class InteractSound : MonoBehaviour
 {
-    InteractRaycasting raycast;
 
     public string audioClipName;    
 
-    private void Start()
-    {
-        raycast = FindObjectOfType<InteractRaycasting>(); // Needed to stop the object rotating from activating the script as well        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -24,12 +20,9 @@ public class InteractSound : MonoBehaviour
 
     void playSound()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         //Currently using Connor's raycast script
 
-        if (raycast.raycastInteract(out hit))
+        if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
         {
             if (hit.transform.gameObject == gameObject)
             {

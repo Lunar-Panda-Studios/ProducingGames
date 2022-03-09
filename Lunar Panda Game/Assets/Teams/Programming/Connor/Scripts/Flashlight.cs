@@ -9,7 +9,6 @@ public class Flashlight : MonoBehaviour
     private Light lightSource; //creating lightsource to assign at runtime
 
     const float maxBatteryLife = 60; //total battery life 
-    public float powerUsage = 1f;
     float batteryLife = maxBatteryLife; //current battery life will change this later after designers say what they want
 
     bool powerOn = true; //Flashlight starts disabled this manages battery consumption 

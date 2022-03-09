@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public GameObject documentLandscape;
     public GameObject documentPortrait;
     typeWriterTest twt;
+    [SerializeField] string audioClipName;
 
     void Awake()
     {
@@ -106,6 +107,7 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         twt.playText = true;
+        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
         Time.timeScale = 0;
     }
 
