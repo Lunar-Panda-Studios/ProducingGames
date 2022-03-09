@@ -13,11 +13,13 @@ public class bikeLock : MonoBehaviour
     [Header("Puzzle State")]
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
+    public GameObject door;
 
     // Update is called once per frame
     void Update()
     {
-        
+        ChangeColor();
+        SetCollision();
     }
 
     //Gives the element the current value of its place in the code
@@ -55,5 +57,55 @@ public class bikeLock : MonoBehaviour
             }
         }
         return false;
+    }
+    void ChangeColor()
+    {
+        if (currentCode[0] == correctCode[0])
+        {
+            gameObject.transform.Find("BikeLockElement").GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            gameObject.transform.Find("BikeLockElement").GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        if (currentCode[1] == correctCode[1])
+        {
+            gameObject.transform.Find("BikeLockElement (1)").GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            gameObject.transform.Find("BikeLockElement (1)").GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        if (currentCode[2] == correctCode[2])
+        {
+            gameObject.transform.Find("BikeLockElement (2)").GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            gameObject.transform.Find("BikeLockElement (2)").GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        if (currentCode[3] == correctCode[3])
+        {
+            gameObject.transform.Find("BikeLockElement (3)").GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            gameObject.transform.Find("BikeLockElement (3)").GetComponent<Renderer>().material.color = Color.red;
+        }
+    }
+
+    void SetCollision()
+    {
+        if (puzzleSolved)
+        {
+            door.gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            door.gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
     }
 }

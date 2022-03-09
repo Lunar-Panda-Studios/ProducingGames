@@ -11,6 +11,7 @@ public class HorrorTrigger : MonoBehaviour
     private Vector3 lookPos = new Vector3();
     public bool disableAtStart;
     public TypeOfTrigger type;
+    public AudioSource audioSource;
 
     [Header("Disable Movement")]
     public bool disablePlayerMovement;
@@ -99,6 +100,7 @@ public class HorrorTrigger : MonoBehaviour
         jumpSImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
+        Destroy(this);
     }
     private IEnumerator LookAtMirror(float delay)
     {
@@ -137,6 +139,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void Jumpscare()
     {
+        audioSource.Play();
         StartCoroutine(JumpscareStayOnScreen(stayOnScreenFor));
     }
     public void Mirror()
