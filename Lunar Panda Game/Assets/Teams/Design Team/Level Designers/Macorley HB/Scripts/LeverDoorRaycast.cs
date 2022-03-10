@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class LeverDoorRaycast : MonoBehaviour
 {
-    [SerializeField] public int rayLength = 5;
-    [SerializeField] public LayerMask layerMaskInteract;
-    [SerializeField] public string excludeLayerName = null;
+    public int rayLength = 5;
+    public LayerMask layerMaskInteract;
+    public string excludeLayerName = null;
 
     private LeverDoorController raycastedObj;
 
-    [SerializeField] public KeyCode openDoorKey = KeyCode.Mouse0;
+    public KeyCode openDoorKey = KeyCode.Mouse0;
     private bool isCrosshairActive;
     private bool doOnce;
 
