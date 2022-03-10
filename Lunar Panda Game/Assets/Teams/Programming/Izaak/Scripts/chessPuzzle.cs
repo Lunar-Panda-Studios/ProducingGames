@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class chessPuzzle : MonoBehaviour
 {
+    [Header("Board Co-ordinates")]
+    [Tooltip("The spot that this square occupies")]
     public Vector2 currentSpot;
+    [Header("Game Objects")]
+    [Tooltip("Drag the chessboard in the scene here")]
     public GameObject chessboardParent;
+    [Tooltip("Drag the item queen here")]
     public GameObject queenChessPiece;
+    [Tooltip("Drag the item pawn here")]
     public GameObject pawnChessPiece;
 
     private bool setOccupied = false;
 
-    public List<GameObject> correctPieces;
-
+    [HideInInspector]
     public bool puzzleComplete;
 
     private GameObject player;
@@ -55,7 +60,7 @@ public class chessPuzzle : MonoBehaviour
                             queenChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
                             if (queenChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
                             {
-                                chessboardParent.GetComponent<chessBoardPlacing>().checkPuzzleCompletion();
+                                chessboardParent.GetComponent<chessBoardPlacing>().check = true;
                             }
                         }
                     }

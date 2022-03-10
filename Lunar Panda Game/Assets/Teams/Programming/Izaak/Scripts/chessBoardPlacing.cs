@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class chessBoardPlacing : MonoBehaviour
 {
+    [Header("Board Co-ordinates")]
+    [Tooltip("The correct co-ordinates for the pawn on the board")]
+    public Vector2 pawnCorrectSpot;
+    [Tooltip("The correct co-ordinates for the queen on the board")]
+    public Vector2 queenCorrectSpot;
+    [Header("Game Objects")]
+    [Tooltip("Drag the prefab board square here")]
     public GameObject boardSquare;
     private GameObject instBoardSquare;
-    public Vector2 pawnCorrectSpot;
-    public Vector2 queenCorrectSpot;
+    [Tooltip("Drag the item pawn in the scene here")]
     public GameObject pawnPiece;
+    [Tooltip("Drag the item queen in the scene here")]
     public GameObject queenPiece;
+    [Tooltip("Drag the drawer in the scene here")]
     public GameObject drawer;
 
     private bool puzzleComplete = false;
+    public bool check = false;
 
     public GameObject chessPieceObj;
     private GameObject instChessPiece;
@@ -21,6 +30,8 @@ public class chessBoardPlacing : MonoBehaviour
     {
         public Vector2 pieceLocation;
         public string pieceName;
+        public Material pieceMaterial;
+        public Mesh pieceMesh;
     }
 
     public List<chessCharacteristics> chessPieces;
@@ -34,7 +45,10 @@ public class chessBoardPlacing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (check)
+        {
+            checkPuzzleCompletion();
+        }
     }
 
     public void createChessSpots()
@@ -48,6 +62,7 @@ public class chessBoardPlacing : MonoBehaviour
                 instBoardSquare.GetComponent<chessPuzzle>().moveToCorrectPosition(new Vector2(i, j), 0.52f);
                 instBoardSquare.GetComponent<chessPuzzle>().queenChessPiece = queenPiece;
                 instBoardSquare.GetComponent<chessPuzzle>().pawnChessPiece = pawnPiece;
+                instBoardSquare.GetComponent<chessPuzzle>().chessboardParent = gameObject;
                 for (int k = 0; k < chessPieces.Count; k++)
                 {
                     if (chessPieces[k].pieceLocation == new Vector2(i,j))
@@ -66,11 +81,15 @@ public class chessBoardPlacing : MonoBehaviour
             instChessPiece = (GameObject)Instantiate(chessPieceObj, transform.position, transform.rotation);
             instChessPiece.transform.parent = gameObject.transform;
             instChessPiece.GetComponent<dummyChessPieceController>().setLocation(chessPieces[i].pieceLocation);
+            instChessPiece.GetComponent<MeshRenderer>().material = chessPieces[i].pieceMaterial;
+            instChessPiece.GetComponent<MeshFilter>().mesh = chessPieces[i].pieceMesh;
         }
     }
 
     public bool checkPuzzleCompletion()
     {
+        check = false;
+        Debug.Log(queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() + " " + pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot());
         if (queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() && pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot())
         {
             drawer.GetComponent<openChessDrawer>().puzzleCleared = true;

@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464582562101897220}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.08333333, y: 0.1, z: 0.08333333}
+  m_LocalScale: {x: 0.08, y: 0.12, z: 0.08}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &5128681526282108101
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceName: White Rook 1
   boardPosition: {x: 3, y: 3}
-  chessScript: {fileID: 0}
+  pieceMaterial: {fileID: 0}
+  objectMesh: {fileID: 0}
 --- !u!54 &146377452042481214
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,11 +121,11 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464582562101897220}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 99999
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0

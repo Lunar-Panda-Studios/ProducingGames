@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class dummyChessPieceController : MonoBehaviour
 {
+    [Tooltip("Name of the piece on the board. Use it just so you know what piece this is. Doesn't actually do anything")]
     public string pieceName;
+    [Tooltip("The board co-ordinates where this should be stored. Do not put one where one of the item pieces needs to go")]
     public Vector2 boardPosition;
-
-    public chessPuzzle chessScript;
+    [Tooltip("The material of the object, can be used to make black and white pieces")]
+    public Material pieceMaterial;
+    [Tooltip("The mesh that gives this object its form")]
+    public Mesh objectMesh;
     // Start is called before the first frame update
     void Start()
     {
