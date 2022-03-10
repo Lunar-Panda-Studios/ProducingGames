@@ -48,6 +48,15 @@ public class SoundEffectManager : MonoBehaviour
             Destroy(TheSFX.gameObject, SFX_Library[ClipName].length);
         }
     }
+    public void PauseSFX(string ClipName)
+    {
+        if (SFX_Library.ContainsKey(ClipName))
+        {
+            TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
+            TheSFX.UnPause();
+        }
+    }
+    
 
     
 

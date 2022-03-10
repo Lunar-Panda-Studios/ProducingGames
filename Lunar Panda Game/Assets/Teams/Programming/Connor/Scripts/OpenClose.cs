@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class OpenClose : MonoBehaviour
 {
     internal int id;
-    [Tooltip("Assign key for opening and closing")]
-    public KeyCode openCloseKey;
     public Animator anim;
     [Tooltip("Set this to time of objects opening and closing time.")]
     public float animTimer = 0.5f;
