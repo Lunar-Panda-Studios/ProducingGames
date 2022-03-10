@@ -60,6 +60,7 @@ public class openChessDrawer : MonoBehaviour
             chessPrize.GetComponent<clockPrizeController>().r_body.constraints = RigidbodyConstraints.None;
             boxCol.enabled = true;
             r_body.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            chessPrize.GetComponent<clockPrizeController>().r_body.velocity = new Vector3(0, 0, 0);
         }
     }
 }
