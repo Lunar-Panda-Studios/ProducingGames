@@ -18,7 +18,7 @@ public class LightsChaging : MonoBehaviour
     {
         if (id == this.id)
         {
-            GetComponent<Light>().intensity = 0;
+            GetComponent<Light>().enabled = false;
         }
     }
 
@@ -26,7 +26,7 @@ public class LightsChaging : MonoBehaviour
     {
         if (id == this.id)
         {
-            GetComponent<Light>().intensity = lightIntensity;
+            GetComponent<Light>().enabled = false;
         }
     }
 }
