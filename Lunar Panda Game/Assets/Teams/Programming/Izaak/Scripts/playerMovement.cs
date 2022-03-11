@@ -18,11 +18,11 @@ public class playerMovement : MonoBehaviour
     //public StaminaBar BarOfStamina;
     [SerializeField] float speed;
     [SerializeField] float sprintMultiplier = 1.5f;
-    [SerializeField] Camera cam;
-    [SerializeField] int Fov;
-    [SerializeField] int SprintFov;
+    //[SerializeField] Camera cam;
+    //[SerializeField] int Fov;
+    //[SerializeField] int SprintFov;
 
-    public float FovSpeed = 1f;
+    //public float FovSpeed = 1f;
 
     void Start()
     {
@@ -58,12 +58,12 @@ public class playerMovement : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
         Vector3 moveBy = transform.right * x + (transform.forward * z);
         float actualSpeed = speed;
-        cam.fieldOfView = Fov;
+        //cam.fieldOfView = Fov;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             actualSpeed *= sprintMultiplier;
-            cam.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, FovSpeed / Time.deltaTime, SprintFov);
+            //cam.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, FovSpeed / Time.deltaTime, SprintFov);
         }
         p_rigidbody.MovePosition(transform.position + moveBy.normalized * actualSpeed * Time.deltaTime);
 
