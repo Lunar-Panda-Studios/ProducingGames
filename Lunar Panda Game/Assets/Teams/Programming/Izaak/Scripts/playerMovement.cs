@@ -8,32 +8,24 @@ public class playerMovement : MonoBehaviour
 
     [Header("Move Settings")]
     [Tooltip("Speed the player moves at")]
-    //public float p_speed = 2f;
+    public float p_speed = 2f;
     //public float runStamReq = 0.02f;
-    //public const float walkSpeed = 2.0f;
-    //public float runSpeed = 5.0f;
-    //public Image RunningMan;
-    //public Image BackgroundSprite;
-    //public Image FillSprite;
-    //public StaminaBar BarOfStamina;
-    [SerializeField] float speed;
-    [SerializeField] float sprintMultiplier = 1.5f;
-    //[SerializeField] Camera cam;
-    //[SerializeField] int Fov;
-    //[SerializeField] int SprintFov;
-
-    //public float FovSpeed = 1f;
-
+    public const float walkSpeed = 2.0f;
+    //public const float runSpeed = 5.0f;
+    /*public Image RunningMan;
+    public Image BackgroundSprite;
+    public Image FillSprite;
+    public StaminaBar BarOfStamina;*/
     void Start()
     {
         //Collects the rigidbody so it can be used in code
         p_rigidbody = gameObject.GetComponent<Rigidbody>();
-        //if(RunningMan != null) 
-        //{
-        //    RunningMan.GetComponent<Image>();
-        //}
+        /*if(RunningMan != null) 
+        {
+            RunningMan.GetComponent<Image>();
+        }
         
-        //BarOfStamina = FindObjectOfType<StaminaBar>();
+        BarOfStamina = FindObjectOfType<StaminaBar>();*/
     }
 
     void Update()
@@ -47,66 +39,57 @@ public class playerMovement : MonoBehaviour
         //    p_speed = 2.0f;
         //} 
         move();
-        //if(RunningMan !=null)
-        //{
-        //    staminaStuff();
-        //}
+        /*if(RunningMan !=null)
+        {
+            staminaStuff();
+        }*/
     }
     void move()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
-        Vector3 moveBy = transform.right * x + (transform.forward * z);
-        float actualSpeed = speed;
-        //cam.fieldOfView = Fov;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            actualSpeed *= sprintMultiplier;
-            //cam.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, FovSpeed / Time.deltaTime, SprintFov);
-        }
-        p_rigidbody.MovePosition(transform.position + moveBy.normalized * actualSpeed * Time.deltaTime);
-
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        //Sets the velocity based on these values to move the player
+        p_rigidbody.velocity = ((transform.forward * z) * p_speed) + ((transform.right * x) * p_speed) + (new Vector3(0, p_rigidbody.velocity.y, 0));
     }
 
-    //void staminaStuff() 
-    //{
-    //    if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq) && BarOfStamina.CanSprint == true)
-    //    {
-    //        if (RunningMan != null)
-    //        {
-    //            RunningMan.color = new Color(1f, 1f, 1f, 1f);
-    //        }
-    //        p_speed = runSpeed;
-    //        StaminaBar.instance.staminaUsage(runStamReq);
-    //    }
-    //    else if (true)
-    //    {
-    //        if (RunningMan != null)
-    //        {
-    //            RunningMan.color = new Color(0f, 0f, 0f, 1f);
-    //        }
-    //        p_speed = walkSpeed;
-    //        BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 1f);
-    //        FillSprite.color = new Color(0f, 1f, 0f, 1f);
-    //    }
+    /*void staminaStuff() 
+    {
+        if (Input.GetButton("Sprint") && (StaminaBar.instance.currentStam > runStamReq) && BarOfStamina.CanSprint == true)
+        {
+            if (RunningMan != null)
+            {
+                RunningMan.color = new Color(1f, 1f, 1f, 1f);
+            }
+            p_speed = runSpeed;
+            StaminaBar.instance.staminaUsage(runStamReq);
+        }
+        else if (true)
+        {
+            if (RunningMan != null)
+            {
+                RunningMan.color = new Color(0f, 0f, 0f, 1f);
+            }
+            p_speed = walkSpeed;
+            BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 1f);
+            FillSprite.color = new Color(0f, 1f, 0f, 1f);
+        }
 
-    //    if (StaminaBar.instance.currentStam <= 3f && BarOfStamina.CanSprint == true)
-    //    {
-    //        if (RunningMan != null)
-    //        {
-    //            RunningMan.color = new Color(1f, 0f, 0f, 0.1f);
-    //        }
-    //        BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 0.1f);
-    //        FillSprite.color = new Color(0f, 1f, 0f, 0.1f);
-    //    }
+        if (StaminaBar.instance.currentStam <= 3f && BarOfStamina.CanSprint == true)
+        {
+            if (RunningMan != null)
+            {
+                RunningMan.color = new Color(1f, 0f, 0f, 0.1f);
+            }
+            BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 0.1f);
+            FillSprite.color = new Color(0f, 1f, 0f, 0.1f);
+        }
 
-    //    if (StaminaBar.instance.currentStam <= 0f && BarOfStamina.CanSprint == true)
-    //    {
-    //        if (RunningMan != null)
-    //        {
-    //            RunningMan.color = new Color(0f, 0f, 0f, 1f);
-    //        }
-    //    }
-    //}
+        if (StaminaBar.instance.currentStam <= 0f && BarOfStamina.CanSprint == true)
+        {
+            if (RunningMan != null)
+            {
+                RunningMan.color = new Color(0f, 0f, 0f, 1f);
+            }
+        }
+    }*/
 }
