@@ -11484,6 +11484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumspcareTrig
       objectReference: {fileID: 0}
+    - target: {fileID: 3027164084439395487, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
 --- !u!1001 &564578692
@@ -11860,7 +11864,12 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2672158854895771822, guid: e5a75777f46d83a4ab9a85b6ec0b621b, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2672158854895771823, guid: e5a75777f46d83a4ab9a85b6ec0b621b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e5a75777f46d83a4ab9a85b6ec0b621b, type: 3}
 --- !u!1 &596901754
 GameObject:
@@ -34652,6 +34661,14 @@ PrefabInstance:
       propertyPath: walkingSource
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 973075566, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: dropDist
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 973075566, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: pickupDist
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1218166218, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: far clip plane
       value: 20
@@ -42308,6 +42325,10 @@ PrefabInstance:
     - target: {fileID: 3027164084439395487, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
       propertyPath: m_Name
       value: LightsTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027164084439395487, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03c3473324c1c84dab2e2182b3adedc, type: 3}
