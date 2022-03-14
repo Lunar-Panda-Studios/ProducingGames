@@ -180,8 +180,6 @@ public class UIManager : MonoBehaviour
 
     public void inventoryItemAdd(ItemData data, int slot)
     {
-        print(inventoryImages[slot].sprite);
-        print(data.itemImage);
         inventoryImages[slot].sprite = data.itemImage;
     }
 
