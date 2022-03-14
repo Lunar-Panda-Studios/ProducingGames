@@ -51,4 +51,15 @@ public class chessValuedItem : MonoBehaviour
         }
         return false;
     }
+
+    private void OnEnable()
+    {
+        maxClock = maxTime;
+    }
+
+    private void OnDisable()
+    {
+        maxClock = 0;
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+    }
 }

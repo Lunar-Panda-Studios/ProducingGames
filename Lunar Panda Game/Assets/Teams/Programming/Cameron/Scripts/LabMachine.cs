@@ -66,11 +66,13 @@ public class LabMachine : MonoBehaviour
                         Database.current.addToItemsInScene(holdableItem);
                         Database.itemLocation.Add(holdableItem.gameObject.transform.position);
 
-                        /*if(Analysis.current.consent)
+                        if (Analysis.current != null)
                         {
-                            Analysis.current.resetlevelTimer();
-                            print(Analysis.current.completed());
-                        }*/
+                            if (Analysis.current.consent)
+                            {
+                                Analysis.current.resetTimer("Antidote");
+                            }
+                        }
 
                     }
                 }
