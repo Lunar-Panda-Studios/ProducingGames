@@ -13,6 +13,7 @@ public class InventoryMenuToggle : MonoBehaviour
     public JournalMenuToggle Journal;
     public PauseButtonToggle Pause;
     public FeedbackToggle Feedback;
+    PlayerPickup pickup;
 
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class InventoryMenuToggle : MonoBehaviour
         Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
+        pickup = FindObjectOfType<PlayerPickup>();
     }
 
     // Update is called once per frame
@@ -37,10 +39,11 @@ public class InventoryMenuToggle : MonoBehaviour
 
                 BarOfStamina.SetActive(false);
 
-                print("Cursor is visible");
+                pickup.enabled = false;
                 MrCapsule.canLook = false;
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
+                Analysis.current.menuOpen = true;
             }
             else if (IsOnInventory == true)
             {
@@ -51,8 +54,9 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
                 Cursor.visible = false;
-                print("Cursor is no longer visible");
+                pickup.enabled = true;
                 Time.timeScale = 1f;
+                Analysis.current.menuOpen = false;
             }
         }
     }

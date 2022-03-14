@@ -10,4 +10,6 @@ public class StoryData : ScriptableObject
     [TextArea]
     public string description;
     public Room roomGottenIn;
+    internal bool beenPickedUp = false;
+    internal int timesChecked = 0;
 }

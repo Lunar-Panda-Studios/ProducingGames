@@ -128,6 +128,11 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         if(isSinglePuzzle)
                         {
                             GameEvents.current.onPuzzleComplete(id);
+
+                            if(Analysis.current.consent)
+                            {
+                                Analysis.current.resetTimer("Wires");
+                            }
                         }
                         
                         

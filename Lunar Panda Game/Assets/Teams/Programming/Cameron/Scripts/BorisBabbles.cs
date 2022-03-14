@@ -19,6 +19,7 @@ public class BorisBabbles : MonoBehaviour
     [SerializeField] float timeBetweenDisplayingOrder = 2f;
     [Tooltip("This is temporary. Just used to activate the animation of the lid opening")]
     [SerializeField] GameObject lid;
+    public Room inRoom;
 
     void Awake()
     {
@@ -107,6 +108,11 @@ public class BorisBabbles : MonoBehaviour
                         {
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
+                            if (Analysis.current.consent)
+                            {
+                                string name = "SimonSays" + inRoom.ToString();
+                                Analysis.current.resetTimer(name);
+                            }
                         }
                         else
                         {

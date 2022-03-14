@@ -53,5 +53,10 @@ public class DoorToDoor : MonoBehaviour
         }
 
         switchState = !switchState;
+
+        if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Electric Boxes"))
+        {
+            Analysis.current.resetTimer("Electric Boxes");
+        }
     }
 }

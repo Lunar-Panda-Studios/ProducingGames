@@ -16,6 +16,8 @@ public class playerMovement : MonoBehaviour
     public Image BackgroundSprite;
     public Image FillSprite;
     public StaminaBar BarOfStamina;*/
+    internal bool isSprinting;
+
     void Start()
     {
         //Collects the rigidbody so it can be used in code
@@ -62,6 +64,7 @@ public class playerMovement : MonoBehaviour
             }
             p_speed = runSpeed;
             StaminaBar.instance.staminaUsage(runStamReq);
+            isSprinting = true;
         }
         else if (true)
         {
@@ -72,6 +75,7 @@ public class playerMovement : MonoBehaviour
             p_speed = walkSpeed;
             BackgroundSprite.color = new Color(0.1f, 0.25f, 0.1f, 1f);
             FillSprite.color = new Color(0f, 1f, 0f, 1f);
+            isSprinting = false;
         }
 
         if (StaminaBar.instance.currentStam <= 3f && BarOfStamina.CanSprint == true)

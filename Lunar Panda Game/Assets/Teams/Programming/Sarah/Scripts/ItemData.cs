@@ -13,5 +13,8 @@ public class ItemData : ScriptableObject
     public Sprite itemImage;
     public bool isUtility;
     public GameObject prefab;
+    internal bool beenPickedUp = false;
+    internal int timesChecked = 0;
+    internal int timesUses = 0;
     public Room foundInRoom; 
 }

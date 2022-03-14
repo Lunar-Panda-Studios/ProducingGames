@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -30,6 +31,23 @@ public class UIManager : MonoBehaviour
     public GameObject documentPortrait;
     typeWriterTest twt;
     [SerializeField] string audioClipName;
+
+    [Header("Inventory UI")]
+    public List<Image> inventoryImages;
+    public Text inventoryDescription;
+    public Text inventoryName;
+    public Image inventorySelect;
+
+    [Header("Journal UI")]
+    internal Room currentTab;
+    public Text leftPageTxt;
+    public Text rightPageTxt;
+    public Image leftPageImagePortrait;
+    public Image rightPageImagePortrait;
+    public Image leftPageImageLandscape;
+    public Image rightPageImageLandscape;
+    internal int leftPage = 0;
+    internal int rightPage = 1;
 
     void Awake()
     {
@@ -147,16 +165,184 @@ public class UIManager : MonoBehaviour
 
     public void showingText(DocumentData data, ViewDocument documentScript)
     {
-        notesText.GetComponent<Text>().text = data.docText;
+        notesText.text = data.docText;
         documentScript.showText = true;
-        notesText.gameObject.SetActive(true);
+        notesText.transform.parent.gameObject.SetActive(true);
         //Show text when pressed
     }
 
     public void hideText(ViewDocument documentScript)
     {
         documentScript.showText = false;
-        notesText.gameObject.SetActive(false);
+        notesText.transform.parent.gameObject.SetActive(false);
         //Hide text when pressed
+    }
+
+    public void inventoryItemAdd(ItemData data, int slot)
+    {
+        print(inventoryImages[slot].sprite);
+        print(data.itemImage);
+        inventoryImages[slot].sprite = data.itemImage;
+    }
+
+    public void inventoryItemSelected(ItemData data, int slot)
+    {
+        if (data != null)
+        {
+            inventorySelect.sprite = data.itemImage;
+            inventoryName.text = data.itemName;
+            inventoryDescription.text = data.description;
+            data.timesChecked++;
+        }
+        else
+        {
+            inventorySelect.sprite = null;
+            inventoryName.text = "Item Name";
+            inventoryDescription.text = "Item Description";
+        }
+    }
+
+    public void turnPage(bool right)
+    {
+        if (inventory.documentInventory.Count != 0)
+        {
+            if (right)
+            {
+                leftPage += 2;
+                if (leftPage >= inventory.documentInventory.Count)
+                {
+                    leftPage -= 2;
+                }
+            }
+            else
+            {
+                leftPage -= 2;
+                if (leftPage < 0)
+                {
+                    leftPage = 0;
+                }
+            }
+
+            if (right)
+            {
+                rightPage += 2;
+                if (rightPage >= inventory.documentInventory.Count)
+                {
+                    rightPage -= 2;
+                }
+            }
+            else
+            {
+                rightPage -= 2;
+                if (rightPage < 1)
+                {
+                    rightPage = 1;
+                }
+            }
+
+            updatePages();
+        }
+    }
+
+    public void changeTab(int newTab)
+    {
+        switch(newTab)
+        {
+            case 1:
+                {
+                    currentTab = Room.TRAIN;
+                    UpdateJournal();
+                    break;
+                }
+            case 2:
+                {
+                    currentTab = Room.HOSPITAL;
+                    UpdateJournal();
+                    break;
+                }
+            case 3:
+                {
+                    currentTab = Room.HOTEL;
+                    UpdateJournal();
+                    break;
+                }
+            case 4:
+                {
+                    currentTab = Room.CABIN;
+                    UpdateJournal();
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+
+    }
+
+    public void UpdateJournal()
+    {
+        for(int i = leftPage; i < inventory.documentInventory.Count; i++)
+        {
+            if(inventory.documentInventory[i].roomGottenIn == currentTab)
+            {
+                leftPage = i;
+                break;
+            }
+        }
+
+        rightPage = leftPage + 1;
+
+        updatePages();
+    }
+
+    public void updatePages()
+    {
+        print(leftPage);
+        print(rightPage);
+
+        if (leftPage < inventory.documentInventory.Count && leftPage >= 0)
+        {
+            if (inventory.documentInventory[leftPage].isLandscape)
+            {
+                leftPageImageLandscape.sprite = inventory.documentInventory[leftPage].documentImage;
+                leftPageImagePortrait.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                leftPageImagePortrait.sprite = inventory.documentInventory[leftPage].documentImage;
+                leftPageImageLandscape.color = new Color(0, 0, 0, 0);
+            }
+        }
+        else
+        {
+            leftPageImagePortrait.sprite = null;
+            leftPageImageLandscape.sprite = null;
+            leftPageImageLandscape.color = new Color(0, 0, 0, 0);
+            leftPageImagePortrait.color = new Color(0, 0, 0, 0);
+        }
+
+
+        if (rightPage < inventory.documentInventory.Count && rightPage > 0)
+        {
+
+                if (inventory.documentInventory[leftPage].isLandscape)
+                {
+                    rightPageImageLandscape.sprite = inventory.documentInventory[rightPage].documentImage;
+                    rightPageImagePortrait.color = new Color(0, 0, 0, 0);
+                }
+                else
+                {
+                    rightPageImagePortrait.sprite = inventory.documentInventory[rightPage].documentImage;
+                    rightPageImageLandscape.color = new Color(0, 0, 0, 0);
+                }
+        }
+        else
+        {
+            rightPageImagePortrait.sprite = null;
+            rightPageImageLandscape.sprite = null;
+            rightPageImageLandscape.color = new Color(0, 0, 0, 0);
+            rightPageImagePortrait.color = new Color(0, 0, 0, 0);
+        }
     }
 }

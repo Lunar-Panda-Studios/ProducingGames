@@ -47,6 +47,11 @@ public class VentScrewdriver : MonoBehaviour
             if(moveLocation.transform.position == transform.position)
             {
                 moveto = false;
+
+                if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Vent"))
+                {
+                    Analysis.current.resetTimer("Open Vent");
+                }
             }
         }
     }
