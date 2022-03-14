@@ -159,4 +159,6 @@ public class UIManager : MonoBehaviour
         notesText.gameObject.SetActive(false);
         //Hide text when pressed
     }
+
+
 }
