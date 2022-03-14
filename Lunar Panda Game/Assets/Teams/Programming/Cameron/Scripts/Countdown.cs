@@ -65,10 +65,6 @@ public class Countdown : MonoBehaviour
     {
         timerActive = false;
         timeLeft = countdownTime;
-        /*if (Analysis.current.consent)
-        {
-            Analysis.current.resetTimer("Antidote Puzzle");
-        }*/
     }
 
 

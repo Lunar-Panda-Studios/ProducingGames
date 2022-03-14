@@ -43,7 +43,11 @@ public class InventoryMenuToggle : MonoBehaviour
                 MrCapsule.canLook = false;
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
-                Analysis.current.menuOpen = true;
+
+                if (FindObjectOfType<Analysis>() != null)
+                {
+                    Analysis.current.menuOpen = true;
+                }
             }
             else if (IsOnInventory == true)
             {
@@ -56,7 +60,10 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                Analysis.current.menuOpen = false;
+                if (FindObjectOfType<Analysis>() != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }
             }
         }
     }

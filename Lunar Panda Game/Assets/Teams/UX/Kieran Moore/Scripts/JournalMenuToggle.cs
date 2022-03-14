@@ -43,7 +43,11 @@ public class JournalMenuToggle : MonoBehaviour
                 UIManager.Instance.UpdateJournal();
                 pickup.enabled = false;
                 Time.timeScale = 0f;
-                Analysis.current.menuOpen = true;
+
+                if (FindObjectOfType<Analysis>() != null)
+                {
+                    Analysis.current.menuOpen = true;
+                }
             }
             else if (IsOnMenu == true)
             {
@@ -55,7 +59,10 @@ public class JournalMenuToggle : MonoBehaviour
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                Analysis.current.menuOpen = false;
+                if (FindObjectOfType<Analysis>() != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }
             }
         }
     }

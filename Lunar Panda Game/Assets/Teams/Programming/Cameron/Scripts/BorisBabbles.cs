@@ -108,10 +108,14 @@ public class BorisBabbles : MonoBehaviour
                         {
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
-                            if (Analysis.current.consent)
+
+                            if (FindObjectOfType<Analysis>() != null)
                             {
-                                string name = "SimonSays" + inRoom.ToString();
-                                Analysis.current.resetTimer(name);
+                                if (Analysis.current.consent)
+                                {
+                                    string name = "SimonSays" + inRoom.ToString();
+                                    Analysis.current.resetTimer(name);
+                                }
                             }
                         }
                         else

@@ -129,9 +129,12 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             GameEvents.current.onPuzzleComplete(id);
 
-                            if(Analysis.current.consent)
+                            if (FindObjectOfType<Analysis>() != null)
                             {
-                                Analysis.current.resetTimer("Wires");
+                                if (Analysis.current.consent)
+                                {
+                                    Analysis.current.resetTimer("Wires");
+                                }
                             }
                         }
                         
