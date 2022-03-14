@@ -129,7 +129,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             GameEvents.current.onPuzzleComplete(id);
 
-                            if (FindObjectOfType<Analysis>() != null)
+                            if (Analysis.current != null)
                             {
                                 if (Analysis.current.consent)
                                 {

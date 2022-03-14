@@ -19,7 +19,7 @@ public class chessPuzzle : MonoBehaviour
 
     [HideInInspector]
     public bool puzzleComplete;
-
+    Inventory inventory;
     private GameObject player;
     private Transform cam;
     // Start is called before the first frame update
@@ -28,6 +28,7 @@ public class chessPuzzle : MonoBehaviour
         //moveToCorrectPosition(correctSpot);
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
+        inventory = FindObjectOfType<Inventory>();
     }
 
     // Update is called once per frame
@@ -45,19 +46,25 @@ public class chessPuzzle : MonoBehaviour
                     {
                         //player.GetComponent<PlayerPickup>().DropHeldItem();
                         
-                        if (pawnChessPiece.GetComponent<chessValuedItem>().checkIfRecent()>0)
+                        if (pawnChessPiece.GetComponent<chessValuedItem>().checkIfRecent()>0 || inventory.itemInventory[inventory.selectedItem] == pawnChessPiece.GetComponent<HoldableItem>().data)
                         {
                             pawnChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                             pawnChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
+                            pawnChessPiece.GetComponent<Rigidbody>().useGravity = true;
+                            pawnChessPiece.SetActive(true);
+                            inventory.removeItem();
                             if (pawnChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
                             {
                                 chessboardParent.GetComponent<chessBoardPlacing>().checkPuzzleCompletion();
                             }
                         }
-                        if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0)
+                        if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0 || inventory.itemInventory[inventory.selectedItem] == queenChessPiece.GetComponent<HoldableItem>().data)
                         {
                             queenChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                             queenChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
+                            queenChessPiece.GetComponent<Rigidbody>().useGravity = true;
+                            queenChessPiece.SetActive(true);
+                            inventory.removeItem();
                             if (queenChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
                             {
                                 chessboardParent.GetComponent<chessBoardPlacing>().check = true;

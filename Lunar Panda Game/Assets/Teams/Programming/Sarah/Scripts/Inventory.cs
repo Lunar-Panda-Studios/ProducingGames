@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //player = FindObjectOfType<playerMovement>().gameObject;
+        player = FindObjectOfType<playerMovement>().gameObject;
         pickupControl = FindObjectOfType<PlayerPickup>();
         itemInventory = new List<ItemData>();
         documentInventory = new List<DocumentData>();

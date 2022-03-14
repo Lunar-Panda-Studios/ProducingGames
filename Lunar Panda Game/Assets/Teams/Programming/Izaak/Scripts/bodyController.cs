@@ -115,7 +115,7 @@ public class bodyController : MonoBehaviour
                 }
             }
 
-            if (FindObjectOfType<Analysis>() != null)
+            if (Analysis.current != null)
             {
                 if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Body"))
                 {

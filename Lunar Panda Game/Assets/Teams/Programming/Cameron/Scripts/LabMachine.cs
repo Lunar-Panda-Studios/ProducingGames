@@ -66,7 +66,7 @@ public class LabMachine : MonoBehaviour
                         Database.current.addToItemsInScene(holdableItem);
                         Database.itemLocation.Add(holdableItem.gameObject.transform.position);
 
-                        if (FindObjectOfType<Analysis>() != null)
+                        if (Analysis.current != null)
                         {
                             if (Analysis.current.consent)
                             {

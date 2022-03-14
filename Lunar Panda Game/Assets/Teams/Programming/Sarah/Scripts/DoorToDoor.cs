@@ -54,7 +54,7 @@ public class DoorToDoor : MonoBehaviour
 
         switchState = !switchState;
 
-        if (FindObjectOfType<Analysis>() != null)
+        if (Analysis.current != null)
         {
             if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Electric Boxes"))
             {

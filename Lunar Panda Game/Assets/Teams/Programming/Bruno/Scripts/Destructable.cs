@@ -45,7 +45,7 @@ public class Destructable : MonoBehaviour
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
                 {
                     GameEvents.current.onPuzzleComplete(id);
-                    if (FindObjectOfType<Analysis>() != null)
+                    if (Analysis.current != null)
                     {
                         if (Analysis.current.consent)
                         {

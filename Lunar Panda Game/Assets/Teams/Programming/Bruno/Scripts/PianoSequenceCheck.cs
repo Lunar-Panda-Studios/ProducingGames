@@ -25,7 +25,7 @@ public class PianoSequenceCheck : MonoBehaviour
         if (attemptedSequence == sequence)
         {
             GameEvents.current.onPuzzleComplete(id);
-            if (FindObjectOfType<Analysis>() != null)
+            if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
                 {
@@ -35,6 +35,10 @@ public class PianoSequenceCheck : MonoBehaviour
         }
         else
         {
+            if (Analysis.current != null)
+            {
+                Analysis.current.failCounterPiano++;
+            }
             Debug.Log("Wrong Code");
         }
     }

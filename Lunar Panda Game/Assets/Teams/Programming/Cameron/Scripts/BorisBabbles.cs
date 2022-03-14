@@ -109,7 +109,7 @@ public class BorisBabbles : MonoBehaviour
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
 
-                            if (FindObjectOfType<Analysis>() != null)
+                            if (Analysis.current != null)
                             {
                                 if (Analysis.current.consent)
                                 {
@@ -122,6 +122,11 @@ public class BorisBabbles : MonoBehaviour
                         {
                             //run IEnumerator that displays the buttons as all red and then resets the puzzle
                             StartCoroutine(IncorrectInput());
+
+                            if (Analysis.current != null)
+                            {
+                                Analysis.current.failCounterSimon++;
+                            }
                         }
                     }
                     else

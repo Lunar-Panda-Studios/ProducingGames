@@ -48,7 +48,7 @@ public class VentScrewdriver : MonoBehaviour
             {
                 moveto = false;
 
-                if (FindObjectOfType<Analysis>() != null)
+                if (Analysis.current != null)
                 {
                     if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Vent"))
                     {

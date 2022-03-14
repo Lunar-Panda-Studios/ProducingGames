@@ -19,6 +19,11 @@ public class Analysis : MonoBehaviour
     float gameTimer = 0;
     playerMovement player;
     Flashlight light;
+    internal int failCounterSimon = 0;
+    internal int failCounterPiano = 0;
+    internal int failCounterCodeLock = 0;
+    internal int failCounterBikeLock = 0;
+    internal int failCounterAntidote = 0;
 
     private void Start()
     {
@@ -167,6 +172,44 @@ public class Analysis : MonoBehaviour
         parameters.Add("Time of Gameplay", gameTimer);
     }
 
+    public void puzzleFails()
+    {
+        List<string> failCounter = new List<string>();
+
+        if (failCounterSimon != 0)
+        {
+            failCounter.Add("Simon Says: " + failCounterSimon);
+            failCounterSimon = 0;
+        }
+
+        if (failCounterPiano != 0)
+        {
+            failCounter.Add("Piano: " + failCounterPiano);
+            failCounterPiano = 0;
+        }
+
+        if (failCounterCodeLock != 0)
+        {
+            failCounter.Add("Code Lock: " + failCounterCodeLock);
+            failCounterCodeLock = 0;
+        }
+
+        if (failCounterBikeLock != 0)
+        {
+            failCounter.Add("Bike Lock: " + failCounterBikeLock);
+            failCounterBikeLock = 0;
+        }
+
+        if (failCounterAntidote != 0)
+        {
+            failCounter.Add( "Antidote: " + failCounterAntidote);
+            failCounterAntidote = 0;
+        }
+
+        parameters.Add(GameManager.Instance.currentRoom.ToString() + " Fail Counters", failCounter);
+
+    }
+
     public void OnLevelWasLoaded(int level)
     {
         if (level != GameManager.Instance.whichLevel)
@@ -176,6 +219,7 @@ public class Analysis : MonoBehaviour
             missedItems(GameManager.Instance.currentRoom.ToString());
             missedStoryNotes(GameManager.Instance.currentRoom.ToString());
             resetlevelTimer(GameManager.Instance.currentRoom.ToString());
+            puzzleFails();
             print("Level Loaded");
             GameManager.Instance.currentLevel(level);
             GameManager.Instance.ChangeRoom();

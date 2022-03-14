@@ -46,9 +46,9 @@ public class bikeLock : MonoBehaviour
                 passes++;
                 if (passes == currentCode.Length)
                 {
-                    if (FindObjectOfType<Analysis>() != null)
+                    puzzleSolved = true;
+                    if (Analysis.current != null)
                     {
-                        puzzleSolved = true;
                         if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Bike Lock"))
                         {
                             Analysis.current.resetTimer("Bike Lock");
@@ -59,6 +59,11 @@ public class bikeLock : MonoBehaviour
             }
             else
             {
+                if (Analysis.current != null)
+                {
+                    Analysis.current.failCounterBikeLock++;
+                }
+
                 puzzleSolved = false;
                 return false;
             }

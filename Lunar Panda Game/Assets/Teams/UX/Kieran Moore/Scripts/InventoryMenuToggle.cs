@@ -44,7 +44,7 @@ public class InventoryMenuToggle : MonoBehaviour
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
 
-                if (FindObjectOfType<Analysis>() != null)
+                if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = true;
                 }
@@ -60,7 +60,7 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                if (FindObjectOfType<Analysis>() != null)
+                if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = false;
                 }

@@ -27,7 +27,7 @@ public class CodeLock : MonoBehaviour
         if(attemptedCode == code)
         {
             GameEvents.current.onPuzzleComplete(id);
-            if (FindObjectOfType<Analysis>() != null)
+            if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
                 {
@@ -37,6 +37,10 @@ public class CodeLock : MonoBehaviour
         }
         else
         {
+            if (Analysis.current != null)
+            {
+                Analysis.current.failCounterCodeLock++;
+            }
             Debug.Log("Wrong Code");
         }
     }
