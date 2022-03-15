@@ -63,21 +63,39 @@ public class PlayerPickup : MonoBehaviour
                     PickupItem(hit.transform);
                     //if the player is looking at an object that can glow, and if the object is currently glowing, toggle the glow effect
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        if(GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
+                        if (GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
                             GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
-                }                
+                }
+                else if (hit.transform.GetComponent<RotatableItem>())
+                {
+                    player.gameObject.GetComponent<playerMovement>().enabled = false;
+                    PickupItem(hit.transform);
+                }
             }
         }
-        else if(Input.GetButtonDown("Interact") && heldItem != null)
+        else if (Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
-            
-            DropHeldItem();
+            if (heldItem.GetComponent<RotatableItem>())
+            {
+                GameObject tempHeld = heldItem;
+                heldItem = null;
+                tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
+                player.GetComponent<playerMovement>().enabled = true;
+            }
+            else
+            {
+                DropHeldItem();
+            }
         }
         if (Input.GetButtonDown("Throw") && heldItem != null)
         {
-            ThrowItem();
+            if (!heldItem.GetComponent<RotatableItem>())
+            {
+                ThrowItem();
+            }
         }
         RotateHeldItem();
         CheckInfront();
@@ -134,7 +152,7 @@ public class PlayerPickup : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = false;
             }
-            
+
         }
         //while the mouse button is down and player is holding an item
         else if (Input.GetButton("RotateItemEnable") && heldItem != null)
