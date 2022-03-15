@@ -13,7 +13,7 @@ public class BookPuzzle : MonoBehaviour
     public GameObject cameraRotate;
     [Tooltip("drag pressure plate here")]
     public GameObject pressurePlate;
-    [Tooltip("weight required to unlock pressure plate corresponds to ")]
+    [Tooltip("weight required to unlock pressure plate, weight is calculated by 10x the local scale value, 1 scale = 10 etc.")]
     public float weightNeeded;
     [Tooltip("maximum size of book before looking up does nothing")]
     public float maxSize = 3;
@@ -35,8 +35,6 @@ public class BookPuzzle : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(cameraRotate.transform.localRotation.eulerAngles.x);
-
         rotation = cameraRotate.transform.localRotation.eulerAngles.x;
 
         if (pickUp.heldItem == gameObject)
