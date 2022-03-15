@@ -20,6 +20,11 @@ public class openChessDrawer : MonoBehaviour
 
     private BoxCollider boxCol;
 
+    [SerializeField]
+    float drawerTimer;
+
+    private float currentTimer;
+
     //[HideInInspector]
     public bool puzzleCleared = false;
     private bool drawerOpened = false;
@@ -50,14 +55,21 @@ public class openChessDrawer : MonoBehaviour
 
     public void openDrawer()
     {
-        r_body.velocity = (new Vector3(moveSpeed * currentSpeed, 0, 0));
-        chessPrize.transform.localPosition = new Vector3(0.5f, 0.4f, -0.5f);
-        if (xValueOpened < transform.localPosition.x)
+        currentTimer += Time.deltaTime;
+
+
+        r_body.velocity = transform.right * moveSpeed;            /*(new Vector3(moveSpeed * currentSpeed, 0, 0));*/
+        //chessPrize.transform.localPosition = new Vector3(0.5f, 0.4f, -0.5f);
+        chessPrize.GetComponent<clockPrizeController>().r_body.velocity = transform.right * moveSpeed;
+
+
+        if (currentTimer > drawerTimer)
         {
             drawerOpened = true;
             r_body.velocity = new Vector3(0, 0, 0);
             chessPrize.GetComponent<clockPrizeController>().boxCol.enabled = true;
             chessPrize.GetComponent<clockPrizeController>().r_body.constraints = RigidbodyConstraints.None;
+            chessPrize.GetComponent<clockPrizeController>().r_body.velocity = Vector3.zero;
             boxCol.enabled = true;
             r_body.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             chessPrize.GetComponent<clockPrizeController>().r_body.velocity = new Vector3(0, 0, 0);

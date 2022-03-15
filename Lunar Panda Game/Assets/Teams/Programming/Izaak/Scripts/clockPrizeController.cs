@@ -26,6 +26,6 @@ public class clockPrizeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(r_body.velocity);
+        //Debug.Log(r_body.velocity);
     }
 }

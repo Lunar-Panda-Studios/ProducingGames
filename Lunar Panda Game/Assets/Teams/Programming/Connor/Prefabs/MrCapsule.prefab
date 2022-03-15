@@ -531,6 +531,7 @@ Transform:
   m_Children:
   - {fileID: 1218166219}
   - {fileID: 1475630743}
+  - {fileID: 7200134803138709910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,8 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ed4f3640b3bcc4d97415fceb951502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  sprintMultiplier: 1.5
+  p_speed: 2
 --- !u!114 &973075566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,5 +693,79 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ee8ebd05bce2f418be4a9d63cc910d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchTrigger: {fileID: 7200134803138709911}
+--- !u!1001 &3123608398434619858
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8207024237382381628}
+    m_Modifications:
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0012155455
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0063512786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.11988168
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99278826
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239178667818342520, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+      propertyPath: m_Name
+      value: CrouchDetection
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+--- !u!4 &7200134803138709910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5239178667818342468, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+  m_PrefabInstance: {fileID: 3123608398434619858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7200134803138709911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5239178667818342469, guid: 4c9a8bf1c5a9bd24baf3af414e3a2811, type: 3}
+  m_PrefabInstance: {fileID: 3123608398434619858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb0442879c257242a05a6160fca90ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

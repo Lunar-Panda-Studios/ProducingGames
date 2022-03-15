@@ -227,8 +227,8 @@ public class PlayerPickup : MonoBehaviour
         //item.parent = playerCameraTransform;
         //item.localPosition = new Vector3(0, 0, holdDist);
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
-        item.transform.rotation = Quaternion.identity;
-        item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
+        //item.transform.rotation = Quaternion.identity;
+        //item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
 
         item.GetComponent<Rigidbody>().isKinematic = false;
         item.GetComponent<Rigidbody>().useGravity = false;
