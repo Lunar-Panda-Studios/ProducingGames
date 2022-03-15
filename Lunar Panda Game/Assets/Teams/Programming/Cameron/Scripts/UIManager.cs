@@ -177,7 +177,6 @@ public class UIManager : MonoBehaviour
         notesText.transform.parent.gameObject.SetActive(false);
         //Hide text when pressed
     }
-
     public void inventoryItemAdd(ItemData data, int slot)
     {
         inventoryImages[slot].sprite = data.itemImage;

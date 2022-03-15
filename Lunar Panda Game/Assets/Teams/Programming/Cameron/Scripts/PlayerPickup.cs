@@ -121,7 +121,7 @@ public class PlayerPickup : MonoBehaviour
     void RotateHeldItem()
     {
         //the frame the player clicks and is holding an item
-        if (Input.GetButtonDown("Fire1") && heldItem != null)
+        if (Input.GetButtonDown("RotateItemEnable") && heldItem != null)
         {
             //setup/start the rotation mode
             mouseRotateStartPoint = Input.mousePosition;
@@ -137,7 +137,7 @@ public class PlayerPickup : MonoBehaviour
             
         }
         //while the mouse button is down and player is holding an item
-        else if (Input.GetButton("Fire1") && heldItem != null)
+        else if (Input.GetButton("RotateItemEnable") && heldItem != null)
         {
             //get the distance between the first clicks mouse position, and the current mouse position
             Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
@@ -145,7 +145,7 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
         }
         //the frame the player stops pressing the mouse button
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("RotateItemEnable"))
         {
             //stop rotating the object
             //this if statement should only be a temp fix. Better fix should be made
