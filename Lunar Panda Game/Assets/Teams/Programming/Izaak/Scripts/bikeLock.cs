@@ -47,11 +47,23 @@ public class bikeLock : MonoBehaviour
                 if (passes == currentCode.Length)
                 {
                     puzzleSolved = true;
+                    if (Analysis.current != null)
+                    {
+                        if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Bike Lock"))
+                        {
+                            Analysis.current.resetTimer("Bike Lock");
+                        }
+                    }
                     return puzzleSolved;
                 }
             }
             else
             {
+                if (Analysis.current != null)
+                {
+                    Analysis.current.failCounterBikeLock++;
+                }
+
                 puzzleSolved = false;
                 return false;
             }

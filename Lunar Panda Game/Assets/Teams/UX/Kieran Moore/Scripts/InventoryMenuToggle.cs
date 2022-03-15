@@ -7,6 +7,7 @@ public class InventoryMenuToggle : MonoBehaviour
 {
 
     public bool IsOnInventory;
+
     [SerializeField] GameObject InventoryMenu;
     lockMouse mouseLock;
     playerJump jump;
@@ -14,7 +15,7 @@ public class InventoryMenuToggle : MonoBehaviour
     JournalMenuToggle Journal;
     PauseButtonToggle Pause;
     FeedbackToggle Feedback;
-
+    PlayerPickup pickup;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class InventoryMenuToggle : MonoBehaviour
         Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
+        pickup = FindObjectOfType<PlayerPickup>();
         jump = FindObjectOfType<playerJump>();
     }
 
@@ -38,11 +40,17 @@ public class InventoryMenuToggle : MonoBehaviour
                 IsOnInventory = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+
+                pickup.enabled = false;
                 //BarOfStamina.SetActive(false);
                 mouseLock.canLook = false;
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
-                
+
+                if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = true;
+                }
             }
             //if the inventory ui is already on screen
             else if (IsOnInventory == true)
@@ -54,8 +62,12 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 mouseLock.canLook = true;
                 Cursor.visible = false;
-                print("Cursor is no longer visible");
+                pickup.enabled = true;
                 Time.timeScale = 1f;
+                if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }
             }
         }
     }
