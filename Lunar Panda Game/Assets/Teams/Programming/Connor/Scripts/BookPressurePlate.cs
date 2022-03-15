@@ -19,14 +19,13 @@ public class BookPressurePlate : MonoBehaviour
     void Update()
     {
         bookWeight = evilBook.transform.localScale.x * 10;
-        Debug.Log(bookWeight);
     }
 
     private void OnTriggerEnter(Collider pog)
     {
         if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
         {
-            Debug.Log("door would open here");
+            //open door
         }
     }
 
@@ -35,7 +34,7 @@ public class BookPressurePlate : MonoBehaviour
  
         if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
         {
-            Debug.Log("door would shut here");
+            //close door
         }
     }
 }
