@@ -53,7 +53,7 @@ public class SoundEffectManager : MonoBehaviour
         if (SFX_Library.ContainsKey(ClipName))
         {
             TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
-            TheSFX.UnPause();
+            TheSFX.Pause();
         }
     }
     
