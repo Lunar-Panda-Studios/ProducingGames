@@ -9,7 +9,9 @@ public class autoCombineScript : MonoBehaviour
     {
         public List<ItemData> itemParts;
         public ItemData combinedItem;
+        public GameObject instance;
     }
+
     [Header("Items Required")]
     [Tooltip("The list of all items that can be made through combining and their ingredients")]
     public List<itemBuildPath> autoCombineItemsList;
@@ -23,17 +25,22 @@ public class autoCombineScript : MonoBehaviour
     [Tooltip("Script of the inventory system")]
     public Inventory inventoryScript;
     private List<List<bool>> inInventory;
+
     // Start is called before the first frame update
     void Start()
     {
         inInventory = new List<List<bool>>();
+        List<bool> temp = new List<bool>();
         inventoryScript = FindObjectOfType<Inventory>();
         for (int j = 0; j < autoCombineItemsList.Count; j++)
         {
+            temp = new List<bool>();
             for (int i = 0; i < autoCombineItemsList[j].itemParts.Count; i++)
             {
-                inInventory[j].Add(false);
+                temp.Add(false);
             }
+
+            inInventory.Add(temp);
         }
     }
 
@@ -92,7 +99,9 @@ public class autoCombineScript : MonoBehaviour
                     }
 
                 }
-                inventoryScript.addItem(autoCombineItemsList[k].combinedItem);
+                inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
+                autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
+                Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
             }
             
         }

@@ -7,14 +7,20 @@ public class DoorToDoor : MonoBehaviour
     public int id;
     public GameObject LinkedDoor1;
     public GameObject LinkedDoor2;
+    public GameObject LinkedDoor3;
+    public GameObject LinkedDoor4;
     bool switchState = true;
     InteractRaycasting ray;
 
     private void Start()
     {
         ray = FindObjectOfType<InteractRaycasting>();
-        LinkedDoor1.GetComponent<OpenClose>().id = id;
-        LinkedDoor2.GetComponent<OpenClose>().id = id;
+        //LinkedDoor1.GetComponent<OpenClose>().id = id;
+        //LinkedDoor2.GetComponent<OpenClose>().id = id;
+        LinkedDoor1.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor2.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor3.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor4.GetComponent<TempSlidingDoors>().id = id;
     }
 
     private void Update()
@@ -39,15 +45,21 @@ public class DoorToDoor : MonoBehaviour
             if (switchState)
             {
                 GameEvents.current.onTriggerOpenDoor(id);
-                GameEvents.current.onPowerTurnedOff(id);
             }
             else
             {
                 GameEvents.current.onTriggerCloseDoor(id);
-                GameEvents.current.onPowerTurnedOn(id);
             }
         }
 
         switchState = !switchState;
+
+        if (Analysis.current != null)
+        {
+            if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Electric Boxes"))
+            {
+                Analysis.current.resetTimer("Electric Boxes");
+            }
+        }
     }
 }

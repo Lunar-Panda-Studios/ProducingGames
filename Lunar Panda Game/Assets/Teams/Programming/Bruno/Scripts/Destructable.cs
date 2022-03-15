@@ -45,6 +45,13 @@ public class Destructable : MonoBehaviour
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
                 {
                     GameEvents.current.onPuzzleComplete(id);
+                    if (Analysis.current != null)
+                    {
+                        if (Analysis.current.consent)
+                        {
+                            Analysis.current.resetTimer("Destructable Object");
+                        }
+                    }
                 }
             }            
         }
@@ -52,16 +59,12 @@ public class Destructable : MonoBehaviour
 
     void puzzleComplete(int id)
     {
-        if(id == this.id)
+        if(id == this.id && this.gameObject != null)
         {
+            
             //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
             Instantiate(destroyedVersion, transform.position, transform.rotation);
             Destroy(gameObject);
-
-            if (Analysis.current.consent)
-            {
-                Analysis.current.resetTimer("Destructable Object");
-            }
 
             PuzzleData.current.completedEvents[id] = true;
             PuzzleData.current.isCompleted[id - 1] = true;

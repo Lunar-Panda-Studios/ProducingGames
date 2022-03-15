@@ -70,7 +70,6 @@ public class SwitchWall : MonoBehaviour
         if (!madeCorrectGuess)
         {
             print("didnt make correct guess");
-            print(completedCombinations.Length);
             for (int i = 0; i < completedCombinations.Length; i++)
             {
                 completedCombinations[i] = false;
@@ -78,6 +77,11 @@ public class SwitchWall : MonoBehaviour
             labMachine.ResetMachine(amogusPuzzle.id);
             amogusPuzzle.resetPuzzle(amogusPuzzle.id);
             amogusPuzzle.TurnOffLights();
+
+            if (Analysis.current != null)
+            {
+                Analysis.current.failCounterAntidote++;
+            }
         }
         return completedCombinations;
     }

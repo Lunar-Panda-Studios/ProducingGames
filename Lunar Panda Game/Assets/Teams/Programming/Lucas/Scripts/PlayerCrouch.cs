@@ -8,11 +8,11 @@ public class PlayerCrouch : MonoBehaviour
     
     protected bool isCrouching = false;
 
+    public CrouchTrigger crouchTrigger;
     void Start()
     {
         playerCollider = GetComponent<CapsuleCollider>();
     }
-
     void Update()
     {
         Crouch();
@@ -32,19 +32,19 @@ public class PlayerCrouch : MonoBehaviour
             playerCollider.center = new Vector3(playerCollider.center.x, 0.25f, playerCollider.center.z);
             isCrouching = true;
         }
-
-        if(isCrouching && !Input.GetButton("Crouch"))
+        else
+            if(isCrouching && Input.GetButtonDown("Crouch") && crouchTrigger.isObjectAbove == false)
         {
-            var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
+            //var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
 
             //Checks if player can stand up
-            if(!cantStandUp)
-            {
+            //if(!cantStandUp)
+            //{
                 //Sets player height back to 2 and resets center back to 0
                 playerCollider.height = 2f;
                 playerCollider.center = new Vector3(playerCollider.center.x, 0f, playerCollider.center.z);
                 isCrouching = false;
-            }
+            //}
         }
     }
 }

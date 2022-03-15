@@ -7,52 +7,67 @@ public class InventoryMenuToggle : MonoBehaviour
 {
 
     public bool IsOnInventory;
-    public GameObject InventoryMenu;
-    public lockMouse MrCapsule;
-    public GameObject BarOfStamina;
-    public JournalMenuToggle Journal;
-    public PauseButtonToggle Pause;
-    public FeedbackToggle Feedback;
 
+    [SerializeField] GameObject InventoryMenu;
+    lockMouse mouseLock;
+    playerJump jump;
+    //public GameObject BarOfStamina;
+    JournalMenuToggle Journal;
+    PauseButtonToggle Pause;
+    FeedbackToggle Feedback;
+    PlayerPickup pickup;
 
     // Start is called before the first frame update
     void Start()
     {
-        MrCapsule = FindObjectOfType<lockMouse>();
+        mouseLock = FindObjectOfType<lockMouse>();
         Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
+        pickup = FindObjectOfType<PlayerPickup>();
+        jump = FindObjectOfType<playerJump>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetButtonDown("Inventory"))
         {
+            //if the inventory ui isnt on screen
             if (IsOnInventory == false && Pause.IsPaused == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
             {
+                jump.enabled = false;
                 IsOnInventory = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 
-                BarOfStamina.SetActive(false);
-
-                print("Cursor is visible");
-                MrCapsule.canLook = false;
+                pickup.enabled = false;
+                //BarOfStamina.SetActive(false);
+                mouseLock.canLook = false;
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
+
+                if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = true;
+                }
             }
+            //if the inventory ui is already on screen
             else if (IsOnInventory == true)
             {
+                jump.enabled = true;
                 InventoryMenu.SetActive(false);
                 IsOnInventory = false;
-
-                BarOfStamina.SetActive(true);
+                //BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
-                MrCapsule.canLook = true;
+                mouseLock.canLook = true;
                 Cursor.visible = false;
-                print("Cursor is no longer visible");
+                pickup.enabled = true;
                 Time.timeScale = 1f;
+                if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }
             }
         }
     }

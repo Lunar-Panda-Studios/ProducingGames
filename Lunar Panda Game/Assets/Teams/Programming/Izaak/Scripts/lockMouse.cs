@@ -24,9 +24,9 @@ public class lockMouse : MonoBehaviour
     public float cameraUpperBoundsY;
     public float cameraLowerBoundsY;
 
-    internal bool canLook;
+    [SerializeField] internal bool canLook;
 
-    void Start()
+    void Awake()
     {
         canLook = true;
     }

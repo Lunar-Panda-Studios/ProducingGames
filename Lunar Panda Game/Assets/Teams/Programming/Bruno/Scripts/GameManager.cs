@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public GameState gameStates;
     public int whichLevel = 0;
+    public Room currentRoom;
     internal GameObject player;
     public Inventory inventory;
     public PuzzleData completion;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<playerMovement>().gameObject;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void save()
@@ -203,7 +205,43 @@ public class GameManager : MonoBehaviour
     public void currentLevel(int currLevel)
     {
         //Just returning the value of which game scene the player is in
-        currLevel = whichLevel;
+        whichLevel = currLevel;
         return;
+    }
+
+    public void ChangeRoom()
+    {
+        switch (whichLevel)
+        {
+            case 0:
+                {
+                    currentRoom = Room.TRAIN;
+                    break;
+                }
+            case 1:
+                {
+                    currentRoom = Room.HOSPITAL;
+                    break;
+                }
+            case 2:
+                {
+                    currentRoom = Room.CABIN;
+                    break;
+                }
+        }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level < 3)
+        {
+            player = FindObjectOfType<playerMovement>().gameObject;
+            inventory = FindObjectOfType<Inventory>();
+            completion = FindObjectOfType<PuzzleData>();
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 }

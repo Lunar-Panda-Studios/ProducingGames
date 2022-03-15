@@ -8,7 +8,9 @@ public class SubmitFeedback : MonoBehaviour
 {
     public Button yourButton;
     public GameObject FeedbackMenu;
-
+    string keyName;
+    int feedbackNumber = 0;
+    public Text textBody;
 
     public FeedbackToggle EE;
 
@@ -25,6 +27,10 @@ public class SubmitFeedback : MonoBehaviour
     {
         if (EE.IsOnFeedbackMenu == true)
         {
+            keyName = "FeedbackV" + feedbackNumber.ToString();
+            Analysis.current.parameters.Add(keyName, textBody.text);
+            feedbackNumber++;
+
             EE.IsOnFeedbackMenu = false;
             FeedbackMenu.SetActive(false);
             if (Time.timeScale <= 0f)

@@ -1024,7 +1024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8083397703754574979}
   - component: {fileID: 8083397703754574982}
-  - component: {fileID: 8083397703754574983}
   - component: {fileID: 8083397703754574977}
   - component: {fileID: 8083397703754574976}
   m_Layer: 5
@@ -1062,21 +1061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8083397703754574978}
   m_CullTransparentMesh: 1
---- !u!114 &8083397703754574983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8083397703754574978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0964257f48ec0c43a1bc1d7625c91d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yourButton: {fileID: 8083397703754574976}
-  PauseMenu: {fileID: 8083397702785715179}
-  EE: {fileID: 8083397703963958492}
 --- !u!114 &8083397703754574977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,7 +1134,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8083397703754574977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8083397703963958492}
+        m_TargetAssemblyTypeName: PauseButtonToggle, Assembly-CSharp
+        m_MethodName: Unpause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8083397703963958494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,10 +1199,6 @@ MonoBehaviour:
   IsPaused: 0
   IsOnRegularMenu: 0
   PauseMenu: {fileID: 8083397702785715179}
-  MrCapsule: {fileID: 0}
-  BarOfStamina: {fileID: 0}
-  Journal: {fileID: 0}
-  Inventory: {fileID: 0}
 --- !u!1 &8083397704001874057
 GameObject:
   m_ObjectHideFlags: 0
