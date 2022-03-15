@@ -114,10 +114,12 @@ public class bikeLock : MonoBehaviour
         if (puzzleSolved)
         {
             door.gameObject.GetComponent<BoxCollider>().enabled = false;
+            door.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         else
         {
             door.gameObject.GetComponent<BoxCollider>().enabled = true;
+            door.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 }
