@@ -26,6 +26,7 @@ public class ClockPuzzle : MonoBehaviour
     [Header("Temp")]
     [SerializeField] Transform door;
     [SerializeField] Transform pivot;
+    private bool completed;
 
     /*[Tooltip("This is the position of the minute hand when its placed on the clock")]
     [SerializeField] Vector3 minHandClockPos;
@@ -46,17 +47,23 @@ public class ClockPuzzle : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            InteractRaycasting.Instance.raycastInteract(out RaycastHit hit);
-            if (hit.transform.gameObject == gameObject)
+            if(InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
             {
-                if (handsConnected)
+                if (hit.transform.gameObject == gameObject)
                 {
-                    RotateHand();
+                    if (handsConnected)
+                    {
+                        RotateHand();
+                    }
+                    else
+                    {
+                        PlaceHands();
+                    }
                 }
-                else
-                {
-                    PlaceHands();
-                }
+            }
+            else
+            {
+                return;
             }
         }
     }
@@ -113,14 +120,21 @@ public class ClockPuzzle : MonoBehaviour
             {
                 //unlock the door
                 //need to replace this with proper door unlock code stuff
-                door.eulerAngles = new Vector3(0, 0, 90);//im not making this a variable as its only temporary
-                door.RotateAround(pivot.position, Vector3.up, 90);
+                door.eulerAngles = new Vector3(-90, 180, 90);//im not making this a variable as its only temporary
+                door.RotateAround(pivot.position, Vector3.up, -90);
+                completed = true;
             }
         }
         else
         {
             //lock the door
-            door.eulerAngles = new Vector3(0, 0, 0);
+            if (completed)
+            {
+                door.RotateAround(pivot.position, Vector3.up, 90);
+                completed = false;
+            }
+            else
+                door.eulerAngles = new Vector3(-90, 180, 90);
         }
     }
 }

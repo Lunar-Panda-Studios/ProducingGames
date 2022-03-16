@@ -30,23 +30,25 @@ public class Countdown : MonoBehaviour
             timeLeft -= Time.deltaTime;
         if(timeLeft <= 0)
         {
-            manager.load();
+            //manager.load();
             this.GetComponent<Collider>().enabled = true;
             StopTimer();
         }
 
-        //if (Input.GetButtonDown("Interact"))
-        //{
-        //    RaycastHit hit;
-        //    InteractRaycasting.Instance.raycastInteract(out hit);
-        //    if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
-        //    {
-        //        if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
-        //        {
-        //            StartCoroutine(UIManager.Instance.FadePanelIn());
-        //        }
-        //    }
-        //}
+        if (Input.GetButtonDown("Interact"))
+        {
+            RaycastHit hit;
+            if(InteractRaycasting.Instance.raycastInteract(out hit))
+            {
+                if (hit.transform.gameObject != null && hit.transform.gameObject == gameObject)
+                {
+                    if (inventoryScript.itemInventory[inventoryScript.selectedItem] == antidoteData)
+                    {
+                        StartCoroutine(UIManager.Instance.FadePanelIn());
+                    }
+                }
+            }
+        }
     }
 
     public float TimeLeft()
@@ -63,10 +65,10 @@ public class Countdown : MonoBehaviour
     {
         timerActive = false;
         timeLeft = countdownTime;
-        if (Analysis.current.consent)
+        /*if (Analysis.current.consent)
         {
             Analysis.current.resetTimer("Antidote Puzzle");
-        }
+        }*/
     }
 
 

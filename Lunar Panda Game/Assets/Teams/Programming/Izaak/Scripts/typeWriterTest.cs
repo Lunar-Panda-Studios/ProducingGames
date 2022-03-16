@@ -21,7 +21,7 @@ public class typeWriterTest : MonoBehaviour
     public float timeBetweenLetters;
     private float timeBetweenLettersCounter;
 
-    bool playText = false;
+    [HideInInspector] public bool playText = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class typeWriterTest : MonoBehaviour
     {
         if (playText)
         {
-            timeBetweenLettersCounter -= Time.deltaTime;
+            timeBetweenLettersCounter -= Time.unscaledDeltaTime;
             //If timer runs out and there are still more letters to print, print the next letter
             if ((timeBetweenLettersCounter <= 0) && (currentDialogue.Length < dialogue.Length))
             {

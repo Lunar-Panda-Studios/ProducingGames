@@ -23,10 +23,10 @@ public class Cheats : MonoBehaviour
 
 
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(gameObject);
+    //}
 
     void Update()
     {
@@ -45,15 +45,18 @@ public class Cheats : MonoBehaviour
     {
         if (Input.GetKeyDown(trainKey))
         {
-            SceneManager.LoadScene(trainScene.name);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Train v1.7.1");
         }
         else if (Input.GetKeyDown(hospitalKey))
         {
-            SceneManager.LoadScene(hospitalScene.name);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Hospital v1.7.1");
         }
         else if (Input.GetKeyDown(hotelKey))
         {
-            SceneManager.LoadScene(hotelScene.name);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Hotel v1.7.1");
         }
     }
 }

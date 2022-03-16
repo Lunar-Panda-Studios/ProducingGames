@@ -33,7 +33,8 @@ public class PlayerCrouch : MonoBehaviour
             isCrouching = true;
         }
 
-        if(isCrouching && !Input.GetButton("Crouch"))
+        else
+            if(isCrouching && Input.GetButtonDown("Crouch"))
         {
             var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
 
