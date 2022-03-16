@@ -176,7 +176,7 @@ public class PlayerPickup : MonoBehaviour
         {
             //stop rotating the object
             //this if statement should only be a temp fix. Better fix should be made
-            if (!FindObjectOfType<PauseButtonToggle>().IsPaused)
+            if (!FindObjectOfType<PauseButtonToggle>().IsPaused && !heldItem.GetComponent<RotatableItem>())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = true;
