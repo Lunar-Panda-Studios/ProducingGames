@@ -23,6 +23,7 @@ public class PlayerPickup : MonoBehaviour
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
     public float pickupDist = 3f;
+    float startingHoldDist;
     public float holdDist = 1.5f;
     [SerializeField] float dropDist;
     [SerializeField] float lerpSpeed;
@@ -34,6 +35,9 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] float throwForce;
     Inventory inventory;
     bool controllerRotating = false;
+    [Header("Rotatable Items")]
+    [Tooltip("The distance away from the camera that rotatable items are put")]
+    [SerializeField] float rotDist;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -45,6 +49,7 @@ public class PlayerPickup : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerPickupRay = player.GetComponent<InteractRaycasting>();
+        startingHoldDist = holdDist;
     }
 
     void Update()
@@ -57,6 +62,7 @@ public class PlayerPickup : MonoBehaviour
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
+                    holdDist = startingHoldDist;
                     //if the ray hits a holdable item, the player picks it up
                     if (hit.transform.GetComponent<HoldableItem>().data)
                         inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
@@ -69,7 +75,9 @@ public class PlayerPickup : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<RotatableItem>())
                 {
+                    holdDist = rotDist;
                     player.gameObject.GetComponent<playerMovement>().enabled = false;
+                    FindObjectOfType<lockMouse>().canLook = false;
                     PickupItem(hit.transform);
                 }
             }
@@ -84,6 +92,7 @@ public class PlayerPickup : MonoBehaviour
                 tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
                 player.GetComponent<playerMovement>().enabled = true;
+                FindObjectOfType<lockMouse>().canLook = true;
             }
             else
             {
@@ -238,6 +247,10 @@ public class PlayerPickup : MonoBehaviour
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
+        if (heldItem.GetComponent<RotatableItem>())
+        {
+            FindObjectOfType<lockMouse>().canLook = true;
+        }
     }
 
     internal void PickupItem(Transform item)
