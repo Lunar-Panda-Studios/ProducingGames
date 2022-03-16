@@ -10,6 +10,11 @@ using UnityEngine;
 
 public class LabMachine : MonoBehaviour
 {
+    //Filip Changes
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
+    public bool has3DAudio;
+
     internal int id;
     [SerializeField] List<GameObject> tubes;
     [SerializeField] List<Material> startingTubeMats;
@@ -47,6 +52,10 @@ public class LabMachine : MonoBehaviour
                     //if all the combos have been put in and are fine.
                     if (switchWall.CheckAllCombos())
                     {
+                        //Filip Changes
+                        if (has3DAudio)
+                            audioSource2.Play();
+
                         antidoteMade = true;
                         //change the antidote so that it can be picked up and stuff
                         //add holdableitem and item data
@@ -66,10 +75,12 @@ public class LabMachine : MonoBehaviour
                         Database.current.addToItemsInScene(holdableItem);
                         Database.itemLocation.Add(holdableItem.gameObject.transform.position);
 
-                        /*if(Analysis.current.consent)
+                        /*if (Analysis.current != null)
                         {
-                            Analysis.current.resetlevelTimer();
-                            print(Analysis.current.completed());
+                            if (Analysis.current.consent)
+                            {
+                                Analysis.current.resetTimer("Antidote");
+                            }
                         }*/
 
                     }
@@ -86,6 +97,10 @@ public class LabMachine : MonoBehaviour
         {
             if (completedCombos[i])
             {
+                //Filip Changes
+                if (has3DAudio)
+                    audioSource.Play();
+
                 tubes[i].GetComponent<MeshRenderer>().material = completeTubeMats[i];
                 //I think they want to play a sound here
             }

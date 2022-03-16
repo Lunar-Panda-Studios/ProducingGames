@@ -53,13 +53,14 @@ public class chessBoardPlacing : MonoBehaviour
 
     public void createChessSpots()
     {
+        const float height = 0.565f;
         for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 8; j++)
             {
                 instBoardSquare = (GameObject)Instantiate(boardSquare, transform.position, transform.rotation);
                 instBoardSquare.transform.parent = gameObject.transform;
-                instBoardSquare.GetComponent<chessPuzzle>().moveToCorrectPosition(new Vector2(i, j), 0.52f);
+                instBoardSquare.GetComponent<chessPuzzle>().moveToCorrectPosition(new Vector2(i, j), height);
                 instBoardSquare.GetComponent<chessPuzzle>().queenChessPiece = queenPiece;
                 instBoardSquare.GetComponent<chessPuzzle>().pawnChessPiece = pawnPiece;
                 instBoardSquare.GetComponent<chessPuzzle>().chessboardParent = gameObject;
@@ -76,9 +77,10 @@ public class chessBoardPlacing : MonoBehaviour
 
     public void createChessPieces()
     {
-        for(int i = 0; i < chessPieces.Count; i++)
+        const float height = 0.575f;
+        for (int i = 0; i < chessPieces.Count; i++)
         {
-            instChessPiece = (GameObject)Instantiate(chessPieceObj, transform.position, transform.rotation);
+            instChessPiece = (GameObject)Instantiate(chessPieceObj, new Vector3(transform.position.x, height, transform.position.z), Quaternion.Euler(270, 0 , 0));
             instChessPiece.transform.parent = gameObject.transform;
             instChessPiece.GetComponent<dummyChessPieceController>().setLocation(chessPieces[i].pieceLocation);
             instChessPiece.GetComponent<MeshRenderer>().material = chessPieces[i].pieceMaterial;

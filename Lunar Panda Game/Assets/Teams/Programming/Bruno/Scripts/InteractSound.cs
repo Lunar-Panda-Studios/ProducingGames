@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class InteractSound : MonoBehaviour
 {
-
-    public string audioClipName;    
-
-    
+    public string audioClipName;
 
     // Update is called once per frame
     void Update()

@@ -23,6 +23,7 @@ public class PlayerPickup : MonoBehaviour
     Vector3 mouseRotateStartPoint;
     Quaternion itemStartRotation;
     public float pickupDist = 3f;
+    float startingHoldDist;
     public float holdDist = 1.5f;
     [SerializeField] float dropDist;
     [SerializeField] float lerpSpeed;
@@ -34,6 +35,9 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] float throwForce;
     Inventory inventory;
     bool controllerRotating = false;
+    [Header("Rotatable Items")]
+    [Tooltip("The distance away from the camera that rotatable items are put")]
+    [SerializeField] float rotDist;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -45,6 +49,7 @@ public class PlayerPickup : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerPickupRay = player.GetComponent<InteractRaycasting>();
+        startingHoldDist = holdDist;
     }
 
     void Update()
@@ -57,27 +62,49 @@ public class PlayerPickup : MonoBehaviour
             {
                 if (hit.transform.GetComponent<HoldableItem>())
                 {
+                    holdDist = startingHoldDist;
                     //if the ray hits a holdable item, the player picks it up
                     if (hit.transform.GetComponent<HoldableItem>().data)
                         inventory.addItem(hit.transform.GetComponent<HoldableItem>().data);
                     PickupItem(hit.transform);
                     //if the player is looking at an object that can glow, and if the object is currently glowing, toggle the glow effect
                     if (GOLookingAt != null && GOLookingAt.GetComponent<GlowWhenLookedAt>() != null)
-                        if(GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
+                        if (GOLookingAt.GetComponent<GlowWhenLookedAt>().isGlowing)
                             GOLookingAt.GetComponent<GlowWhenLookedAt>().ToggleGlowingMat();
                     GOLookingAt = null;
-                }                
+                }
+                else if (hit.transform.GetComponent<RotatableItem>())
+                {
+                    holdDist = rotDist;
+                    player.gameObject.GetComponent<playerMovement>().enabled = false;
+                    FindObjectOfType<lockMouse>().canLook = false;
+                    PickupItem(hit.transform);
+                }
             }
         }
-        else if(Input.GetButtonDown("Interact") && heldItem != null)
+        else if (Input.GetButtonDown("Interact") && heldItem != null)
         {
             //if the player is holding an item and presses 'e', it drops said item
-            
-            DropHeldItem();
+            if (heldItem.GetComponent<RotatableItem>())
+            {
+                GameObject tempHeld = heldItem;
+                heldItem = null;
+                tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
+                player.GetComponent<playerMovement>().enabled = true;
+                FindObjectOfType<lockMouse>().canLook = true;
+            }
+            else
+            {
+                DropHeldItem();
+            }
         }
         if (Input.GetButtonDown("Throw") && heldItem != null)
         {
-            ThrowItem();
+            if (!heldItem.GetComponent<RotatableItem>())
+            {
+                ThrowItem();
+            }
         }
         RotateHeldItem();
         CheckInfront();
@@ -121,7 +148,7 @@ public class PlayerPickup : MonoBehaviour
     void RotateHeldItem()
     {
         //the frame the player clicks and is holding an item
-        if (Input.GetButtonDown("Fire1") && heldItem != null)
+        if (Input.GetButtonDown("RotateItemEnable") && heldItem != null)
         {
             //setup/start the rotation mode
             mouseRotateStartPoint = Input.mousePosition;
@@ -134,10 +161,10 @@ public class PlayerPickup : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = false;
             }
-            
+
         }
         //while the mouse button is down and player is holding an item
-        else if (Input.GetButton("Fire1") && heldItem != null)
+        else if (Input.GetButton("RotateItemEnable") && heldItem != null)
         {
             //get the distance between the first clicks mouse position, and the current mouse position
             Vector2 distBetweenStartPoint = new Vector2((Input.mousePosition - mouseRotateStartPoint).x, (Input.mousePosition - mouseRotateStartPoint).y);
@@ -145,11 +172,11 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.rotation = itemStartRotation * Quaternion.Euler(new Vector3((distBetweenStartPoint.y / Screen.width) * 360, 0, (distBetweenStartPoint.x / Screen.width) * -360));
         }
         //the frame the player stops pressing the mouse button
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("RotateItemEnable"))
         {
             //stop rotating the object
             //this if statement should only be a temp fix. Better fix should be made
-            if (!FindObjectOfType<PauseButtonToggle>().IsPaused)
+            if (!FindObjectOfType<PauseButtonToggle>().IsPaused && !heldItem.GetComponent<RotatableItem>())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = true;
@@ -220,6 +247,10 @@ public class PlayerPickup : MonoBehaviour
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
         heldItem = null;
+        if (heldItem.GetComponent<RotatableItem>())
+        {
+            FindObjectOfType<lockMouse>().canLook = true;
+        }
     }
 
     internal void PickupItem(Transform item)
@@ -227,9 +258,10 @@ public class PlayerPickup : MonoBehaviour
         //item.parent = playerCameraTransform;
         //item.localPosition = new Vector3(0, 0, holdDist);
         //the below code is needed so that the rotation is user-friendly and feels more natural to the player
-        item.transform.rotation = Quaternion.identity;
-        item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
-        
+        //item.transform.rotation = Quaternion.identity;
+        //item.transform.eulerAngles = new Vector3(item.transform.eulerAngles.x, transform.eulerAngles.y, item.transform.eulerAngles.z);
+
+        item.GetComponent<Rigidbody>().isKinematic = false;
         item.GetComponent<Rigidbody>().useGravity = false;
         item.GetComponent<Rigidbody>().freezeRotation = true;
         heldItem = item.gameObject;

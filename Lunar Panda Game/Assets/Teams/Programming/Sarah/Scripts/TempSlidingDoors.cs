@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TempSlidingDoors : MonoBehaviour
 {
+    //Filip Changes
+    public AudioSource audioSource;
+    public bool has3DAudio;
+    
     bool move;
     public GameObject MoveTo;
     Vector3 startLocation;
@@ -54,6 +58,10 @@ public class TempSlidingDoors : MonoBehaviour
     {
         if(id == this.id)
         {
+            //Filip Changes
+            if(has3DAudio)
+                audioSource.Play();
+
             changeTarget();
             move = true;
         }

@@ -25,9 +25,20 @@ public class PianoSequenceCheck : MonoBehaviour
         if (attemptedSequence == sequence)
         {
             GameEvents.current.onPuzzleComplete(id);
+            /*if (Analysis.current != null)
+            {
+                if (Analysis.current.consent)
+                {
+                    Analysis.current.resetTimer("Piano");
+                }
+            }*/
         }
         else
         {
+            /*if (Analysis.current != null)
+            {
+                Analysis.current.failCounterPiano++;
+            }*/
             Debug.Log("Wrong Code");
         }
     }

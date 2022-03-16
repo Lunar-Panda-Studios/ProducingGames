@@ -12,10 +12,12 @@ public class dummyChessPieceController : MonoBehaviour
     public Material pieceMaterial;
     [Tooltip("The mesh that gives this object its form")]
     public Mesh objectMesh;
+
+    private const float height = 0.575f;
     // Start is called before the first frame update
     void Start()
     {
-        moveToCorrectPosition(boardPosition, 0.52f);
+        moveToCorrectPosition(boardPosition, height);
     }
 
     // Update is called once per frame

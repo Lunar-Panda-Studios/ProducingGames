@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class autoCombineScript : MonoBehaviour
 {
+
     [System.Serializable]
     public class itemBuildPath
     {
@@ -47,7 +48,7 @@ public class autoCombineScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void itemChecking(ItemData item)
@@ -99,9 +100,10 @@ public class autoCombineScript : MonoBehaviour
                     }
 
                 }
-                inventoryScript.addItem(autoCombineItemsList[k].combinedItem);
+                inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
+                autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
-                autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count - 1;
+
             }
             
         }

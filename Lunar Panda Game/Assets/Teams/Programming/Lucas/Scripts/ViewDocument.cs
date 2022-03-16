@@ -12,7 +12,7 @@ public class ViewDocument : MonoBehaviour
     public DocumentData data;
 
     [Header("Inputs")]
-    public KeyCode keyInteract; //temp
+    //public KeyCode keyInteract; //temp
     public KeyCode keyText; //temp
     private bool overDoc; //temp
     private Inventory inventory;
@@ -25,7 +25,13 @@ public class ViewDocument : MonoBehaviour
     //temp testing
     private void Update()
     {
-        if(Input.GetKeyDown(keyInteract) && !showDoc)
+        if (Input.GetButtonDown("Interact") && showDoc)
+        {
+            UIManager.Instance.hideDocument(this);
+            UIManager.Instance.hideText(this);
+        }
+
+        if (Input.GetButtonDown("Interact") && !showDoc)
         {
             RaycastHit hit;
             if(InteractRaycasting.Instance.raycastInteract(out hit))
@@ -47,12 +53,6 @@ public class ViewDocument : MonoBehaviour
             {
                 UIManager.Instance.showingText(data, this);
             }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Escape) && showDoc)
-        {
-            UIManager.Instance.hideDocument(this);
-            UIManager.Instance.hideText(this);
         }
     }
 }

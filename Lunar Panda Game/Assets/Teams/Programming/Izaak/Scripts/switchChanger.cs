@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class switchChanger : MonoBehaviour
 {
+    public string audioClipName;
     //Current state of switch
     [SerializeField] bool switchMode = true;
     [Tooltip("The wires that will be used after the switch is off")]
@@ -47,6 +48,7 @@ public class switchChanger : MonoBehaviour
     public void TurnPowerOn()
     {
         isPowerOn = true;
+        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
         //call a function from another script that handles power
     }
 

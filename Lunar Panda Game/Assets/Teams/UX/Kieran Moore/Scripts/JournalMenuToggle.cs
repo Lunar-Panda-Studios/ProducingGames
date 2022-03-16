@@ -13,6 +13,7 @@ public class JournalMenuToggle : MonoBehaviour
     public PauseButtonToggle Pause;
     public InventoryMenuToggle Inventory;
     public FeedbackToggle Feedback;
+    PlayerPickup pickup;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class JournalMenuToggle : MonoBehaviour
         MrCapsule = FindObjectOfType<lockMouse>();
         Pause = FindObjectOfType<PauseButtonToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
+        pickup = FindObjectOfType<PlayerPickup>();
     }
 
     // Update is called once per frame
@@ -38,7 +40,14 @@ public class JournalMenuToggle : MonoBehaviour
                 print("Cursor is visible");
                 MrCapsule.canLook = false;
                 JournalMenu.SetActive(true);
+                UIManager.Instance.UpdateJournal();
+                pickup.enabled = false;
                 Time.timeScale = 0f;
+
+                /*if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = true;
+                }*/
             }
             else if (IsOnMenu == true)
             {
@@ -48,8 +57,12 @@ public class JournalMenuToggle : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
                 Cursor.visible = false;
-                print("Cursor is no longer visible");
+                pickup.enabled = true;
                 Time.timeScale = 1f;
+                /*if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }*/
             }
         }
     }

@@ -77,6 +77,11 @@ public class SwitchWall : MonoBehaviour
             labMachine.ResetMachine(amogusPuzzle.id);
             amogusPuzzle.resetPuzzle(amogusPuzzle.id);
             amogusPuzzle.TurnOffLights();
+
+            /*if (Analysis.current != null)
+            {
+                Analysis.current.failCounterAntidote++;
+            }*/
         }
         return completedCombinations;
     }

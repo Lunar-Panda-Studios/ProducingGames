@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour
         {
             itemInventory.Add(null);
         }
+
     }
 
     private void Update()
@@ -47,6 +49,10 @@ public class Inventory : MonoBehaviour
         if (Input.GetButtonDown("PutAway"))
         {
             toggleHeldItem();
+        }
+        if(Input.GetButtonDown("Interact") && itemInventory[selectedItem] != null)
+        {
+            itemInventory[selectedItem].timesUses++;
         }
     }
 
@@ -79,10 +85,12 @@ public class Inventory : MonoBehaviour
             if(itemInventory[i] == null)
             {
                 itemInventory[i] = data;
+                UIManager.Instance.inventoryItemAdd(data, i);
                 itemsIn++;
                 break;
             }
         }
+        data.beenPickedUp = true;
     }
 
     public void addItem(DocumentData data)
@@ -90,11 +98,13 @@ public class Inventory : MonoBehaviour
         documentInventory.Add(data);
 
         data.prefab.GetComponent<ViewDocument>().inInventory = true;
+        data.beenPickedUp = true;
     }
 
     public void addItem(StoryData data)
     {
         storyNotesInventory.Add(data);
+        data.beenPickedUp = true;
     }
 
     public void removeItem()
@@ -135,6 +145,14 @@ public class Inventory : MonoBehaviour
                 takeout();
             }
         }
+
+        UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+    }
+
+    public void selectItem(int inventoryNumber)
+    {
+        selectedItem = inventoryNumber;
+        UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], inventoryNumber);
     }
 
     private void putAway()
@@ -161,6 +179,20 @@ public class Inventory : MonoBehaviour
             heldItem.transform.position = player.transform.position;
             pickupControl.PickupItem(heldItem.transform);
             heldItem.SetActive(true);
+        }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level < 3)
+        {
+            pickupControl = FindObjectOfType<PlayerPickup>();
+            autoCombine = FindObjectOfType<autoCombineScript>();
+            itemInventory.Clear();
+        }
+        else
+        {
+            Destroy(this);
         }
     }
 }

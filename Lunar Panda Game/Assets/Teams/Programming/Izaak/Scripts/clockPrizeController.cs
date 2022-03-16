@@ -10,6 +10,7 @@ public class clockPrizeController : MonoBehaviour
 
     [HideInInspector]
     public BoxCollider boxCol;
+    [HideInInspector]
     public Rigidbody r_body;
 
 
@@ -25,6 +26,6 @@ public class clockPrizeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(r_body.velocity);
     }
 }

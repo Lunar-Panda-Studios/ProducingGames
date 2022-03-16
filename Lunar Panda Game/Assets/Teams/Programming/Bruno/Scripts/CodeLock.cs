@@ -14,6 +14,7 @@ public class CodeLock : MonoBehaviour
     public string attemptedCode;
 
     public Transform toOpen;
+    public string AudioClipName;
 
     public void Start()
     {
@@ -27,15 +28,27 @@ public class CodeLock : MonoBehaviour
         if(attemptedCode == code)
         {
             GameEvents.current.onPuzzleComplete(id);
+            //if (Analysis.current != null)
+            //{
+            //    if (Analysis.current.consent)
+            //    {
+            //        Analysis.current.resetTimer("Code Lock");
+            //    }
+            //}
         }
         else
         {
+            //if (Analysis.current != null)
+            //{
+            //    Analysis.current.failCounterCodeLock++;
+            //}
             Debug.Log("Wrong Code");
         }
     }
 
     IEnumerator Open() //Rotates the door
     {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);
         toOpen.Rotate(new Vector3(0, 90, 0), Space.World);        
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 

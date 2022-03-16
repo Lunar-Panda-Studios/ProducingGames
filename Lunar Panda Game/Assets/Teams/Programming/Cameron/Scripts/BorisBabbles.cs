@@ -19,6 +19,12 @@ public class BorisBabbles : MonoBehaviour
     [SerializeField] float timeBetweenDisplayingOrder = 2f;
     [Tooltip("This is temporary. Just used to activate the animation of the lid opening")]
     [SerializeField] GameObject lid;
+    public Room inRoom;
+
+    public string buttonAudio;
+    public string failAudio;
+    public string completeAudio;
+    public string briefcaseAudio;
 
     void Awake()
     {
@@ -76,6 +82,7 @@ public class BorisBabbles : MonoBehaviour
         for (int i = 0; i < buttonOrder.Count; i++)
         {
             buttons[buttonOrder[i]].GetComponent<MeshRenderer>().material = greenMat;
+            SoundEffectManager.GlobalSFXManager.PlaySFX(completeAudio);
             yield return new WaitForSeconds(timeBetweenDisplayingOrder);
             buttons[buttonOrder[i]].GetComponent<MeshRenderer>().material = baseMat;
         }
@@ -107,11 +114,25 @@ public class BorisBabbles : MonoBehaviour
                         {
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
+
+                            //if (Analysis.current != null)
+                            //{
+                            //    if (Analysis.current.consent)
+                            //    {
+                            //        string name = "SimonSays" + inRoom.ToString();
+                            //        Analysis.current.resetTimer(name);
+                            //    }
+                            //}
                         }
                         else
                         {
                             //run IEnumerator that displays the buttons as all red and then resets the puzzle
                             StartCoroutine(IncorrectInput());
+
+                            /*if (Analysis.current != null)
+                            {
+                                Analysis.current.failCounterSimon++;
+                            }*/
                         }
                     }
                     else
@@ -126,6 +147,7 @@ public class BorisBabbles : MonoBehaviour
     IEnumerator ButtonPress(GameObject btn)
     {
         btn.GetComponent<MeshRenderer>().material = greenMat;
+        SoundEffectManager.GlobalSFXManager.PlaySFX(buttonAudio);
         yield return new WaitForSeconds(0.2f);
         btn.GetComponent<MeshRenderer>().material = baseMat;
     }
@@ -139,6 +161,7 @@ public class BorisBabbles : MonoBehaviour
             buttons[i].GetComponent<MeshRenderer>().material = greenMat;
         }
         yield return new WaitForSeconds(0.2f);
+        SoundEffectManager.GlobalSFXManager.PlaySFX(briefcaseAudio);
         lid.GetComponent<Animation>().Play();
     }
 
@@ -148,6 +171,7 @@ public class BorisBabbles : MonoBehaviour
         showingOrder = true;
         for (int i = 0; i < buttons.Length; i++)
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(failAudio);
             buttons[i].GetComponent<MeshRenderer>().material = redMat;
         }
         yield return new WaitForSeconds(1.5f);

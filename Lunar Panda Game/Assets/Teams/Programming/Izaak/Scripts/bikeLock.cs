@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class bikeLock : MonoBehaviour
 {
+    public string audioClipName;
     [Header("Codes")]
     [Tooltip("The combination that solves the puzzle")]
     public int[] correctCode;
@@ -14,6 +15,8 @@ public class bikeLock : MonoBehaviour
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
     public GameObject door;
+    private bool canOpen = true;
+
 
     // Update is called once per frame
     void Update()
@@ -47,11 +50,23 @@ public class bikeLock : MonoBehaviour
                 if (passes == currentCode.Length)
                 {
                     puzzleSolved = true;
+                    /*if (Analysis.current != null)
+                    {
+                        if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Bike Lock"))
+                        {
+                            Analysis.current.resetTimer("Bike Lock");
+                        }
+                    }*/
                     return puzzleSolved;
                 }
             }
             else
             {
+                /*if (Analysis.current != null)
+                {
+                    Analysis.current.failCounterBikeLock++;
+                }*/
+
                 puzzleSolved = false;
                 return false;
             }
@@ -101,11 +116,24 @@ public class bikeLock : MonoBehaviour
     {
         if (puzzleSolved)
         {
-            door.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            if (canOpen) 
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, -90, -90);
+            } 
+            canOpen = false;
+            
         }
         else
         {
-            door.gameObject.GetComponent<BoxCollider>().enabled = true;
+            if (!canOpen)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, 0, -90);
+            }
+            canOpen = true;
+
         }
     }
 }
