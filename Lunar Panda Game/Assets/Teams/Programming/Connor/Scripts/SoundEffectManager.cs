@@ -9,8 +9,6 @@ public class SoundEffectManager : MonoBehaviour
     public List<AudioClip> ClipList = new List<AudioClip>();
     private Dictionary<string, AudioClip> SFX_Library = new Dictionary<string, AudioClip>();
 
-    //Matej changes
-
     public GameObject SFX_Prefab;
     AudioSource TheSFX;
     public AudioSource stopSFX;
@@ -57,9 +55,4 @@ public class SoundEffectManager : MonoBehaviour
             TheSFX.Pause();
         }
     }
-   
-    
-
-    
-
 }
