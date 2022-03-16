@@ -115,24 +115,24 @@ public class BorisBabbles : MonoBehaviour
                             //run IEnumerator that changes all the buttons to green and then opens the briefcase
                             StartCoroutine(CorrectInput());
 
-                            if (Analysis.current != null)
-                            {
-                                if (Analysis.current.consent)
-                                {
-                                    string name = "SimonSays" + inRoom.ToString();
-                                    Analysis.current.resetTimer(name);
-                                }
-                            }
+                            //if (Analysis.current != null)
+                            //{
+                            //    if (Analysis.current.consent)
+                            //    {
+                            //        string name = "SimonSays" + inRoom.ToString();
+                            //        Analysis.current.resetTimer(name);
+                            //    }
+                            //}
                         }
                         else
                         {
                             //run IEnumerator that displays the buttons as all red and then resets the puzzle
                             StartCoroutine(IncorrectInput());
 
-                            if (Analysis.current != null)
+                            /*if (Analysis.current != null)
                             {
                                 Analysis.current.failCounterSimon++;
-                            }
+                            }*/
                         }
                     }
                     else

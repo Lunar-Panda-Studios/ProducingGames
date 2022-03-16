@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<playerMovement>().gameObject;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void save()

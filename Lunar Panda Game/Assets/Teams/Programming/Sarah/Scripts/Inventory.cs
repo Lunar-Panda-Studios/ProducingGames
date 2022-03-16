@@ -34,7 +34,6 @@ public class Inventory : MonoBehaviour
             itemInventory.Add(null);
         }
 
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

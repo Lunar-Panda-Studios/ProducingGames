@@ -46,17 +46,17 @@ public class Cheats : MonoBehaviour
         if (Input.GetKeyDown(trainKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Train v1.7.1");
+            SceneManager.LoadScene("MainTrain week7 this one");
         }
         else if (Input.GetKeyDown(hospitalKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Hospital v1.7.1");
+            SceneManager.LoadScene("Hospital THIS ONE");
         }
         else if (Input.GetKeyDown(hotelKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Hotel v1.7.1");
+            SceneManager.LoadScene("Hotel Build v1.8 1 this one");
         }
     }
 }

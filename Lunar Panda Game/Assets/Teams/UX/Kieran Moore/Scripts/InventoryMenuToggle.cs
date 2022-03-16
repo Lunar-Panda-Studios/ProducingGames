@@ -47,10 +47,10 @@ public class InventoryMenuToggle : MonoBehaviour
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
 
-                if (Analysis.current != null)
+                /*if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = true;
-                }
+                }*/
             }
             //if the inventory ui is already on screen
             else if (IsOnInventory == true)
@@ -64,10 +64,10 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                if (Analysis.current != null)
-                {
-                    Analysis.current.menuOpen = false;
-                }
+                //if (Analysis.current != null)
+                //{
+                //    Analysis.current.menuOpen = false;
+                //}
             }
         }
     }

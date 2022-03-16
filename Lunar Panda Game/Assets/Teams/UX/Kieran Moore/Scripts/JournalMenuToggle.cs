@@ -44,10 +44,10 @@ public class JournalMenuToggle : MonoBehaviour
                 pickup.enabled = false;
                 Time.timeScale = 0f;
 
-                if (Analysis.current != null)
+                /*if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = true;
-                }
+                }*/
             }
             else if (IsOnMenu == true)
             {
@@ -59,10 +59,10 @@ public class JournalMenuToggle : MonoBehaviour
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                if (Analysis.current != null)
+                /*if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = false;
-                }
+                }*/
             }
         }
     }
