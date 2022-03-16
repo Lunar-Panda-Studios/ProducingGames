@@ -21,6 +21,11 @@ public class BorisBabbles : MonoBehaviour
     [SerializeField] GameObject lid;
     public Room inRoom;
 
+    public string buttonAudio;
+    public string failAudio;
+    public string completeAudio;
+    public string briefcaseAudio;
+
     void Awake()
     {
         baseMat = buttons[0].GetComponent<MeshRenderer>().material;
@@ -77,6 +82,7 @@ public class BorisBabbles : MonoBehaviour
         for (int i = 0; i < buttonOrder.Count; i++)
         {
             buttons[buttonOrder[i]].GetComponent<MeshRenderer>().material = greenMat;
+            SoundEffectManager.GlobalSFXManager.PlaySFX(completeAudio);
             yield return new WaitForSeconds(timeBetweenDisplayingOrder);
             buttons[buttonOrder[i]].GetComponent<MeshRenderer>().material = baseMat;
         }
@@ -141,6 +147,7 @@ public class BorisBabbles : MonoBehaviour
     IEnumerator ButtonPress(GameObject btn)
     {
         btn.GetComponent<MeshRenderer>().material = greenMat;
+        SoundEffectManager.GlobalSFXManager.PlaySFX(buttonAudio);
         yield return new WaitForSeconds(0.2f);
         btn.GetComponent<MeshRenderer>().material = baseMat;
     }
@@ -154,6 +161,7 @@ public class BorisBabbles : MonoBehaviour
             buttons[i].GetComponent<MeshRenderer>().material = greenMat;
         }
         yield return new WaitForSeconds(0.2f);
+        SoundEffectManager.GlobalSFXManager.PlaySFX(briefcaseAudio);
         lid.GetComponent<Animation>().Play();
     }
 
@@ -163,6 +171,7 @@ public class BorisBabbles : MonoBehaviour
         showingOrder = true;
         for (int i = 0; i < buttons.Length; i++)
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(failAudio);
             buttons[i].GetComponent<MeshRenderer>().material = redMat;
         }
         yield return new WaitForSeconds(1.5f);
