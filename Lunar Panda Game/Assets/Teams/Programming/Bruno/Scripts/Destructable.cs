@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
+    //Filip Changes
+    public GameObject doorL;
+    public GameObject doorR;
+
     public string audioClipName;
     public int id;
     [Header("Prefabs")]
@@ -45,6 +49,10 @@ public class Destructable : MonoBehaviour
             {
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == Hammer)
                 {
+                    //Filip Changes
+                    doorL.transform.rotation = Quaternion.Euler(-90, 90, -180);
+                    doorR.transform.rotation = Quaternion.Euler(-90, -90, 0);
+
                     GameEvents.current.onPuzzleComplete(id);
                     if (Analysis.current != null)
                     {

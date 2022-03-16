@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class InteractSound : MonoBehaviour
 {
-
-    public string audioClipName;    
-
-    
+    public string audioClipName;
 
     // Update is called once per frame
     void Update()
@@ -26,7 +23,6 @@ public class InteractSound : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
-                print("I played sound");
                 SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
             }
         }

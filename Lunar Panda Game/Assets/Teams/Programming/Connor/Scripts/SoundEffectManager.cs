@@ -15,7 +15,6 @@ public class SoundEffectManager : MonoBehaviour
     AudioSource TheSFX;
     public AudioSource stopSFX;
 
-
     public static SoundEffectManager GlobalSFXManager;
 
     private void Awake()

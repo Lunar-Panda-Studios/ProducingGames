@@ -15,7 +15,8 @@ public class bikeLock : MonoBehaviour
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
     public GameObject door;
-    private bool open = false;
+    private bool canOpen = true;
+
 
     // Update is called once per frame
     void Update()
@@ -115,15 +116,24 @@ public class bikeLock : MonoBehaviour
     {
         if (puzzleSolved)
         {
-            if (!open) SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-            open = true;
-            door.gameObject.GetComponent<BoxCollider>().enabled = false;
-            door.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            if (canOpen) 
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, -90, -90);
+            } 
+            canOpen = false;
+            
         }
         else
         {
-            door.gameObject.GetComponent<BoxCollider>().enabled = true;
-            door.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            if (!canOpen)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, 0, -90);
+            }
+            canOpen = true;
+
         }
     }
 }
