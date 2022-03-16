@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class bikeLock : MonoBehaviour
 {
+    public string audioClipName;
     [Header("Codes")]
     [Tooltip("The combination that solves the puzzle")]
     public int[] correctCode;
@@ -14,6 +15,7 @@ public class bikeLock : MonoBehaviour
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
     public GameObject door;
+    private bool open = false;
 
     // Update is called once per frame
     void Update()
@@ -113,6 +115,8 @@ public class bikeLock : MonoBehaviour
     {
         if (puzzleSolved)
         {
+            if (!open) SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+            open = true;
             door.gameObject.GetComponent<BoxCollider>().enabled = false;
             door.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class bodyController : MonoBehaviour
 {
+    public string AudioClip;
+    private float audioClipLenght;
+
     public int id;
     [Header("Puzzle Values")]
     [Tooltip("The ID of this patient")]
@@ -61,6 +64,7 @@ public class bodyController : MonoBehaviour
                         if (inventoryScript.itemInventory[inventoryScript.selectedItem] == scalpelData)
                         {
                             //Cutscene or animation or whatever will go here
+                            //StartCoroutine(OpenBody(AudioClip.Lenght))
                             changeMesh();
                             isCut = true;
                             if (isCorrect == true)
@@ -80,7 +84,11 @@ public class bodyController : MonoBehaviour
             }
         }
     }
-
+    private IEnumerator OpenBody(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        mesh.mesh = cutBody;
+    }
     public void changeMesh()
     {
         mesh.mesh = cutBody;

@@ -7,6 +7,7 @@ public class ObjectiveTrigger : MonoBehaviour
     public float TimeToShowDialogue;
     public string ObjectiveNumberToDisplay;
     public string TextToDisplay;
+    public string JournalObjectiveText;
     public Text ObjectiveNumberToShow;
     public Text TextToShow;
     public Text ObjectiveForJournal;
@@ -20,7 +21,7 @@ public class ObjectiveTrigger : MonoBehaviour
                 ObjectiveNumberToShow.text = ObjectiveNumberToDisplay;
                 TextToShow.text = TextToDisplay;
                 TextToShow.enabled = true;
-                ObjectiveForJournal.text = TextToDisplay;
+                ObjectiveForJournal.text = JournalObjectiveText;
                 ObjectiveNumberToShow.enabled = true;
 
                 yield return new WaitForSeconds(TimeToShowDialogue);

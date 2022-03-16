@@ -7,6 +7,17 @@ public class WalkingSound : MonoBehaviour
     private Rigidbody p_rigidbody;
     private bool playing;
     public AudioSource soundSource;
+    public enum TypeOfFloor
+    {
+        Wood,
+        Concrete,
+        Puddle,
+        Carpet,
+        Grass,
+        Chips,
+        Tiles
+    }
+    public TypeOfFloor typeOfFloor;
 
     public SoundEffectManager soundEffectManager;
     void Start()

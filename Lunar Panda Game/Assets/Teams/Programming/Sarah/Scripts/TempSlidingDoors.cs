@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TempSlidingDoors : MonoBehaviour
 {
+    public string audioClipName;
     bool move;
     public GameObject MoveTo;
     Vector3 startLocation;
@@ -54,6 +55,7 @@ public class TempSlidingDoors : MonoBehaviour
     {
         if(id == this.id)
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
             changeTarget();
             move = true;
         }

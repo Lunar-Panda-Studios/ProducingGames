@@ -26,6 +26,7 @@ public class InteractSound : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
+                print("I played sound");
                 SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
             }
         }

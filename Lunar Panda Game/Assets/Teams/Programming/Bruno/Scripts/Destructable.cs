@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
+    public string audioClipName;
     public int id;
     [Header("Prefabs")]
     [Tooltip("Destroyable Version of the gameobject")]
@@ -61,7 +62,7 @@ public class Destructable : MonoBehaviour
     {
         if(id == this.id && this.gameObject != null)
         {
-            
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
             //It instantiates the destroyable version of the game object in the same position as the original object and destroys the original object
             Instantiate(destroyedVersion, transform.position, transform.rotation);
             Destroy(gameObject);
