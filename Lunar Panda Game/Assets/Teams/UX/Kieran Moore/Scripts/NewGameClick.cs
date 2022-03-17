@@ -8,14 +8,31 @@ public class NewGameClick : MonoBehaviour
 {
     public Button yourButton;
     public string SceneToLoad;
+    public GameObject LoadScreenOBJ;
+    public float DelayForLoading;
     void Start()
     {
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
     }
 
+
+    IEnumerator LoadSceneAsync()
+    {
+        yield return new WaitForSeconds(DelayForLoading);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneToLoad);
+
+        while (!asyncLoad.isDone)
+        {
+            print("Loading");
+            yield return null;
+        }
+    }
+
+
     void TaskOnClick()
     {
-        SceneManager.LoadScene(SceneToLoad);
+        LoadScreenOBJ.SetActive(true);
+        StartCoroutine("LoadSceneAsync");
     }
 }
