@@ -38,21 +38,28 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && pickupControl.heldItem.GetComponent<HoldableItem>())
         {
             selectItem(true);
         }
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f && pickupControl.heldItem.GetComponent<HoldableItem>())
         {
             selectItem(false);
         }
-        if (Input.GetButtonDown("PutAway"))
+        if (Input.GetButtonDown("PutAway") && pickupControl.heldItem.GetComponent<HoldableItem>())
         {
             toggleHeldItem();
         }
         if(Input.GetButtonDown("Interact") && itemInventory[selectedItem] != null)
         {
-            itemInventory[selectedItem].timesUses++;
+            if (pickupControl.heldItem != null)
+            {
+                if (pickupControl.heldItem.GetComponent<HoldableItem>())
+                {
+                    itemInventory[selectedItem].timesUses++;
+                }
+            }
+
         }
     }
 

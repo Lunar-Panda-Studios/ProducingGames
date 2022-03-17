@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public Inventory inventory;
     public PuzzleData completion;
     internal bool canSave;
+    internal int saveFile = 1;
+    internal string currentScene;
+    internal bool subtitles;
 
     private void Awake()
     {
@@ -41,23 +44,51 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<Inventory>();
+        completion = FindObjectOfType<PuzzleData>();
         player = FindObjectOfType<playerMovement>().gameObject;
     }
 
     public void save()
     {
+        currentScene = SceneManager.GetActiveScene().name;
+        print(whichLevel);
         Database.current.locationUpdate();
-        SaveSystem.save();
+        SaveSystem.save(saveFile);
         print("Save");
+
     }
 
-    public void load()
+    IEnumerator load(int slot)
     {
-        GameData data = SaveSystem.load();
+        GameData data = SaveSystem.load(slot);
+
         if (data != null)
         {
+            bool sceneJustLoad = false ;
+
+            if (whichLevel != data.whichLevel)
+            {
+                whichLevel = data.whichLevel;
+                AsyncOperation loadScene = SceneManager.LoadSceneAsync("Train v1.8");
+
+                while(!loadScene.isDone)
+                {
+                    yield return null;
+                }
+
+                sceneJustLoad = true;
+            }
+
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
             player.transform.eulerAngles = new Vector3(data.rotation[0], data.rotation[1], data.rotation[2]);
+
+            print(data.position[0]);
 
             //inventory.itemInventory = data.itemInven;
             int index = 0;
@@ -148,7 +179,10 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    GameEvents.current.onPuzzleReset(i + 1);
+                    if (!sceneJustLoad)
+                    {
+                        GameEvents.current.onPuzzleReset(i + 1);
+                    }
                 }
             }
 
@@ -158,6 +192,13 @@ public class GameManager : MonoBehaviour
         {
             print("No load data");
         }
+
+        yield return null;
+    }
+
+    public void loadButton(int slot = 0)
+    {
+        StartCoroutine(load(slot));
     }
 
     public void LoadCurrentScene(GameState state) //Scene Loader. Not doing anything as of right now as we don't have any scenes to load.
@@ -173,7 +214,7 @@ public class GameManager : MonoBehaviour
                     {
                         case 0:
                             {
-                                SceneManager.LoadScene("Train");
+                                SceneManager.LoadScene("Train v1.8");
                                 break;
                             }
                         case 1:
@@ -197,6 +238,8 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+        currentScene = SceneManager.GetActiveScene().name;
     }
 
 
