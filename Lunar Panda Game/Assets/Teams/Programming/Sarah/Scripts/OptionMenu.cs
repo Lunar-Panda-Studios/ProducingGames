@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class OptionMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
+    public Volume postProcessV;
+    public VSync vSync;
+
 
     private void Start()
     {
@@ -71,20 +76,21 @@ public class OptionMenu : MonoBehaviour
     {
         print("Change Quality " + index);
         QualitySettings.SetQualityLevel(index);
-    }
+    }    
 
-    public void VsyncEnabled()
+    public void motionBlur(bool enable)
     {
-       
-    }
+        VolumeProfile profile = postProcessV.sharedProfile;
 
-    public void motionBlur()
-    {
-        
+        profile.TryGet(out MotionBlur motionBlur);
+        motionBlur.active = enable;
     }
 
     public void brightness(float value)
     {
-        Screen.brightness = value;
+        VolumeProfile profile = postProcessV.sharedProfile;
+        
+        profile.TryGet(out Exposure exposure);
+        exposure.compensation.value = value;
     }
 }
