@@ -201,6 +201,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(load(slot));
     }
 
+    public void deleteButton(int slot)
+    {
+        SaveSystem.delete(slot);
+    }
+
     public void LoadCurrentScene(GameState state) //Scene Loader. Not doing anything as of right now as we don't have any scenes to load.
     {
         gameStates = state;

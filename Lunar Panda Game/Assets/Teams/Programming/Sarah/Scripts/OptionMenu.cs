@@ -8,7 +8,7 @@ public class OptionMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     Resolution[] resolutions;
-    Dropdown resolutionDropdown;
+    public Dropdown resolutionDropdown;
 
     private void Start()
     {
@@ -37,12 +37,12 @@ public class OptionMenu : MonoBehaviour
 
     public void masterVolume(float volume)
     {
-        audioMixer.SetFloat("Master", volume);
+        audioMixer.SetFloat("MastVol", volume);
     }
 
     public void SFXVolume(float volume)
     {
-        audioMixer.SetFloat("SFX", volume);
+        audioMixer.SetFloat("SFXVol", volume);
     }
 
     public void dialogVolume(float volume)
@@ -60,8 +60,16 @@ public class OptionMenu : MonoBehaviour
         GameManager.Instance.subtitles = enable;
     }
 
+    public void resolution(int index)
+    {
+        print("Change Resolution " + index);
+        Resolution resolution = resolutions[index];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
     public void qualitySettings(int index)
     {
+        print("Change Quality " + index);
         QualitySettings.SetQualityLevel(index);
     }
 
