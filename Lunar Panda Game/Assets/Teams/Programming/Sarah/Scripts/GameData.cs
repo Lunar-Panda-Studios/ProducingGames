@@ -20,6 +20,7 @@ public class GameData
     public GameData(GameManager data)
     {
         whichLevel = data.whichLevel;
+        sceneName = data.currentScene;
 
         position = new float[3];
         position[0] = data.player.transform.position.x;

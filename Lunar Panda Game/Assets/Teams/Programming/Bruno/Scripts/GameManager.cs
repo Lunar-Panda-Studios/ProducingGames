@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -43,8 +43,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -61,7 +59,6 @@ public class GameManager : MonoBehaviour
         Database.current.locationUpdate();
         SaveSystem.save(saveFile);
         print("Save");
-
     }
 
     IEnumerator load(int slot)
@@ -75,7 +72,7 @@ public class GameManager : MonoBehaviour
             if (whichLevel != data.whichLevel)
             {
                 whichLevel = data.whichLevel;
-                AsyncOperation loadScene = SceneManager.LoadSceneAsync("Train v1.8");
+                AsyncOperation loadScene = SceneManager.LoadSceneAsync(data.sceneName);
 
                 while(!loadScene.isDone)
                 {
