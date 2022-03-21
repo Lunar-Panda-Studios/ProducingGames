@@ -28,7 +28,6 @@ public class bikeLock : MonoBehaviour
     //Gives the element the current value of its place in the code
     public int getCurrentCode(int digitPlace)
     {
-        Debug.Log(currentCode[0]);
         return currentCode[digitPlace - 1];
     }
 

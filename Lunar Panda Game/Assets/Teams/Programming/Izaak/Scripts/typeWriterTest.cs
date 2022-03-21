@@ -43,6 +43,11 @@ public class typeWriterTest : MonoBehaviour
                 timeBetweenLettersCounter = timeBetweenLetters;
                 dialogueText.text = currentDialogue;
             }
+
+            if(currentDialogue == dialogue)
+            {
+                playText = false;
+            }
         }
     }
 
@@ -52,5 +57,7 @@ public class typeWriterTest : MonoBehaviour
         timeBetweenLettersCounter = timeBetweenLetters;
         //Empties the current dialogue ready for use
         currentDialogue = ("");
+        timeBetweenLettersCounter = 0;
+        revealedLetters = 0;
     }
 }

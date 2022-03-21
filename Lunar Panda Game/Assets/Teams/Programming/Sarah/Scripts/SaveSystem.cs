@@ -6,26 +6,26 @@ using System.IO;
 
 public static class SaveSystem
 {
-    public static void save()
+    internal static string path;
+    public static void save(int savefile)
     {
+        asignPath(savefile);
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.save";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        //Saved data here
         GameData data = new GameData(GameManager.Instance);
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static GameData load()
+    public static GameData load(int slot)
     {
-        string path = Application.persistentDataPath + "/player.save";
+        asignPath(slot);
+
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-
 
             GameData data = formatter.Deserialize(stream) as GameData;
 
@@ -40,9 +40,38 @@ public static class SaveSystem
         }
     }
 
-    public static void delete()
+    public static void asignPath(int savefile)
     {
-        string path = Application.persistentDataPath + "player.save";
+        switch (savefile)
+        {
+            case 1:
+                {
+                    path = Application.persistentDataPath + "/slot1.save";
+                    break;
+                }
+            case 2:
+                {
+                    path = Application.persistentDataPath + "/slot2.save";
+                    break;
+                }
+            case 3:
+                {
+                    path = Application.persistentDataPath + "/slot3.save";
+                    break;
+                }
+            default:
+                {
+                    path = Application.persistentDataPath + "/slot1.save";
+                    break;
+                }
+
+        }
+    }
+
+    public static void delete(int fileSlot)
+    {
+        asignPath(fileSlot);
+
         if (File.Exists(path))
         {
             File.Delete(path);

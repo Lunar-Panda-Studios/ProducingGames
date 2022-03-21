@@ -293,7 +293,6 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                     line.GetComponent<Node>().connectedNode = InputNodes[i].GetComponent<Node>().desiredNode.transform.gameObject;*/
                 }
 
-                print("Auto Completed");
             }
 
             PuzzleData.current.completedEvents[id] = true;

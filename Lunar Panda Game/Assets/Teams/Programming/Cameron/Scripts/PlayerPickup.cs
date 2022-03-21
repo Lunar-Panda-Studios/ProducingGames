@@ -38,6 +38,7 @@ public class PlayerPickup : MonoBehaviour
     [Header("Rotatable Items")]
     [Tooltip("The distance away from the camera that rotatable items are put")]
     [SerializeField] float rotDist;
+    internal bool holdingNarrative = false;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -75,6 +76,7 @@ public class PlayerPickup : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<RotatableItem>())
                 {
+                    holdingNarrative = true;
                     holdDist = rotDist;
                     player.gameObject.GetComponent<playerMovement>().enabled = false;
                     FindObjectOfType<lockMouse>().canLook = false;
@@ -87,6 +89,7 @@ public class PlayerPickup : MonoBehaviour
             //if the player is holding an item and presses 'e', it drops said item
             if (heldItem.GetComponent<RotatableItem>())
             {
+                holdingNarrative = false;
                 GameObject tempHeld = heldItem;
                 heldItem = null;
                 tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
