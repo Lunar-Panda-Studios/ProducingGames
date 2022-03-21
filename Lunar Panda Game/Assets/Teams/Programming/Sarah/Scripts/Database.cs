@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Database: MonoBehaviour
 {
+
+
+
     public static Database current;
     public List<ItemData> allItems;
     public List<DocumentData> allDocs;
     public List<StoryData> allStoryNotes;
+    public List<Objectives> objectives;
+
     public List<HoldableItem> itemsInScene;
     public static List<Vector3> itemLocation;
     public static Dictionary<HoldableItem, Vector3> getLocation;
@@ -48,6 +53,11 @@ public class Database: MonoBehaviour
         for (int i = 0; i < allStoryNotes.Count; i++)
         {
             getStoryID.Add(allStoryNotes[i], i.ToString());
+        }
+
+        for (int i = 0; i < objectives.Count; i++)
+        {
+            objectives[i].id = i;
         }
 
         itemUpdate();

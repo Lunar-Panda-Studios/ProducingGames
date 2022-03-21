@@ -5,7 +5,8 @@ using UnityEngine;
 public class BoxToDoor : MonoBehaviour
 {
     public int id;
-    public GameObject LinkedDoor;
+    public GameObject LinkedDoor1;
+    public GameObject LinkedDoor2;
     public GameObject LinkedBox;
     bool switchState = false;
     InteractRaycasting ray;
@@ -14,7 +15,8 @@ public class BoxToDoor : MonoBehaviour
     {
         ray = FindObjectOfType<InteractRaycasting>();
         //LinkedDoor.GetComponent<OpenClose>().id = id;
-        LinkedDoor.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor1.GetComponent<TempSlidingDoors>().id = id;
+        LinkedDoor2.GetComponent<TempSlidingDoors>().id = id;
         LinkedBox.GetComponent<PowerChanging>().id = id;
     }
 

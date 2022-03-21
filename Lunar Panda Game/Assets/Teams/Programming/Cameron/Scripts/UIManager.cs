@@ -49,6 +49,12 @@ public class UIManager : MonoBehaviour
     internal int leftPage = 0;
     internal int rightPage = 1;
 
+    [Header("Objective UI")]
+    public Text objectText;
+    public GameObject objectivesTab;
+    int objectiveNumber = 0;
+    ObjectiveSystem objectiveSystem;
+
     void Awake()
     {
         //setting up singleton
@@ -68,21 +74,14 @@ public class UIManager : MonoBehaviour
         InitUI();
         inventory = FindObjectOfType<Inventory>();
         twt = GameObject.FindObjectOfType<typeWriterTest>();
+        objectiveSystem = FindObjectOfType<ObjectiveSystem>();
+        updateObject();
     }
 
-  /*  public void ChangeStaminaUsage(float value)
+    private void Update()
     {
-        if (staminaBar.gameObject.activeSelf)
-        {
-            staminaBar.value = value;
-        }
-    }*/
-
-  /*  public void ToggleStaminaBar()
-    {
-        //toggles between active and inactive whenever this is called
-        staminaBar.gameObject.SetActive(!staminaBar.gameObject.activeSelf);
-    }*/
+        
+    }
 
     public void ToggleCrosshair()
     {
@@ -104,10 +103,6 @@ public class UIManager : MonoBehaviour
 
     void InitUI()
     {
-        //init stamina
-       /* staminaBar.maxValue = StaminaBar.instance.maxStam;
-        staminaBar.value = staminaBar.maxValue;
-        staminaBar.gameObject.SetActive(staminaBar.gameObject.activeSelf);*/
         //init crosshair
         crosshair.gameObject.SetActive(crosshair.gameObject.activeSelf);
         //init doc viewing system
@@ -124,9 +119,6 @@ public class UIManager : MonoBehaviour
             fadeGroup.alpha = elapsedTime / fadeDuration;
             yield return null;
         }
-        twt.playText = true;
-        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-        Time.timeScale = 0;
     }
 
     public void showDocument(DocumentData data, ViewDocument documentScript)
@@ -341,5 +333,23 @@ public class UIManager : MonoBehaviour
             rightPageImageLandscape.color = new Color(0, 0, 0, 0);
             rightPageImagePortrait.color = new Color(0, 0, 0, 0);
         }
+    }
+
+    public void updateObject()
+    {
+        objectText.text = objectiveSystem.currentObjective.description;
+    }
+
+    public void textToScreen(string dialogue)
+    {
+        twt.setupText();
+        twt.dialogue = dialogue;
+        twt.dialogueText.enabled = true;
+        twt.playText = true;
+    }
+
+    public void diableSubtitles()
+    {
+        twt.dialogueText.enabled = false;
     }
 }

@@ -38,21 +38,28 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && !pickupControl.holdingNarrative)
         {
             selectItem(true);
         }
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f && !pickupControl.holdingNarrative)
         {
             selectItem(false);
         }
-        if (Input.GetButtonDown("PutAway"))
+        if (Input.GetButtonDown("PutAway") && !pickupControl.holdingNarrative)
         {
             toggleHeldItem();
         }
         if(Input.GetButtonDown("Interact") && itemInventory[selectedItem] != null)
         {
-            itemInventory[selectedItem].timesUses++;
+            if (pickupControl.heldItem != null)
+            {
+                if (!pickupControl.holdingNarrative)
+                {
+                    itemInventory[selectedItem].timesUses++;
+                }
+            }
+
         }
     }
 
@@ -179,20 +186,6 @@ public class Inventory : MonoBehaviour
             heldItem.transform.position = player.transform.position;
             pickupControl.PickupItem(heldItem.transform);
             heldItem.SetActive(true);
-        }
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        if (level < 3)
-        {
-            pickupControl = FindObjectOfType<PlayerPickup>();
-            autoCombine = FindObjectOfType<autoCombineScript>();
-            itemInventory.Clear();
-        }
-        else
-        {
-            Destroy(this);
         }
     }
 }

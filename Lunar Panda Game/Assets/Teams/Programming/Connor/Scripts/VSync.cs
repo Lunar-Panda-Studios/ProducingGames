@@ -14,4 +14,9 @@ public class VSync : MonoBehaviour
         //QualitySettings.vSyncCount = 4;
         //QualitySettings.vSyncCount = 0;
     }
+
+    public void toggleVSync(bool enable) 
+    {
+        QualitySettings.vSyncCount = enable ? 1 : 0;
+    }
 }
