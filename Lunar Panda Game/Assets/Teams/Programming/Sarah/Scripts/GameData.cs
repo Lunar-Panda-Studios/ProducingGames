@@ -14,9 +14,14 @@ public class GameData
     public List<int> puzzlesEvents;
     public List<bool> puzzleCompleted;
     public float?[,] itemsInScene;
+    public string sceneName;
+    public int whichLevel;
 
     public GameData(GameManager data)
     {
+        whichLevel = data.whichLevel;
+        sceneName = data.currentScene;
+
         position = new float[3];
         position[0] = data.player.transform.position.x;
         position[1] = data.player.transform.position.y;
@@ -31,17 +36,24 @@ public class GameData
 
         for(int i = 0; i < Database.getLocation.Count; i++)
         {
-            if(!data.inventory.itemInventory.Contains(Database.current.itemsInScene[i].GetComponent<HoldableItem>().data))
+            if (Database.current.itemsInScene[i] == null)
             {
-                itemsInScene[i,0] = Database.itemLocation[i].x;
-                itemsInScene[i,1] = Database.itemLocation[i].y;
-                itemsInScene[i,2] = Database.itemLocation[i].z;
+                if (!data.inventory.itemInventory.Contains(Database.current.itemsInScene[i].GetComponent<HoldableItem>().data))
+                {
+                    itemsInScene[i, 0] = Database.itemLocation[i].x;
+                    itemsInScene[i, 1] = Database.itemLocation[i].y;
+                    itemsInScene[i, 2] = Database.itemLocation[i].z;
+                }
+                else
+                {
+                    itemsInScene[i, 0] = null;
+                    itemsInScene[i, 1] = null;
+                    itemsInScene[i, 2] = null;
+                }
             }
             else
             {
-                itemsInScene[i, 0] = null;
-                itemsInScene[i, 1] = null;
-                itemsInScene[i, 2] = null;
+                break;
             }
         }
 
