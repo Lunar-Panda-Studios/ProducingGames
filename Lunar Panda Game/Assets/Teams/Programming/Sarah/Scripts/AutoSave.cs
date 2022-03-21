@@ -5,7 +5,8 @@ using UnityEngine;
 public class AutoSave : MonoBehaviour
 {
     GameManager manager;
-    internal bool shouldSave = false;
+    public bool shouldSave = false;
+    public bool mainSave = false;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class AutoSave : MonoBehaviour
     {
         if(other.CompareTag("Player") && shouldSave)
         {
-            manager.save();
+            manager.save(mainSave);
             gameObject.SetActive(false);
         }
     }
