@@ -12,46 +12,47 @@ public class HorrorTrigger : MonoBehaviour
     public bool disableAtStart;
     public AudioSource audioSource;
 
-    [Header("Disable Movement")]
+    [Header("---DISABLE MOVEMENT SETTINGS---")]
     public bool disablePlayerMovement;
     public float delayBeforeMovingAgain;
 
-    [Header("Move object settings")]
+    [Header("---MOVE OBJECT SETTINGS---")]
     public bool move;
     public MovableObject movableObject;
     public float delayMoveObject;
 
-    [Header("Teleport object settings")]
+    [Header("---TELEPORT OBJECT SETTINGS---")]
     public bool teleport;
     public MovableObject teleportObject;
     
 
-    [Header("Lights out settings")]
+    [Header("---LIGHTS ON/OFF SETTINGS---")]
     public bool lights;
+    public bool lightsOnOff;
     public List<Light> Lights = new List<Light>();
 
-    [Header("Jumpscare settings")]
+    [Header("---JUMPSCARE SETTINGS---")]
     public bool jump;
     public Image jumpSImage;
     public float stayOnScreenFor;
 
-    [Header("Look At settings")]
-    private Vector3 lookPos = new Vector3();
-    private bool startLook;
+    [Header("---LOOK AT SETTINGS---")]
     public bool look;
     public Transform lookAt;
     public float lookAtDelay;
     public float damping;
+    private Vector3 lookPos = new Vector3();
+    private bool startLook;
 
-    [Header("Play Sound settings")]
+    [Header("---PLAY SOUND SETTINGS---")]
     public bool play;
     public string clipName;
 
-    [Header("Drop Object settings")]
+    [Header("---DROP OBJECT SETTINGS---")]
     public bool drop;
     public GameObject dropObject;
 
-    [Header("Enable other trigger")]
+    [Header("---ENABLE OTHER TRIGGER SETTINGS---")]
     public bool enableOtherTrigger;
     public HorrorTrigger otherTrigger;
     
@@ -59,6 +60,7 @@ public class HorrorTrigger : MonoBehaviour
     {
         if (disableAtStart) ActivateTriggerCollider(false);
         player = GameObject.FindWithTag("Player");
+        camera = player.GetComponentInChildren<Camera>().gameObject;
     }
     public void Update()
     {
@@ -77,7 +79,7 @@ public class HorrorTrigger : MonoBehaviour
             if (disablePlayerMovement) DisablePlayerMovement();
             if (move) Move();
             if (teleport) Teleport();
-            if (lights) LightsOut();
+            if (lights) LightsOnOff(lightsOnOff);
             if (jump) Jumpscare();
             if (look) LookAt();
             if (play) PlaySound(clipName);
@@ -135,11 +137,11 @@ public class HorrorTrigger : MonoBehaviour
         //Design-vise make sure the player cannot see the transport
         movableObject.Teleport();
     }
-    public void LightsOut()
+    public void LightsOnOff(bool value)
     {
         foreach (Light light in Lights)
         {
-            light.enabled = false;
+            light.enabled = value;
         }
     }
     public void Jumpscare()
