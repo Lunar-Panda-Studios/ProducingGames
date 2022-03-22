@@ -15,14 +15,14 @@ public class Flashlight : MonoBehaviour
 
 
     //Matej changes - just flickering :)
-    public float minWaitTime;
-    public float maxWaitTime;
+    public float minWaitTime = 5;
+    public float maxWaitTime = 8;
 
-    public float stopMinWaitTime;
-    public float stopMaxWaitTime;
+    public float stopMinWaitTime = 0;
+    public float stopMaxWaitTime = 0.2f;
 
-    public int minFlicks;
-    public int maxFlicks;
+    public int minFlicks = 2;
+    public int maxFlicks = 3;
 
 
     private bool isOn;
