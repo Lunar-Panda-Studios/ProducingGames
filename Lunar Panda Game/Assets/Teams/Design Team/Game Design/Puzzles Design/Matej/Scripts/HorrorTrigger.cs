@@ -8,7 +8,7 @@ public class HorrorTrigger : MonoBehaviour
     private GameObject player;
     //Rotating camera to the mirror settings
     public GameObject camera;
-    
+
     public bool disableAtStart;
     public AudioSource audioSource;
 
@@ -24,7 +24,7 @@ public class HorrorTrigger : MonoBehaviour
     [Header("---TELEPORT OBJECT SETTINGS---")]
     public bool teleport;
     public MovableObject teleportObject;
-    
+
 
     [Header("---LIGHTS ON/OFF SETTINGS---")]
     public bool lights;
@@ -52,10 +52,22 @@ public class HorrorTrigger : MonoBehaviour
     public bool drop;
     public GameObject dropObject;
 
+    [Header("---LEVITATE OBJECTS SETTINGS---")]
+    public bool levitate;
+    public List<FallObject> LevitateObjects = new List<FallObject>();
+    public float forceUp;
+    public float forceDown;
+    public float delay;
+
+    [Header("---THROW OBJECT SETTINGS---")]
+    public bool throW;
+    public FallObject throwObject;
+    public float force;
+
     [Header("---ENABLE OTHER TRIGGER SETTINGS---")]
     public bool enableOtherTrigger;
     public HorrorTrigger otherTrigger;
-    
+
     public void Start()
     {
         if (disableAtStart) ActivateTriggerCollider(false);
@@ -64,13 +76,13 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void Update()
     {
-        if(startLook)
+        if (startLook)
         {
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(lookPos),
                         Time.deltaTime * damping);
             camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
         }
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -84,10 +96,12 @@ public class HorrorTrigger : MonoBehaviour
             if (look) LookAt();
             if (play) PlaySound(clipName);
             if (drop) DropObject();
+            if (levitate) Levitate();
+            if (throW) ThrowObject(force);
             if (enableOtherTrigger) otherTrigger.ActivateTriggerCollider(true);
         }
     }
-    
+
     private IEnumerator PlayerMovementCoroutine(float Delay)
     {
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -116,6 +130,7 @@ public class HorrorTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay);
         startLook = false;
         player.GetComponentInChildren<lockMouse>().enabled = true;
+        Destroy(this);
     }
     public void DisablePlayerMovement()
     {
@@ -135,7 +150,7 @@ public class HorrorTrigger : MonoBehaviour
     {
         //Basically just telport the movable object
         //Design-vise make sure the player cannot see the transport
-        movableObject.Teleport();
+        teleportObject.Teleport();
     }
     public void LightsOnOff(bool value)
     {
@@ -151,15 +166,10 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void LookAt()
     {
-        //GameObject cam = player.GetComponentInChildren<Camera>().gameObject;
         StartCoroutine(LookAtCoroutine(lookAtDelay));
         startLook = true;
         lookPos = lookAt.position - player.transform.position;
         lookPos.y = 0;
-        //player.transform.rotation = Quaternion.LookRotation(lookPos);
-        
-
-
     }
     public void ActivateTriggerCollider(bool value)
     {
@@ -173,5 +183,20 @@ public class HorrorTrigger : MonoBehaviour
     public void DropObject()
     {
         dropObject.GetComponent<Rigidbody>().useGravity = true;
+        Destroy(this);
+    }
+    public void Levitate()
+    {
+        foreach(FallObject levitateObject in LevitateObjects)
+        {
+            levitateObject.Levitate(forceUp,forceDown,delay);
+        }
+        Destroy(this);
+    }
+    public void ThrowObject(float force)
+    {
+        throwObject.Fly(force);
+        Destroy(this);
+
     }
 }
