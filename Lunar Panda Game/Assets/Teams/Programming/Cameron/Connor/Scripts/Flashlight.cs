@@ -21,8 +21,8 @@ public class Flashlight : MonoBehaviour
     public float stopMinWaitTime;
     public float stopMaxWaitTime;
 
-    public float minFlicks;
-    public float maxFlicks;
+    public int minFlicks;
+    public int maxFlicks;
 
 
     private bool isOn;
@@ -52,26 +52,24 @@ public class Flashlight : MonoBehaviour
     {
         while (true)
         {
-            if (isOn)
+            if(powerOn)
             {
-                yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-                lightSource.enabled = !lightSource.enabled;
-                isOn = false;
-            }
-            if (!isOn)
-            {
-                for (int i = 0; i <= Random.Range(minFlicks, maxFlicks) * 2; i++)
+                if (isOn)
                 {
-                    yield return new WaitForSeconds(Random.Range(stopMinWaitTime, stopMaxWaitTime));
+                    yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
                     lightSource.enabled = !lightSource.enabled;
-                    print(".");
-                    isOn = true;
+                    isOn = false;
                 }
-
-            }
+                if (!isOn)
+                {
+                    for (int i = 0; i <= Random.Range(minFlicks, maxFlicks) * 2; i++)
+                    {
+                        yield return new WaitForSeconds(Random.Range(stopMinWaitTime, stopMaxWaitTime));
+                        lightSource.enabled = !lightSource.enabled;
+                        isOn = true;
+                    }
+                }
+            } 
         }
-
     }
-
-
 }
