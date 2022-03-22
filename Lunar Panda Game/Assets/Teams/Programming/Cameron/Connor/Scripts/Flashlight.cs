@@ -56,8 +56,8 @@ public class Flashlight : MonoBehaviour
             {
                 if (isOn)
                 {
+                    lightSource.intensity = 28000;
                     yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-                    lightSource.enabled = !lightSource.enabled;
                     isOn = false;
                 }
                 if (!isOn)
@@ -65,7 +65,7 @@ public class Flashlight : MonoBehaviour
                     for (int i = 0; i <= Random.Range(minFlicks, maxFlicks) * 2; i++)
                     {
                         yield return new WaitForSeconds(Random.Range(stopMinWaitTime, stopMaxWaitTime));
-                        lightSource.enabled = !lightSource.enabled;
+                        lightSource.intensity = Random.Range(5000, 10000);
                         isOn = true;
                     }
                 }

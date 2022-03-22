@@ -9,7 +9,7 @@ public class FogMechanic : MonoBehaviour
     Volume volume;
     Fog fog;
 
-    float maxFog = 20;
+    float maxFog = 10;
     float minFog = 1.5f;
     float currentFog = 1;
 
