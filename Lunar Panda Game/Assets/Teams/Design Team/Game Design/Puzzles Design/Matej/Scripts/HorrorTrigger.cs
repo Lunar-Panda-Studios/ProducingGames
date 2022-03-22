@@ -7,10 +7,9 @@ public class HorrorTrigger : MonoBehaviour
 {
     private GameObject player;
     //Rotating camera to the mirror settings
-    private float damping = 0.02f;
-    private Vector3 lookPos = new Vector3();
+    public GameObject camera;
+    
     public bool disableAtStart;
-    public TypeOfTrigger type;
     public AudioSource audioSource;
 
     [Header("Disable Movement")]
@@ -18,64 +17,71 @@ public class HorrorTrigger : MonoBehaviour
     public float delayBeforeMovingAgain;
 
     [Header("Move object settings")]
+    public bool move;
     public MovableObject movableObject;
     public float delayMoveObject;
 
+    [Header("Teleport object settings")]
+    public bool teleport;
+    public MovableObject teleportObject;
+    
+
     [Header("Lights out settings")]
+    public bool lights;
     public List<Light> Lights = new List<Light>();
 
     [Header("Jumpscare settings")]
+    public bool jump;
     public Image jumpSImage;
     public float stayOnScreenFor;
 
-    [Header("Mirror settings")]
-    public Transform mirror;
-    public GameObject mysteriousMan;
-    public float mirrorDelay;
+    [Header("Look At settings")]
+    private Vector3 lookPos = new Vector3();
+    private bool startLook;
+    public bool look;
+    public Transform lookAt;
+    public float lookAtDelay;
+    public float damping;
+
+    [Header("Play Sound settings")]
+    public bool play;
+    public string clipName;
+
+    [Header("Drop Object settings")]
+    public bool drop;
+    public GameObject dropObject;
 
     [Header("Enable other trigger")]
     public bool enableOtherTrigger;
     public HorrorTrigger otherTrigger;
-
-    public enum TypeOfTrigger
-    {
-        Move,
-        Teleport,
-        LightsOut,
-        Jumpscare,
-        Mirror
-    }
     
     public void Start()
     {
         if (disableAtStart) ActivateTriggerCollider(false);
         player = GameObject.FindWithTag("Player");
     }
+    public void Update()
+    {
+        if(startLook)
+        {
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(lookPos),
+                        Time.deltaTime * damping);
+            camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
+        }
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             if (disablePlayerMovement) DisablePlayerMovement();
-            switch (type)
-            {
-                case TypeOfTrigger.Move:
-                    Move();
-                    break;
-                case TypeOfTrigger.Teleport:
-                    Teleport();
-                    break;
-                case TypeOfTrigger.LightsOut:
-                    LightsOut();
-                    break;
-                case TypeOfTrigger.Jumpscare:
-                    Jumpscare();
-                    break;
-                case TypeOfTrigger.Mirror:
-                    Mirror();
-                    break;
-                default:
-                    break;
-            }
+            if (move) Move();
+            if (teleport) Teleport();
+            if (lights) LightsOut();
+            if (jump) Jumpscare();
+            if (look) LookAt();
+            if (play) PlaySound(clipName);
+            if (drop) DropObject();
             if (enableOtherTrigger) otherTrigger.ActivateTriggerCollider(true);
         }
     }
@@ -102,13 +108,12 @@ public class HorrorTrigger : MonoBehaviour
         jumpSImage.gameObject.SetActive(false);
         Destroy(this);
     }
-    private IEnumerator LookAtMirror(float delay)
+    private IEnumerator LookAtCoroutine(float delay)
     {
         player.GetComponentInChildren<lockMouse>().enabled = false;
-        mysteriousMan.SetActive(true);
         yield return new WaitForSeconds(delay);
+        startLook = false;
         player.GetComponentInChildren<lockMouse>().enabled = true;
-        mysteriousMan.SetActive(false);
     }
     public void DisablePlayerMovement()
     {
@@ -142,18 +147,29 @@ public class HorrorTrigger : MonoBehaviour
         audioSource.Play();
         StartCoroutine(JumpscareStayOnScreen(stayOnScreenFor));
     }
-    public void Mirror()
+    public void LookAt()
     {
-        StartCoroutine(LookAtMirror(mirrorDelay));
-        lookPos = mirror.position - player.transform.position;
+        //GameObject cam = player.GetComponentInChildren<Camera>().gameObject;
+        StartCoroutine(LookAtCoroutine(lookAtDelay));
+        startLook = true;
+        lookPos = lookAt.position - player.transform.position;
         lookPos.y = 0;
-        player.transform.rotation = Quaternion.LookRotation(lookPos);
-        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, player.transform.rotation, 
-            Time.deltaTime * damping);
+        //player.transform.rotation = Quaternion.LookRotation(lookPos);
         
+
+
     }
     public void ActivateTriggerCollider(bool value)
     {
         this.gameObject.GetComponent<MeshCollider>().enabled = value;
+    }
+    public void PlaySound(string clipName)
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);
+        Destroy(this);
+    }
+    public void DropObject()
+    {
+        dropObject.GetComponent<Rigidbody>().useGravity = true;
     }
 }
