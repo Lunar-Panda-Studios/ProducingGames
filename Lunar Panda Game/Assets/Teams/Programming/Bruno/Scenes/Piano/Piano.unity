@@ -483,8 +483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  sequence: 
-  attemptedSequence: 
+  pianoKeys: []
+  attemptKeySeq: []
 --- !u!65 &1462373012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -800,8 +800,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  sequence: ABCCED
-  attemptedSequence: 
+  pianoKeys:
+  - {fileID: 6893806614501710673}
+  - {fileID: 7119918506138136523}
+  - {fileID: 4865089490171360087}
+  - {fileID: 1162521711436934401}
+  - {fileID: 6893806614501710673}
+  attemptKeySeq:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1747743964
 Transform:
   m_ObjectHideFlags: 0

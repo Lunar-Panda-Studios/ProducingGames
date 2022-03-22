@@ -46,6 +46,7 @@ public class PianoKeySwap : MonoBehaviour
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == PianoKey)
                 {
                     GameEvents.current.onPuzzleComplete(id);
+                    inventoryScript.removeItem();
                 }
             }
         }
@@ -59,7 +60,7 @@ public class PianoKeySwap : MonoBehaviour
             GameObject PuzzleKeyRescale = Instantiate(ReplaceKey, transform.position, transform.rotation);
             PuzzleKeyRescale.transform.localScale = EmptyKey.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
 
-            Destroy(gameObject);
+            Destroy(gameObject);            
 
             //if (Analysis.current.consent)
             //{
