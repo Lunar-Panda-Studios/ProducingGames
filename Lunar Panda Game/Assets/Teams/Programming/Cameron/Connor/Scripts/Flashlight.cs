@@ -15,14 +15,14 @@ public class Flashlight : MonoBehaviour
 
 
     //Matej changes - just flickering :)
-    public float minWaitTime;
-    public float maxWaitTime;
+    public float minWaitTime = 5;
+    public float maxWaitTime = 8;
 
-    public float stopMinWaitTime;
-    public float stopMaxWaitTime;
+    public float stopMinWaitTime = 0;
+    public float stopMaxWaitTime = 0.2f;
 
-    public int minFlicks;
-    public int maxFlicks;
+    public int minFlicks = 2;
+    public int maxFlicks = 3;
 
 
     private bool isOn;
@@ -56,8 +56,8 @@ public class Flashlight : MonoBehaviour
             {
                 if (isOn)
                 {
+                    lightSource.intensity = 28000;
                     yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-                    lightSource.enabled = !lightSource.enabled;
                     isOn = false;
                 }
                 if (!isOn)
@@ -65,7 +65,7 @@ public class Flashlight : MonoBehaviour
                     for (int i = 0; i <= Random.Range(minFlicks, maxFlicks) * 2; i++)
                     {
                         yield return new WaitForSeconds(Random.Range(stopMinWaitTime, stopMaxWaitTime));
-                        lightSource.enabled = !lightSource.enabled;
+                        lightSource.intensity = Random.Range(5000, 10000);
                         isOn = true;
                     }
                 }
