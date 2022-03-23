@@ -9,7 +9,6 @@ public static class SaveSystem
     internal static string path;
     public static void save(int savefile)
     {
-        asignPath(savefile);
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -18,9 +17,8 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static GameData load(int slot)
+    public static GameData load()
     {
-        asignPath(slot);
 
         if(File.Exists(path))
         {
@@ -44,6 +42,11 @@ public static class SaveSystem
     {
         switch (savefile)
         {
+            case 0:
+                {
+                    path = Application.persistentDataPath + "/quickSave.save";
+                    break;
+                }
             case 1:
                 {
                     path = Application.persistentDataPath + "/slot1.save";
