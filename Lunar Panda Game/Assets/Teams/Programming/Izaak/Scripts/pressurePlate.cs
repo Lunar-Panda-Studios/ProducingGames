@@ -25,9 +25,11 @@ public class pressurePlate : MonoBehaviour
     public bool pressing;
     [HideInInspector]
     public bool moving;
+    private float startHeight;
     // Start is called before the first frame update
     void Start()
     {
+        startHeight = transform.localPosition.y;
         r_body = GetComponent<Rigidbody>();
         puzzleScript = puzzleParent.GetComponent<pressurePlatePuzzle>();
     }
@@ -39,7 +41,7 @@ public class pressurePlate : MonoBehaviour
         {
             if (pressing)
             {
-                if (transform.position.y > minYVal)
+                if (transform.localPosition.y > (minYVal + startHeight))
                 {
                     r_body.velocity = -transform.up * moveSpeed * Time.deltaTime;
                 }
@@ -52,7 +54,7 @@ public class pressurePlate : MonoBehaviour
             }
             else
             {
-                if (transform.position.y < maxYVal)
+                if (transform.localPosition.y < (maxYVal + startHeight))
                 {
                     r_body.velocity = transform.up * moveSpeed * Time.deltaTime;
                 }

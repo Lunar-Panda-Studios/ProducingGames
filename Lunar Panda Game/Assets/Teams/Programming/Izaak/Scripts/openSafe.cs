@@ -9,6 +9,8 @@ public class openSafe : MonoBehaviour
     public float openSpeed;
     [Tooltip("How far the safe opens before the door stops moving")]
     public float maxOpenAngle;
+    [Tooltip("How far the safe closes before the door stops moving")]
+    public float minOpenAngle;
 
     private bool isOpening = false;
     private bool isChanging = false;
@@ -31,7 +33,7 @@ public class openSafe : MonoBehaviour
             if (isOpening)
             {
                 transform.Rotate(0, -openSpeed * Time.deltaTime, 0);
-                if (transform.eulerAngles.y <= (360 - maxOpenAngle))
+                if (transform.eulerAngles.y <= maxOpenAngle)
                 {
                     isChanging = false;
                 }
@@ -39,7 +41,7 @@ public class openSafe : MonoBehaviour
             else
             {
                 transform.Rotate(0, openSpeed * Time.deltaTime, 0);
-                if (transform.eulerAngles.y >= 359)
+                if (transform.eulerAngles.y >= minOpenAngle)
                 {
                     isChanging = false;
                 }
