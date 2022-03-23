@@ -6,13 +6,23 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] Image fadePanel;
+    [SerializeField] CanvasGroup loadingScreen;
     [SerializeField] float fadeTime;
     float currentFadeTime;
+    private static LevelManager _instance;
+    public static LevelManager Instance { get { return _instance; } }
 
     void Awake()
     {
-        StartCoroutine(LoadConnectorScene());
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+        //StartCoroutine(LoadConnectorScene());
         DontDestroyOnLoad(gameObject);
         
     }
@@ -26,18 +36,40 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    IEnumerator FadeLoadingScreen()
+    IEnumerator FadeIn()
     {
-        fadePanel.color = new Color(0, 0, 0, currentFadeTime);
-        while (currentFadeTime < fadeTime)
+        for (float t = 0f; t < fadeTime; t += Time.deltaTime)
         {
-            fadeTime += Time.deltaTime;
+            float normalizedTime = t / fadeTime;
+            loadingScreen.alpha = Mathf.Lerp(0, 1, normalizedTime);
             yield return null;
         }
-        //load shit here
+        loadingScreen.alpha = 1; //without this, the value will end at something like 0.9992367
+    }
 
-        //if shit loaded
-        //fade loading screen out
-        //idk if that should all be in this single function, but i dont care
+    IEnumerator FadeOut() //i dont care this this doesnt need to exist. Shut up
+    {
+        for (float t = 0f; t < fadeTime; t += Time.deltaTime)
+        {
+            float normalizedTime = t / fadeTime;
+            loadingScreen.alpha = Mathf.Lerp(1, 0, normalizedTime);
+            yield return null;
+        }
+        loadingScreen.alpha = 0;
+    }
+
+    public IEnumerator FadeLoadingScreen(string sceneName)
+    {
+        loadingScreen.gameObject.SetActive(true);
+        
+        StartCoroutine(FadeIn());
+        yield return new WaitForSeconds(2f);
+        AsyncOperation load = SceneManager.LoadSceneAsync("CamsHotel");
+        while (!load.isDone)
+        {
+            yield return null;
+        }
+        currentFadeTime = fadeTime;
+        StartCoroutine(FadeOut());
     }
 }

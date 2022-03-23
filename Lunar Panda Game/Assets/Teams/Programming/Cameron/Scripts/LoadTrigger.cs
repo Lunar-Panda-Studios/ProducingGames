@@ -28,17 +28,8 @@ public class LoadTrigger : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        AsyncOperation sceneUnload = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        while (!sceneUnload.isDone)
-        {
-            yield return null;
-        }
-
-        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync("CamsHotel", LoadSceneMode.Additive);
-        while (!sceneLoad.isDone)
-        {
-            yield return null;
-        }
+        StartCoroutine(LevelManager.Instance.FadeLoadingScreen("CamsHotel"));
         closedDoor.SetActive(false);
+        yield return null;
     }
 }

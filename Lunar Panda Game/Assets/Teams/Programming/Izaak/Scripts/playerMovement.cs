@@ -17,7 +17,6 @@ public class playerMovement : MonoBehaviour
     {
         //Collects the rigidbody so it can be used in code
         p_rigidbody = gameObject.GetComponent<Rigidbody>();
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
