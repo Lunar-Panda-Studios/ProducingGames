@@ -47,6 +47,10 @@ public class HorrorTrigger : MonoBehaviour
     [Header("---PLAY SOUND SETTINGS---")]
     public bool play;
     public string clipName;
+    
+    [Header("---STOP SOUND SETTINGS---")]
+    public bool stop;
+    public string stopClipName;
 
     [Header("---DROP OBJECT SETTINGS---")]
     public bool drop;
@@ -95,6 +99,7 @@ public class HorrorTrigger : MonoBehaviour
             if (jump) Jumpscare();
             if (look) LookAt();
             if (play) PlaySound(clipName);
+            if (stop) StopSound(stopClipName);
             if (drop) DropObject();
             if (levitate) Levitate();
             if (throW) ThrowObject(force);
@@ -178,6 +183,11 @@ public class HorrorTrigger : MonoBehaviour
     public void PlaySound(string clipName)
     {
         SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);
+        Destroy(this);
+    }
+    public void StopSound(string clipName)
+    {
+        SoundEffectManager.GlobalSFXManager.PauseSFX(clipName);
         Destroy(this);
     }
     public void DropObject()
