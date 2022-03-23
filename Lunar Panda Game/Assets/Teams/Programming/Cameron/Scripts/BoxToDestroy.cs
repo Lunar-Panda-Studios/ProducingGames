@@ -1,16 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+
 
 public class BoxToDestroy : MonoBehaviour
 {
     [SerializeField] GameObject destroyObject;
     [SerializeField] ItemData requiredItem;
+
+    public VideoPlayer videoPlayer;
+    public VideoClip videoClip;
+
+    bool played = false;
+
     Inventory inv;
 
     private void Awake()
     {
         inv = FindObjectOfType<Inventory>();
+        
+    }
+
+    private void Start()
+    {
+        videoPlayer.clip = videoClip;
+        videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.CameraNearPlane;
+        videoPlayer.Prepare();
     }
 
     void Update()
@@ -24,9 +40,16 @@ public class BoxToDestroy : MonoBehaviour
                     if (hit.transform.gameObject == gameObject)
                     {
                         destroyObject.SetActive(false);
+                        videoPlayer.Play();
+                        played = true;
                     }
                 }
             }
         }
-    }
+
+        if (!videoPlayer.isPlaying && played)
+        {
+            videoPlayer.clip = null;
+        }
+    }   
 }
