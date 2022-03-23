@@ -43,12 +43,12 @@ public class BoxToDoor : MonoBehaviour
             if (switchState)
             {
                 GameEvents.current.onTriggerOpenDoor(id);
-                GameEvents.current.onPowerTurnedOff(id);
+                LinkedBox.GetComponent<Interaction>().canInteract = false;
             }
             else
             {
                 GameEvents.current.onTriggerCloseDoor(id);
-                GameEvents.current.onPowerTurnedOn(id);
+                LinkedBox.GetComponent<Interaction>().canInteract = true;
             }
         }
 
