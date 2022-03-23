@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4157251702715052567}
   - component: {fileID: 4157251702715052564}
   - component: {fileID: 4157251702715052565}
-  - component: {fileID: 4157251702715052569}
   - component: {fileID: 4157251702715052568}
+  - component: {fileID: 8512369527830089891}
   m_Layer: 0
   m_Name: KeyPart2
   m_TagString: Untagged
@@ -97,19 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4157251702715052569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157251702715052562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71fd8399b6ac66449b07603060d1fedf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 11ea18d58a9e7264e85bb090b8a44732, type: 2}
 --- !u!114 &4157251702715052568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,5 +109,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d45f575807806849a73c08c9abf5e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
+--- !u!114 &8512369527830089891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157251702715052562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: db3d13dd73b1fff4991ea47e7f0eb6d0, type: 2}
