@@ -22,10 +22,8 @@ public class WalkingSound : MonoBehaviour
     public SoundEffectManager soundEffectManager;
     void Start()
     {
-        //soundEffectManager = GetComponent<SoundEffectManager>();
         playing = true;
         p_rigidbody = gameObject.GetComponent<Rigidbody>();
-        //soundEffectManager.PlaySFX("walk");
     }
 
     void Update()
