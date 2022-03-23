@@ -22,6 +22,7 @@ public class chessBoardPlacing : MonoBehaviour
 
     private bool puzzleComplete = false;
     public bool check = false;
+    public string openAudio;//Matej changes
 
     public GameObject chessPieceObj;
     private GameObject instChessPiece;
@@ -96,6 +97,7 @@ public class chessBoardPlacing : MonoBehaviour
         {
             drawer.GetComponent<openChessDrawer>().puzzleCleared = true;
             puzzleComplete = true;
+            SoundEffectManager.GlobalSFXManager.PlaySFX(openAudio);//Matej edit
             return true;
         }
         return false;
