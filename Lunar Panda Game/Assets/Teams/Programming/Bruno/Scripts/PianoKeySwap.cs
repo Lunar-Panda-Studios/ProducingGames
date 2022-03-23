@@ -59,7 +59,7 @@ public class PianoKeySwap : MonoBehaviour
             GameObject PuzzleKeyRescale = Instantiate(ReplaceKey, transform.position, transform.rotation);
             PuzzleKeyRescale.name = ReplaceKey.name;
             PuzzleKeyRescale.transform.localScale = EmptyKey.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
-            PuzzleKeyRescale.transform.parent = GameObject.Find("Daddy").transform;
+            PuzzleKeyRescale.transform.parent = GameObject.Find("PianoSequence").transform;
 
             Destroy(gameObject);
             inventoryScript.removeItem();

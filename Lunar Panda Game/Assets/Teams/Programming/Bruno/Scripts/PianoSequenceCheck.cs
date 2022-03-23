@@ -78,7 +78,7 @@ public class PianoSequenceCheck : MonoBehaviour
     IEnumerator Open() //Rotates the door
     {
         SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
-        toOpen.Rotate(new Vector3(90, 0, 0), Space.World);
+        toOpen.Rotate(new Vector3(0, 0, -54), Space.World);
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
 
