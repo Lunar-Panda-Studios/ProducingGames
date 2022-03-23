@@ -7,6 +7,7 @@ public class LoadTrigger : MonoBehaviour
 {
     [SerializeField] GameObject openedDoor;
     [SerializeField] GameObject closedDoor;
+    [SerializeField] string sceneName;
     bool loadingScene = false;
 
     private void Start()
@@ -18,7 +19,7 @@ public class LoadTrigger : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            openedDoor.SetActive(true);
+            //openedDoor.SetActive(true);
             if (!loadingScene)
             {
                 StartCoroutine(LoadScene());
@@ -28,8 +29,8 @@ public class LoadTrigger : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        StartCoroutine(LevelManager.Instance.FadeLoadingScreen("CamsHotel"));
-        closedDoor.SetActive(false);
+        StartCoroutine(LevelManager.Instance.FadeLoadingScreen(sceneName));
+        //closedDoor.SetActive(false);
         yield return null;
     }
 }

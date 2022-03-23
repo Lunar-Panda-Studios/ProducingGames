@@ -23,18 +23,18 @@ public class LevelManager : MonoBehaviour
             _instance = this;
         }
         //StartCoroutine(LoadConnectorScene());
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         
     }
 
-    IEnumerator LoadConnectorScene()
+    /*IEnumerator LoadConnectorScene()
     {
         AsyncOperation load = SceneManager.LoadSceneAsync("Connect", LoadSceneMode.Additive);
         while (!load.isDone)
         {
             yield return null;
         }
-    }
+    }*/
 
     IEnumerator FadeIn()
     {
@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
         
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
-        AsyncOperation load = SceneManager.LoadSceneAsync("CamsHotel");
+        AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
         while (!load.isDone)
         {
             yield return null;
