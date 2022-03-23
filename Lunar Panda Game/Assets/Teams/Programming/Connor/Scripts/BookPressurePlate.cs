@@ -13,7 +13,7 @@ public class BookPressurePlate : MonoBehaviour
 
     void Start()
     {
-        weightNeeded = GetComponent<BookPuzzle>().weightNeeded;
+        //weightNeeded = GetComponent<BookPuzzle>().weightNeeded;
     }
 
     void Update()
