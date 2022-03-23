@@ -112,6 +112,7 @@ public class HorrorTrigger : MonoBehaviour
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         yield return new WaitForSeconds(Delay);
         player.GetComponent<playerMovement>().enabled = true;
+        player.GetComponent<WalkingSound>().enabled= true;
         Destroy(this);
     }
     private IEnumerator StopMoveObject(float Delay)
@@ -139,6 +140,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void DisablePlayerMovement()
     {
+        player.GetComponent<WalkingSound>().enabled = false;
         player.GetComponent<playerMovement>().enabled = false;
         StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
     }
