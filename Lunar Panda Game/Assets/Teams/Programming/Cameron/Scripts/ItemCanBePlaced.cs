@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemCanBePlaced : MonoBehaviour
 {
+    HearSeeSayMaster controller;
+
     [SerializeField] ItemData placeableItem;
 
     //IMPORTANT FOR DESIGNERS IF UR SNOOPING: read the below tooltip before changing anything. It may lead to you being able to fix the issue you have
@@ -18,6 +20,7 @@ public class ItemCanBePlaced : MonoBehaviour
     void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
+        controller = FindObjectOfType<HearSeeSayMaster>();
     }
 
     void Update()
@@ -40,6 +43,8 @@ public class ItemCanBePlaced : MonoBehaviour
                     isItemPlaced = true;
                     //remove item from inventory
                     inventory.removeItem();
+
+                    controller.check();
                 }
             }
         }

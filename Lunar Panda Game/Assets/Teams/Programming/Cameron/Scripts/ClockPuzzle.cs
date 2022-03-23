@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ClockPuzzle : MonoBehaviour
 {
+    public string rotateAudio;//Matej edit
+    public string placeAudio;//Matej edit
+    public string openAudio;//Matej edit
     bool handsConnected = false;
     const float clockAngle = 30f;
     const float hourAngle = 90;
@@ -54,10 +57,12 @@ public class ClockPuzzle : MonoBehaviour
                     if (handsConnected)
                     {
                         RotateHand();
+                        SoundEffectManager.GlobalSFXManager.PlaySFX(rotateAudio);//Matej edit
                     }
                     else
                     {
                         PlaceHands();
+                        SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
                     }
                 }
             }
@@ -120,6 +125,7 @@ public class ClockPuzzle : MonoBehaviour
             {
                 //unlock the door
                 //need to replace this with proper door unlock code stuff
+                SoundEffectManager.GlobalSFXManager.PlaySFX(openAudio);//Matej edit
                 door.eulerAngles = new Vector3(-90, 180, 90);//im not making this a variable as its only temporary
                 door.RotateAround(pivot.position, Vector3.up, -90);
                 completed = true;
@@ -130,6 +136,7 @@ public class ClockPuzzle : MonoBehaviour
             //lock the door
             if (completed)
             {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(openAudio);//Matej edit
                 door.RotateAround(pivot.position, Vector3.up, 90);
                 completed = false;
             }
