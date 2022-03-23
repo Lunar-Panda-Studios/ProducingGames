@@ -12,7 +12,7 @@ public class LoadTrigger : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(transform.parent.gameObject);
+        
     }
 
     private void OnTriggerEnter(Collider col)

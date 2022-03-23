@@ -38,7 +38,7 @@ public class UnlockDoor : MonoBehaviour
         {
             currentTotal += 1;
             
-            transform.parent.transform.Rotate(new Vector3(0, 1, 0));
+            transform.Rotate(new Vector3(0, 1, 0));
 
             if(moveTotal == currentTotal)
             {
