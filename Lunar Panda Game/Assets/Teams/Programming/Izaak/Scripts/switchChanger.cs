@@ -6,7 +6,7 @@ public class switchChanger : MonoBehaviour
 {
     public string audioClipName;
     //Current state of switch
-    [SerializeField] bool switchMode = true;
+    [SerializeField] bool switchMode = false;
     [Tooltip("The wires that will be used after the switch is off")]
     public GameObject amogus;
     public bool isPowerOn = false;
