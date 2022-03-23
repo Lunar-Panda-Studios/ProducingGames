@@ -23,14 +23,15 @@ public class GameData
         sceneName = data.currentScene;
 
         position = new float[3];
-        position[0] = data.player.transform.position.x;
-        position[1] = data.player.transform.position.y;
-        position[2] = data.player.transform.position.z;
+        position[0] = data.location.x;
+        position[1] = data.location.y;
+        position[2] = data.location.z;
 
-        rotation = new float[3];
-        rotation[0] = data.player.transform.rotation.x;
-        rotation[1] = data.player.transform.rotation.y;
-        rotation[2] = data.player.transform.rotation.z;
+        rotation = new float[4];
+        rotation[0] = data.rotation.x;
+        rotation[1] = data.rotation.y;
+        rotation[2] = data.rotation.z;
+        rotation[3] = data.rotation.w;
 
         itemsInScene = new float?[Database.getLocation.Count, 3];
 
