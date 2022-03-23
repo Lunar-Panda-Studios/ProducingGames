@@ -34,7 +34,7 @@ public class KeySelect : MonoBehaviour
             if (sequence != null && hit.transform.CompareTag("SequenceCode"))
             {
                 string value = hit.transform.name;
-                //sequence.SetValue(value);
+                sequence.SetValue(value);
             }
         }
     }
