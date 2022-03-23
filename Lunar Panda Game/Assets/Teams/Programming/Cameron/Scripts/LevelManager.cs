@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
         
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
+        GameManager.Instance.currentLevel(GameManager.Instance.whichLevel + 1);
         AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
         while (!load.isDone)
         {

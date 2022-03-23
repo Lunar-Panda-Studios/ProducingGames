@@ -237,58 +237,12 @@ public class GameManager : MonoBehaviour
         SaveSystem.delete(slot);
     }
 
-    public void LoadCurrentScene(GameState state) //Scene Loader. Not doing anything as of right now as we don't have any scenes to load.
-    {
-        gameStates = state;
-        switch (gameStates)
-        {
-            case GameState.MENU:
-                break;
-            case GameState.GAME:
-                {
-                    switch (whichLevel)
-                    {
-                        case 0:
-                            {
-                                SceneManager.LoadScene("Train v1.8");
-                                break;
-                            }
-                        case 1:
-                            {
-                                SceneManager.LoadScene("Hospital");
-                                break;
-                            }                        
-                        default:
-                            {
-                                SceneManager.LoadScene("Train");
-                                break;
-                            }
-                    }
-                    break;
-                }
-            case GameState.PAUSE:
-                break;
-            case GameState.QUIT:
-                Application.Quit();
-                break;
-            default:
-                break;
-        }
-
-        currentScene = SceneManager.GetActiveScene().name;
-    }
-
 
 
     public void currentLevel(int currLevel)
     {
         //Just returning the value of which game scene the player is in
         whichLevel = currLevel;
-        return;
-    }
-
-    public void ChangeRoom()
-    {
         switch (whichLevel)
         {
             case 0:
@@ -307,5 +261,6 @@ public class GameManager : MonoBehaviour
                     break;
                 }
         }
+        return;
     }
 }
