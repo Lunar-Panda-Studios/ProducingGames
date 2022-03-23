@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class BoxToDestroy : MonoBehaviour
 {
     [SerializeField] GameObject destroyObject;
+    [SerializeField] GameObject unhideObject;
     [SerializeField] ItemData requiredItem;
 
     public VideoPlayer videoPlayer;
@@ -39,9 +40,11 @@ public class BoxToDestroy : MonoBehaviour
                 {
                     if (hit.transform.gameObject == gameObject)
                     {
-                        destroyObject.SetActive(false);
+                        if(destroyObject != null)
+                            destroyObject.SetActive(false);
                         videoPlayer.Play();
                         played = true;
+                        unhideObject.SetActive(true);
                     }
                 }
             }

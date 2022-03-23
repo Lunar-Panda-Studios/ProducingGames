@@ -22,6 +22,7 @@ public class LoadTrigger : MonoBehaviour
             //openedDoor.SetActive(true);
             if (!loadingScene)
             {
+                
                 StartCoroutine(LoadScene());
             }
         }
