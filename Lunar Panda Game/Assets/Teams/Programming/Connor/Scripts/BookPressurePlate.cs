@@ -10,6 +10,8 @@ public class BookPressurePlate : MonoBehaviour
     private float weightNeeded;
     private float bookWeight;
     public GameObject evilBook;
+    [Tooltip("Drag the safe's door here")]
+    public GameObject safeDoor;
 
     void Start()
     {
@@ -25,7 +27,7 @@ public class BookPressurePlate : MonoBehaviour
     {
         if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
         {
-            //open door
+            safeDoor.GetComponent<openSafe>().toggleOpening(true);
         }
     }
 
@@ -34,7 +36,7 @@ public class BookPressurePlate : MonoBehaviour
  
         if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
         {
-            //close door
+            safeDoor.GetComponent<openSafe>().toggleOpening(false);
         }
     }
 }
