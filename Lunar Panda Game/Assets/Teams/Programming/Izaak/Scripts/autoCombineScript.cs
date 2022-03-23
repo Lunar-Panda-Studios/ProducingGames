@@ -66,26 +66,25 @@ public class autoCombineScript : MonoBehaviour
         combine();
     }
 
-    bool canCombine()
+    bool canCombine(int j)
     {
-        for (int j = 0; j < autoCombineItemsList.Count; j++)
+        for (int i = 0; i < inInventory[j].Count; i++)
         {
-            for (int i = 0; i < inInventory[j].Count; i++)
+            if (!inInventory[j][i])
             {
-                if (!inInventory[j][i])
-                {
-                    return false;
-                }
+                return false;
             }
         }
+
         return true;
     }
 
     void combine()
     {
-        if (canCombine()==true)
-        {
-            for (int k = 0; k < autoCombineItemsList.Count; k++)
+
+       for (int k = 0; k < autoCombineItemsList.Count; k++)
+       {
+            if (canCombine(k) == true)
             {
                 for (int i = 0; i < inventoryScript.itemInventory.Count; i++)
                 {
