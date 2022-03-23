@@ -31,7 +31,7 @@ public class Flashlight : MonoBehaviour
     {
         lightSource = this.gameObject.GetComponent<Light>(); //assigning the spotlight to access it
         isOn = true;
-        StartCoroutine(Flashing());
+        //StartCoroutine(Flashing());
     }
 
     void Update()
