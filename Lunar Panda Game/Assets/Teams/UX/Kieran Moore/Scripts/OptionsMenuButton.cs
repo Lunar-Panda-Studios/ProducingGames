@@ -9,6 +9,7 @@ public class OptionsMenuButton : MonoBehaviour
     public Button yourButton;
     public GameObject MenuOne;
     public GameObject MenuTwo;
+    public GameObject MenuThree;
     public GameObject MenuToShow;
     void Start()
     {
@@ -20,6 +21,7 @@ public class OptionsMenuButton : MonoBehaviour
     {
         MenuOne.SetActive(false);
         MenuTwo.SetActive(false);
+        MenuThree.SetActive(false);
         MenuToShow.SetActive(true);
     }
 }
