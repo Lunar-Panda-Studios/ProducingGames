@@ -61,15 +61,23 @@ public class LevelManager : MonoBehaviour
     public IEnumerator FadeLoadingScreen(string sceneName)
     {
         loadingScreen.gameObject.SetActive(true);
-        
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
+        if (Analysis.current != null)
+        {
+            if (Analysis.current.consent)
+            {
+                Analysis.current.saveAnalytics();
+            }
+        }
         GameManager.Instance.currentLevel(GameManager.Instance.whichLevel + 1);
         AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
         while (!load.isDone)
         {
             yield return null;
         }
+        yield return new WaitForEndOfFrame();
+
         currentFadeTime = fadeTime;
         StartCoroutine(FadeOut());
     }

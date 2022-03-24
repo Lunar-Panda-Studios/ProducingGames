@@ -123,13 +123,13 @@ public class bodyController : MonoBehaviour
                 }
             }
 
-            /*if (Analysis.current != null)
+            if (Analysis.current != null)
             {
-                if (Analysis.current.consent && !Analysis.current.parameters.ContainsKey("Open Body"))
+                if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp1.ContainsKey("Open Body") && !Analysis.current.timersPuzzlesp2.ContainsKey("Open Body")))
                 {
                     Analysis.current.resetTimer("Open Body");
                 }
-            }*/
+            }
         }
     }
 }

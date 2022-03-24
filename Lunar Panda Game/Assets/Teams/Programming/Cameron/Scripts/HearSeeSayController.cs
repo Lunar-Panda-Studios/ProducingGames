@@ -19,6 +19,11 @@ public class HearSeeSayController : MonoBehaviour
 
     void OnComplete()
     {
+        if (Analysis.current.consent)
+        {
+            Analysis.current.resetTimer("HearSeeSay");
+            Analysis.current.sendFinal();
+        }
         StartCoroutine(LevelManager.Instance.FadeLoadingScreen(mainMenuName));
     }
 }

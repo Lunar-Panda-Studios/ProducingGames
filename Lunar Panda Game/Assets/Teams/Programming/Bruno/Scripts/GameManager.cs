@@ -247,17 +247,38 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 {
-                    currentRoom = Room.TRAIN;
+                    currentRoom = Room.NONE;
                     break;
                 }
             case 1:
                 {
-                    currentRoom = Room.HOSPITAL;
+                    currentRoom = Room.CRASHEDTRAIN;
                     break;
                 }
             case 2:
                 {
+                    currentRoom = Room.TRAIN;
+                    break;
+                }
+            case 3:
+                {
+                    currentRoom = Room.HOSPITAL;
+                    break;
+                }
+            case 4:
+                {
+                    currentRoom = Room.HOTEL;
+                    break;
+                }
+            case 5:
+                {
                     currentRoom = Room.CABIN;
+                    break;
+                }
+            default:
+                {
+                    currentRoom = Room.NONE;
+                    whichLevel = 0;
                     break;
                 }
         }

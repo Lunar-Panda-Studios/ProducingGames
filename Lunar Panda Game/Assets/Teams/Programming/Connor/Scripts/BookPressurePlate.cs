@@ -23,18 +23,29 @@ public class BookPressurePlate : MonoBehaviour
         bookWeight = evilBook.transform.localScale.x * 10;
     }
 
-    private void OnTriggerEnter(Collider pog)
+    void OnCollisionEnter(Collision collision)
     {
-        if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
+        print("COllision");
+        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
-            safeDoor.GetComponent<openSafe>().toggleOpening(true);
+            print("Completed");
+            //safeDoor.GetComponent<openSafe>().toggleOpening(true);
+            safeDoor.SetActive(false);
+
+            if (Analysis.current != null)
+            {
+                if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp2.ContainsKey("Perspective") && !Analysis.current.timersPuzzlesp1.ContainsKey("Perspective")))
+                {
+                    Analysis.current.resetTimer("Perspective");
+                }
+            }
         }
     }
 
-    private void OnTriggerExit(Collider pog)
+    private void OnCollisionExit(Collision collision)
     {
  
-        if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
+        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
             safeDoor.GetComponent<openSafe>().toggleOpening(false);
         }

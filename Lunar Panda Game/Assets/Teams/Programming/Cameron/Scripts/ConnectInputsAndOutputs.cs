@@ -129,13 +129,13 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             GameEvents.current.onPuzzleComplete(id);
 
-                            /*if (Analysis.current != null)
+                            if (Analysis.current != null)
                             {
                                 if (Analysis.current.consent)
                                 {
                                     Analysis.current.resetTimer("Wires");
                                 }
-                            }*/
+                            }
                         }
                         
                         
@@ -264,6 +264,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             //if the currently connected node is not the right node, return false
             if (i.GetComponent<Node>().connectedNode != i.GetComponent<Node>().desiredNode)
             {
+                Analysis.current.failCounterWires++;
                 return false;
             }
         }

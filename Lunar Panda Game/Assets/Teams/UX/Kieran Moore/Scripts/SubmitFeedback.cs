@@ -28,7 +28,7 @@ public class SubmitFeedback : MonoBehaviour
         if (EE.IsOnFeedbackMenu == true)
         {
             keyName = "FeedbackV" + feedbackNumber.ToString();
-            /*Analysis.current.parameters.Add(keyName, textBody.text);*/
+            Analysis.current.parameters.Add(keyName, textBody.text);
             feedbackNumber++;
 
             EE.IsOnFeedbackMenu = false;

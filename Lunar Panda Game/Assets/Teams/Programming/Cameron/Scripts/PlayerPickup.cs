@@ -249,11 +249,11 @@ public class PlayerPickup : MonoBehaviour
         //heldItem.transform.parent = null;
         heldItem.GetComponent<Rigidbody>().useGravity = true;
         heldItem.GetComponent<Rigidbody>().freezeRotation = false;
-        heldItem = null;
         if (heldItem.GetComponent<RotatableItem>())
         {
             FindObjectOfType<lockMouse>().canLook = true;
         }
+        heldItem = null;
     }
 
     internal void PickupItem(Transform item)

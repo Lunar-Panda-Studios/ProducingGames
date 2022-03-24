@@ -55,6 +55,13 @@ public class pressurePlatePuzzle : MonoBehaviour
         if (currentCorrect==correctOrder.Count)
         {
             instDoor.GetComponent<openSafe>().toggleOpening(true);
+            if (Analysis.current != null)
+            {
+                if (Analysis.current.consent)
+                {
+                    Analysis.current.resetTimer("Pressure Plates");
+                }
+            }
             return true;
         }
         return false;
