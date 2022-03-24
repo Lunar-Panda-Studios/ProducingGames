@@ -9,7 +9,7 @@ public class JournalMenuToggle : MonoBehaviour
     public bool IsOnMenu;
     public GameObject JournalMenu;
     public lockMouse MrCapsule;
-    public GameObject BarOfStamina;
+    //public GameObject BarOfStamina;
     public PauseButtonToggle Pause;
     public InventoryMenuToggle Inventory;
     public FeedbackToggle Feedback;
@@ -33,7 +33,7 @@ public class JournalMenuToggle : MonoBehaviour
             {
                 IsOnMenu = true;
 
-                BarOfStamina.SetActive(false);
+              //  BarOfStamina.SetActive(false);
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -53,7 +53,7 @@ public class JournalMenuToggle : MonoBehaviour
             {
                 JournalMenu.SetActive(false);
                 IsOnMenu = false;
-                BarOfStamina.SetActive(true);
+            //    BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
                 Cursor.visible = false;
