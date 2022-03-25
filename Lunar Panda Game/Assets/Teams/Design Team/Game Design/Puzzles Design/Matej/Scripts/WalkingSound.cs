@@ -32,7 +32,7 @@ public class WalkingSound : MonoBehaviour
     {
         Vector2 velocityV2 = new Vector2(p_rigidbody.velocity.x, p_rigidbody.velocity.z);
         float velocityMag = velocityV2.magnitude;
-        if ((velocityMag > buffer || velocityMag < -buffer) && !playing)
+        if ((velocityMag > buffer || velocityMag < -buffer) && !playing && Time.timeScale > 0)
         {
             soundSource.UnPause();
             playing = true;
