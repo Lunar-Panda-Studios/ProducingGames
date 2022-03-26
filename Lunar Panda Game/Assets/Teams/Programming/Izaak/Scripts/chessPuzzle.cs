@@ -23,6 +23,7 @@ public class chessPuzzle : MonoBehaviour
     Inventory inventory;
     private GameObject player;
     private Transform cam;
+    InteractRaycasting raycast;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class chessPuzzle : MonoBehaviour
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
         inventory = FindObjectOfType<Inventory>();
+        raycast = FindObjectOfType<InteractRaycasting>();
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class chessPuzzle : MonoBehaviour
             if (!setOccupied)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+                if (raycast.raycastInteract(out hit))
                 {
                     if (hit.transform.gameObject == gameObject)
                     {

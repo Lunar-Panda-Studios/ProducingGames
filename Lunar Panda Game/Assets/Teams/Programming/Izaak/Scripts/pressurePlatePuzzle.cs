@@ -20,7 +20,7 @@ public class pressurePlatePuzzle : MonoBehaviour
     public GameObject prefabPedestal;
     private GameObject instPedestal;
     [Tooltip("The door that opens when the puzzle is solved")]
-    public GameObject instDoor;
+    public GameObject codeLock;
 
     [Header("Puzzle")]
     [Tooltip("Checks if the puzzle is complete or not")]
@@ -54,7 +54,7 @@ public class pressurePlatePuzzle : MonoBehaviour
     {
         if (currentCorrect==correctOrder.Count)
         {
-            instDoor.GetComponent<openSafe>().toggleOpening(true);
+            codeLock.GetComponent<MoveTo>().move = true;
             if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
