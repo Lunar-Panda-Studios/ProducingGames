@@ -15,14 +15,14 @@ public class bikeLock : MonoBehaviour
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
     public GameObject door;
-    private bool canOpen = true;
 
+    bool finished;
 
     // Update is called once per frame
     void Update()
     {
-        ChangeColor();
         SetCollision();
+        DisablePuzzle();
     }
 
     //Gives the element the current value of its place in the code
@@ -72,67 +72,23 @@ public class bikeLock : MonoBehaviour
         }
         return false;
     }
-    void ChangeColor()
-    {
-        if (currentCode[0] == correctCode[0])
-        {
-            gameObject.transform.Find("BikeLockElement").GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            gameObject.transform.Find("BikeLockElement").GetComponent<Renderer>().material.color = Color.red;
-        }
-
-        if (currentCode[1] == correctCode[1])
-        {
-            gameObject.transform.Find("BikeLockElement (1)").GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            gameObject.transform.Find("BikeLockElement (1)").GetComponent<Renderer>().material.color = Color.red;
-        }
-
-        if (currentCode[2] == correctCode[2])
-        {
-            gameObject.transform.Find("BikeLockElement (2)").GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            gameObject.transform.Find("BikeLockElement (2)").GetComponent<Renderer>().material.color = Color.red;
-        }
-
-        if (currentCode[3] == correctCode[3])
-        {
-            gameObject.transform.Find("BikeLockElement (3)").GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            gameObject.transform.Find("BikeLockElement (3)").GetComponent<Renderer>().material.color = Color.red;
-        }
-    }
 
     void SetCollision()
     {
+        if (puzzleSolved && !finished)
+        {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+            door.GetComponent<Animator>().SetTrigger("DoorUnlocked");
+            finished = true;
+        }
+    }
+
+    private void DisablePuzzle()
+    {
         if (puzzleSolved)
         {
-
-            if (canOpen) 
-            {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, -90, -90);
-            } 
-            canOpen = false;
-            
-        }
-        else
-        {
-            if (!canOpen)
-            {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-                door.GetComponentInParent<Transform>().rotation = Quaternion.Euler(-90, 0, -90);
-            }
-            canOpen = true;
-
+            Destroy(GetComponentInChildren<bikeLockNumber>());
+            Destroy(GetComponentInChildren<InteractSound>());
         }
     }
 }
