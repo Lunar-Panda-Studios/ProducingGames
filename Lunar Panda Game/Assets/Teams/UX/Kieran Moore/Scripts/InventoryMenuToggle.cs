@@ -26,6 +26,7 @@ public class InventoryMenuToggle : MonoBehaviour
         Feedback = FindObjectOfType<FeedbackToggle>();
         pickup = FindObjectOfType<PlayerPickup>();
         jump = FindObjectOfType<playerJump>();
+
     }
 
     // Update is called once per frame

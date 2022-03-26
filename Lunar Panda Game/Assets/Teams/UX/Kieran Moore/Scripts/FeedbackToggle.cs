@@ -9,6 +9,7 @@ public class FeedbackToggle : MonoBehaviour
     public bool IsOnFeedbackMenu;
     public GameObject PauseMenu;
     public lockMouse MrCapsule;
+    playerJump CapsuleJump;
     //public GameObject BarOfStamina;
     public JournalMenuToggle Journal;
     public InventoryMenuToggle Inventory;
@@ -21,6 +22,7 @@ public class FeedbackToggle : MonoBehaviour
         Journal = FindObjectOfType<JournalMenuToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
         Pause = FindObjectOfType<PauseButtonToggle>();
+        CapsuleJump = FindObjectOfType<playerJump>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class FeedbackToggle : MonoBehaviour
                 Cursor.visible = true;
                 print("Cursor is visible");
                 MrCapsule.canLook = false;
+                CapsuleJump.enabled = false;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
@@ -47,6 +50,7 @@ public class FeedbackToggle : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
                 Cursor.visible = false;
+                CapsuleJump.enabled = true;
                 print("Cursor is no longer visible");
                 Time.timeScale = 1f;
             }
