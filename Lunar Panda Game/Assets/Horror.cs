@@ -20,6 +20,16 @@ public class Horror : MonoBehaviour
         ThrowObject,
         EnableOtherTrigger
     };
+    [System.Serializable]
+    public struct MyStruct
+    {
+        public HorrorEvent state;
+        public bool disableAtStart;
+        public float delayBeforeMovingAgain;
+    }
+    [SerializeField]
+    public List<MyStruct> list = new List<MyStruct>();
+
 
     public HorrorEvent state;
 
