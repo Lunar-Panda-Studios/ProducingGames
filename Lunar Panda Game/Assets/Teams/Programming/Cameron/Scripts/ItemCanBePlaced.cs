@@ -15,9 +15,12 @@ public class ItemCanBePlaced : MonoBehaviour
 
     internal bool isItemPlaced = false;
 
+    HearSeeSayController controller;
+
     void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
+        controller = FindObjectOfType<HearSeeSayController>();
     }
 
     void Update()
@@ -40,6 +43,7 @@ public class ItemCanBePlaced : MonoBehaviour
                     isItemPlaced = true;
                     //remove item from inventory
                     inventory.removeItem();
+                    controller.CheckIfComplete();
                 }
             }
         }

@@ -29,6 +29,14 @@ public class UnlockDoor : MonoBehaviour
                     if(key == inventory.itemInventory[inventory.selectedItem])
                     {
                         open();
+
+                        if (Analysis.current != null)
+                        {
+                            if (Analysis.current.consent)
+                            {
+                                Analysis.current.resetTimer("3 Key Parts");
+                            }
+                        }
                     }
                 }
             }
@@ -38,7 +46,7 @@ public class UnlockDoor : MonoBehaviour
         {
             currentTotal += 1;
             
-            transform.parent.transform.Rotate(new Vector3(0, 1, 0));
+            transform.Rotate(new Vector3(0, 1, 0));
 
             if(moveTotal == currentTotal)
             {

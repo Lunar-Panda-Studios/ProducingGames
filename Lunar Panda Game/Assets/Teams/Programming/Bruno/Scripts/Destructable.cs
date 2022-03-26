@@ -54,13 +54,13 @@ public class Destructable : MonoBehaviour
                     doorR.transform.rotation = Quaternion.Euler(-90, -90, 0);
 
                     GameEvents.current.onPuzzleComplete(id);
-                    /*if (Analysis.current != null)
+                    if (Analysis.current != null)
                     {
                         if (Analysis.current.consent)
                         {
                             Analysis.current.resetTimer("Destructable Object");
                         }
-                    }*/
+                    }
                 }
             }            
         }

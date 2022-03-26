@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractRaycasting : MonoBehaviour
 {
     Transform player;
+    Flashlight flashlight;
     Transform playerCamera;
     private static InteractRaycasting _instance;
     public static InteractRaycasting Instance { get { return _instance; } }
@@ -14,6 +15,8 @@ public class InteractRaycasting : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerCamera = Camera.main.transform;
+        flashlight = FindObjectOfType<Flashlight>();
+        //flashlight.enabled = false;
 
         //setting up singleton
         if (_instance != null && _instance != this)
@@ -28,11 +31,47 @@ public class InteractRaycasting : MonoBehaviour
 
     public bool raycastInteract(out RaycastHit hit)
     {
-        return Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist);
+        Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist);
+
+        if (hit.transform != null)
+        {
+            if (flashlight.enabled)
+            {
+                return true;
+            }
+            else
+            {
+                if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
+                {
+                    return false;
+                }
+                else
+                {
+                    if(hit.transform.CompareTag("Flashlight"))
+                    {
+                        flashlight.enabled = true;
+                        hit.transform.gameObject.SetActive(false);
+                    }
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool raycastInteract(out RaycastHit hit, int layerMask)
     {
-        return Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
+        Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
+        if(flashlight.enabled)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

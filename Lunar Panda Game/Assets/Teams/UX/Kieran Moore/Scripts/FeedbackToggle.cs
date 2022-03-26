@@ -9,7 +9,7 @@ public class FeedbackToggle : MonoBehaviour
     public bool IsOnFeedbackMenu;
     public GameObject PauseMenu;
     public lockMouse MrCapsule;
-    public GameObject BarOfStamina;
+    //public GameObject BarOfStamina;
     public JournalMenuToggle Journal;
     public InventoryMenuToggle Inventory;
     public PauseButtonToggle Pause;
@@ -31,7 +31,7 @@ public class FeedbackToggle : MonoBehaviour
             if (IsOnFeedbackMenu == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Pause.IsPaused == false)
             {
                 IsOnFeedbackMenu = true;
-                BarOfStamina.SetActive(false);
+                //BarOfStamina.SetActive(false);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 print("Cursor is visible");
@@ -43,7 +43,7 @@ public class FeedbackToggle : MonoBehaviour
             {
                 PauseMenu.SetActive(false);
                 IsOnFeedbackMenu = false;
-                BarOfStamina.SetActive(true);
+                //BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
                 Cursor.visible = false;

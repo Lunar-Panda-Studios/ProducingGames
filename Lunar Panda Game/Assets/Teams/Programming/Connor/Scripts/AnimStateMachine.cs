@@ -5,37 +5,36 @@ using UnityEngine;
 public class AnimStateMachine : MonoBehaviour
 {
     private Rigidbody Player;
-    private enum State { idle, run, jump, falling};
+    private enum State { idle, run, jump, falling, sprinting};
     private State state = State.idle;
 
     private bool walking = false;
     private bool falling = false;
     private bool jumping = false;
-    
+
+    public Animator anim;
+
     void Start()
     {
+        anim = GetComponent<Animator>();
         Player = GetComponent<Rigidbody>();
     }
     void Update()
     {
         Debug.Log(state);
+        animState();
+        anim.SetInteger("State", (int)state);
     }
     private void animState()
     {
-        if (!falling && !jumping)
-        {
-            if (state == State.jump && Player.velocity.y <= 0)
-            {
-                state = State.idle;
-            }
-        }
-        if (falling || jumping)
-        {
-            if (Player.velocity.y < 0)
-            {
-                state = State.falling;
 
-            }
+        if (Player.velocity.x < 0.05f && Player.velocity.x > -0.05f && Player.velocity.y < 0.05f && Player.velocity.y > -0.05f && Player.velocity.z < 0.05f && Player.velocity.z > -0.05f)
+        {
+                state = State.idle;
+        }
+        if (Player.velocity.y < -0.1f)
+        {
+            state = State.falling;
         }
         else if (state == State.falling)
         {
@@ -44,7 +43,7 @@ public class AnimStateMachine : MonoBehaviour
                 state = State.idle;
             }
         }
-        else if (walking)
+        else if (Player.velocity.x > 0.05f || Player.velocity.x < -0.05f || Player.velocity.y > 0.05f || Player.velocity.y < -0.05f || Player.velocity.z > 0.05f || Player.velocity.z < -0.05f)
         {
             if (state != State.jump)
             {
@@ -53,43 +52,45 @@ public class AnimStateMachine : MonoBehaviour
         }
         else
         {
-            if (state != State.jump)
+            if ((state == State.idle || state == State.run || state == State.sprinting) && Input.GetButtonDown("Jump"))
             {
-                state = State.idle;
+                state = State.jump;
             }
         }
     }
-    void amIWalking()
-    {
-        Vector3 prevPosition = Player.position;
+    //void amIWalking()
+    //{
+    //    Vector3 prevPosition = Player.position;
 
-        if (Player.transform.position != prevPosition)
-        {
-            walking = true;
-        }
-        else
-        {
-            walking = false;
-        }
+    //    if (Player.transform.position != prevPosition)
+    //    {
+    //        walking = true;
+    //    }
+    //    else
+    //    {
+    //        walking = false;
+    //    }
 
-        prevPosition = Player.transform.position;
-    }
+    //    prevPosition = Player.transform.position;
+    //}
 
-    void amIJumping()
-    {
-        float prevPositionY = Player.position.y;
+    //void amIJumping()
+    //{
+    //    float prevPositionY = Player.position.y;
 
-        if (Player.transform.position.y != prevPositionY && Player.transform.position.y < prevPositionY)
-        {
-            falling = true;
-            jumping = false;
-        }
-        else
-        {
-            falling = false;
-            jumping = true;
-        }
+    //    if (Player.velocity.y < 0)
+    //    {
+    //        falling = true;
+    //        jumping = false;
+    //        Debug.Log("falling true");
+    //    }
+    //    else if (Player.velocity.y > 0.05f)
+    //    {
+    //        falling = false;
+    //        jumping = true;
+    //        Debug.Log("Jumping True");
+    //    }
 
-        prevPositionY = Player.transform.position.y;
-    }
+    //    prevPositionY = Player.transform.position.y;
+    //}
 }

@@ -11,7 +11,15 @@ public class PianoSequenceCheck : MonoBehaviour
     int placeinSequence;
 
     public string sequence = "";
-    public string attemptedSequence;    
+    public string attemptedSequence;
+
+    [Header("Reset Sound")]
+    public string resetSound;
+
+    [Header("Open Sound")]
+    public string openSound;
+
+    public Transform toOpen;
 
     public void Start()
     {
@@ -25,25 +33,26 @@ public class PianoSequenceCheck : MonoBehaviour
         if (attemptedSequence == sequence)
         {
             GameEvents.current.onPuzzleComplete(id);
-            /*if (Analysis.current != null)
+            if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
                 {
                     Analysis.current.resetTimer("Piano");
                 }
-            }*/
+            }
         }
         else
         {
-            /*if (Analysis.current != null)
+            if (Analysis.current != null)
             {
                 Analysis.current.failCounterPiano++;
-            }*/
+            }
+            SoundEffectManager.GlobalSFXManager.PlaySFX(resetSound);
             Debug.Log("Wrong Code");
         }
     }
 
-    void OpenAnim() 
+    void OpenAnim()
     {
         // Reminder to set up the anim here once we have one
     }
@@ -66,11 +75,21 @@ public class PianoSequenceCheck : MonoBehaviour
         }
     }
 
+    IEnumerator Open() //Rotates the door
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
+        toOpen.Rotate(new Vector3(0, 0, -54), Space.World);
+
+        yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
+
+        //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+    }
+
     public void resetPuzzle(int id)
     {
         if (id == this.id)
         {
-            //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+            toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
             attemptedSequence = "";
         }
     }
@@ -79,7 +98,7 @@ public class PianoSequenceCheck : MonoBehaviour
     {
         if (id == this.id)
         {
-            //StartCoroutine(Open());
+            StartCoroutine(Open());
             PuzzleData.current.completedEvents[id] = true;
         }
     }

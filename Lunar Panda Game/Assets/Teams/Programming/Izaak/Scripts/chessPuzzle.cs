@@ -16,6 +16,7 @@ public class chessPuzzle : MonoBehaviour
     public GameObject pawnChessPiece;
 
     private bool setOccupied = false;
+    public string placeAudio;//Matej changes
 
     [HideInInspector]
     public bool puzzleComplete;
@@ -57,6 +58,15 @@ public class chessPuzzle : MonoBehaviour
                             {
                                 chessboardParent.GetComponent<chessBoardPlacing>().checkPuzzleCompletion();
                             }
+                            SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
+
+                            if (Analysis.current != null)
+                            {
+                                if (Analysis.current.consent)
+                                {
+                                    Analysis.current.failCounterChess++;
+                                }
+                            }
                         }
                         if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0 || inventory.itemInventory[inventory.selectedItem] == queenChessPiece.GetComponent<HoldableItem>().data)
                         {
@@ -68,6 +78,15 @@ public class chessPuzzle : MonoBehaviour
                             if (queenChessPiece.GetComponent<chessValuedItem>().correctLocation == currentSpot)
                             {
                                 chessboardParent.GetComponent<chessBoardPlacing>().check = true;
+                            }
+                            SoundEffectManager.GlobalSFXManager.PlaySFX(placeAudio);//Matej edit
+
+                            if (Analysis.current != null)
+                            {
+                                if (Analysis.current.consent)
+                                {
+                                    Analysis.current.failCounterChess++;
+                                }
                             }
                         }
                     }

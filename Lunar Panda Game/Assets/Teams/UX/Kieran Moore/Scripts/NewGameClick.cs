@@ -20,6 +20,7 @@ public class NewGameClick : MonoBehaviour
     IEnumerator LoadSceneAsync()
     {
         yield return new WaitForSeconds(DelayForLoading);
+        GameManager.Instance.currentLevel(1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneToLoad);
 
         while (!asyncLoad.isDone)

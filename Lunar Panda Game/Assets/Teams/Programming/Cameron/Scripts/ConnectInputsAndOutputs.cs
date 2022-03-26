@@ -21,6 +21,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     int cableMask = 1 << 8;
 
     [SerializeField] Light passLight;
+    [SerializeField] Light passLight1;
     [SerializeField] Light failLight;
 
 
@@ -118,6 +119,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = false;
                             passLight.enabled = true;
+                            passLight1.enabled = true;
                         }
                         button.GetComponent<switchChanger>().TurnPowerOn();
                         foreach (Light light in completionLights)
@@ -129,13 +131,13 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             GameEvents.current.onPuzzleComplete(id);
 
-                            /*if (Analysis.current != null)
+                            if (Analysis.current != null)
                             {
                                 if (Analysis.current.consent)
                                 {
                                     Analysis.current.resetTimer("Wires");
                                 }
-                            }*/
+                            }
                         }
                         
                         
@@ -152,6 +154,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = true;
                             passLight.enabled = false;
+                            passLight1.enabled = false;
                         }
                     }
                 }
@@ -239,6 +242,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             PuzzleData.current.completedEvents[id] = false;
             PuzzleData.current.isCompleted[id - 1] = false;
             passLight.enabled = false;
+            passLight1.enabled = false;
             failLight.enabled = false;
         }
     }
@@ -264,6 +268,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             //if the currently connected node is not the right node, return false
             if (i.GetComponent<Node>().connectedNode != i.GetComponent<Node>().desiredNode)
             {
+                Analysis.current.failCounterWires++;
                 return false;
             }
         }

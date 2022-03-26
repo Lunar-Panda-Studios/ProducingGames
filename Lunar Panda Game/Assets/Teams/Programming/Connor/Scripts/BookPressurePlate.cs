@@ -10,10 +10,12 @@ public class BookPressurePlate : MonoBehaviour
     private float weightNeeded;
     private float bookWeight;
     public GameObject evilBook;
+    [Tooltip("Drag the safe's door here")]
+    public GameObject safeDoor;
 
     void Start()
     {
-        weightNeeded = GetComponent<BookPuzzle>().weightNeeded;
+        //weightNeeded = GetComponent<BookPuzzle>().weightNeeded;
     }
 
     void Update()
@@ -21,20 +23,31 @@ public class BookPressurePlate : MonoBehaviour
         bookWeight = evilBook.transform.localScale.x * 10;
     }
 
-    private void OnTriggerEnter(Collider pog)
+    void OnCollisionEnter(Collision collision)
     {
-        if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
+        print("COllision");
+        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
-            //open door
+            print("Completed");
+            //safeDoor.GetComponent<openSafe>().toggleOpening(true);
+            safeDoor.SetActive(false);
+
+            if (Analysis.current != null)
+            {
+                if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp2.ContainsKey("Perspective") && !Analysis.current.timersPuzzlesp1.ContainsKey("Perspective")))
+                {
+                    Analysis.current.resetTimer("Perspective");
+                }
+            }
         }
     }
 
-    private void OnTriggerExit(Collider pog)
+    private void OnCollisionExit(Collision collision)
     {
  
-        if (pog.gameObject.name == "EvilBook" && bookWeight > weightNeeded)
+        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
-            //close door
+            safeDoor.GetComponent<openSafe>().toggleOpening(false);
         }
     }
 }

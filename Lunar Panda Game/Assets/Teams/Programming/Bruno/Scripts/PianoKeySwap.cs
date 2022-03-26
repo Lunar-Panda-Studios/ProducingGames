@@ -45,7 +45,7 @@ public class PianoKeySwap : MonoBehaviour
             {
                 if (inventoryScript.itemInventory[inventoryScript.selectedItem] == PianoKey)
                 {
-                    GameEvents.current.onPuzzleComplete(id);
+                    GameEvents.current.onPuzzleComplete(id);                    
                 }
             }
         }
@@ -57,14 +57,12 @@ public class PianoKeySwap : MonoBehaviour
         {
             //It instantiates the real piano key version of the game object in the same position as the empty piano key object and destroys the original object
             GameObject PuzzleKeyRescale = Instantiate(ReplaceKey, transform.position, transform.rotation);
+            PuzzleKeyRescale.name = ReplaceKey.name;
             PuzzleKeyRescale.transform.localScale = EmptyKey.transform.localScale; // For the designers to put the rescaled key so that it will instantiate with the correct scale
+            PuzzleKeyRescale.transform.parent = GameObject.Find("PianoSequence").transform;
 
             Destroy(gameObject);
-
-            //if (Analysis.current.consent)
-            //{
-            //    Analysis.current.resetTimer("");
-            //}
+            inventoryScript.removeItem();
 
             PuzzleData.current.completedEvents[id] = true;
             PuzzleData.current.isCompleted[id - 1] = true;

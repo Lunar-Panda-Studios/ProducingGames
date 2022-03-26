@@ -42,15 +42,14 @@ public class InventoryMenuToggle : MonoBehaviour
                 Cursor.visible = true;
 
                 pickup.enabled = false;
-                //BarOfStamina.SetActive(false);
                 mouseLock.canLook = false;
                 InventoryMenu.SetActive(true);
                 Time.timeScale = 0f;
 
-                /*if (Analysis.current != null)
+                if (Analysis.current != null)
                 {
                     Analysis.current.menuOpen = true;
-                }*/
+                }
             }
             //if the inventory ui is already on screen
             else if (IsOnInventory == true)
@@ -58,16 +57,15 @@ public class InventoryMenuToggle : MonoBehaviour
                 jump.enabled = true;
                 InventoryMenu.SetActive(false);
                 IsOnInventory = false;
-                //BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 mouseLock.canLook = true;
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;
-                //if (Analysis.current != null)
-                //{
-                //    Analysis.current.menuOpen = false;
-                //}
+                if (Analysis.current != null)
+                {
+                    Analysis.current.menuOpen = false;
+                }
             }
         }
     }

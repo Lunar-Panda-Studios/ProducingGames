@@ -19,6 +19,8 @@ public class pressurePlatePuzzle : MonoBehaviour
     [Tooltip("Prefab of the pedestal goes here")]
     public GameObject prefabPedestal;
     private GameObject instPedestal;
+    [Tooltip("The door that opens when the puzzle is solved")]
+    public GameObject instDoor;
 
     [Header("Puzzle")]
     [Tooltip("Checks if the puzzle is complete or not")]
@@ -52,6 +54,14 @@ public class pressurePlatePuzzle : MonoBehaviour
     {
         if (currentCorrect==correctOrder.Count)
         {
+            instDoor.GetComponent<openSafe>().toggleOpening(true);
+            if (Analysis.current != null)
+            {
+                if (Analysis.current.consent)
+                {
+                    Analysis.current.resetTimer("Pressure Plates");
+                }
+            }
             return true;
         }
         return false;
