@@ -8,6 +8,7 @@ public class HorrorEditor : Editor
 {
     public SerializedProperty
     //General
+        list_prop,
         hor_Prop,
         state_Prop,
         player_Prop,
@@ -65,6 +66,7 @@ public class HorrorEditor : Editor
     {
         // Setup the SerializedProperties
         hor_Prop = serializedObject.FindProperty("hor");
+        list_prop = serializedObject.FindProperty("list");
         state_Prop = serializedObject.FindProperty("state");
         player_Prop = serializedObject.FindProperty("player");
         disableAtStart_Prop = serializedObject.FindProperty("disableAtStart");
@@ -101,6 +103,7 @@ public class HorrorEditor : Editor
 
 
         Horror.HorrorEvent st = (Horror.HorrorEvent)state_Prop.enumValueIndex;
+        
 
         switch (st)
         {
@@ -165,6 +168,7 @@ public class HorrorEditor : Editor
                 break;
 
         }
+        EditorGUILayout.PropertyField(list_prop, new GUIContent("list"));
 
         serializedObject.ApplyModifiedProperties();
     }

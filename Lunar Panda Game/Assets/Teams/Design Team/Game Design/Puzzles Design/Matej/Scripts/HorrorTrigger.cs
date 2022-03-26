@@ -48,7 +48,7 @@ public class HorrorTrigger : MonoBehaviour
     [Header("---PLAY SOUND SETTINGS---")]
     public bool play;
     public string clipName;
-    
+
     [Header("---STOP SOUND SETTINGS---")]
     public bool stop;
     public string stopClipName;
@@ -119,7 +119,7 @@ public class HorrorTrigger : MonoBehaviour
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         yield return new WaitForSeconds(Delay);
         player.GetComponent<playerMovement>().enabled = true;
-        player.GetComponent<WalkingSound>().enabled= true;
+        player.GetComponent<WalkingSound>().enabled = true;
         Destroy(this);
     }
     private IEnumerator StopMoveObject(float Delay)
@@ -213,9 +213,9 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void Levitate()
     {
-        foreach(FallObject levitateObject in LevitateObjects)
+        foreach (FallObject levitateObject in LevitateObjects)
         {
-            levitateObject.Levitate(forceUp,forceDown,delay);
+            levitateObject.Levitate(forceUp, forceDown, delay);
         }
         Destroy(this);
     }
@@ -224,7 +224,11 @@ public class HorrorTrigger : MonoBehaviour
         throwObject.Fly(force);
         Destroy(this);
 
-    }
+    }    
+    public void TestFunction(string[] test)
+    {
+        
+    }    
     public void HideObject()
     {
         StartCoroutine(HideObjectCoroutine(EnableFor));
