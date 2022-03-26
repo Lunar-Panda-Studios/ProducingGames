@@ -64,11 +64,6 @@ public class PianoKeySwap : MonoBehaviour
             Destroy(gameObject);
             inventoryScript.removeItem();
 
-            //if (Analysis.current.consent)
-            //{
-            //    Analysis.current.resetTimer("");
-            //}
-
             PuzzleData.current.completedEvents[id] = true;
             PuzzleData.current.isCompleted[id - 1] = true;
         }

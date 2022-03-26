@@ -31,6 +31,7 @@ public class HorrorTrigger : MonoBehaviour
     public bool lightsOnOff;
     public List<Light> Lights = new List<Light>();
 
+
     [Header("---JUMPSCARE SETTINGS---")]
     public bool jump;
     public Image jumpSImage;
@@ -68,6 +69,11 @@ public class HorrorTrigger : MonoBehaviour
     public FallObject throwObject;
     public float force;
 
+    [Header("---ENABLE/DISABLE OBJECTS---")]
+    public bool enableObject;
+    public GameObject otherObject;
+    public float EnableFor;
+
     [Header("---ENABLE OTHER TRIGGER SETTINGS---")]
     public bool enableOtherTrigger;
     public HorrorTrigger otherTrigger;
@@ -104,6 +110,7 @@ public class HorrorTrigger : MonoBehaviour
             if (levitate) Levitate();
             if (throW) ThrowObject(force);
             if (enableOtherTrigger) otherTrigger.ActivateTriggerCollider(true);
+            if (enableObject) HideObject();
         }
     }
 
@@ -136,6 +143,13 @@ public class HorrorTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay);
         startLook = false;
         player.GetComponentInChildren<lockMouse>().enabled = true;
+        Destroy(this);
+    }
+    private IEnumerator HideObjectCoroutine(float time)
+    {
+        otherObject.gameObject.SetActive(true);
+        yield return new WaitForSeconds(time);
+        otherObject.gameObject.SetActive(false);
         Destroy(this);
     }
     public void DisablePlayerMovement()
@@ -210,11 +224,13 @@ public class HorrorTrigger : MonoBehaviour
         throwObject.Fly(force);
         Destroy(this);
 
-    }
+    }    
     public void TestFunction(string[] test)
     {
         
+    }    
+    public void HideObject()
+    {
+        StartCoroutine(HideObjectCoroutine(EnableFor));
     }
-    
-
 }

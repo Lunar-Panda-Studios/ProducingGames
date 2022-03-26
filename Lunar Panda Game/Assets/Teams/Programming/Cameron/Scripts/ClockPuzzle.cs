@@ -129,6 +129,14 @@ public class ClockPuzzle : MonoBehaviour
                 door.eulerAngles = new Vector3(-90, 180, 90);//im not making this a variable as its only temporary
                 door.RotateAround(pivot.position, Vector3.up, -90);
                 completed = true;
+
+                if (Analysis.current != null)
+                {
+                    if (Analysis.current.consent && (!Analysis.current.timersPuzzlesp1.ContainsKey("Clock") && !Analysis.current.timersPuzzlesp1.ContainsKey("Clock")))
+                    {
+                        Analysis.current.resetTimer("Clock");
+                    }
+                }
             }
         }
         else

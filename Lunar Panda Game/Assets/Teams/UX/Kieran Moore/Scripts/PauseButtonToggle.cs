@@ -13,6 +13,7 @@ public class PauseButtonToggle : MonoBehaviour
     JournalMenuToggle Journal;
     InventoryMenuToggle Inventory;
     FeedbackToggle Feedback;
+    public GameObject PauseMenuElement;
 
     // Start is called before the first frame update
     void Start()
@@ -38,26 +39,43 @@ public class PauseButtonToggle : MonoBehaviour
                 MrCapsule.canLook = false;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
+                
             }
             else if (IsPaused == true)
             {
                if (IsOnRegularMenu == true)
                 {
                     Unpause();
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
             }
+        }
+
+
+        if (PauseMenuElement.activeInHierarchy == false)
+        {
+            IsOnRegularMenu = false;
+        }
+
+
+        if (PauseMenuElement.activeInHierarchy == true)
+        {
+            IsOnRegularMenu = true;
         }
     }
 
     public void Unpause()
     {
-        PauseMenu.SetActive(false);
-        IsPaused = false;
-        //BarOfStamina.SetActive(true);
-        IsOnRegularMenu = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        MrCapsule.canLook = true;
-        Cursor.visible = false;
-        Time.timeScale = 1f;
+       if (IsOnRegularMenu == true)
+        {
+            PauseMenu.SetActive(false);
+            IsPaused = false;
+            //BarOfStamina.SetActive(true);
+            IsOnRegularMenu = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            MrCapsule.canLook = true;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+        }
     }
 }

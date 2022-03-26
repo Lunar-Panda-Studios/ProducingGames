@@ -47,6 +47,14 @@ public class CorrectHead : MonoBehaviour
                 return;
             }    
         }
+
+        if (Analysis.current != null)
+        {
+            if (Analysis.current.consent)
+            {
+                Analysis.current.resetTimer("Arrangement");
+            }
+        }
         Debug.Log("It can be opened");
         StartCoroutine(Open());
     }
@@ -54,7 +62,7 @@ public class CorrectHead : MonoBehaviour
     IEnumerator Open() //Rotates the door
     {
         //SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);
-        toOpen.Rotate(new Vector3(0, 90, 0), Space.World);
+        toOpen.Rotate(new Vector3(0, 90, 0), Space.Self);
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
 

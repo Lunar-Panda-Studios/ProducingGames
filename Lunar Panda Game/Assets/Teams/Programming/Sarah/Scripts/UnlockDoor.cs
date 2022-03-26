@@ -29,6 +29,14 @@ public class UnlockDoor : MonoBehaviour
                     if(key == inventory.itemInventory[inventory.selectedItem])
                     {
                         open();
+
+                        if (Analysis.current != null)
+                        {
+                            if (Analysis.current.consent)
+                            {
+                                Analysis.current.resetTimer("3 Key Parts");
+                            }
+                        }
                     }
                 }
             }
