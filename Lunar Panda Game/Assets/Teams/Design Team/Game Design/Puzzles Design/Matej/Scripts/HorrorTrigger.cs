@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class HorrorTrigger : MonoBehaviour
 {
+    private int doneEvents = 0;
+    private int numberOfEvents =0;
+    private bool coroutineDone=false;
+
+
     private GameObject player;
     //Rotating camera to the mirror settings
     public GameObject camera;
@@ -92,26 +97,86 @@ public class HorrorTrigger : MonoBehaviour
                         Time.deltaTime * damping);
             camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
         }
+        if(doneEvents == numberOfEvents && coroutineDone)Destroy(this.gameObject);
 
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (disablePlayerMovement) DisablePlayerMovement();
-            if (move) Move();
-            if (teleport) Teleport();
-            if (lights) LightsOnOff(lightsOnOff);
-            if (jump) Jumpscare();
-            if (look) LookAt();
-            if (play) PlaySound(clipName);
-            if (stop) StopSound(stopClipName);
-            if (drop) DropObject();
-            if (levitate) Levitate();
-            if (throW) ThrowObject(force);
-            if (enableOtherTrigger) otherTrigger.ActivateTriggerCollider(true);
-            if (enableObject) HideObject();
+            StartCoroutine(HelpCoroutine());
+            if (disablePlayerMovement)
+            {
+                numberOfEvents++;
+                DisablePlayerMovement();
+            }
+            if (move)
+            {
+                numberOfEvents++;
+                Move();
+            }
+            if (teleport)
+            {
+                numberOfEvents++;
+                Teleport();
+            }
+            if (lights)
+            {
+                numberOfEvents++;
+                LightsOnOff(lightsOnOff);
+            }
+            if (jump)
+            {
+                numberOfEvents++;
+                Jumpscare();
+            }
+            if (look)
+            {
+                numberOfEvents++;
+                LookAt();
+            }
+            if (play)
+            {
+                numberOfEvents++;
+                PlaySound(clipName);
+            }
+            if (stop)
+            {
+                numberOfEvents++;
+                StopSound(stopClipName);
+            }
+            if (drop)
+            {
+                numberOfEvents++;
+                DropObject();
+            }
+            if (levitate)
+            {
+                numberOfEvents++;
+                Levitate();
+            }
+            if (throW)
+            {
+                numberOfEvents++;
+                ThrowObject(force);
+            }
+            if (enableOtherTrigger)
+            {
+                numberOfEvents++;
+                otherTrigger.ActivateTriggerCollider(true);
+            }
+            if (enableObject)
+            {
+                numberOfEvents++;
+                HideObject();
+            }
         }
+    }
+    private IEnumerator HelpCoroutine()
+    {
+        yield return new WaitForSeconds(2);
+        coroutineDone = true;
+
     }
 
     private IEnumerator PlayerMovementCoroutine(float Delay)
@@ -120,14 +185,14 @@ public class HorrorTrigger : MonoBehaviour
         yield return new WaitForSeconds(Delay);
         player.GetComponent<playerMovement>().enabled = true;
         player.GetComponent<WalkingSound>().enabled = true;
-        Destroy(this);
+        doneEvents++;
     }
     private IEnumerator StopMoveObject(float Delay)
     {
         yield return new WaitForSeconds(Delay);
         movableObject.SetIsMoving(false);
         if (movableObject.GetDisableAM()) movableObject.gameObject.SetActive(false);
-        Destroy(this);
+        doneEvents++;
     }
     private IEnumerator JumpscareStayOnScreen(float time)
     {
@@ -135,7 +200,7 @@ public class HorrorTrigger : MonoBehaviour
         jumpSImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
-        Destroy(this);
+        doneEvents++;
     }
     private IEnumerator LookAtCoroutine(float delay)
     {
@@ -143,14 +208,14 @@ public class HorrorTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay);
         startLook = false;
         player.GetComponentInChildren<lockMouse>().enabled = true;
-        Destroy(this);
+        doneEvents++;
     }
     private IEnumerator HideObjectCoroutine(float time)
     {
         otherObject.gameObject.SetActive(true);
         yield return new WaitForSeconds(time);
         otherObject.gameObject.SetActive(false);
-        Destroy(this);
+        doneEvents++;
     }
     public void DisablePlayerMovement()
     {
@@ -172,6 +237,7 @@ public class HorrorTrigger : MonoBehaviour
         //Basically just telport the movable object
         //Design-vise make sure the player cannot see the transport
         teleportObject.Teleport();
+        doneEvents++;
     }
     public void LightsOnOff(bool value)
     {
@@ -179,6 +245,7 @@ public class HorrorTrigger : MonoBehaviour
         {
             light.enabled = value;
         }
+        doneEvents++;
     }
     public void Jumpscare()
     {
@@ -195,21 +262,22 @@ public class HorrorTrigger : MonoBehaviour
     public void ActivateTriggerCollider(bool value)
     {
         this.gameObject.GetComponent<MeshCollider>().enabled = value;
+        doneEvents++;
     }
     public void PlaySound(string clipName)
     {
         SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);
-        Destroy(this);
+        doneEvents++;
     }
     public void StopSound(string clipName)
     {
         SoundEffectManager.GlobalSFXManager.PauseSFX(clipName);
-        Destroy(this);
+        doneEvents++;
     }
     public void DropObject()
     {
         dropObject.GetComponent<Rigidbody>().useGravity = true;
-        Destroy(this);
+        doneEvents++;
     }
     public void Levitate()
     {
@@ -217,13 +285,12 @@ public class HorrorTrigger : MonoBehaviour
         {
             levitateObject.Levitate(forceUp, forceDown, delay);
         }
-        Destroy(this);
+        doneEvents++;
     }
     public void ThrowObject(float force)
     {
         throwObject.Fly(force);
-        Destroy(this);
-
+        doneEvents++;
     }    
     public void TestFunction(string[] test)
     {
