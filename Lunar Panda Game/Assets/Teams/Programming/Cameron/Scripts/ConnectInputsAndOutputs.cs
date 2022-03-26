@@ -21,6 +21,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     int cableMask = 1 << 8;
 
     [SerializeField] Light passLight;
+    [SerializeField] Light passLight1;
     [SerializeField] Light failLight;
 
 
@@ -118,6 +119,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = false;
                             passLight.enabled = true;
+                            passLight1.enabled = true;
                         }
                         button.GetComponent<switchChanger>().TurnPowerOn();
                         foreach (Light light in completionLights)
@@ -152,6 +154,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = true;
                             passLight.enabled = false;
+                            passLight1.enabled = false;
                         }
                     }
                 }
@@ -239,6 +242,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             PuzzleData.current.completedEvents[id] = false;
             PuzzleData.current.isCompleted[id - 1] = false;
             passLight.enabled = false;
+            passLight1.enabled = false;
             failLight.enabled = false;
         }
     }
