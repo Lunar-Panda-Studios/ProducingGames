@@ -9,7 +9,6 @@ public class PauseButtonToggle : MonoBehaviour
     public bool IsOnRegularMenu;
     public GameObject PauseMenu;
     lockMouse MrCapsule;
-    playerJump CapsuleJump;
     //public GameObject BarOfStamina;
     JournalMenuToggle Journal;
     InventoryMenuToggle Inventory;
@@ -23,7 +22,6 @@ public class PauseButtonToggle : MonoBehaviour
         Journal = FindObjectOfType<JournalMenuToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
-        CapsuleJump = FindObjectOfType<playerJump>();
     }
 
     // Update is called once per frame
@@ -38,7 +36,6 @@ public class PauseButtonToggle : MonoBehaviour
                 IsOnRegularMenu = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                CapsuleJump.enabled = false;
                 MrCapsule.canLook = false;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
@@ -77,7 +74,6 @@ public class PauseButtonToggle : MonoBehaviour
             //BarOfStamina.SetActive(true);
             IsOnRegularMenu = false;
             Cursor.lockState = CursorLockMode.Locked;
-            CapsuleJump.enabled = true;
             MrCapsule.canLook = true;
             Cursor.visible = false;
             Time.timeScale = 1f;

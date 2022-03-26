@@ -9,7 +9,6 @@ public class JournalMenuToggle : MonoBehaviour
     public bool IsOnMenu;
     public GameObject JournalMenu;
     public lockMouse MrCapsule;
-    playerJump CapsuleJump;
     //public GameObject BarOfStamina;
     public PauseButtonToggle Pause;
     public InventoryMenuToggle Inventory;
@@ -23,7 +22,6 @@ public class JournalMenuToggle : MonoBehaviour
         Pause = FindObjectOfType<PauseButtonToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
         pickup = FindObjectOfType<PlayerPickup>();
-        CapsuleJump = FindObjectOfType<playerJump>();
     }
 
     // Update is called once per frame
@@ -41,7 +39,6 @@ public class JournalMenuToggle : MonoBehaviour
                 Cursor.visible = true;
                 print("Cursor is visible");
                 MrCapsule.canLook = false;
-                CapsuleJump.enabled = false;
                 JournalMenu.SetActive(true);
                 UIManager.Instance.UpdateJournal();
                 pickup.enabled = false;
@@ -59,7 +56,6 @@ public class JournalMenuToggle : MonoBehaviour
             //    BarOfStamina.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 MrCapsule.canLook = true;
-                CapsuleJump.enabled = true;
                 Cursor.visible = false;
                 pickup.enabled = true;
                 Time.timeScale = 1f;

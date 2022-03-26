@@ -10,7 +10,6 @@ public class InventoryMenuToggle : MonoBehaviour
 
     [SerializeField] GameObject InventoryMenu;
     lockMouse mouseLock;
-    playerJump jump;
     //public GameObject BarOfStamina;
     JournalMenuToggle Journal;
     PauseButtonToggle Pause;
@@ -25,7 +24,6 @@ public class InventoryMenuToggle : MonoBehaviour
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
         pickup = FindObjectOfType<PlayerPickup>();
-        jump = FindObjectOfType<playerJump>();
 
     }
 
@@ -37,7 +35,6 @@ public class InventoryMenuToggle : MonoBehaviour
             //if the inventory ui isnt on screen
             if (IsOnInventory == false && Pause.IsPaused == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
             {
-                jump.enabled = false;
                 IsOnInventory = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -55,7 +52,6 @@ public class InventoryMenuToggle : MonoBehaviour
             //if the inventory ui is already on screen
             else if (IsOnInventory == true)
             {
-                jump.enabled = true;
                 InventoryMenu.SetActive(false);
                 IsOnInventory = false;
                 Cursor.lockState = CursorLockMode.Locked;
