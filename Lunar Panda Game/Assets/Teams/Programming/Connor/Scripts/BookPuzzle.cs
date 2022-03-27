@@ -61,7 +61,7 @@ public class BookPuzzle : MonoBehaviour
         }
 
         //looking down
-        if (rotation > 0 && rotation < 90)
+        if (rotation > 0 && rotation <= 90)
         {
             if (pickUp.heldItem == gameObject)
             {

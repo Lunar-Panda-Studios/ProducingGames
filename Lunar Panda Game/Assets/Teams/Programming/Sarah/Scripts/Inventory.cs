@@ -119,6 +119,8 @@ public class Inventory : MonoBehaviour
         //If item is used then it will not be dropped on the floor
         itemInventory[selectedItem] = null;
         itemsIn--;
+
+        UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
     }
 
     private void selectItem(bool positive)

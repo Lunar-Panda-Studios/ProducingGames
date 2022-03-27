@@ -71,6 +71,10 @@ public class OptionMenu : MonoBehaviour
         Resolution resolution = resolutions[index];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+    public void fullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+    }
 
     public void qualitySettings(int index)
     {
