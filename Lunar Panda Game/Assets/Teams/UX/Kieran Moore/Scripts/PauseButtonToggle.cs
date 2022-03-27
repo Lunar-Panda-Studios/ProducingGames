@@ -47,6 +47,7 @@ public class PauseButtonToggle : MonoBehaviour
                 {
                     Unpause();
                     Cursor.lockState = CursorLockMode.Locked;
+                   
                 }
             }
         }

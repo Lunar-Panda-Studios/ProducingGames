@@ -44,7 +44,7 @@ public class playerJump : MonoBehaviour
         //Checks if the player pressed jump this frame and acts on the jump if the player is considered on the ground
         if (Input.GetButtonDown("Jump"))
         {
-            if (rayDown == true)
+            if (rayDown == true && Time.timeScale > 0)
             {
                 p_rigidbody.AddForce(transform.up* p_speed, ForceMode.Impulse);  
             }
