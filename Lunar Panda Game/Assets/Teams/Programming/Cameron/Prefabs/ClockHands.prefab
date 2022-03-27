@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1365047933078457706}
-  m_Layer: 0
+  - component: {fileID: 4829407873568058596}
+  - component: {fileID: 912225826}
+  - component: {fileID: 912225825}
+  m_Layer: 6
   m_Name: ClockHands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3967873923166163153}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10, y: 5.28, z: 4.9962854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -32,6 +35,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4829407873568058596
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967873923166163153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2884562, y: 0.20073223, z: 0.13398147}
+  m_Center: {x: 0.12903762, y: -0.08047402, z: 0.054351926}
+--- !u!54 &912225826
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967873923166163153}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &912225825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967873923166163153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 95579ede32d3a6a4fa422c8f39ace2ea, type: 2}
 --- !u!1 &5575071900324026703
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,11 +88,9 @@ GameObject:
   - component: {fileID: 5575071900324026691}
   - component: {fileID: 5575071900324026690}
   - component: {fileID: 5575071900324026689}
-  - component: {fileID: 5575071900324026688}
   - component: {fileID: 6416227673536163209}
-  - component: {fileID: 6416227673536163210}
-  - component: {fileID: 6416227673536163211}
-  m_Layer: 0
+  - component: {fileID: 874650824}
+  m_Layer: 6
   m_Name: Hand_Hour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,19 +160,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5575071900324026688
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575071900324026703}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6416227673536163209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,20 +175,7 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 2aceb664a7e449c42b8b9c96e334f4b1, type: 2}
---- !u!114 &6416227673536163210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575071900324026703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5b5dc85bf512b7744abee50eb59d7e58, type: 2}
---- !u!54 &6416227673536163211
+--- !u!54 &874650824
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,10 +187,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &5575071900367148549
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,11 +202,9 @@ GameObject:
   - component: {fileID: 5575071900367148665}
   - component: {fileID: 5575071900367148664}
   - component: {fileID: 5575071900367148551}
-  - component: {fileID: 5575071900367148550}
   - component: {fileID: 5752453985485525889}
-  - component: {fileID: 5752453985485525890}
-  - component: {fileID: 5752453985485525891}
-  m_Layer: 0
+  - component: {fileID: 710601743}
+  m_Layer: 6
   m_Name: Hand_Min
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,19 +274,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5575071900367148550
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575071900367148549}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5752453985485525889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,20 +289,7 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
---- !u!114 &5752453985485525890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575071900367148549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfb39ce4da44de4f9d3b7b697139982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 45e820be505c1ad4cb2487b082c2d319, type: 2}
---- !u!54 &5752453985485525891
+--- !u!54 &710601743
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,7 +301,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
