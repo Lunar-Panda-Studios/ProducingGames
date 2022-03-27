@@ -7,6 +7,10 @@ public class InteractRaycasting : MonoBehaviour
     Transform player;
     Flashlight flashlight;
     Transform playerCamera;
+    JournalMenuToggle Journal;
+    PauseButtonToggle Pause;
+    FeedbackToggle Feedback;
+    InventoryMenuToggle Inventory;
     private static InteractRaycasting _instance;
     public static InteractRaycasting Instance { get { return _instance; } }
 
@@ -29,11 +33,19 @@ public class InteractRaycasting : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Pause = FindObjectOfType<PauseButtonToggle>();
+        Journal = FindObjectOfType<JournalMenuToggle>();
+        Feedback = FindObjectOfType<FeedbackToggle>();
+        Inventory = FindObjectOfType<InventoryMenuToggle>();
+    }
+
     public bool raycastInteract(out RaycastHit hit)
     {
         Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist);
 
-        if (hit.transform != null)
+        if (hit.transform != null && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
         {
             if (flashlight.enabled)
             {
@@ -65,7 +77,7 @@ public class InteractRaycasting : MonoBehaviour
     public bool raycastInteract(out RaycastHit hit, int layerMask)
     {
         Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
-        if(flashlight.enabled)
+        if(flashlight.enabled && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
         {
             return true;
         }
