@@ -113,6 +113,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                 if (hit.transform.gameObject == button)
                 {
                     button.GetComponent<switchChanger>().changeSwitchState();
+
                     if (CheckCombination())
                     {
                         if (failLight != null && passLight != null)
@@ -268,7 +269,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             //if the currently connected node is not the right node, return false
             if (i.GetComponent<Node>().connectedNode != i.GetComponent<Node>().desiredNode)
             {
-                Analysis.current.failCounterWires++;
+                //Analysis.current.failCounterWires++;
                 return false;
             }
         }
