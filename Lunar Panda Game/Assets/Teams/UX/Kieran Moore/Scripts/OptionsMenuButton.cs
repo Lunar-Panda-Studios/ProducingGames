@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 
 public class OptionsMenuButton : MonoBehaviour
@@ -11,10 +12,14 @@ public class OptionsMenuButton : MonoBehaviour
     public GameObject MenuTwo;
     public GameObject MenuThree;
     public GameObject MenuToShow;
+    [SerializeField] GameObject firstSelectedButton;
     void Start()
     {
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (firstSelectedButton != null)
+            EventSystem.current.SetSelectedGameObject(firstSelectedButton);
     }
 
     void TaskOnClick()
@@ -23,5 +28,6 @@ public class OptionsMenuButton : MonoBehaviour
         MenuTwo.SetActive(false);
         MenuThree.SetActive(false);
         MenuToShow.SetActive(true);
+        
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseButtonToggle : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseButtonToggle : MonoBehaviour
     InventoryMenuToggle Inventory;
     FeedbackToggle Feedback;
     public GameObject PauseMenuElement;
+    [SerializeField] GameObject firstSelectedButton;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,9 @@ public class PauseButtonToggle : MonoBehaviour
                 MrCapsule.canLook = false;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
+                EventSystem.current.SetSelectedGameObject(null);
+                if(firstSelectedButton != null)
+                    EventSystem.current.SetSelectedGameObject(firstSelectedButton);
                 
             }
             else if (IsPaused == true)
