@@ -36,6 +36,15 @@ public class playerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         //Sets the velocity based on these values to move the player
         p_rigidbody.velocity = ((transform.forward * z) * p_speed) + ((transform.right * x) * p_speed) + (new Vector3(0, p_rigidbody.velocity.y, 0));
+
+        if(p_rigidbody.velocity != new Vector3(0,0,0))
+        {
+            UIManager.Instance.itemFade(true);
+        }
+        else
+        {
+            UIManager.Instance.itemFade(false);
+        }
     }
 
     void sprint() 

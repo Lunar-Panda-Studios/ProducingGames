@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     public Text inventoryDescription;
     public Text inventoryName;
     public Image inventorySelect;
+    public Image bottomRightItem;
+    public Image bottomRightPanel;
 
     [Header("Journal UI")]
     internal Room currentTab;
@@ -81,6 +83,40 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void itemEquip(ItemData data)
+    {
+        Color colour = bottomRightItem.color;
+
+        if (data != null)
+        {
+            bottomRightItem.color = new Color(colour.r, colour.g, colour.b, 1);
+            bottomRightItem.sprite = data.itemImage;
+        }
+        else
+        {
+            bottomRightItem.color = new Color(colour.r, colour.g, colour.b, 0);
+            bottomRightItem.sprite = null;
+        }
+
+    }
+
+    public void itemFade(bool isMoving)
+    {
+        Color colour = bottomRightPanel.color;
+        Color colourItem = bottomRightItem.color;
+
+        if (isMoving)
+        {
+            bottomRightPanel.color = new Color(colour.r, colour.g, colour.b, 0.10f);
+            bottomRightItem.color = new Color(colourItem.r, colourItem.g, colourItem.b, 0.10f);
+        }
+        else
+        {
+            bottomRightPanel.color = new Color(colour.r, colour.g, colour.b, 1);
+            bottomRightItem.color = new Color(colourItem.r, colourItem.g, colourItem.b, 1);
+        }
     }
 
     public void ToggleCrosshair()
