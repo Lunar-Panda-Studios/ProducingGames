@@ -145,6 +145,7 @@ public class Inventory : MonoBehaviour
         itemsIn--;
 
         UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
     private void selectItem(bool positive)
