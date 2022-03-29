@@ -672,7 +672,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6902
+  m_Name: pb_Mesh-31042
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19824,6 +19824,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759330666}
     m_Modifications:
+    - target: {fileID: 2780458349258617639, guid: 7ecb99613ff057749afad8c9af6b0676, type: 3}
+      propertyPath: autoCombineItemsList.Array.data[0].instance
+      value: 
+      objectReference: {fileID: 912225823}
     - target: {fileID: 6301407982950469256, guid: 7ecb99613ff057749afad8c9af6b0676, type: 3}
       propertyPath: m_Name
       value: MrCapsule Variant
@@ -37983,6 +37987,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 27.238281
       objectReference: {fileID: 0}
+    - target: {fileID: 1817431959704567453, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3548961326446000691, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
       propertyPath: allItems.Array.size
       value: 7
@@ -43310,11 +43318,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipList.Array.size
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipNames.Array.size
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipList.Array.data[0]
@@ -43441,6 +43449,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: e313a082e6d200a42a568801b527b43a, type: 3}
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
+      propertyPath: ClipList.Array.data[31]
+      value: 
+      objectReference: {fileID: 8300000, guid: dda2a6db3c86d2544abfe05d08744a33, type: 3}
+    - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipNames.Array.data[0]
       value: Fire
       objectReference: {fileID: 0}
@@ -43563,6 +43575,10 @@ PrefabInstance:
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipNames.Array.data[30]
       value: Piano_Reset
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
+      propertyPath: ClipNames.Array.data[31]
+      value: Flashlight
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435146, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: m_Name
@@ -52835,6 +52851,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797052255}
   m_Mesh: {fileID: 3181909582359037443, guid: 7c9f0933c0d801646bfa4aeab75f90e6, type: 3}
+--- !u!1 &1798900935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ed6eb6629a01f174eab04c66072bffbc, type: 3}
+  m_PrefabInstance: {fileID: 49894507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1798900938
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798900935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8966729, y: 2.1446962, z: 0.14939454}
+  m_Center: {x: -0.40576914, y: 1.0675696, z: 0.010357056}
 --- !u!1 &1799292267
 GameObject:
   m_ObjectHideFlags: 0
