@@ -9,7 +9,7 @@ public class bikeLockNumber : MonoBehaviour
     public int digitPlacement;
 
     private float rotationIncrement = 36;
-    private int currentNumber = 5;
+    private int currentNumber = 0;
     private GameObject bikeLockParent;
     private bikeLock bikeLockScript;
 
@@ -23,7 +23,7 @@ public class bikeLockNumber : MonoBehaviour
         bikeLockScript = bikeLockParent.GetComponent<bikeLock>();
         //Matches the current value and rotation with the current code value in the parent script
         currentNumber = bikeLockScript.getCurrentCode(digitPlacement);
-        transform.Rotate((-5 * rotationIncrement) + (currentNumber * rotationIncrement), 0, 0);
+        transform.Rotate(0, 0, (currentNumber * rotationIncrement));
         cam = Camera.main.transform;
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -38,17 +38,39 @@ public class bikeLockNumber : MonoBehaviour
             {
                 if (hit.transform.gameObject == gameObject)
                 {
-                        if (currentNumber >= 9)
+                        if (currentNumber <= 0)
                         {
-                            currentNumber = 0;
+                            currentNumber = 9;
                         }
                         else
                         {
-                            currentNumber++;
+                            currentNumber--;
                         }
-                        transform.Rotate(-rotationIncrement, 0, 0);
+                        transform.Rotate(0, 0, -rotationIncrement);
                         bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
                         bikeLockScript.checkPuzzleComplete();
+                }
+            }
+        }
+
+        if (Input.GetButtonDown("PutAway"))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            {
+                if (hit.transform.gameObject == gameObject)
+                {
+                    if (currentNumber >= 9)
+                    {
+                        currentNumber = 0;
+                    }
+                    else
+                    {
+                        currentNumber++;
+                    }
+                    transform.Rotate(0, 0, rotationIncrement);
+                    bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
+                    bikeLockScript.checkPuzzleComplete();
                 }
             }
         }

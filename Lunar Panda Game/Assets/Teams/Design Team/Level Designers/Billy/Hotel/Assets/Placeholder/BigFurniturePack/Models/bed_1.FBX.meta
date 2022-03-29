@@ -1,37 +1,92 @@
 fileFormatVersion: 2
 guid: a66f756b6810535438053fc6a961a201
-timeCreated: 18446744011573954816
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: base
-    100002: //RootNode
-    100004: blanket
-    100006: mattress
-    100008: pillow
-    100010: pillow 1
-    400000: base
-    400002: //RootNode
-    400004: blanket
-    400006: mattress
-    400008: pillow
-    400010: pillow 1
-    2300000: base
-    2300002: blanket
-    2300004: mattress
-    2300006: pillow
-    2300008: pillow 1
-    3300000: base
-    3300002: blanket
-    3300004: mattress
-    3300006: pillow
-    3300008: pillow 1
-    4300000: pillow
-    4300002: pillow
-    4300004: blanket
-    4300006: mattress
-    4300008: base
-    9500000: //RootNode
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: base
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: blanket
+  - first:
+      1: 100006
+    second: mattress
+  - first:
+      1: 100008
+    second: pillow
+  - first:
+      1: 100010
+    second: pillow 1
+  - first:
+      4: 400000
+    second: base
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: blanket
+  - first:
+      4: 400006
+    second: mattress
+  - first:
+      4: 400008
+    second: pillow
+  - first:
+      4: 400010
+    second: pillow 1
+  - first:
+      23: 2300000
+    second: base
+  - first:
+      23: 2300002
+    second: blanket
+  - first:
+      23: 2300004
+    second: mattress
+  - first:
+      23: 2300006
+    second: pillow
+  - first:
+      23: 2300008
+    second: pillow 1
+  - first:
+      33: 3300000
+    second: base
+  - first:
+      33: 3300002
+    second: blanket
+  - first:
+      33: 3300004
+    second: mattress
+  - first:
+      33: 3300006
+    second: pillow
+  - first:
+      33: 3300008
+    second: pillow 1
+  - first:
+      43: 4300000
+    second: pillow
+  - first:
+      43: 4300002
+    second: pillow
+  - first:
+      43: 4300004
+    second: blanket
+  - first:
+      43: 4300006
+    second: mattress
+  - first:
+      43: 4300008
+    second: base
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -39,7 +94,7 @@ ModelImporter:
       name: base_material
     second: {fileID: 2100000, guid: 366679cf3713065428e131e78f9593ee, type: 2}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 2
     materialLocation: 0
@@ -56,6 +111,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -70,30 +126,45 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -103,14 +174,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 1
   userData: 
   assetBundleName: 
