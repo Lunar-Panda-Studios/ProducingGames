@@ -12,6 +12,7 @@ public class ItemCanBePlaced : MonoBehaviour
     [SerializeField] Vector3 placeableItemPosition;
 
     Inventory inventory;
+    public string clipName;//Matej changes
 
     internal bool isItemPlaced = false;
 
@@ -33,6 +34,7 @@ public class ItemCanBePlaced : MonoBehaviour
                 if (inventory.itemInventory[inventory.selectedItem] == placeableItem) //if the selected item is the one needed
                 {
                     //place item
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
                     GameObject placedItem = Instantiate(placeableItem.prefab);
                     Destroy(placedItem.GetComponent<Rigidbody>());
                     Destroy(placedItem.GetComponent<GlowWhenLookedAt>());

@@ -10,6 +10,7 @@ public class switchChanger : MonoBehaviour
     [Tooltip("The wires that will be used after the switch is off")]
     public GameObject amogus;
     public bool isPowerOn = false;
+    public bool isLightsOn = false;
     public string leverSound;
     Animator anim;
     public string nameSound;
@@ -47,9 +48,15 @@ public class switchChanger : MonoBehaviour
 
     public void TurnPowerOn()
     {
-        isPowerOn = true;
-        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+
+        if (!isPowerOn)
+        {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+        }
+
         //call a function from another script that handles power
+
+        isPowerOn = true;
     }
 
     public void TurnPowerOff()

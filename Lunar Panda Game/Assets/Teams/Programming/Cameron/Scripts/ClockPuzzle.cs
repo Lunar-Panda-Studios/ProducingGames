@@ -90,16 +90,18 @@ public class ClockPuzzle : MonoBehaviour
         if(inventory.itemInventory[inventory.selectedItem] == clockHandsData)
         {
             clockHands = Instantiate(clockHands, transform.position, Quaternion.identity);
+            Destroy(clockHands.GetComponent<BoxCollider>());
+            Destroy(clockHands.GetComponent<Rigidbody>());
             minuteHand = clockHands.transform.GetChild(0).gameObject;
-            Destroy(minuteHand.GetComponent<Rigidbody>());
-            Destroy(minuteHand.GetComponent<GlowWhenLookedAt>());
+            //Destroy(minuteHand.GetComponent<Rigidbody>());
+            //Destroy(minuteHand.GetComponent<GlowWhenLookedAt>());
             Destroy(minuteHand.GetComponent<HoldableItem>());
-            Destroy(minuteHand.GetComponent<Collider>());
+            //Destroy(minuteHand.GetComponent<Collider>());
             hourHand = clockHands.transform.GetChild(1).gameObject;
-            Destroy(hourHand.GetComponent<Rigidbody>());
-            Destroy(hourHand.GetComponent<GlowWhenLookedAt>());
+            //Destroy(hourHand.GetComponent<Rigidbody>());
+            //Destroy(hourHand.GetComponent<GlowWhenLookedAt>());
             Destroy(hourHand.GetComponent<HoldableItem>());
-            Destroy(hourHand.GetComponent<Collider>());
+            //Destroy(hourHand.GetComponent<Collider>());
             //remove the current selected item (clock hands) from the inventory
             inventory.removeItem();
             handsConnected = true;
@@ -111,8 +113,6 @@ public class ClockPuzzle : MonoBehaviour
                     FindObjectOfType<PlayerPickup>().heldItem = null;
                 }
             }
-
-
         }
     }
 
