@@ -19834,6 +19834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundSource: {fileID: 732347053}
+  buffer: 0.1
   typeOfFloor: 0
   soundEffectManager: {fileID: 0}
 --- !u!1 &747575199
@@ -55493,6 +55494,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e318e753f98870478948ec63068e889, type: 3}
+--- !u!114 &1857585271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1218166220, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+  m_PrefabInstance: {fileID: 6158223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda1bc79662463d4abfabd6e976ad122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1861634544
 GameObject:
   m_ObjectHideFlags: 0
@@ -64836,7 +64848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnMenu: 0
   JournalMenu: {fileID: 6010459827967889342}
-  MrCapsule: {fileID: 0}
+  MrCapsule: {fileID: 1857585271}
   Pause: {fileID: 6010459827402225112}
   Inventory: {fileID: 6010459827378825296}
   Feedback: {fileID: 8130996322341609029}
@@ -72544,7 +72556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnFeedbackMenu: 0
   PauseMenu: {fileID: 8130996321568377203}
-  MrCapsule: {fileID: 0}
+  MrCapsule: {fileID: 1857585271}
   Journal: {fileID: 6010459826431999939}
   Inventory: {fileID: 6010459827378825296}
   Pause: {fileID: 6010459827402225112}

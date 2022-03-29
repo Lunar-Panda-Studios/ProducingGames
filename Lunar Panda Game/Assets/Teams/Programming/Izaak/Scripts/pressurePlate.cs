@@ -26,6 +26,7 @@ public class pressurePlate : MonoBehaviour
     [HideInInspector]
     public bool moving;
     private float startHeight;
+    bool stayOn = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,9 +48,12 @@ public class pressurePlate : MonoBehaviour
                 }
                 else
                 {
-                    moving = false;
                     r_body.velocity = new Vector3(0,0,0);
-                    puzzleScript.checkIfCorrect(symbolNo);
+                    if(!stayOn)
+                    {
+                        moving = false;
+                        puzzleScript.checkIfCorrect(symbolNo);
+                    }
                 }
             }
             else
@@ -73,6 +77,15 @@ public class pressurePlate : MonoBehaviour
         {
             moving = true;
             pressing = true;
+            stayOn = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            stayOn = false;
         }
     }
 }
