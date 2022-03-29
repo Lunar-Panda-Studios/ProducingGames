@@ -19,6 +19,12 @@ public class Inventory : MonoBehaviour
     private int itemsIn;
     PlayerPickup pickupControl;
     GameObject player;
+    bool puttingAway = false;
+    GameObject puttingAwayItem;
+    float lerpSpeed = 5;
+    Camera cam;
+    float timer = 0;
+    float maxTime = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +34,7 @@ public class Inventory : MonoBehaviour
         itemInventory = new List<ItemData>();
         documentInventory = new List<DocumentData>();
         autoCombine = FindObjectOfType<autoCombineScript>();
+        cam = FindObjectOfType<Camera>();
 
         for(int i = 0; i < maxItemsInInventory; i++)
         {
@@ -60,6 +67,20 @@ public class Inventory : MonoBehaviour
                 }
             }
 
+        }
+
+        if (puttingAway)
+        {
+            timer += Time.deltaTime;
+            puttingAwayItem.transform.position = Vector3.MoveTowards(puttingAwayItem.transform.position, player.transform.position, lerpSpeed * Time.deltaTime);
+
+            if (puttingAwayItem.transform.position == cam.transform.position || timer >= maxTime)
+            {
+                timer = 0;
+                puttingAway = false;
+                puttingAwayItem.SetActive(false);
+                puttingAwayItem = null;
+            }
         }
     }
 
@@ -98,6 +119,8 @@ public class Inventory : MonoBehaviour
             }
         }
         data.beenPickedUp = true;
+        UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
     public void addItem(DocumentData data)
@@ -112,6 +135,7 @@ public class Inventory : MonoBehaviour
     {
         storyNotesInventory.Add(data);
         data.beenPickedUp = true;
+
     }
 
     public void removeItem()
@@ -121,6 +145,7 @@ public class Inventory : MonoBehaviour
         itemsIn--;
 
         UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
     private void selectItem(bool positive)
@@ -156,12 +181,14 @@ public class Inventory : MonoBehaviour
         }
 
         UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
     public void selectItem(int inventoryNumber)
     {
         selectedItem = inventoryNumber;
         UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], inventoryNumber);
+        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
     }
 
     private void putAway()
@@ -175,7 +202,10 @@ public class Inventory : MonoBehaviour
                     autoCombine.itemChecking(pickupControl.heldItem.GetComponent<HoldableItem>().data);
                 }
             }
-            pickupControl.heldItem.SetActive(false);
+
+
+            puttingAway = true;
+            puttingAwayItem = pickupControl.heldItem;
             pickupControl.heldItem = null;
         }
     }
@@ -184,6 +214,7 @@ public class Inventory : MonoBehaviour
     {
         if(itemInventory[selectedItem] != null)
         {
+            puttingAway = false;
             GameObject heldItem = Database.current.itemsInScene[itemInventory[selectedItem].id].gameObject;
             heldItem.transform.position = player.transform.position;
             pickupControl.PickupItem(heldItem.transform);

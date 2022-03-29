@@ -17,6 +17,31 @@ public static class SaveSystem
         stream.Close();
     }
 
+    public static bool pathExists(int slotNo)
+    {
+        asignPath(slotNo);
+        if (File.Exists(path))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static int checkLevel()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Open);
+
+        GameData data = formatter.Deserialize(stream) as GameData;
+
+        stream.Close();
+
+        return data.whichLevel;
+    }
+
     public static GameData load()
     {
 
