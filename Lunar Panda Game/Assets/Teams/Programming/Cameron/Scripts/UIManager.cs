@@ -337,7 +337,7 @@ public class UIManager : MonoBehaviour
 
     public void updateObject()
     {
-        objectText.text = objectiveSystem.currentObjective.description;
+        //objectText.text = objectiveSystem.currentObjective.description;
     }
 
     public void textToScreen(string dialogue)

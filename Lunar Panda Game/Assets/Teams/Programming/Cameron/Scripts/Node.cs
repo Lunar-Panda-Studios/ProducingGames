@@ -11,4 +11,7 @@ public class Node : MonoBehaviour
     [HideInInspector] public GameObject connectedNode;
 
     //i'll find a better use for this script i swear
+
+    //where is it?
+
 }
