@@ -16,6 +16,7 @@ public class HeadPlacing : MonoBehaviour
     internal bool isItemPlaced = false;
 
     GameObject placedItem;
+    public string clipName;//Matej changes
 
     public enum Tags
     {
@@ -54,6 +55,7 @@ public class HeadPlacing : MonoBehaviour
                     {
                         //place item
                         placedItem = Instantiate(placeableItem[i].prefab);
+                        SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
 
                         switch (tag)
                         {

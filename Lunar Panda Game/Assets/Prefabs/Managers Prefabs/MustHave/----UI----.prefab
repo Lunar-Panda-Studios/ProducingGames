@@ -248,7 +248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Build - v0.2a
+  m_text: Build - v0.2.a
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1266,6 +1266,7 @@ MonoBehaviour:
   yourButton: {fileID: 1756702655851060302}
   CurrentMenu: {fileID: 1756702656175548676}
   MenuToShow: {fileID: 1756702656753878557}
+  firstButtonSelected: {fileID: 0}
 --- !u!114 &1756702655851060302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,6 +2806,8 @@ MonoBehaviour:
   IsPaused: 0
   IsOnRegularMenu: 0
   PauseMenu: {fileID: 1756702657526696063}
+  PauseMenuElement: {fileID: 1756702657526696063}
+  firstSelectedButton: {fileID: 1756702656612708118}
 --- !u!1 &1756702656289581853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,16 +4168,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_WrapAround: 1
+    m_SelectOnUp: {fileID: 1756702657262883724}
+    m_SelectOnDown: {fileID: 1756702657034492791}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
     m_PressedColor: {r: 0.7264151, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0.4811321, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.5019608}
@@ -6469,6 +6472,7 @@ MonoBehaviour:
   yourButton: {fileID: 1756702657034492791}
   CurrentMenu: {fileID: 1756702656753878557}
   MenuToShow: {fileID: 5193758962315401396}
+  firstButtonSelected: {fileID: 5193758961580354126}
 --- !u!114 &1756702657034492791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6482,16 +6486,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1756702656612708116}
+    m_SelectOnDown: {fileID: 1756702657262883724}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
     m_PressedColor: {r: 0.7264151, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0.4811321, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.5019608}
@@ -7515,7 +7519,6 @@ MonoBehaviour:
   IsOnMenu: 0
   JournalMenu: {fileID: 1756702655687632174}
   MrCapsule: {fileID: 0}
-  BarOfStamina: {fileID: 1756702657622026020}
   Pause: {fileID: 1756702656285876040}
   Inventory: {fileID: 1756702656310313664}
   Feedback: {fileID: 4314277534089540821}
@@ -7612,6 +7615,7 @@ MonoBehaviour:
   yourButton: {fileID: 1756702657262883724}
   CurrentMenu: {fileID: 1756702656753878557}
   MenuToShow: {fileID: 1756702656175548676}
+  firstButtonSelected: {fileID: 0}
 --- !u!114 &1756702657262883724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7625,16 +7629,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1756702657034492791}
+    m_SelectOnDown: {fileID: 1756702656612708116}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
     m_PressedColor: {r: 0.7264151, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0.4811321, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.5019608}
@@ -10146,7 +10150,6 @@ MonoBehaviour:
   IsOnFeedbackMenu: 0
   PauseMenu: {fileID: 4314277535398519779}
   MrCapsule: {fileID: 0}
-  BarOfStamina: {fileID: 1756702657622026020}
   Journal: {fileID: 1756702657257084243}
   Inventory: {fileID: 1756702656310313664}
   Pause: {fileID: 1756702656285876040}
@@ -10673,7 +10676,9 @@ MonoBehaviour:
   yourButton: {fileID: 5193758961580354124}
   MenuOne: {fileID: 5193758963255251452}
   MenuTwo: {fileID: 5193758961938886426}
+  MenuThree: {fileID: 0}
   MenuToShow: {fileID: 5193758962713908131}
+  firstSelectedButton: {fileID: 0}
 --- !u!114 &5193758961580354124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11048,7 +11053,9 @@ MonoBehaviour:
   yourButton: {fileID: 5193758961921498265}
   MenuOne: {fileID: 5193758962713908131}
   MenuTwo: {fileID: 5193758963255251452}
+  MenuThree: {fileID: 0}
   MenuToShow: {fileID: 5193758961938886426}
+  firstSelectedButton: {fileID: 0}
 --- !u!114 &5193758961921498265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11947,7 +11954,9 @@ MonoBehaviour:
   yourButton: {fileID: 5193758962681019786}
   MenuOne: {fileID: 5193758962713908131}
   MenuTwo: {fileID: 5193758961938886426}
+  MenuThree: {fileID: 0}
   MenuToShow: {fileID: 5193758963255251452}
+  firstSelectedButton: {fileID: 0}
 --- !u!114 &5193758962681019786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13038,6 +13047,7 @@ MonoBehaviour:
   yourButton: {fileID: 5193758963391641732}
   CurrentMenu: {fileID: 5193758962315401396}
   MenuToShow: {fileID: 1756702656753878557}
+  firstButtonSelected: {fileID: 0}
 --- !u!114 &5193758963391641732
 MonoBehaviour:
   m_ObjectHideFlags: 0

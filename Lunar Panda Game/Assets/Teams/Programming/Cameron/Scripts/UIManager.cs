@@ -31,12 +31,16 @@ public class UIManager : MonoBehaviour
     public GameObject documentPortrait;
     typeWriterTest twt;
     [SerializeField] string audioClipName;
+    bool isMoving;
 
     [Header("Inventory UI")]
     public List<Image> inventoryImages;
     public Text inventoryDescription;
     public Text inventoryName;
     public Image inventorySelect;
+    public Image bottomRightItem;
+    public Image bottomRightPanel;
+    bool itemShowing = false;
 
     [Header("Journal UI")]
     internal Room currentTab;
@@ -81,6 +85,97 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void itemEquip(ItemData data)
+    {
+        Color colour = bottomRightItem.color;
+
+        if (data != null)
+        {
+            if (!isMoving)
+            {
+                bottomRightItem.color = new Color(colour.r, colour.g, colour.b, 1);
+            }
+            bottomRightItem.sprite = data.itemImage;
+        }
+        else
+        {
+            bottomRightItem.color = new Color(colour.r, colour.g, colour.b, 0);
+            bottomRightItem.sprite = null;
+        }
+
+    }
+
+    public void itemFade(bool isMove)
+    {
+        isMoving = isMove;
+
+        Color colour = bottomRightPanel.color;
+        Color colourItem = bottomRightItem.color;
+
+        if (isMoving)
+        {
+            bottomRightPanel.color = new Color(colour.r, colour.g, colour.b, 0.10f);
+            //StartCoroutine(fadeBottomRightPanel(0.10f));
+            if(itemShowing)
+            {
+                bottomRightItem.color = new Color(colourItem.r, colourItem.g, colourItem.b, 0.10f);
+                //StartCoroutine(fadeBottomRightItem(0.10f));
+            }
+
+        }
+        else
+        {
+            bottomRightPanel.color = new Color(colour.r, colour.g, colour.b, 1);
+            //StartCoroutine(fadeBottomRightPanel(1));
+            if (itemShowing)
+            {
+                //StartCoroutine(fadeBottomRightItem(1));
+                bottomRightItem.color = new Color(colourItem.r, colourItem.g, colourItem.b, 1);
+            }
+        }
+    }
+
+    IEnumerator fadeBottomRightPanel(float fadeAmount)
+    {
+        if (bottomRightPanel.color.a > fadeAmount)
+        {
+            while (bottomRightPanel.color.a > fadeAmount)
+            {
+                bottomRightPanel.color = new Color(bottomRightPanel.color.r, bottomRightPanel.color.g, bottomRightPanel.color.b, bottomRightPanel.color.a - Time.deltaTime);
+                yield return null;
+            }
+        }
+        else
+        {
+            while (bottomRightPanel.color.a < fadeAmount)
+            {
+                bottomRightPanel.color = new Color(bottomRightPanel.color.r, bottomRightPanel.color.g, bottomRightPanel.color.b, bottomRightPanel.color.a + Time.deltaTime);
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator fadeBottomRightItem(float fadeAmount)
+    {
+
+        if (bottomRightItem.color.a > fadeAmount)
+        {
+            while (bottomRightItem.color.a > fadeAmount)
+            {
+                bottomRightItem.color = new Color(bottomRightItem.color.r, bottomRightItem.color.g, bottomRightItem.color.b, bottomRightItem.color.a - Time.deltaTime);
+                yield return null;
+            }
+        }
+        else
+        {
+            while (bottomRightItem.color.a < fadeAmount)
+            {
+                bottomRightItem.color = new Color(bottomRightItem.color.r, bottomRightItem.color.g, bottomRightItem.color.b, bottomRightItem.color.a + Time.deltaTime);
+                yield return null;
+            }
+        }
     }
 
     public void ToggleCrosshair()
@@ -172,22 +267,41 @@ public class UIManager : MonoBehaviour
     public void inventoryItemAdd(ItemData data, int slot)
     {
         inventoryImages[slot].sprite = data.itemImage;
+        inventoryImages[slot].color = new Color(inventoryImages[slot].color.r, inventoryImages[slot].color.g, inventoryImages[slot].color.b, 1);
     }
 
     public void inventoryItemSelected(ItemData data, int slot)
     {
+        Color colour = inventoryImages[slot].color;
+        Color colourSelect = inventorySelect.color;
+        Color colourRightImage = bottomRightItem.color;
+
         if (data != null)
         {
+            itemShowing = true;
+            inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 1);
+            inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 1);
+            if (!isMoving)
+            {
+                bottomRightItem.color = new Color(colourRightImage.r, colourRightImage.g, colourRightImage.b, 1);
+            }
             inventorySelect.sprite = data.itemImage;
+            inventoryImages[slot].sprite = data.itemImage;
             inventoryName.text = data.itemName;
             inventoryDescription.text = data.description;
             data.timesChecked++;
         }
         else
         {
+            itemShowing = false;
+            inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 0);
+            inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 0);
+            bottomRightItem.color = new Color(colourRightImage.r, colourRightImage.g, colourRightImage.b, 0);
             inventorySelect.sprite = null;
-            inventoryName.text = "Item Name";
-            inventoryDescription.text = "Item Description";
+            inventoryImages[slot].sprite = null;
+            bottomRightItem.sprite = null;
+            inventoryName.text = "";
+            inventoryDescription.text = "";
         }
     }
 

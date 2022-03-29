@@ -7,6 +7,10 @@ public class InteractRaycasting : MonoBehaviour
     Transform player;
     Flashlight flashlight;
     Transform playerCamera;
+    JournalMenuToggle Journal;
+    PauseButtonToggle Pause;
+    FeedbackToggle Feedback;
+    InventoryMenuToggle Inventory;
     private static InteractRaycasting _instance;
     public static InteractRaycasting Instance { get { return _instance; } }
 
@@ -29,43 +33,50 @@ public class InteractRaycasting : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Pause = FindObjectOfType<PauseButtonToggle>();
+        Journal = FindObjectOfType<JournalMenuToggle>();
+        Feedback = FindObjectOfType<FeedbackToggle>();
+        Inventory = FindObjectOfType<InventoryMenuToggle>();
+    }
+
     public bool raycastInteract(out RaycastHit hit)
     {
-        Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist);
-
-        if (hit.transform != null)
+        if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
         {
-            if (flashlight.enabled)
+            if (hit.transform != null && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
             {
-                return true;
-            }
-            else
-            {
-                if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
+                if (flashlight.enabled)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    if(hit.transform.CompareTag("Flashlight"))
+                    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
                     {
-                        flashlight.enabled = true;
-                        hit.transform.gameObject.SetActive(false);
+                        return false;
                     }
-                    return true;
+                    else
+                    {
+                        if (hit.transform.CompareTag("Flashlight"))
+                        {
+                            flashlight.enabled = true;
+                            hit.transform.gameObject.SetActive(false);
+                        }
+                        return true;
+                    }
                 }
             }
+            return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public bool raycastInteract(out RaycastHit hit, int layerMask)
     {
         Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
-        if(flashlight.enabled)
+        if(flashlight.enabled && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
         {
             return true;
         }
