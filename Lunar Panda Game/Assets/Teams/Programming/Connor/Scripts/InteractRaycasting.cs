@@ -45,7 +45,8 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
         {
-            if (hit.transform != null && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+            return true;
+            if (!Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
             {
                 if (flashlight.enabled)
                 {
@@ -68,14 +69,18 @@ public class InteractRaycasting : MonoBehaviour
                     }
                 }
             }
-            return true;
+            return false;
         }
         return false;
     }
 
     public bool raycastInteract(out RaycastHit hit, int layerMask)
     {
-        Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
+        if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask))
+        {
+            return true;
+        }
+        return false;
         if(flashlight.enabled && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
         {
             return true;
