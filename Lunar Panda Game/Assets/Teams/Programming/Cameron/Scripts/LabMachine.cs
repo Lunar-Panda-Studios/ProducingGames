@@ -16,9 +16,9 @@ public class LabMachine : MonoBehaviour
     public bool has3DAudio;
 
     internal int id;
-    [SerializeField] List<GameObject> tubes;
-    [SerializeField] List<Material> startingTubeMats;
-    [SerializeField] List<Material> completeTubeMats;
+    //[SerializeField] List<GameObject> tubes;
+    [SerializeField] List<Light> antidoteLights;
+    //[SerializeField] List<Material> completeTubeMats;
     [SerializeField] SwitchWall switchWall;
     [SerializeField] GameObject button;
     [SerializeField] ItemData antidoteData;
@@ -101,7 +101,7 @@ public class LabMachine : MonoBehaviour
                 if (has3DAudio)
                     audioSource.Play();
 
-                tubes[i].GetComponent<MeshRenderer>().material = completeTubeMats[i];
+                antidoteLights[i].GetComponent<Light>().enabled = true;
                 //I think they want to play a sound here
             }
         }
@@ -111,9 +111,9 @@ public class LabMachine : MonoBehaviour
     {
         if(id == switchWall.id)
         {
-            for (int i = 0; i < tubes.Count; i++)
+            for (int i = 0; i < antidoteLights.Count; i++)
             {
-                tubes[i].GetComponent<MeshRenderer>().material = startingTubeMats[i];
+                antidoteLights[i].GetComponent<Light>().enabled = false;
             }
 
             Database.current.itemsInScene.Remove(antidote.GetComponent<HoldableItem>());

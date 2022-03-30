@@ -14,11 +14,13 @@ public class bodyController : MonoBehaviour
     [Tooltip("Whether this patient is the one with the screwdriver or not")]
     public bool isCorrect;
 
-    [Header("Meshes")]
+    [Header("Meshes && Materials")]
     [Tooltip("The mesh of the body when it has been cut")]
     public Mesh cutBody;
     Mesh startMesh;
     private MeshFilter mesh;
+    Material[] mats;
+    public Material[] newMats;
 
     private bool isCut;
 
@@ -39,6 +41,7 @@ public class bodyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mesh = GetComponent<MeshFilter>();
         startMesh = mesh.mesh;
+        mats = GetComponent<MeshRenderer>().sharedMaterials;
     }
     // Start is called before the first frame update
     void Start()
@@ -92,6 +95,7 @@ public class bodyController : MonoBehaviour
     public void changeMesh()
     {
         mesh.mesh = cutBody;
+        mats = newMats;
     }
 
     public void puzzleReset(int id)
@@ -101,7 +105,7 @@ public class bodyController : MonoBehaviour
             collected = false;
             isCut = false;
             mesh.mesh = startMesh;
-            if(screwdriverTip != null)
+            if (screwdriverTip != null)
             {
                 screwdriverTip.SetActive(false);
             }
@@ -119,6 +123,7 @@ public class bodyController : MonoBehaviour
                 if (isCorrect)
                 {
                     mesh.mesh = cutBody;
+                    mats = newMats;
                     screwdriverTip.SetActive(true);
                 }
             }
