@@ -84,6 +84,11 @@ public class Analysis : MonoBehaviour
         //}
     }
 
+    public void askConcent(bool hasConsent)
+    {
+        consent = hasConsent;
+    }
+
     public bool completed(string name, Dictionary<string, object> para)
     {
         AnalyticsResult result = AnalyticsEvent.Custom(name, para);

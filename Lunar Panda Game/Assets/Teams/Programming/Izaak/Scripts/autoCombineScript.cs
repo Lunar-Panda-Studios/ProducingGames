@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class autoCombineScript : MonoBehaviour
 {
+    private string combinePrompt = "You combine the items together to create: ";
+    private string itemNamePrompt;
+    public string fullPrompt;
+    
 
     [System.Serializable]
     public class itemBuildPath
@@ -102,9 +107,11 @@ public class autoCombineScript : MonoBehaviour
                 inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
                 autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
-
-            }
-            
+                itemNamePrompt = autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.itemName;
+            }  
         }
+
+        fullPrompt = combinePrompt + itemNamePrompt;
+
     }
 }
