@@ -13,8 +13,10 @@ public class CodeLock : MonoBehaviour
     public string code = "";
     public string attemptedCode;
 
-    public Transform toOpen;
+    public GameObject toOpen;
     public string AudioClipName;
+
+    public GameObject anim;
 
     public void Start()
     {
@@ -49,7 +51,8 @@ public class CodeLock : MonoBehaviour
     IEnumerator Open() //Rotates the door
     {
         SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);
-        toOpen.Rotate(new Vector3(0, 90, 0), Space.World);        
+        //toOpen.Rotate(new Vector3(0, 90, 0), Space.World);        
+        anim.GetComponent<Animator>().SetTrigger("Open");
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
 
@@ -78,7 +81,7 @@ public class CodeLock : MonoBehaviour
     {
         if(id == this.id)
         {
-            toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
+            //toOpen.Rotate(new Vector3(0, -90, 0), Space.World);
             attemptedCode = "";
         }
     }
