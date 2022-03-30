@@ -29,10 +29,10 @@ public class FadeUITrigger : MonoBehaviour
         for (float t = 0f; t < fadeTime; t += Time.deltaTime)
         {
             float normalizedTime = t / fadeTime;
-            fadeItem.alpha = Mathf.Lerp(1, 0, normalizedTime);
+            fadeItem.alpha = Mathf.Lerp(0, 1, normalizedTime);
             yield return null;
         }
-        fadeItem.alpha = 0;
+        fadeItem.alpha = 1;
         Time.timeScale = 0;
         yield return null;
     }
