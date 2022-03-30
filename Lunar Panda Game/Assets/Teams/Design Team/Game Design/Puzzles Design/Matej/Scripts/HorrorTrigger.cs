@@ -71,7 +71,8 @@ public class HorrorTrigger : MonoBehaviour
 
     [Header("---THROW OBJECT SETTINGS---")]
     public bool throW;
-    public FallObject throwObject;
+    //public FallObject throwObject;
+    public List<FallObject> FallObjects = new List<FallObject>();
     public float force;
 
     [Header("---ENABLE/DISABLE OBJECTS---")]
@@ -303,7 +304,11 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void ThrowObject(float force)
     {
-        throwObject.Fly(force);
+        foreach (FallObject obj in FallObjects)
+
+        {
+            obj.Fly(force);
+        }
         doneEvents++;
     }
     public void TestFunction(string[] test)
