@@ -143,8 +143,9 @@ public class UIManager : MonoBehaviour
     public void hideDocument(ViewDocument documentScript)
     {
         documentScript.showDoc = false;
+        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = true;
 
-        if(documentScript.data.isLandscape)
+        if (documentScript.data.isLandscape)
         {
             documentLandscape.SetActive(false);
         }
