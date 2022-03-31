@@ -26,6 +26,7 @@ public class Flashlight : MonoBehaviour
 
 
     private bool isOn;
+    public string clipName;//Matej changes
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class Flashlight : MonoBehaviour
     {
         if (Input.GetButtonDown("Flashlight"))
         {
+            SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
             powerOn = !powerOn;
             lightSource.enabled = powerOn;
         }

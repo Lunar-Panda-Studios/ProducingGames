@@ -120,7 +120,9 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = false;
                             passLight.enabled = true;
-                            passLight1.enabled = true;
+
+                            if (passLight1 != null)
+                                passLight1.enabled = true;
                         }
                         button.GetComponent<switchChanger>().TurnPowerOn();
                         foreach (Light light in completionLights)
@@ -155,7 +157,9 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             failLight.enabled = true;
                             passLight.enabled = false;
-                            passLight1.enabled = false;
+
+                            if(passLight1 != null)
+                                passLight1.enabled = false;
                         }
                     }
                 }
