@@ -54,7 +54,7 @@ public class ViewDocument : MonoBehaviour
             lockMouse.canLook = true;
         }
 
-        if (Input.GetKeyDown(keyText) && showDoc)
+        if (Input.GetButtonDown("ShowText") && showDoc)
         {
             if(showText)
             {
