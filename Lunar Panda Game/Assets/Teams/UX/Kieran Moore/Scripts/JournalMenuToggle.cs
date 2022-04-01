@@ -29,7 +29,7 @@ public class JournalMenuToggle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (IsOnMenu == false && Pause.IsPaused == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
+            if (IsOnMenu == false && FindObjectOfType<PauseButtonToggle>() == null && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
             {
                 IsOnMenu = true;
 

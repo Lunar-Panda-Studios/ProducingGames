@@ -16,21 +16,20 @@ public class ViewDocument : MonoBehaviour
     public KeyCode keyText; //temp
     private bool overDoc; //temp
     private Inventory inventory;
+    internal playerMovement player;
+    internal lockMouse lockMouse;
 
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
+        player = FindObjectOfType<playerMovement>();
+        lockMouse = FindObjectOfType<lockMouse>();
+
     }
 
     //temp testing
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && showDoc)
-        {
-            UIManager.Instance.hideDocument(this);
-            UIManager.Instance.hideText(this);
-        }
-
         if (Input.GetButtonDown("Interact") && !showDoc)
         {
             RaycastHit hit;
@@ -39,11 +38,23 @@ public class ViewDocument : MonoBehaviour
                 if(hit.transform.gameObject == gameObject)
                 {
                     UIManager.Instance.showDocument(data, this);
+                    inInventory = true;
+                    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                    player.enabled = false;
+                    lockMouse.canLook = false;
                 }
             }
         }
+        else if (Input.GetButtonDown("Interact") && showDoc)
+        {
+            UIManager.Instance.hideDocument(this);
+            UIManager.Instance.hideText(this);
 
-        if(Input.GetKeyDown(keyText) && showDoc)
+            player.enabled = true;
+            lockMouse.canLook = true;
+        }
+
+        if (Input.GetButtonDown("ShowText") && showDoc)
         {
             if(showText)
             {

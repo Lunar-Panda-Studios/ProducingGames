@@ -76,6 +76,7 @@ public class PlayerPickup : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<RotatableItem>())
                 {
+                    player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     holdingNarrative = true;
                     holdDist = rotDist;
                     player.gameObject.GetComponent<playerMovement>().enabled = false;
