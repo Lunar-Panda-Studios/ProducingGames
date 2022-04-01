@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WirePanel : MonoBehaviour
 {
+    [SerializeField]
+    GameObject doorPivot;
 
-    public Transform toOpenPan;
     public string AudioClipName;
     public bool DoOnce;
 
@@ -24,6 +25,7 @@ public class WirePanel : MonoBehaviour
                 {
                     if (!DoOnce)
                     {
+                        doorPivot.GetComponent<Animation>().Play();
                         StartCoroutine(OpenPannel());
                     }
                 }
@@ -34,12 +36,13 @@ public class WirePanel : MonoBehaviour
     {
         DoOnce = true;
         SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);
-        toOpenPan.Rotate(new Vector3(0, -135, 0), Space.World);
-
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
-
-
     }
+
+    //public void PlaySound()
+    //{
+    //    SoundEffectManager.GlobalSFXManager.PlaySFX(AudioClipName);
+    //}
 
 }
