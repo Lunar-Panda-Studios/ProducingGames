@@ -106,6 +106,7 @@ MonoBehaviour:
   queenPiece: {fileID: 0}
   drawer: {fileID: 2276191840820697522}
   check: 1
+  openAudio: 
   chessPieceObj: {fileID: 1464582562101897220, guid: 8fc2cc64956a3b84e9cae62c83ec6067, type: 3}
   chessPieces:
   - pieceLocation: {x: 6, y: 1}
@@ -1320,6 +1321,10 @@ PrefabInstance:
     - target: {fileID: 3773011235604485074, guid: 5d497b717743bde49a52e4e52891a013, type: 3}
       propertyPath: m_Name
       value: ChessboardMaterial
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773011235604485074, guid: 5d497b717743bde49a52e4e52891a013, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3903086479143948018, guid: 5d497b717743bde49a52e4e52891a013, type: 3}
       propertyPath: m_Size.x
