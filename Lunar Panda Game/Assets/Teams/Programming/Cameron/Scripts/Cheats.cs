@@ -10,16 +10,16 @@ public class Cheats : MonoBehaviour
     [SerializeField] KeyCode cheatKey = KeyCode.Tilde;
 
     [Header("Scenes")]
-    [Tooltip("Drag and drop the hospital scene here")]
-    [SerializeField] Object hospitalScene;
-    [Tooltip("Drag and drop the hotel scene here")]
-    [SerializeField] Object hotelScene;
-    [Tooltip("Drag and drop the train scene here")]
-    [SerializeField] Object trainScene;
+    [SerializeField] string trainSceneName;
+    [SerializeField] string hospitalSceneName;
+    [SerializeField] string hotelSceneName;
+    [SerializeField] string cabinSceneName;
 
+    [SerializeField] KeyCode trainKey = KeyCode.B;
     [SerializeField] KeyCode hospitalKey = KeyCode.N;
     [SerializeField] KeyCode hotelKey = KeyCode.M;
-    [SerializeField] KeyCode trainKey = KeyCode.B;
+    [SerializeField] KeyCode cabinKey = KeyCode.Comma;
+    
 
 
 
@@ -46,17 +46,26 @@ public class Cheats : MonoBehaviour
         if (Input.GetKeyDown(trainKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("MainTrain week7 this one");
+            GameManager.Instance.currentLevel(2);
+            SceneManager.LoadScene(trainSceneName);
         }
         else if (Input.GetKeyDown(hospitalKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Hospital THIS ONE");
+            GameManager.Instance.currentLevel(3);
+            SceneManager.LoadScene(hospitalSceneName);
         }
         else if (Input.GetKeyDown(hotelKey))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Hotel Build v1.8 1 this one");
+            GameManager.Instance.currentLevel(4);
+            SceneManager.LoadScene(hotelSceneName);
+        }
+        else if (Input.GetKeyDown(cabinKey))
+        {
+            Time.timeScale = 1f;
+            GameManager.Instance.currentLevel(5);
+            SceneManager.LoadScene(cabinSceneName);
         }
     }
 }
