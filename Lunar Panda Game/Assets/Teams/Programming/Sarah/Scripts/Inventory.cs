@@ -126,8 +126,6 @@ public class Inventory : MonoBehaviour
     public void addItem(DocumentData data)
     {
         documentInventory.Add(data);
-
-        data.prefab.GetComponent<ViewDocument>().inInventory = true;
         data.beenPickedUp = true;
     }
 

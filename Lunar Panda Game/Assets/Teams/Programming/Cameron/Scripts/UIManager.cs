@@ -229,17 +229,22 @@ public class UIManager : MonoBehaviour
             documentPortrait.SetActive(true);
         }
 
-        documentScript.showDoc = true;
-        inventory.addItem(data);
-        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = false;
-
+        if (documentScript != null)
+        {
+            if (!documentScript.inInventory)
+            {
+                inventory.addItem(data);
+            }
+            documentScript.showDoc = true;
+        }
     }
 
     public void hideDocument(ViewDocument documentScript)
     {
         documentScript.showDoc = false;
+        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = true;
 
-        if(documentScript.data.isLandscape)
+        if (documentScript.data.isLandscape)
         {
             documentLandscape.SetActive(false);
         }

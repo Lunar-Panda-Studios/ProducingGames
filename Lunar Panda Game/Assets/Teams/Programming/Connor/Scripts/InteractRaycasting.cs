@@ -35,7 +35,7 @@ public class InteractRaycasting : MonoBehaviour
 
     private void Start()
     {
-        Pause = FindObjectOfType<PauseButtonToggle>();
+        //Pause = FindObjectOfType<PauseButtonToggle>();
         Journal = FindObjectOfType<JournalMenuToggle>();
         Feedback = FindObjectOfType<FeedbackToggle>();
         Inventory = FindObjectOfType<InventoryMenuToggle>();
@@ -45,7 +45,7 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
         {
-            if (hit.transform != null && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+            if (hit.transform != null && FindObjectOfType<PauseButtonToggle>() == null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
             {
                 if (flashlight.enabled)
                 {
@@ -62,27 +62,30 @@ public class InteractRaycasting : MonoBehaviour
                         if (hit.transform.CompareTag("Flashlight"))
                         {
                             flashlight.enabled = true;
-                            hit.transform.gameObject.SetActive(false);
+                            //hit.transform.gameObject.SetActive(false);
                         }
                         return true;
                     }
                 }
             }
-            return true;
+            return false;
         }
         return false;
     }
 
     public bool raycastInteract(out RaycastHit hit, int layerMask)
     {
-        Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask);
-        if(flashlight.enabled && !Pause.IsPaused && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+        if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask))
         {
-            return true;
+            if (hit.transform != null && flashlight.enabled && FindObjectOfType<PauseButtonToggle>() == null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
