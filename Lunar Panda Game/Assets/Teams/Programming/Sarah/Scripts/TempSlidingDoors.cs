@@ -78,12 +78,16 @@ public class TempSlidingDoors : MonoBehaviour
 
     public void closeDoor()
     {
+        if (has3DAudio)
+            audioSource.Play();
         target = startLocation;
         move = true;
     }
 
     public void openDoor()
     {
+        if (has3DAudio)
+            audioSource.Play();
         target = MoveTo.transform.position;
         move = true;
     }
