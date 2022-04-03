@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorToDoor : MonoBehaviour
 {
+    Interaction interaction;
+
     public int id;
     public GameObject LinkedDoor1;
     public GameObject LinkedDoor2;
@@ -14,6 +16,7 @@ public class DoorToDoor : MonoBehaviour
 
     private void Start()
     {
+        interaction = GetComponent<Interaction>();
         ray = FindObjectOfType<InteractRaycasting>();
         //LinkedDoor1.GetComponent<OpenClose>().id = id;
         //LinkedDoor2.GetComponent<OpenClose>().id = id;
