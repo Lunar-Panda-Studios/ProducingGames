@@ -33,7 +33,7 @@ public class InventoryMenuToggle : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             //if the inventory ui isnt on screen
-            if (IsOnInventory == false && FindObjectOfType<PauseButtonToggle>() == null && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
+            if (IsOnInventory == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
             {
                 IsOnInventory = true;
                 Cursor.lockState = CursorLockMode.None;
