@@ -66,6 +66,8 @@ public class SwitchWall : MonoBehaviour
                 madeCorrectGuess = true;
             }
         }
+
+
         //if the player didnt make a correct guess, reset the lab machine and the completed combo array
         if (!madeCorrectGuess)
         {
