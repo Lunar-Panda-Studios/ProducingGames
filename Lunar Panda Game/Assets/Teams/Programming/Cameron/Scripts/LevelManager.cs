@@ -8,22 +8,23 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup loadingScreen;
     [SerializeField] float fadeTime;
-    float currentFadeTime;
-    private static LevelManager _instance;
-    public static LevelManager Instance { get { return _instance; } }
+/*    private static LevelManager _instance;
+    public static LevelManager Instance { get { return _instance; } }*/
 
     void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        /*        if (_instance != null && _instance != this)
+                {
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    _instance = this;
+                }*/
         //StartCoroutine(LoadConnectorScene());
-        //DontDestroyOnLoad(gameObject);
+        transform.parent = null;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
         
     }
 
@@ -44,11 +45,12 @@ public class LevelManager : MonoBehaviour
             loadingScreen.alpha = Mathf.Lerp(0, 1, normalizedTime);
             yield return null;
         }
-        loadingScreen.alpha = 1; //without this, the value will end at something like 0.9992367
+        loadingScreen.alpha = 1; //without this, the value will end at something like 0.9994512
     }
 
-    IEnumerator FadeOut() //i dont care this this doesnt need to exist. Shut up
+    IEnumerator FadeOut() //i dont care this this doesnt need to exist and the fade in could just be optimised. Shut up
     {
+        yield return new WaitForSeconds(1);
         for (float t = 0f; t < fadeTime; t += Time.deltaTime)
         {
             float normalizedTime = t / fadeTime;
@@ -56,6 +58,7 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
         loadingScreen.alpha = 0;
+        Destroy(gameObject);
     }
 
     public IEnumerator FadeLoadingScreen(string sceneName)
@@ -78,13 +81,11 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.currentLevel(0);
 
         AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
-        while (!load.isDone)
+        while (load.progress < 0.9f)
         {
             yield return null;
         }
-        yield return new WaitForEndOfFrame();
-
-        currentFadeTime = fadeTime;
+        print("test");
         StartCoroutine(FadeOut());
     }
 }

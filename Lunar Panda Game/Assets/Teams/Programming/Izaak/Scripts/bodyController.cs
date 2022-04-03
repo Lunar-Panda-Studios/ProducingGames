@@ -20,7 +20,10 @@ public class bodyController : MonoBehaviour
     Mesh startMesh;
     private MeshFilter mesh;
     Material[] mats;
-    public Material[] newMats;
+    public Material openBody;
+    public Material insides;
+
+    MeshRenderer myRenderer;
 
     private bool isCut;
 
@@ -41,7 +44,8 @@ public class bodyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mesh = GetComponent<MeshFilter>();
         startMesh = mesh.mesh;
-        mats = GetComponent<MeshRenderer>().sharedMaterials;
+
+        myRenderer = GetComponent<MeshRenderer>();
     }
     // Start is called before the first frame update
     void Start()
@@ -95,7 +99,10 @@ public class bodyController : MonoBehaviour
     public void changeMesh()
     {
         mesh.mesh = cutBody;
-        mats = newMats;
+        Material[] materials = myRenderer.materials;
+        materials[0] = openBody;
+        materials[1] = insides;
+        myRenderer.materials = materials;
     }
 
     public void puzzleReset(int id)
@@ -123,7 +130,10 @@ public class bodyController : MonoBehaviour
                 if (isCorrect)
                 {
                     mesh.mesh = cutBody;
-                    mats = newMats;
+                    Material[] materials = myRenderer.materials;
+                    materials[0] = openBody;
+                    materials[1] = insides;
+                    myRenderer.materials = materials;
                     screwdriverTip.SetActive(true);
                 }
             }
