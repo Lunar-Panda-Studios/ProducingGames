@@ -8,14 +8,14 @@ public class autoCombineScript : MonoBehaviour
     private string combinePrompt = "You combine the items together to create: ";
     private string itemNamePrompt;
     public string fullPrompt;
-    
+    public Animator anim;
 
     [System.Serializable]
     public class itemBuildPath
     {
         public List<ItemData> itemParts;
         public ItemData combinedItem;
-        public GameObject instance;
+        public GameObject instance;       
     }
 
     [Header("Items Required")]
@@ -108,10 +108,11 @@ public class autoCombineScript : MonoBehaviour
                 autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
                 itemNamePrompt = autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.itemName;
+                fullPrompt = combinePrompt + itemNamePrompt;
+                anim.SetTrigger("Prompt");
             }  
         }
 
-        fullPrompt = combinePrompt + itemNamePrompt;
 
     }
 }

@@ -30,7 +30,7 @@ public class LoadTrigger : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        StartCoroutine(LevelManager.Instance.FadeLoadingScreen(sceneName));
+        StartCoroutine(FindObjectOfType<LevelManager>().FadeLoadingScreen(sceneName));
         //closedDoor.SetActive(false);
         yield return null;
     }

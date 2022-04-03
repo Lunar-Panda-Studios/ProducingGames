@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class bikeLock : MonoBehaviour
 {
+    [SerializeField] InteractAnimation interactAnimation;
+
     public string audioClipName;
     [Header("Codes")]
     [Tooltip("The combination that solves the puzzle")]
@@ -14,7 +16,6 @@ public class bikeLock : MonoBehaviour
     [Header("Puzzle State")]
     [Tooltip("Check for if the puzzle is solved")]
     public bool puzzleSolved;
-    public GameObject door;
 
     bool finished;
 
@@ -78,7 +79,7 @@ public class bikeLock : MonoBehaviour
         if (puzzleSolved && !finished)
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-            door.GetComponent<Animator>().SetTrigger("DoorUnlocked");
+            interactAnimation.enabled = true;
             finished = true;
         }
     }
