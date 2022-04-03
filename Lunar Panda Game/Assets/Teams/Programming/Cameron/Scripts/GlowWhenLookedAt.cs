@@ -12,6 +12,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     [SerializeField] List<MeshRenderer> childrenThatNeedGlow;
     [SerializeField] List<Material> childrenFresnelMat;
     List<Material> childrenBaseMat;
+    public ToolTipType tipType;
 
     void Awake()
     {
@@ -33,6 +34,18 @@ public class GlowWhenLookedAt : MonoBehaviour
             for (int i = 0; i < childrenThatNeedGlow.Count; i++)
             {
                 childrenThatNeedGlow[i].material = isGlowing ? childrenFresnelMat[i] : childrenBaseMat[i];
+            }
+        }
+
+        if (tipType != null)
+        {
+            if (isGlowing)
+            {
+                UIManager.Instance.toolTipInteract(tipType);
+            }
+            else
+            {
+                UIManager.Instance.toolTipHide();
             }
         }
     }

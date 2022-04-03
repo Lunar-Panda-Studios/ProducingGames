@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public Text inventoryDescription;
     public Text inventoryName;
     public Image inventorySelect;
+    public GameObject descriptionSection;
     public Image bottomRightItem;
     public Image bottomRightPanel;
     bool itemShowing = false;
@@ -59,6 +60,11 @@ public class UIManager : MonoBehaviour
     int objectiveNumber = 0;
     ObjectiveSystem objectiveSystem;
 
+    [Header("Tooltip UI")]
+    public GameObject TooltipSection;
+    public Text tooltipText;
+    public Image tooltipImage;
+
     void Awake()
     {
         //setting up singleton
@@ -79,12 +85,24 @@ public class UIManager : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
         twt = GameObject.FindObjectOfType<typeWriterTest>();
         objectiveSystem = FindObjectOfType<ObjectiveSystem>();
-        updateObject();
+        //updateObject();
     }
 
     private void Update()
     {
         
+    }
+
+    public void toolTipInteract(ToolTipType type)
+    {
+        TooltipSection.SetActive(true);
+        tooltipText.text = type.text;
+        tooltipImage.sprite = type.KeyboardSprite;
+    }
+
+    public void toolTipHide()
+    {
+        TooltipSection.SetActive(false);
     }
 
     public void itemEquip(ItemData data)
@@ -242,7 +260,6 @@ public class UIManager : MonoBehaviour
     public void hideDocument(ViewDocument documentScript)
     {
         documentScript.showDoc = false;
-        documentScript.gameObject.GetComponent<MeshRenderer>().enabled = true;
 
         if (documentScript.data.isLandscape)
         {
@@ -283,6 +300,7 @@ public class UIManager : MonoBehaviour
 
         if (data != null)
         {
+            descriptionSection.SetActive(true);
             itemShowing = true;
             inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 1);
             inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 1);
@@ -298,6 +316,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            descriptionSection.SetActive(false);
             itemShowing = false;
             inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 0);
             inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 0);
