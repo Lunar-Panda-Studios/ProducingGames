@@ -16,6 +16,8 @@ public class Zoom : MonoBehaviour
     public Transform camPositionOG;
     bool zoomOut = false;
 
+    [SerializeField] BoxCollider zoomCollider;
+
     private void Start()
     {
         mainCam = Camera.main;
@@ -36,6 +38,7 @@ public class Zoom : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 isZoomed = true;
+                zoomCollider.enabled = false;
             }
 
             mainCam.transform.LookAt(gameObject.transform);
@@ -54,6 +57,7 @@ public class Zoom : MonoBehaviour
                 mouse.canLook = true;
                 player.enabled = true;
                 isZoomed = false;
+                zoomCollider.enabled = true;
             }
         }
 

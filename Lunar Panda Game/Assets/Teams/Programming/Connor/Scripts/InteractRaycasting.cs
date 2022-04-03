@@ -45,7 +45,7 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
         {
-            if (hit.transform != null && FindObjectOfType<PauseButtonToggle>() == null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+            if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
             {
                 if (flashlight.enabled)
                 {

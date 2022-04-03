@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class bikeLockNumber : MonoBehaviour
 {
+    public string audioClipName;
+
     [Header("Digit Values")]
     [Tooltip("Where this number places in the sequence")]
     public int digitPlacement;
@@ -31,48 +33,41 @@ public class bikeLockNumber : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Interact"))
+       
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            if (currentNumber <= 0)
             {
-                if (hit.transform.gameObject == gameObject)
-                {
-                        if (currentNumber <= 0)
-                        {
-                            currentNumber = 9;
-                        }
-                        else
-                        {
-                            currentNumber--;
-                        }
-                        transform.Rotate(0, 0, -rotationIncrement);
-                        bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
-                        bikeLockScript.checkPuzzleComplete();
-                }
+                currentNumber = 9;
             }
+            else
+            {
+                currentNumber--;
+            }
+            transform.Rotate(0, 0, -rotationIncrement);
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+            bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
+            bikeLockScript.checkPuzzleComplete();
         }
 
-        if (Input.GetButtonDown("PutAway"))
+        if (Input.GetMouseButtonDown(1))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.position, cam.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist))
+            if (currentNumber >= 9)
             {
-                if (hit.transform.gameObject == gameObject)
-                {
-                    if (currentNumber >= 9)
-                    {
-                        currentNumber = 0;
-                    }
-                    else
-                    {
-                        currentNumber++;
-                    }
-                    transform.Rotate(0, 0, rotationIncrement);
-                    bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
-                    bikeLockScript.checkPuzzleComplete();
-                }
+                currentNumber = 0;
             }
+            else
+            {
+                currentNumber++;
+            }
+            transform.Rotate(0, 0, rotationIncrement);
+            SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
+            bikeLockScript.changeCurrentCode(digitPlacement, currentNumber);
+            bikeLockScript.checkPuzzleComplete();
         }
     }
 }
