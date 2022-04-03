@@ -24,7 +24,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [SerializeField] Light passLight1;
     [SerializeField] Light failLight;
 
-    [SerializeField] float maxPlayerDist = 1f;
+    [SerializeField] float maxPlayerDist = 2f;
 
 
     void Awake()
@@ -85,11 +85,9 @@ public class ConnectInputsAndOutputs : MonoBehaviour
                         {
                             inputCurrentlyConnecting = i;
                             inputCurrentlyConnecting.GetComponent<Node>().connectedNode = null;
-                            //SetUpLine();
                             SetUpCable();
                         }
                     }
-                    
                 }
             }
             if (inputCurrentlyConnecting)
