@@ -9,7 +9,7 @@ public class ClockPuzzle : MonoBehaviour
     public string openAudio;//Matej edit
     bool handsConnected = false;
     const float clockAngle = 30f;
-    const float hourAngle = 90;
+    const float hourAngle = 270f;
     [Header("Prefabs")]
     [Tooltip("This should be the prefab of the Hour hand")]
     [SerializeField] GameObject hourHand;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FPSCounter : MonoBehaviour
 {
-    [SerializeField] private int FPS;
+    public int FPS;
 
     // Update is called once per frame
     void Update()
