@@ -5,11 +5,12 @@ using UnityEngine;
 public class LightsChaging : MonoBehaviour
 {
     public int id;
-    public int lightIntensity;
+    float lightIntensity;
 
     // Start is called before the first frame update
     private void Start()
     {
+        lightIntensity = GetComponent<Light>().intensity;
         GameEvents.current.triggerLightsOff += lightsOn;
         GameEvents.current.triggerLightsOn += lightsOff;
     }

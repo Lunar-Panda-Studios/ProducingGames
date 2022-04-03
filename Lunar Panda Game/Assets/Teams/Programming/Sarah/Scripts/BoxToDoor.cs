@@ -5,22 +5,27 @@ using UnityEngine;
 public class BoxToDoor : MonoBehaviour
 {
     Interaction interaction;
-
-    public int id;
+    [Tooltip("Surgery door 1")]
     public GameObject LinkedDoor1;
+    [Tooltip("Surgery door 2")]
     public GameObject LinkedDoor2;
+    [Tooltip("Lobby door 1")]
+    public GameObject OtherLinkedDoor3;
+    [Tooltip("Lobby door 2")]
+    public GameObject OtherLinkedDoor4;
+    public GameObject wifeRoomDoor1;
+    public GameObject wifeRoomDoor2;
+    [Tooltip("DoorToDoor")]
     public GameObject LinkedBox;
-    bool switchState = false;
+    internal bool switchState = true;
     InteractRaycasting ray;
+    internal DoorToDoor doorToDoor;
 
     private void Start()
     {
         interaction = GetComponent<Interaction>();
         ray = FindObjectOfType<InteractRaycasting>();
-        //LinkedDoor.GetComponent<OpenClose>().id = id;
-        LinkedDoor1.GetComponent<TempSlidingDoors>().id = id;
-        LinkedDoor2.GetComponent<TempSlidingDoors>().id = id;
-        LinkedBox.GetComponent<PowerChanging>().id = id;
+        doorToDoor = FindObjectOfType<DoorToDoor>();
     }
 
     private void Update()
@@ -45,13 +50,25 @@ public class BoxToDoor : MonoBehaviour
         {
             if (switchState)
             {
-                GameEvents.current.onTriggerOpenDoor(id);
-                LinkedBox.GetComponent<Interaction>().canInteract = false;
+                //print("Close near door");
+                LinkedDoor1.GetComponent<TempSlidingDoors>().closeDoor();
+                LinkedDoor2.GetComponent<TempSlidingDoors>().closeDoor();
+                OtherLinkedDoor3.GetComponent<TempSlidingDoors>().openDoor();
+                OtherLinkedDoor4.GetComponent<TempSlidingDoors>().openDoor();
+                LinkedBox.GetComponent<Interaction>().canInteract = true;
             }
             else
             {
-                GameEvents.current.onTriggerCloseDoor(id);
-                LinkedBox.GetComponent<Interaction>().canInteract = true;
+                //print("Open near door");
+                LinkedDoor1.GetComponent<TempSlidingDoors>().openDoor();
+                LinkedDoor2.GetComponent<TempSlidingDoors>().openDoor();
+                OtherLinkedDoor3.GetComponent<TempSlidingDoors>().closeDoor();
+                OtherLinkedDoor4.GetComponent<TempSlidingDoors>().closeDoor();
+                LinkedBox.GetComponent<Interaction>().canInteract = false;
+                wifeRoomDoor1.GetComponent<TempSlidingDoors>().closeDoor();
+                wifeRoomDoor2.GetComponent<TempSlidingDoors>().closeDoor();
+                doorToDoor.switchState = false;
+
             }
         }
 
