@@ -8,7 +8,7 @@ public class TempSlidingDoors : MonoBehaviour
     public AudioSource audioSource;
     public bool has3DAudio;
     
-    bool move;
+    internal bool move;
     public GameObject MoveTo;
     Vector3 startLocation;
     public float speed = 3;
@@ -65,6 +65,31 @@ public class TempSlidingDoors : MonoBehaviour
             changeTarget();
             move = true;
         }
+    }
+
+    public void changeMove()
+    {
+        if (has3DAudio)
+            audioSource.Play();
+
+        changeTarget();
+        move = true;
+    }
+
+    public void closeDoor()
+    {
+        if (has3DAudio)
+            audioSource.Play();
+        target = startLocation;
+        move = true;
+    }
+
+    public void openDoor()
+    {
+        if (has3DAudio)
+            audioSource.Play();
+        target = MoveTo.transform.position;
+        move = true;
     }
 
     void changeTarget()
