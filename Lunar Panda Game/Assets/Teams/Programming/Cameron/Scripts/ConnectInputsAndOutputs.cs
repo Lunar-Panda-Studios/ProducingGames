@@ -24,6 +24,8 @@ public class ConnectInputsAndOutputs : MonoBehaviour
     [SerializeField] Light passLight1;
     [SerializeField] Light failLight;
 
+    [SerializeField] float maxPlayerDist = 1f;
+
 
     void Awake()
     {
@@ -92,15 +94,15 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             }
             if (inputCurrentlyConnecting)
             {
-                //DrawLine();
                 UpdateCable();
-            }
-            else if (currentCable != null)
-            {
-                
+                if (Vector3.Distance(transform.position, player.position) > maxPlayerDist)
+                {
+                    currentCable.gameObject.SetActive(false);
+                    currentCable = null;
+                    inputCurrentlyConnecting = null;
+                }
             }
         }
-
     }
 
     void CheckForButtonPress()
@@ -206,8 +208,6 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             positions[1] = (cam.position) + (lineHoldDist * cam.forward);
             positions[2] = positions[1];
             currentCable.worldPositions(positions);
-            //ooooo magic numbers scaryyyyy
-            //dont care
             currentCable.uvScale = new Vector2(positions[1].z, positions[1].z);
         }
     }
