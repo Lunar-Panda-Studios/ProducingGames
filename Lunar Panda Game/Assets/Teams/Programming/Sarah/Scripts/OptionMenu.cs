@@ -13,17 +13,28 @@ public class OptionMenu : MonoBehaviour
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
     public Volume postProcessV;
-    public VSync vSync;
     float timer = 0;
     int timerMax = 5;
     bool changeResolution = false;
     int currentResolutionIndex;
     int oldResolutionIndex;
+
+    [Header("Audio Settings")]
+    public Slider masterVolSlider;
+    public Slider SFXVolSlider;
+    public Slider dialogueVolSlider;
+    public Slider musicVolSlider;
+    public Toggle subtitleToggle;
+
+    [Header("Video Settings")]
     public TextMeshProUGUI resolutionText;
     public GameObject resolutionWindow;
     public Dropdown fullscreenDropdown;
+    public Dropdown qualitySettingsDropdown;
+    public Dropdown FPSDropdown;
+    public Toggle motionBlurToggle;
+    public Slider brightnessSlider;
     bool initialing = true;
-
 
     private void Start()
     {
@@ -58,6 +69,32 @@ public class OptionMenu : MonoBehaviour
         }
 
         fullscreenDropdown.RefreshShownValue();
+
+        qualitySettingsDropdown.value = QualitySettings.GetQualityLevel();
+        qualitySettingsDropdown.RefreshShownValue();
+
+        audioMixer.GetFloat("MastVol", out float volume);
+        masterVolSlider.value = volume;
+
+        audioMixer.GetFloat("SFXVol", out volume);
+        SFXVolSlider.value = volume;
+
+        audioMixer.GetFloat("DialogueVol", out volume);
+        dialogueVolSlider.value = volume;
+
+        audioMixer.GetFloat("MusVol", out volume);
+        musicVolSlider.value = volume;
+
+        VolumeProfile profile = postProcessV.sharedProfile;
+
+        if(profile.TryGet(out MotionBlur motionBlur))
+        {
+            motionBlurToggle.isOn = motionBlur.active;
+        }
+
+        profile.TryGet(out Exposure exposure);
+        brightnessSlider.value = exposure.compensation.value;
+
         initialing = false;
     }
 
@@ -89,12 +126,12 @@ public class OptionMenu : MonoBehaviour
 
     public void dialogVolume(float volume)
     {
-        audioMixer.SetFloat("Dialog", volume);
+        audioMixer.SetFloat("DialogueVol", volume);
     }
 
     public void musicVolume(float volume)
     {
-        audioMixer.SetFloat("Music", volume);
+        audioMixer.SetFloat("MusVol", volume);
     }
 
     public void enableSubtitles(bool enable)
@@ -106,7 +143,6 @@ public class OptionMenu : MonoBehaviour
     {
         if (!resolutionWindow.activeInHierarchy)
         {
-            print("Change Resolution " + index);
             Resolution resolution = resolutions[index];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
@@ -155,7 +191,6 @@ public class OptionMenu : MonoBehaviour
 
     public void qualitySettings(int index)
     {
-        print("Change Quality " + index);
         QualitySettings.SetQualityLevel(index);
     }    
 
