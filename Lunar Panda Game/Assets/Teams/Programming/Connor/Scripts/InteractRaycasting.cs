@@ -77,14 +77,30 @@ public class InteractRaycasting : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.position, playerCamera.TransformDirection(Vector3.forward), out hit, player.GetComponent<PlayerPickup>().pickupDist, layerMask))
         {
-            if (hit.transform != null && flashlight.enabled && FindObjectOfType<PauseButtonToggle>() == null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
+            if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory)
             {
-                return true;
+                if (flashlight.enabled)
+                {
+                    return true;
+                }
+                else
+                {
+                    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        if (hit.transform.CompareTag("Flashlight"))
+                        {
+                            flashlight.enabled = true;
+                            //hit.transform.gameObject.SetActive(false);
+                        }
+                        return true;
+                    }
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         return false;
     }
