@@ -108,11 +108,11 @@ public class autoCombineScript : MonoBehaviour
                 autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
                 itemNamePrompt = autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.itemName;
+                fullPrompt = combinePrompt + itemNamePrompt;
+                anim.SetTrigger("Prompt");
             }  
         }
 
-        fullPrompt = combinePrompt + itemNamePrompt;
-        anim.SetTrigger("Prompt");
 
     }
 }
