@@ -7,6 +7,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     [HideInInspector] public bool isGlowing;
     [HideInInspector] public Material baseMaterial; //need this for the input script thingie but dont want in inspector
     [SerializeField] public Material glowingMaterial;
+    public ToolTipType tipType;
 
     void Awake()
     {
@@ -19,5 +20,17 @@ public class GlowWhenLookedAt : MonoBehaviour
         isGlowing = !isGlowing;
         //if the glowing bool is true, set the material to be glowing, if its false, set it to the base material
         this.gameObject.GetComponent<MeshRenderer>().material = isGlowing ? glowingMaterial : baseMaterial;
+
+        if (tipType != null)
+        {
+            if (isGlowing)
+            {
+                UIManager.Instance.toolTipInteract(tipType);
+            }
+            else
+            {
+                UIManager.Instance.toolTipHide();
+            }
+        }
     }
 }

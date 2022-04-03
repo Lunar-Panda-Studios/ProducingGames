@@ -95,14 +95,14 @@ public class UIManager : MonoBehaviour
 
     public void toolTipInteract(ToolTipType type)
     {
-        //TooltipSection.SetActive(true);
-        //tooltipText.text = type.text;
-        //tooltipImage.sprite = type.KeyboardSprite;
+        TooltipSection.SetActive(true);
+        tooltipText.text = type.text;
+        tooltipImage.sprite = type.KeyboardSprite;
     }
 
     public void toolTipHide()
     {
-        //TooltipSection.SetActive(false);
+        TooltipSection.SetActive(false);
     }
 
     public void itemEquip(ItemData data)

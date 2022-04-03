@@ -37,6 +37,9 @@ public class Analysis : MonoBehaviour
     internal int failCounterAntidote = 0;
     internal int failCounterPressurePlates = 0;
 
+    [Header("Analytics UI")]
+    public GameObject AnalyticsPanel;
+
     private void Start()
     {
         if (current == null)
@@ -87,6 +90,12 @@ public class Analysis : MonoBehaviour
     public void askConcent(bool hasConsent)
     {
         consent = hasConsent;
+        analyticsConsent();
+    }
+
+    public void analyticsConsent()
+    {
+        AnalyticsPanel.SetActive(false);
     }
 
     public bool completed(string name, Dictionary<string, object> para)
