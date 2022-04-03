@@ -19,7 +19,7 @@ public class BoxToLights : MonoBehaviour
         {
             foreach (Transform child in LinkedLights[i].transform)
             {
-                if(!child.gameObject.CompareTag("Ignore"))
+                if (!child.gameObject.CompareTag("Ignore"))
                 {
                     child.GetComponent<LightsChaging>().id = id;
                 }
