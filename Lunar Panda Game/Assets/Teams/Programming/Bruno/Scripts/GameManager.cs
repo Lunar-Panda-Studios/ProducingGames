@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         }
         );
 
-        print("Save");
+        UIManager.Instance.autoSavingPromptHide();
     }
 
     IEnumerator loadScene(GameData data)
@@ -121,41 +121,41 @@ public class GameManager : MonoBehaviour
         //inventory.itemInventory = data.itemInven;
         int index = 0;
 
-        for (int i = 0; i < inventory.itemInventory.Count; i++)
-        {
-            inventory.itemInventory[i] = null;
-        }
+        //for (int i = 0; i < inventory.itemInventory.Count; i++)
+        //{
+        //    inventory.itemInventory[i] = null;
+        //}
 
-        foreach (string itemId in data.itemInven)
-        {
-            if (itemId != null)
-            {
-                inventory.itemInventory[index] = (Database.current.allItems[int.Parse(itemId)]);
-            }
+        //foreach (string itemId in data.itemInven)
+        //{
+        //    if (itemId != null)
+        //    {
+        //        inventory.itemInventory[index] = (Database.current.allItems[int.Parse(itemId)]);
+        //    }
 
-            index += 1;
-        }
+        //    index += 1;
+        //}
 
-        index = 0;
+        //index = 0;
 
-        foreach (HoldableItem item in Database.current.itemsInScene)
-        {
-            if (!inventory.itemInventory.Contains(item.data))
-            {
-                if (data.itemsInScene[index, 0] != null)
-                {
-                    item.gameObject.SetActive(true);
-                    item.transform.position = new Vector3((float)data.itemsInScene[index, 0], (float)data.itemsInScene[index, 1], (float)data.itemsInScene[index, 2]);
-                    item.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                }
-            }
-            else
-            {
-                item.gameObject.SetActive(false);
-            }
+        //foreach (HoldableItem item in Database.current.itemsInScene)
+        //{
+        //    if (!inventory.itemInventory.Contains(item.data))
+        //    {
+        //        if (data.itemsInScene[index, 0] != null)
+        //        {
+        //            item.gameObject.SetActive(true);
+        //            item.transform.position = new Vector3((float)data.itemsInScene[index, 0], (float)data.itemsInScene[index, 1], (float)data.itemsInScene[index, 2]);
+        //            item.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        item.gameObject.SetActive(false);
+        //    }
 
-            index++;
-        }
+        //    index++;
+        //}
 
         //Document aka clues or red hering or stuff with images
 
@@ -196,23 +196,23 @@ public class GameManager : MonoBehaviour
         }
 
         //Puzzle status
-        completion.eventsID = data.puzzlesEvents;
-        completion.isCompleted = data.puzzleCompleted;
+        //completion.eventsID = data.puzzlesEvents;
+        //completion.isCompleted = data.puzzleCompleted;
 
-        for (int i = 0; i < data.puzzleCompleted.Count; i++)
-        {
-            if (completion.isCompleted[i])
-            {
-                GameEvents.current.onPuzzleComplete(i + 1);
-            }
-            else
-            {
-                if (!sceneJustLoad)
-                {
-                    GameEvents.current.onPuzzleReset(i + 1);
-                }
-            }
-        }
+        //for (int i = 0; i < data.puzzleCompleted.Count; i++)
+        //{
+        //    if (completion.isCompleted[i])
+        //    {
+        //        GameEvents.current.onPuzzleComplete(i + 1);
+        //    }
+        //    else
+        //    {
+        //        if (!sceneJustLoad)
+        //        {
+        //            GameEvents.current.onPuzzleReset(i + 1);
+        //        }
+        //    }
+        //}
 
         print("Load");
     }

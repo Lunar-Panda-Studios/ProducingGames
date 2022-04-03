@@ -33,46 +33,46 @@ public class GameData
         rotation[2] = data.rotation.z;
         rotation[3] = data.rotation.w;
 
-        itemsInScene = new float?[Database.getLocation.Count, 3];
+        //itemsInScene = new float?[Database.getLocation.Count, 3];
 
-        for(int i = 0; i < Database.getLocation.Count; i++)
-        {
-            if (Database.current.itemsInScene[i] == null)
-            {
-                if (!data.inventory.itemInventory.Contains(Database.current.itemsInScene[i].GetComponent<HoldableItem>().data))
-                {
-                    itemsInScene[i, 0] = Database.itemLocation[i].x;
-                    itemsInScene[i, 1] = Database.itemLocation[i].y;
-                    itemsInScene[i, 2] = Database.itemLocation[i].z;
-                }
-                else
-                {
-                    itemsInScene[i, 0] = null;
-                    itemsInScene[i, 1] = null;
-                    itemsInScene[i, 2] = null;
-                }
-            }
-            else
-            {
-                break;
-            }
-        }
+        //for(int i = 0; i < Database.getLocation.Count; i++)
+        //{
+        //    if (Database.current.itemsInScene[i] == null)
+        //    {
+        //        if (!data.inventory.itemInventory.Contains(Database.current.itemsInScene[i].GetComponent<HoldableItem>().data))
+        //        {
+        //            itemsInScene[i, 0] = Database.itemLocation[i].x;
+        //            itemsInScene[i, 1] = Database.itemLocation[i].y;
+        //            itemsInScene[i, 2] = Database.itemLocation[i].z;
+        //        }
+        //        else
+        //        {
+        //            itemsInScene[i, 0] = null;
+        //            itemsInScene[i, 1] = null;
+        //            itemsInScene[i, 2] = null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        break;
+        //    }
+        //}
 
         //itemInven = data.inventory.itemInventory;
 
-        itemInven = new List<string>();
+        //itemInven = new List<string>();
 
-        for(int i = 0; i < data.inventory.itemInventory.Count; i++)
-        {
-            if (data.inventory.itemInventory[i] != null)
-            {
-                itemInven.Add(Database.getItemID[data.inventory.itemInventory[i]]);
-            }
-            else
-            {
-                itemInven.Add(null);
-            }
-        }
+        //for(int i = 0; i < data.inventory.itemInventory.Count; i++)
+        //{
+        //    if (data.inventory.itemInventory[i] != null)
+        //    {
+        //        itemInven.Add(Database.getItemID[data.inventory.itemInventory[i]]);
+        //    }
+        //    else
+        //    {
+        //        itemInven.Add(null);
+        //    }
+        //}
 
         //docInven = data.inventory.documentInventory;
 
@@ -104,8 +104,8 @@ public class GameData
             }
         }
 
-        puzzlesEvents = data.completion.eventsID;
-        puzzleCompleted = data.completion.isCompleted;
+        //puzzlesEvents = data.completion.eventsID;
+        //puzzleCompleted = data.completion.isCompleted;
     }
 
 }
