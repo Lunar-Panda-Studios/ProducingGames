@@ -11,7 +11,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     [Tooltip("Only use this if the object you want to make glow has children that also need to glow")]
     [SerializeField] List<MeshRenderer> childrenThatNeedGlow;
     [SerializeField] List<Material> childrenFresnelMat;
-    List<Material> childrenBaseMat;
+    List<Material> childrenBaseMat = new List<Material>();
 
     void Awake()
     {
