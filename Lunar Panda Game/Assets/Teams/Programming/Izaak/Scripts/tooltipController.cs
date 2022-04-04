@@ -6,7 +6,8 @@ public class tooltipController : MonoBehaviour
 {
     public enum controlTypes
     {
-        MOVE, JUMP, SPRINT, CROUCH, FLASHLIGHT
+        NONE, MOVE, JUMP, SPRINT, CROUCH, FLASHLIGHT,
+        OPENINV, CLOSEINV, OPENJRN, CLOSEJRN, TURNPAGEJRN
     }
     [Header("Controls")]
     [Tooltip("The action you must complete to get rid of the tooltip")]
@@ -23,6 +24,10 @@ public class tooltipController : MonoBehaviour
     [Header("Game Objects")]
     [Tooltip("Drag the tooltip text in the scene here")]
     public GameObject UITip;
+    [Tooltip("Drag in the journalMenu object if it is a journal-related tooltip")]
+    public GameObject journalMenu;
+    [Tooltip("Drag in the InventoryMenu object if it is an inventory-related tooltip")]
+    public GameObject inventoryMenu;
 
     // Update is called once per frame
     void Update()
@@ -77,6 +82,56 @@ public class tooltipController : MonoBehaviour
                         }
                     }
                     break;
+                case controlTypes.OPENINV:
+                    {
+                        if (Input.GetButton("Inventory"))
+                        {
+                            deactivateTooltip();
+                        }
+                    }
+                    break;
+                case controlTypes.CLOSEINV:
+                    {
+                        //If Inventory is currently up
+                        if (Input.GetButton("Inventory"))
+                        {
+                            if (inventoryMenu.GetComponent<InventoryMenuToggle>().IsOnInventory)
+                            {
+                                deactivateTooltip();
+                            }
+                        }
+                    }
+                    break;
+                case controlTypes.OPENJRN:
+                    {
+                        if (Input.GetButton("Journal"))
+                        {
+                            deactivateTooltip();
+                        }
+                    }
+                    break;
+                case controlTypes.CLOSEJRN:
+                    {
+                        if (Input.GetButton("Journal"))
+                        {
+                            if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
+                            {
+                                deactivateTooltip();
+                            }
+                        }
+                    }
+                    break;
+                case controlTypes.TURNPAGEJRN:
+                    {
+                        if (Input.GetKey("e"))
+                        {
+                            if (journalMenu.GetComponent<JournalMenuToggle>().IsOnMenu)
+                            {
+                                deactivateTooltip();
+                            }
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -105,9 +160,12 @@ public class tooltipController : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            inRange = false;
-            UITip.GetComponent<tooltipDisplay>().changeText(" ");
-            UITip.SetActive(false);
+            if (input == controlTypes.NONE)
+            {
+                inRange = false;
+                UITip.GetComponent<tooltipDisplay>().changeText(" ");
+                UITip.SetActive(false);
+            }
         }
     }
 
