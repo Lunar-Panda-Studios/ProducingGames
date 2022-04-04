@@ -25,6 +25,8 @@ public class pressurePlatePuzzle : MonoBehaviour
     [Header("Puzzle")]
     [Tooltip("Checks if the puzzle is complete or not")]
     public bool puzzleComplete;
+
+    public string completeClip;//Matej changes
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class pressurePlatePuzzle : MonoBehaviour
         if (currentCorrect==correctOrder.Count)
         {
             door.GetComponent<OpenDoor>().canOpen = true;
+            SoundEffectManager.GlobalSFXManager.PlaySFX(completeClip);
             if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
