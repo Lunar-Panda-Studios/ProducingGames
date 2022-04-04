@@ -27,6 +27,8 @@ public class pressurePlate : MonoBehaviour
     public bool moving;
     private float startHeight;
     bool stayOn = true;
+    public string downClip; //Matej changes
+    public string upClip; //Matej changes
     // Start is called before the first frame update
     void Start()
     {
