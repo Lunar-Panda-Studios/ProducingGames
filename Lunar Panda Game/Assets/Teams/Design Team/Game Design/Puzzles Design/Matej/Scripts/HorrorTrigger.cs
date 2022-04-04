@@ -201,10 +201,8 @@ public class HorrorTrigger : MonoBehaviour
     {
         //Activates the image in Canva and then disables it
         jumpSImage.gameObject.SetActive(true);
-        FindObjectOfType<WalkingSound>().canMakeSound = false;
         yield return new WaitForSeconds(time);
         jumpSImage.gameObject.SetActive(false);
-        FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
     private IEnumerator LookAtCoroutine(float delay)
