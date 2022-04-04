@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     private int itemsIn;
     PlayerPickup pickupControl;
     GameObject player;
-    bool puttingAway = false;
+    internal bool puttingAway = false;
     GameObject puttingAwayItem;
     float lerpSpeed = 5;
     Camera cam;
