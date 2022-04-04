@@ -18,6 +18,7 @@ public class HeadPlacing : MonoBehaviour
     GameObject placedItem;
     public string clipName;//Matej changes
 
+
     public enum Tags
     {
         redTag,

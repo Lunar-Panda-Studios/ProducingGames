@@ -19,12 +19,12 @@ public class Inventory : MonoBehaviour
     private int itemsIn;
     PlayerPickup pickupControl;
     GameObject player;
-    bool puttingAway = false;
+    internal bool puttingAway = false;
     GameObject puttingAwayItem;
     float lerpSpeed = 5;
     Camera cam;
     float timer = 0;
-    float maxTime = 2;
+    public float maxTime = 1;
 
     // Start is called before the first frame update
     void Start()

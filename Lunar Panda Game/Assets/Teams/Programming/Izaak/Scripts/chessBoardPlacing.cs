@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class chessBoardPlacing : MonoBehaviour
 {
+    [SerializeField] Animation anim;
+
     [Header("Board Co-ordinates")]
     [Tooltip("The correct co-ordinates for the pawn on the board")]
     public Vector2 pawnCorrectSpot;
@@ -95,8 +97,8 @@ public class chessBoardPlacing : MonoBehaviour
         Debug.Log(queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() + " " + pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot());
         if (queenPiece.GetComponent<chessValuedItem>().checkCorrectSpot() && pawnPiece.GetComponent<chessValuedItem>().checkCorrectSpot())
         {
-            drawer.GetComponent<openChessDrawer>().puzzleCleared = true;
             puzzleComplete = true;
+            anim.Play();
             SoundEffectManager.GlobalSFXManager.PlaySFX(openAudio);//Matej edit
 
             if (Analysis.current != null)

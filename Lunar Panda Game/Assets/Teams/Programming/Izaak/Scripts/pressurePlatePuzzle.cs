@@ -20,11 +20,13 @@ public class pressurePlatePuzzle : MonoBehaviour
     public GameObject prefabPedestal;
     private GameObject instPedestal;
     [Tooltip("The door that opens when the puzzle is solved")]
-    public GameObject codeLock;
+    public GameObject door;
 
     [Header("Puzzle")]
     [Tooltip("Checks if the puzzle is complete or not")]
     public bool puzzleComplete;
+
+    public string completeClip;//Matej changes
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +56,8 @@ public class pressurePlatePuzzle : MonoBehaviour
     {
         if (currentCorrect==correctOrder.Count)
         {
-            codeLock.GetComponent<MoveTo>().move = true;
+            door.GetComponent<OpenDoor>().canOpen = true;
+            SoundEffectManager.GlobalSFXManager.PlaySFX(completeClip);
             if (Analysis.current != null)
             {
                 if (Analysis.current.consent)
@@ -92,6 +95,7 @@ public class pressurePlatePuzzle : MonoBehaviour
 
     public bool getCompletion()
     {
+        
         return puzzleComplete;
     }
 }

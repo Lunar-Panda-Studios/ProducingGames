@@ -9,6 +9,8 @@ public class OpenDoor : MonoBehaviour
     public bool isPositiveRotation; 
     int currentTotal;
     public bool canOpen;
+    bool beenOpened = false;
+    public string openClip;
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +37,12 @@ public class OpenDoor : MonoBehaviour
             if (moveTotal == currentTotal)
             {
                 moving = false;
+                currentTotal = 0;
+                beenOpened = true;
             }
         }
 
-        if(canOpen && !moving)
+        if(canOpen && !moving && !beenOpened)
         {
             if (Input.GetButton("Interact"))
             {
@@ -47,6 +51,7 @@ public class OpenDoor : MonoBehaviour
                 {
                     if (hit.transform.gameObject == gameObject.transform.GetChild(0).gameObject)
                     {
+                        SoundEffectManager.GlobalSFXManager.PlaySFX(openClip);
                         moving = true;
                     }
                 }
