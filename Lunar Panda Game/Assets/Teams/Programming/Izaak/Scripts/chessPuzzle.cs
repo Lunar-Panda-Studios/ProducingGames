@@ -51,6 +51,7 @@ public class chessPuzzle : MonoBehaviour
                         
                         if (pawnChessPiece.GetComponent<chessValuedItem>().checkIfRecent()>0 || inventory.itemInventory[inventory.selectedItem] == pawnChessPiece.GetComponent<HoldableItem>().data)
                         {
+                            inventory.puttingAway = false;
                             pawnChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                             pawnChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
                             pawnChessPiece.GetComponent<Rigidbody>().useGravity = true;
@@ -72,6 +73,7 @@ public class chessPuzzle : MonoBehaviour
                         }
                         if (queenChessPiece.GetComponent<chessValuedItem>().checkIfRecent() > 0 || inventory.itemInventory[inventory.selectedItem] == queenChessPiece.GetComponent<HoldableItem>().data)
                         {
+                            inventory.puttingAway = false;
                             queenChessPiece.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                             queenChessPiece.GetComponent<chessValuedItem>().changeCurrentLocation(currentSpot);
                             queenChessPiece.GetComponent<Rigidbody>().useGravity = true;
