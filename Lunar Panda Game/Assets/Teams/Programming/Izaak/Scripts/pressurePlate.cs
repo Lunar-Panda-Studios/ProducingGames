@@ -29,6 +29,8 @@ public class pressurePlate : MonoBehaviour
     bool stayOn = true;
     public string downClip; //Matej changes
     public string upClip; //Matej changes
+    public float audioDelay;
+    private bool playAudio=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,7 @@ public class pressurePlate : MonoBehaviour
             {
                 if (transform.localPosition.y > (minYVal + startHeight))
                 {
+                    if (playAudio) StartCoroutine(PlaySound(downClip, audioDelay));
                     r_body.velocity = -transform.up * moveSpeed * Time.deltaTime;
                 }
                 else
@@ -62,6 +65,7 @@ public class pressurePlate : MonoBehaviour
             {
                 if (transform.localPosition.y < (maxYVal + startHeight))
                 {
+                    if(playAudio) StartCoroutine(PlaySound(upClip, audioDelay));
                     r_body.velocity = transform.up * moveSpeed * Time.deltaTime;
                 }
                 else
@@ -89,5 +93,12 @@ public class pressurePlate : MonoBehaviour
         {
             stayOn = false;
         }
+    }
+    IEnumerator PlaySound(string clip, float delay)
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(clip);
+        playAudio = false;
+        yield return new WaitForSeconds(delay);
+        playAudio = true;
     }
 }

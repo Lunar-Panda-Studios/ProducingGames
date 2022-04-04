@@ -8,6 +8,7 @@ public class HearSeeSayController : MonoBehaviour
     [SerializeField] bool loadMenuOnComplete = true;
     [SerializeField] string mainMenuName;
     public GameObject door;
+    public string completeClip;
 
     public void CheckIfComplete()
     {
@@ -23,6 +24,7 @@ public class HearSeeSayController : MonoBehaviour
         //StartCoroutine(FindObjectOfType<LevelManager>().FadeLoadingScreen(mainMenuName));
 
         door.GetComponent<OpenDoor>().canOpen = true;
+        SoundEffectManager.GlobalSFXManager.PlaySFX(completeClip);
         if (Analysis.current.consent)
         {
             Analysis.current.resetTimer("HearSeeSay");
