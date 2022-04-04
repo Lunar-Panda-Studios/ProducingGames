@@ -41,7 +41,6 @@ public class Zoom : MonoBehaviour
 
         if(timer >= delay)
         {
-            timer = 0;
             canZoom = true;
         }
 
@@ -58,6 +57,7 @@ public class Zoom : MonoBehaviour
                     player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     playerMesh.SetActive(false);
                     zoomIn = true;
+                    timer = 0;
                     canZoom = false;
                 }
             }
@@ -75,6 +75,7 @@ public class Zoom : MonoBehaviour
                 isZoomed = true;
                 zoomCollider.enabled = false;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = flashlightIntensity;
+                timer = 0;
                 canZoom = false;
                 playerCrouch.enabled = false;
             }
@@ -90,19 +91,20 @@ public class Zoom : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                playerMesh.SetActive(false);
+                playerMesh.SetActive(true);
                 mouse.canLook = true;
                 player.enabled = true;
                 isZoomed = false;
                 zoomCollider.enabled = true;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = 27500;
                 zoomOut = false;
+                timer = 0;
                 canZoom = false;
                 playerCrouch.enabled = true;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.C))
         {
             unZoom();
         }
