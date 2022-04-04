@@ -93,6 +93,10 @@ public class bikeLock : MonoBehaviour
         {
             Destroy(GetComponentInChildren<bikeLockNumber>());
             Destroy(GetComponentInChildren<InteractSound>());
+            if (zoomIn.canDisable())
+            {
+                transform.parent.gameObject.SetActive(false);
+            }
         }
     }
 }
