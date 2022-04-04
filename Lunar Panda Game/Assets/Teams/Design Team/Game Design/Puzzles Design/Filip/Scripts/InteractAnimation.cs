@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class InteractAnimation : MonoBehaviour
 {
-    [SerializeField] string audioClipName;
-
     [SerializeField] Animator animator;
 
     [SerializeField] bool closed = true;
@@ -47,11 +45,5 @@ public class InteractAnimation : MonoBehaviour
         yield return new WaitForSeconds(waitFor);
         canInteract = true;
     }
-
-    public void playAnimationSound()
-    {
-        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);
-    }
-
 }
 

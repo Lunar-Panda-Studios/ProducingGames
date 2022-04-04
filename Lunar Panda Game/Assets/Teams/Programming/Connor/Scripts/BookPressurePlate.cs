@@ -6,12 +6,12 @@ public class BookPressurePlate : MonoBehaviour
 {
     [Tooltip("Enter Name of Book in inspector")]
     public string bookName;
+    public ship ship;//Matej changes
 
     private float weightNeeded;
     private float bookWeight;
     public GameObject evilBook;
-    [Tooltip("Drag the safe's door here")]
-    public GameObject safeDoor;
+
 
     void Start()
     {
@@ -29,8 +29,9 @@ public class BookPressurePlate : MonoBehaviour
         if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
             print("Completed");
+            ship.MoveShip();
             //safeDoor.GetComponent<openSafe>().toggleOpening(true);
-            safeDoor.SetActive(false);
+            //safeDoor.SetActive(false);
 
             if (Analysis.current != null)
             {
@@ -47,7 +48,7 @@ public class BookPressurePlate : MonoBehaviour
  
         if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
-            safeDoor.GetComponent<openSafe>().toggleOpening(false);
+            //safeDoor.GetComponent<openSafe>().toggleOpening(false);
         }
     }
 }
