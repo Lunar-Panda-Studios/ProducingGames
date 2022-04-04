@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 2642809838636583636}
   - component: {fileID: 2642809838636583637}
   - component: {fileID: 2642809838636583638}
-  m_Layer: 0
+  - component: {fileID: 425332077}
+  - component: {fileID: 425332083}
+  m_Layer: 6
   m_Name: RedKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2731021154007171800}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0.110728234, y: 0.80836654, z: 0.3019129}
-  m_LocalScale: {x: 134.0001, y: 134.00006, z: 134.00003}
+  m_LocalScale: {x: 27.94442, y: 27.94441, z: 33.53329}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -63,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 7c9f0933c0d801646bfa4aeab75f90e6, type: 3}
+  - {fileID: -6478536213147159724, guid: 2f96e17e6a60516498af9f359fdd694b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +101,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &2642809838636583636
 BoxCollider:
@@ -129,6 +131,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!114 &2642809838636583638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +146,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 2b8fd8217a4d314488d558f014868c2f, type: 2}
+--- !u!114 &425332077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731021154007171800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb0bfddcb5fa004a9ce9680ea600ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipName: Pickup3
+--- !u!114 &425332083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731021154007171800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b25d5ad27a87ae47b2f68149017ec01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawerParent: {fileID: 0}
+  boxCol: {fileID: 0}
+  r_body: {fileID: 0}
