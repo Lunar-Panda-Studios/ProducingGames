@@ -21,6 +21,10 @@ public class Zoom : MonoBehaviour
     [SerializeField] GameObject flashlight;
     [SerializeField] float flashlightIntensity;
 
+    float timer = 0;
+    public float delay = 1.5f;
+    bool canZoom;
+
     private void Start()
     {
         mainCam = Camera.main;
@@ -31,11 +35,37 @@ public class Zoom : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
+        if(timer >= delay)
+        {
+            timer = 0;
+            canZoom = true;
+        }
+
+        RaycastHit hit;
+        if (Input.GetButton("Interact"))
+        {
+            if (playerPickupRay.raycastInteract(out hit))
+            {
+                if (hit.transform.gameObject == gameObject && (!isZoomed || !zoomOut) && canZoom)
+                {
+                    print("Hit");
+                    mouse.canLook = false;
+                    player.enabled = false;
+                    player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                    playerMesh.SetActive(false);
+                    zoomIn = true;
+                    canZoom = false;
+                }
+            }
+        }
+
         if (zoomIn)
         {
             mainCam.transform.position = Vector3.MoveTowards(mainCam.transform.position, moveToLocation.position, disDelta);
 
-            if(mainCam.transform.position == moveToLocation.position)
+            if (mainCam.transform.position == moveToLocation.position)
             {
                 zoomIn = false;
                 Cursor.lockState = CursorLockMode.None;
@@ -43,6 +73,7 @@ public class Zoom : MonoBehaviour
                 isZoomed = true;
                 zoomCollider.enabled = false;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = flashlightIntensity;
+                canZoom = false;
             }
 
             mainCam.transform.LookAt(gameObject.transform);
@@ -54,7 +85,6 @@ public class Zoom : MonoBehaviour
 
             if (mainCam.transform.position == camPositionOG.position)
             {
-                zoomOut = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 playerMesh.SetActive(false);
@@ -63,22 +93,8 @@ public class Zoom : MonoBehaviour
                 isZoomed = false;
                 zoomCollider.enabled = true;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = 27500;
-            }
-        }
-
-        RaycastHit hit;
-        if (Input.GetButton("Interact"))
-        {
-            if (playerPickupRay.raycastInteract(out hit))
-            {
-                if (hit.transform.gameObject == gameObject && !isZoomed)
-                {
-                    mouse.canLook = false;
-                    player.enabled = false;
-                    player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                    playerMesh.SetActive(false);
-                    zoomIn = true;
-                }
+                zoomOut = false;
+                canZoom = false;
             }
         }
 
