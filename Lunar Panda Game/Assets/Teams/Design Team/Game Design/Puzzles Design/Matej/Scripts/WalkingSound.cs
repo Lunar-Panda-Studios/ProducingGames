@@ -8,7 +8,7 @@ public class WalkingSound : MonoBehaviour
     private bool playing;
     public AudioSource soundSource;
     [SerializeField] float buffer = 0.1f;
-    public bool canMakeSound = true;
+    internal bool canMakeSound = true;
 
     public enum TypeOfFloor
     {
