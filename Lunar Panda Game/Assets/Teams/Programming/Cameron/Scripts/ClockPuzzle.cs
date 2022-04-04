@@ -90,8 +90,9 @@ public class ClockPuzzle : MonoBehaviour
         if(inventory.itemInventory[inventory.selectedItem] == clockHandsData)
         {
             clockHands = Instantiate(clockHands, transform.position, Quaternion.identity);
+            Destroy(clockHands.GetComponent<HoldableItem>());
             Destroy(clockHands.GetComponent<BoxCollider>());
-            Destroy(clockHands.GetComponent<Rigidbody>());
+            //Destroy(clockHands.GetComponent<Rigidbody>());
             minuteHand = clockHands.transform.GetChild(0).gameObject;
             //Destroy(minuteHand.GetComponent<Rigidbody>());
             //Destroy(minuteHand.GetComponent<GlowWhenLookedAt>());
