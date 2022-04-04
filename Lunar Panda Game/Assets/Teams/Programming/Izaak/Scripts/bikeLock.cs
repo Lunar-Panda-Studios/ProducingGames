@@ -19,6 +19,8 @@ public class bikeLock : MonoBehaviour
 
     bool finished;
 
+    public Zoom zoomIn;
+
     // Update is called once per frame
     void Update()
     {
@@ -49,6 +51,7 @@ public class bikeLock : MonoBehaviour
                 passes++;
                 if (passes == currentCode.Length)
                 {
+                    zoomIn.unZoom();
                     puzzleSolved = true;
                     if (Analysis.current != null)
                     {
