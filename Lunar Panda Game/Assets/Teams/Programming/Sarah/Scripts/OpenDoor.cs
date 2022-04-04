@@ -10,6 +10,7 @@ public class OpenDoor : MonoBehaviour
     int currentTotal;
     public bool canOpen;
     bool beenOpened = false;
+    public string openClip;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class OpenDoor : MonoBehaviour
                 {
                     if (hit.transform.gameObject == gameObject.transform.GetChild(0).gameObject)
                     {
+                        SoundEffectManager.GlobalSFXManager.PlaySFX(openClip);
                         moving = true;
                     }
                 }
