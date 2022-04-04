@@ -65,6 +65,9 @@ public class UIManager : MonoBehaviour
     public Text tooltipText;
     public Image tooltipImage;
 
+    [Header("AutoSave UI")]
+    public GameObject autoSavingSection;
+
     void Awake()
     {
         //setting up singleton
@@ -91,6 +94,16 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void autoSavingPromptShow()
+    {
+        autoSavingSection.SetActive(true);
+    }
+
+    public void autoSavingPromptHide()
+    {
+        autoSavingSection.SetActive(false);
     }
 
     public void toolTipInteract(ToolTipType type)
