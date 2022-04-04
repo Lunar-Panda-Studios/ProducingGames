@@ -8,7 +8,7 @@ public class BookPressurePlate : MonoBehaviour
     public string bookName;
     public ship ship;//Matej changes
 
-    private float weightNeeded;
+    public float weightNeeded;
     private float bookWeight;
     public GameObject evilBook;
 
