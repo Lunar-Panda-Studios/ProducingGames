@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class Zoom : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Zoom : MonoBehaviour
     bool zoomOut = false;
 
     [SerializeField] BoxCollider zoomCollider;
+    [SerializeField] GameObject flashlight;
+    [SerializeField] float flashlightIntensity;
 
     private void Start()
     {
@@ -39,6 +42,7 @@ public class Zoom : MonoBehaviour
                 Cursor.visible = true;
                 isZoomed = true;
                 zoomCollider.enabled = false;
+                flashlight.GetComponent<HDAdditionalLightData>().intensity = flashlightIntensity;
             }
 
             mainCam.transform.LookAt(gameObject.transform);
@@ -58,6 +62,7 @@ public class Zoom : MonoBehaviour
                 player.enabled = true;
                 isZoomed = false;
                 zoomCollider.enabled = true;
+                flashlight.GetComponent<HDAdditionalLightData>().intensity = 27500;
             }
         }
 
