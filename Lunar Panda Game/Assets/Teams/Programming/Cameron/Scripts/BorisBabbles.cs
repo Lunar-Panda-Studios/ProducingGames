@@ -165,7 +165,8 @@ public class BorisBabbles : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
         SoundEffectManager.GlobalSFXManager.PlaySFX(briefcaseAudio);
-        GetComponent<Animation>().Play();
+        lid.GetComponent<Animation>().Play();
+        //GetComponent<Animation>().Play();
     }
 
     IEnumerator IncorrectInput()
