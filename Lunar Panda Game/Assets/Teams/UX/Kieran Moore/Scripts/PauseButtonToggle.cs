@@ -44,6 +44,7 @@ public class PauseButtonToggle : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(null);
                 if(firstSelectedButton != null)
                     EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+                FindObjectOfType<WalkingSound>().canMakeSound = false;
                 
             }
             else if (IsPaused == true)
@@ -82,6 +83,7 @@ public class PauseButtonToggle : MonoBehaviour
             MrCapsule.canLook = true;
             Cursor.visible = false;
             Time.timeScale = 1f;
+            FindObjectOfType<WalkingSound>().canMakeSound = true;
         }
     }
 }
