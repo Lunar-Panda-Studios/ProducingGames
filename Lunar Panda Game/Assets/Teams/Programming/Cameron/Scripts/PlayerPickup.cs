@@ -55,6 +55,14 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
+        if (heldItem != null)
+        {
+            if (heldItem.GetComponent<Rigidbody>() == null)
+            {
+                heldItem.AddComponent<Rigidbody>();
+            }
+        }
+
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {
             //Casts a ray from the camera

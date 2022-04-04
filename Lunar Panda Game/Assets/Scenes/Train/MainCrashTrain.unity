@@ -13078,7 +13078,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801548737}
-  - component: {fileID: 801548738}
   m_Layer: 0
   m_Name: LightManager (1)
   m_TagString: Untagged
@@ -13100,21 +13099,6 @@ Transform:
   m_Father: {fileID: 1263217871}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &801548738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801548736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e2a4819072a1b4f8358466150d3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerSwitch: {fileID: 0}
-  lightsToTurnOn: {fileID: 1686238408}
-  lightsToTurnOn2: {fileID: 0}
 --- !u!1 &808142712
 GameObject:
   m_ObjectHideFlags: 0
@@ -13235,6 +13219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 249149511, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: combine
+      value: 
+      objectReference: {fileID: 1289439633}
     - target: {fileID: 3548961325420891194, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
       propertyPath: m_Name
       value: ----UI----
@@ -18496,6 +18484,17 @@ MonoBehaviour:
   buffer: 0.1
   typeOfFloor: 0
   soundEffectManager: {fileID: 0}
+--- !u!114 &1289439633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 687099282, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+  m_PrefabInstance: {fileID: 830702997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289439629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b45b41044e0b42489d2b88209a8a237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1296065152
 GameObject:
   m_ObjectHideFlags: 0
