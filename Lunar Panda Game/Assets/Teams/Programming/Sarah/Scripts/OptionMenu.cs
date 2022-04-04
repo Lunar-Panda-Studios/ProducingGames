@@ -32,8 +32,10 @@ public class OptionMenu : MonoBehaviour
     public Dropdown fullscreenDropdown;
     public Dropdown qualitySettingsDropdown;
     public Dropdown FPSDropdown;
+    [SerializeField] Text fpsText;
     public Toggle motionBlurToggle;
     public Slider brightnessSlider;
+    [SerializeField] float brightnessMultiplier = 1f;
     bool initialing = true;
 
     private void Start()
@@ -207,6 +209,11 @@ public class OptionMenu : MonoBehaviour
         VolumeProfile profile = postProcessV.sharedProfile;
         
         profile.TryGet(out Exposure exposure);
-        exposure.compensation.value = value;
+        exposure.compensation.value = value * brightnessMultiplier;
+    }
+
+    public void ToggleFPSText()
+    {
+        fpsText.gameObject.SetActive(!fpsText.gameObject.activeInHierarchy);
     }
 }
