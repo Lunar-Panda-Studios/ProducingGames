@@ -184,9 +184,10 @@ public class HorrorTrigger : MonoBehaviour
     private IEnumerator PlayerMovementCoroutine(float Delay)
     {
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        FindObjectOfType<WalkingSound>().canMakeSound = false;
         yield return new WaitForSeconds(Delay);
         player.GetComponent<playerMovement>().enabled = true;
-        player.GetComponent<WalkingSound>().enabled = true;
+        FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
     private IEnumerator StopMoveObject(float Delay)
@@ -207,9 +208,11 @@ public class HorrorTrigger : MonoBehaviour
     private IEnumerator LookAtCoroutine(float delay)
     {
         player.GetComponentInChildren<lockMouse>().enabled = false;
+        FindObjectOfType<WalkingSound>().canMakeSound = false;
         yield return new WaitForSeconds(delay);
         startLook = false;
         player.GetComponentInChildren<lockMouse>().enabled = true;
+        FindObjectOfType<WalkingSound>().canMakeSound = true;
         doneEvents++;
     }
     private IEnumerator HideObjectCoroutine(float time)
@@ -234,7 +237,6 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void DisablePlayerMovement()
     {
-        player.GetComponent<WalkingSound>().enabled = false;
         player.GetComponent<playerMovement>().enabled = false;
         StartCoroutine(PlayerMovementCoroutine(delayBeforeMovingAgain));
     }
