@@ -6,6 +6,7 @@ public class BookPressurePlate : MonoBehaviour
 {
     [Tooltip("Enter Name of Book in inspector")]
     public string bookName;
+    public ship ship;//Matej changes
 
     private float weightNeeded;
     private float bookWeight;
@@ -28,6 +29,7 @@ public class BookPressurePlate : MonoBehaviour
         if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
         {
             print("Completed");
+            ship.MoveShip();
             //safeDoor.GetComponent<openSafe>().toggleOpening(true);
             //safeDoor.SetActive(false);
 
