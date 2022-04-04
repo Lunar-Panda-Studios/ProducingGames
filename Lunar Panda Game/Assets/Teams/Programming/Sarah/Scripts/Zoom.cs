@@ -14,6 +14,7 @@ public class Zoom : MonoBehaviour
     playerMovement player;
     lockMouse mouse;
     InteractRaycasting playerPickupRay;
+    PlayerCrouch playerCrouch;
     public Transform camPositionOG;
     bool zoomOut = false;
 
@@ -31,6 +32,7 @@ public class Zoom : MonoBehaviour
         player = FindObjectOfType<playerMovement>();
         mouse = FindObjectOfType<lockMouse>();
         playerPickupRay = FindObjectOfType<InteractRaycasting>();
+        playerCrouch = FindObjectOfType<PlayerCrouch>();
     }
 
     private void Update()
@@ -74,6 +76,7 @@ public class Zoom : MonoBehaviour
                 zoomCollider.enabled = false;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = flashlightIntensity;
                 canZoom = false;
+                playerCrouch.enabled = false;
             }
 
             mainCam.transform.LookAt(gameObject.transform);
@@ -95,6 +98,7 @@ public class Zoom : MonoBehaviour
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = 27500;
                 zoomOut = false;
                 canZoom = false;
+                playerCrouch.enabled = true;
             }
         }
 
@@ -107,5 +111,15 @@ public class Zoom : MonoBehaviour
     public void unZoom()
     {
         zoomOut = true;
+    }
+
+    public bool canDisable()
+    {
+        if (mainCam.transform.position == camPositionOG.position)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
