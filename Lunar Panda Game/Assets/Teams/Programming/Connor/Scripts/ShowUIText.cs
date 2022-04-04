@@ -7,10 +7,11 @@ public class ShowUIText : MonoBehaviour
 {
     public string textValue;
     public Text textElement;
-    public autoCombineScript combine;
+    autoCombineScript combine;
 
     void Start()
     {
+        combine = FindObjectOfType<autoCombineScript>();
     }
 
     void Update()
