@@ -15,6 +15,8 @@ public class JournalMenuToggle : MonoBehaviour
     public FeedbackToggle Feedback;
     PlayerPickup pickup;
 
+    internal bool canOpen = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,41 +29,44 @@ public class JournalMenuToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (canOpen)
         {
-            if (IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
+            if (Input.GetKeyDown(KeyCode.V))
             {
-                IsOnMenu = true;
-
-              //  BarOfStamina.SetActive(false);
-
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                print("Cursor is visible");
-                MrCapsule.canLook = false;
-                JournalMenu.SetActive(true);
-                UIManager.Instance.UpdateJournal();
-                pickup.enabled = false;
-                Time.timeScale = 0f;
-
-                if (Analysis.current != null)
+                if (IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false && !Pause.IsPaused)
                 {
-                    Analysis.current.menuOpen = true;
+                    IsOnMenu = true;
+
+                    //  BarOfStamina.SetActive(false);
+
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    print("Cursor is visible");
+                    MrCapsule.canLook = false;
+                    JournalMenu.SetActive(true);
+                    UIManager.Instance.UpdateJournal();
+                    pickup.enabled = false;
+                    Time.timeScale = 0f;
+
+                    if (Analysis.current != null)
+                    {
+                        Analysis.current.menuOpen = true;
+                    }
                 }
-            }
-            else if (IsOnMenu == true)
-            {
-                JournalMenu.SetActive(false);
-                IsOnMenu = false;
-            //    BarOfStamina.SetActive(true);
-                Cursor.lockState = CursorLockMode.Locked;
-                MrCapsule.canLook = true;
-                Cursor.visible = false;
-                pickup.enabled = true;
-                Time.timeScale = 1f;
-                if (Analysis.current != null)
+                else if (IsOnMenu == true)
                 {
-                    Analysis.current.menuOpen = false;
+                    JournalMenu.SetActive(false);
+                    IsOnMenu = false;
+                    //    BarOfStamina.SetActive(true);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    MrCapsule.canLook = true;
+                    Cursor.visible = false;
+                    pickup.enabled = true;
+                    Time.timeScale = 1f;
+                    if (Analysis.current != null)
+                    {
+                        Analysis.current.menuOpen = false;
+                    }
                 }
             }
         }

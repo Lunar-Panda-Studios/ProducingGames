@@ -84,6 +84,7 @@ public class PlayerPickup : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<RotatableItem>())
                 {
+                    UIManager.Instance.toggleMenuVariables();
                     player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     holdingNarrative = true;
                     holdDist = rotDist;
@@ -105,6 +106,7 @@ public class PlayerPickup : MonoBehaviour
                 tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
                 player.GetComponent<playerMovement>().enabled = true;
                 FindObjectOfType<lockMouse>().canLook = true;
+                UIManager.Instance.toggleMenuVariables();
             }
             else
             {
@@ -188,7 +190,7 @@ public class PlayerPickup : MonoBehaviour
         {
             //stop rotating the object
             //this if statement should only be a temp fix. Better fix should be made
-            if (!FindObjectOfType<PauseButtonToggle>().IsPaused && !heldItem.GetComponent<RotatableItem>())
+            if (!heldItem.GetComponent<RotatableItem>())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = true;

@@ -68,6 +68,11 @@ public class UIManager : MonoBehaviour
     [Header("AutoSave UI")]
     public GameObject autoSavingSection;
 
+    FeedbackToggle feedbackToggle;
+    InventoryMenuToggle inventoryMenuToggle;
+    JournalMenuToggle journalMenuToggle;
+    PauseButtonToggle pauseButtonToggle;
+
     void Awake()
     {
         //setting up singleton
@@ -89,6 +94,10 @@ public class UIManager : MonoBehaviour
         twt = GameObject.FindObjectOfType<typeWriterTest>();
         objectiveSystem = FindObjectOfType<ObjectiveSystem>();
         //updateObject();
+        feedbackToggle = FindObjectOfType<FeedbackToggle>();
+        inventoryMenuToggle = FindObjectOfType<InventoryMenuToggle>();
+        journalMenuToggle = FindObjectOfType<JournalMenuToggle>();
+        pauseButtonToggle = FindObjectOfType<PauseButtonToggle>();
     }
 
     private void Update()
@@ -516,5 +525,13 @@ public class UIManager : MonoBehaviour
     public void diableSubtitles()
     {
         twt.dialogueText.enabled = false;
+    }
+
+    public void toggleMenuVariables()
+    {
+        feedbackToggle.canOpen = !feedbackToggle.canOpen;
+        inventoryMenuToggle.canOpen = !inventoryMenuToggle.canOpen;
+        journalMenuToggle.canOpen = !journalMenuToggle.canOpen;
+        pauseButtonToggle.canOpen = !pauseButtonToggle.canOpen;
     }
 }
