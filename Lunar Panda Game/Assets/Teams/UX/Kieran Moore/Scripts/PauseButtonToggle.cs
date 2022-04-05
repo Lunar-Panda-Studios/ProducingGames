@@ -17,6 +17,8 @@ public class PauseButtonToggle : MonoBehaviour
     public GameObject PauseMenuElement;
     [SerializeField] GameObject firstSelectedButton;
 
+    internal bool canOpen = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,45 +31,48 @@ public class PauseButtonToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (canOpen)
         {
-            if (IsPaused == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
+            if (Input.GetButtonDown("Pause"))
             {
-                IsPaused = true;
-                //BarOfStamina.SetActive(false);
-                IsOnRegularMenu = true;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                MrCapsule.canLook = false;
-                PauseMenu.SetActive(true);
-                Time.timeScale = 0f;
-                EventSystem.current.SetSelectedGameObject(null);
-                if(firstSelectedButton != null)
-                    EventSystem.current.SetSelectedGameObject(firstSelectedButton);
-                FindObjectOfType<WalkingSound>().canMakeSound = false;
-                
-            }
-            else if (IsPaused == true)
-            {
-               if (IsOnRegularMenu == true)
+                if (IsPaused == false && Journal.IsOnMenu == false && Inventory.IsOnInventory == false && Feedback.IsOnFeedbackMenu == false)
                 {
-                    Unpause();
-                    Cursor.lockState = CursorLockMode.Locked;
-                   
+                    IsPaused = true;
+                    //BarOfStamina.SetActive(false);
+                    IsOnRegularMenu = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    MrCapsule.canLook = false;
+                    PauseMenu.SetActive(true);
+                    Time.timeScale = 0f;
+                    EventSystem.current.SetSelectedGameObject(null);
+                    if (firstSelectedButton != null)
+                        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+                    FindObjectOfType<WalkingSound>().canMakeSound = false;
+
+                }
+                else if (IsPaused == true)
+                {
+                    if (IsOnRegularMenu == true)
+                    {
+                        Unpause();
+                        Cursor.lockState = CursorLockMode.Locked;
+
+                    }
                 }
             }
-        }
 
 
-        if (PauseMenuElement.activeInHierarchy == false)
-        {
-            IsOnRegularMenu = false;
-        }
+            if (PauseMenuElement.activeInHierarchy == false)
+            {
+                IsOnRegularMenu = false;
+            }
 
 
-        if (PauseMenuElement.activeInHierarchy == true)
-        {
-            IsOnRegularMenu = true;
+            if (PauseMenuElement.activeInHierarchy == true)
+            {
+                IsOnRegularMenu = true;
+            }
         }
     }
 

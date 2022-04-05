@@ -18,13 +18,14 @@ public class ViewDocument : MonoBehaviour
     private Inventory inventory;
     internal playerMovement player;
     internal lockMouse lockMouse;
+    internal PlayerCrouch crouchTrigger;
 
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         player = FindObjectOfType<playerMovement>();
         lockMouse = FindObjectOfType<lockMouse>();
-
+        crouchTrigger = FindObjectOfType<PlayerCrouch>();
     }
 
     //temp testing
@@ -37,11 +38,13 @@ public class ViewDocument : MonoBehaviour
             {
                 if(hit.transform.gameObject == gameObject)
                 {
+                    UIManager.Instance.toggleMenuVariables();
                     UIManager.Instance.showDocument(data, this);
                     inInventory = true;
                     player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     player.enabled = false;
                     lockMouse.canLook = false;
+                    crouchTrigger.enabled = false;
                 }
             }
         }
@@ -52,6 +55,9 @@ public class ViewDocument : MonoBehaviour
 
             player.enabled = true;
             lockMouse.canLook = true;
+
+            crouchTrigger.enabled = true;
+            UIManager.Instance.toggleMenuVariables();
         }
 
         if (Input.GetButtonDown("ShowText") && showDoc)

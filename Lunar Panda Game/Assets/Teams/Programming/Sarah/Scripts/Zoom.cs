@@ -49,16 +49,19 @@ public class Zoom : MonoBehaviour
         {
             if (playerPickupRay.raycastInteract(out hit))
             {
-                if (hit.transform.gameObject == gameObject && (!isZoomed || !zoomOut) && canZoom)
+                if (hit.transform.gameObject == gameObject && (!isZoomed && !zoomOut) && canZoom)
                 {
-                    print("Hit");
+                    print("hit");
+                    isZoomed = true;
+                    canZoom = false;
+                    UIManager.Instance.toggleMenuVariables();
                     mouse.canLook = false;
                     player.enabled = false;
                     player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     playerMesh.SetActive(false);
                     zoomIn = true;
                     timer = 0;
-                    canZoom = false;
+                    
                 }
             }
         }
@@ -69,6 +72,7 @@ public class Zoom : MonoBehaviour
 
             if (mainCam.transform.position == moveToLocation.position)
             {
+                canZoom = false;
                 zoomIn = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -76,7 +80,7 @@ public class Zoom : MonoBehaviour
                 zoomCollider.enabled = false;
                 flashlight.GetComponent<HDAdditionalLightData>().intensity = flashlightIntensity;
                 timer = 0;
-                canZoom = false;
+                
                 playerCrouch.enabled = false;
             }
 
@@ -113,6 +117,7 @@ public class Zoom : MonoBehaviour
     public void unZoom()
     {
         zoomOut = true;
+        UIManager.Instance.toggleMenuVariables();
     }
 
     public bool canDisable()

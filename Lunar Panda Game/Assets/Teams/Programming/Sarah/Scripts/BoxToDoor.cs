@@ -17,9 +17,11 @@ public class BoxToDoor : MonoBehaviour
     public GameObject wifeRoomDoor2;
     [Tooltip("DoorToDoor")]
     public GameObject LinkedBox;
-    internal bool switchState = true;
+    internal bool switchState = false;
     InteractRaycasting ray;
     internal DoorToDoor doorToDoor;
+
+    internal bool externalChange = false;
 
     private void Start()
     {
@@ -41,21 +43,35 @@ public class BoxToDoor : MonoBehaviour
                 }
             }
         }
+
+        if (externalChange)
+        {
+            switches();
+            externalChange = false;
+        }
     }
 
     private void interact()
     {
+        print("Interact");
+        switchState = !switchState;
+        switches();
+        
+    }
 
-        if(GetComponent<Interaction>().canInteract)
+    void switches()
+    {
+        if (GetComponent<Interaction>().canInteract)
         {
             if (switchState)
             {
                 //print("Close near door");
                 LinkedDoor1.GetComponent<TempSlidingDoors>().closeDoor();
                 LinkedDoor2.GetComponent<TempSlidingDoors>().closeDoor();
-                OtherLinkedDoor3.GetComponent<TempSlidingDoors>().openDoor();
-                OtherLinkedDoor4.GetComponent<TempSlidingDoors>().openDoor();
+                //OtherLinkedDoor3.GetComponent<TempSlidingDoors>().openDoor();
+                //OtherLinkedDoor4.GetComponent<TempSlidingDoors>().openDoor();
                 LinkedBox.GetComponent<Interaction>().canInteract = true;
+                doorToDoor.externalChange = true;
             }
             else
             {
@@ -67,11 +83,10 @@ public class BoxToDoor : MonoBehaviour
                 LinkedBox.GetComponent<Interaction>().canInteract = false;
                 wifeRoomDoor1.GetComponent<TempSlidingDoors>().closeDoor();
                 wifeRoomDoor2.GetComponent<TempSlidingDoors>().closeDoor();
-                doorToDoor.switchState = false;
+                doorToDoor.switchState = true;
+                doorToDoor.externalChange = true;
 
             }
         }
-
-        switchState = !switchState;
     }
 }

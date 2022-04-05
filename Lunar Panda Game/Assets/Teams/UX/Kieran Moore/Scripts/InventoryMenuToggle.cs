@@ -16,6 +16,8 @@ public class InventoryMenuToggle : MonoBehaviour
     FeedbackToggle Feedback;
     PlayerPickup pickup;
 
+    internal bool canOpen = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,38 +32,41 @@ public class InventoryMenuToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (canOpen)
         {
-            //if the inventory ui isnt on screen
-            if (IsOnInventory == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false)
+            if (Input.GetButtonDown("Inventory"))
             {
-                IsOnInventory = true;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-
-                pickup.enabled = false;
-                mouseLock.canLook = false;
-                InventoryMenu.SetActive(true);
-                Time.timeScale = 0f;
-
-                if (Analysis.current != null)
+                //if the inventory ui isnt on screen
+                if (IsOnInventory == false && Journal.IsOnMenu == false && Feedback.IsOnFeedbackMenu == false && !Pause.IsPaused)
                 {
-                    Analysis.current.menuOpen = true;
+                    IsOnInventory = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+
+                    pickup.enabled = false;
+                    mouseLock.canLook = false;
+                    InventoryMenu.SetActive(true);
+                    Time.timeScale = 0f;
+
+                    if (Analysis.current != null)
+                    {
+                        Analysis.current.menuOpen = true;
+                    }
                 }
-            }
-            //if the inventory ui is already on screen
-            else if (IsOnInventory == true)
-            {
-                InventoryMenu.SetActive(false);
-                IsOnInventory = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                mouseLock.canLook = true;
-                Cursor.visible = false;
-                pickup.enabled = true;
-                Time.timeScale = 1f;
-                if (Analysis.current != null)
+                //if the inventory ui is already on screen
+                else if (IsOnInventory == true)
                 {
-                    Analysis.current.menuOpen = false;
+                    InventoryMenu.SetActive(false);
+                    IsOnInventory = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    mouseLock.canLook = true;
+                    Cursor.visible = false;
+                    pickup.enabled = true;
+                    Time.timeScale = 1f;
+                    if (Analysis.current != null)
+                    {
+                        Analysis.current.menuOpen = false;
+                    }
                 }
             }
         }

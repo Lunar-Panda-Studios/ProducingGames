@@ -68,6 +68,11 @@ public class UIManager : MonoBehaviour
     [Header("AutoSave UI")]
     public GameObject autoSavingSection;
 
+    FeedbackToggle feedbackToggle;
+    InventoryMenuToggle inventoryMenuToggle;
+    JournalMenuToggle journalMenuToggle;
+    PauseButtonToggle pauseButtonToggle;
+
     void Awake()
     {
         //setting up singleton
@@ -89,6 +94,10 @@ public class UIManager : MonoBehaviour
         twt = GameObject.FindObjectOfType<typeWriterTest>();
         objectiveSystem = FindObjectOfType<ObjectiveSystem>();
         //updateObject();
+        feedbackToggle = FindObjectOfType<FeedbackToggle>();
+        inventoryMenuToggle = FindObjectOfType<InventoryMenuToggle>();
+        journalMenuToggle = FindObjectOfType<JournalMenuToggle>();
+        pauseButtonToggle = FindObjectOfType<PauseButtonToggle>();
     }
 
     private void Update()
@@ -351,6 +360,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void removeItemImage(int slot)
+    {
+        Color colour = inventoryImages[slot].color;
+        Color colourSelect = inventorySelect.color;
+
+        inventoryImages[slot].sprite = null;
+        inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 0);
+
+        if(inventory.selectedItem == slot)
+        {
+            inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 0);
+            descriptionSection.SetActive(false);
+            itemShowing = false;
+            inventorySelect.sprite = null;
+            inventoryName.text = "";
+            inventoryDescription.text = "";
+        }
+    }
+
     public void turnPage(bool right)
     {
         if (inventory.documentInventory.Count != 0)
@@ -516,5 +544,13 @@ public class UIManager : MonoBehaviour
     public void diableSubtitles()
     {
         twt.dialogueText.enabled = false;
+    }
+
+    public void toggleMenuVariables()
+    {
+        feedbackToggle.canOpen = !feedbackToggle.canOpen;
+        inventoryMenuToggle.canOpen = !inventoryMenuToggle.canOpen;
+        journalMenuToggle.canOpen = !journalMenuToggle.canOpen;
+        pauseButtonToggle.canOpen = !pauseButtonToggle.canOpen;
     }
 }
