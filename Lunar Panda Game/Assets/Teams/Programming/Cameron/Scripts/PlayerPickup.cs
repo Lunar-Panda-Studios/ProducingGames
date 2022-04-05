@@ -55,13 +55,13 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        if (heldItem != null)
+        /*if (heldItem != null)
         {
             if (heldItem.GetComponent<Rigidbody>() == null)
             {
                 heldItem.AddComponent<Rigidbody>();
             }
-        }
+        }*/
 
         if (Input.GetButtonDown("Interact") && heldItem == null)
         {
@@ -248,7 +248,8 @@ public class PlayerPickup : MonoBehaviour
                 return;
             }
             //sets the velocity of the object to the direction times the lerp speed times the distance between them
-            heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
+            if(heldItem.GetComponent<Rigidbody>())
+                heldItem.GetComponent<Rigidbody>().velocity = direction.normalized * lerpSpeed * dist;
         }
     }
 
@@ -256,8 +257,11 @@ public class PlayerPickup : MonoBehaviour
     {
         inventory.removeItem();
         //heldItem.transform.parent = null;
-        heldItem.GetComponent<Rigidbody>().useGravity = true;
-        heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+        if(heldItem.GetComponent<Rigidbody>())
+        {
+            heldItem.GetComponent<Rigidbody>().useGravity = true;
+            heldItem.GetComponent<Rigidbody>().freezeRotation = false;
+        }
         if (heldItem.GetComponent<RotatableItem>())
         {
             FindObjectOfType<lockMouse>().canLook = true;
