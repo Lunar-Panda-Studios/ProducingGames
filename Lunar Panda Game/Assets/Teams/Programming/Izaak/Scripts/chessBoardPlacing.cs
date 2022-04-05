@@ -108,6 +108,10 @@ public class chessBoardPlacing : MonoBehaviour
                     Analysis.current.resetTimer("Chess");
                 }
             }
+            queenPiece.GetComponent<GlowWhenLookedAt>().enabled = false;
+            queenPiece.GetComponent<HoldableItem>().enabled = false;
+            pawnPiece.GetComponent<GlowWhenLookedAt>().enabled = false;
+            pawnPiece.GetComponent<HoldableItem>().enabled = false;
             return true;
         }
         return false;
