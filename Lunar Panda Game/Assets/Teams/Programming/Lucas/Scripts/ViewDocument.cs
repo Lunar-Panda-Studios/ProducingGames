@@ -47,7 +47,7 @@ public class ViewDocument : MonoBehaviour
         }
         else if (Input.GetButtonDown("Interact") && showDoc)
         {
-            UIManager.Instance.hideDocument(this);
+            UIManager.Instance.hideDocument(data, this);
             UIManager.Instance.hideText(this);
 
             player.enabled = true;

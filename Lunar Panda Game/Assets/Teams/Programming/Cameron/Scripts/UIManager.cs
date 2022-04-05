@@ -270,11 +270,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void hideDocument(ViewDocument documentScript)
+    public void hideDocument(DocumentData data, ViewDocument documentScript)
     {
-        documentScript.showDoc = false;
+        if (documentScript != null)
+        {
+            documentScript.showDoc = false;
+        }
 
-        if (documentScript.data.isLandscape)
+        if (data.isLandscape)
         {
             documentLandscape.SetActive(false);
         }
@@ -288,14 +291,20 @@ public class UIManager : MonoBehaviour
     public void showingText(DocumentData data, ViewDocument documentScript)
     {
         notesText.text = data.docText;
-        documentScript.showText = true;
+        if (documentScript != null)
+        {
+            documentScript.showText = true;
+        }
         notesText.transform.parent.gameObject.SetActive(true);
         //Show text when pressed
     }
 
     public void hideText(ViewDocument documentScript)
     {
-        documentScript.showText = false;
+        if (documentScript != null)
+        {
+            documentScript.showText = false;
+        }
         notesText.transform.parent.gameObject.SetActive(false);
         //Hide text when pressed
     }
@@ -446,16 +455,19 @@ public class UIManager : MonoBehaviour
             if (inventory.documentInventory[leftPage].isLandscape)
             {
                 leftPageImageLandscape.sprite = inventory.documentInventory[leftPage].documentImage;
+                leftPageImageLandscape.color = new Color(1, 1, 1, 1);
                 leftPageImagePortrait.color = new Color(0, 0, 0, 0);
             }
             else
             {
                 leftPageImagePortrait.sprite = inventory.documentInventory[leftPage].documentImage;
+                leftPageImagePortrait.color = new Color(1, 1, 1, 1);
                 leftPageImageLandscape.color = new Color(0, 0, 0, 0);
             }
         }
         else
         {
+            print("None");
             leftPageImagePortrait.sprite = null;
             leftPageImageLandscape.sprite = null;
             leftPageImageLandscape.color = new Color(0, 0, 0, 0);
@@ -469,11 +481,13 @@ public class UIManager : MonoBehaviour
                 if (inventory.documentInventory[leftPage].isLandscape)
                 {
                     rightPageImageLandscape.sprite = inventory.documentInventory[rightPage].documentImage;
+                    rightPageImageLandscape.color = new Color(1, 1, 1, 1);
                     rightPageImagePortrait.color = new Color(0, 0, 0, 0);
                 }
                 else
                 {
                     rightPageImagePortrait.sprite = inventory.documentInventory[rightPage].documentImage;
+                    rightPageImagePortrait.color = new Color(1, 1, 1, 1);
                     rightPageImageLandscape.color = new Color(0, 0, 0, 0);
                 }
         }
