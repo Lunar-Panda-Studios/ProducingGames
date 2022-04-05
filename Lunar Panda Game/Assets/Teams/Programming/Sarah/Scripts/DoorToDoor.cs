@@ -14,8 +14,10 @@ public class DoorToDoor : MonoBehaviour
     [Tooltip("Wife Room door 2")]
     public GameObject LinkedDoor4;
 
-    internal bool switchState = false;
+    internal bool switchState = true;
     InteractRaycasting ray;
+
+    internal bool externalChange = false;
 
     private void Start()
     {
@@ -36,9 +38,23 @@ public class DoorToDoor : MonoBehaviour
                 }
             }
         }
+
+        if (externalChange)
+        {
+            print("External Change");
+            switches();
+            externalChange = false;
+        }
     }
 
     private void interact()
+    {
+        print("Interact");
+        switchState = !switchState;
+        switches();
+    }
+
+    void switches()
     {
         if (GetComponent<Interaction>().canInteract)
         {
@@ -57,7 +73,5 @@ public class DoorToDoor : MonoBehaviour
                 LinkedDoor4.GetComponent<TempSlidingDoors>().openDoor();
             }
         }
-
-        switchState = !switchState;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxToLights : MonoBehaviour
 {
     public int id;
-    bool switchState = false;
+    bool switchState = true;
     [Tooltip("BoxToDoor")]
     public GameObject LinkedBox;
     [Tooltip("Surgery door 1")]
@@ -21,6 +21,8 @@ public class BoxToLights : MonoBehaviour
 
     public List<GameObject> LinkedLights;
     InteractRaycasting ray;
+
+    internal bool externalChange = false;
 
     private void Start()
     {
@@ -54,11 +56,23 @@ public class BoxToLights : MonoBehaviour
                 }
             }
         }
+
+        if (externalChange)
+        {
+            switches();
+            externalChange = false;
+        }
     }
 
     private void interact()
     {
-        if(GetComponent<Interaction>().canInteract)
+        switchState = !switchState;
+        switches();
+    }
+
+    void switches()
+    {
+        if (GetComponent<Interaction>().canInteract)
         {
             if (switchState)
             {
@@ -69,9 +83,11 @@ public class BoxToLights : MonoBehaviour
                 linkedDoor2.GetComponent<TempSlidingDoors>().closeDoor();
                 linkedDoor3.GetComponent<TempSlidingDoors>().closeDoor();
                 linkedDoor4.GetComponent<TempSlidingDoors>().closeDoor();
-                doorToDoor.switchState = false;
+                doorToDoor.switchState = true;
                 doorToDoor.interaction.canInteract = false;
-                boxToDoor.switchState = true;
+                doorToDoor.externalChange = true;
+                boxToDoor.switchState = false;
+                boxToDoor.externalChange = true;
             }
             else
             {
@@ -80,9 +96,9 @@ public class BoxToLights : MonoBehaviour
                 LinkedBox.GetComponent<Interaction>().canInteract = true;
                 linkedDoor1.GetComponent<TempSlidingDoors>().openDoor();
                 linkedDoor2.GetComponent<TempSlidingDoors>().openDoor();
+                boxToDoor.externalChange = true;
+                doorToDoor.externalChange = true;
             }
-
-            switchState = !switchState;
         }
     }
 }
