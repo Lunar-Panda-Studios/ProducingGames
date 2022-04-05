@@ -360,6 +360,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void removeItemImage(int slot)
+    {
+        Color colour = inventoryImages[slot].color;
+        Color colourSelect = inventorySelect.color;
+
+        inventoryImages[slot].sprite = null;
+        inventoryImages[slot].color = new Color(colour.r, colour.g, colour.b, 0);
+
+        if(inventory.selectedItem == slot)
+        {
+            inventorySelect.color = new Color(colourSelect.r, colourSelect.g, colourSelect.b, 0);
+            descriptionSection.SetActive(false);
+            itemShowing = false;
+            inventorySelect.sprite = null;
+            inventoryName.text = "";
+            inventoryDescription.text = "";
+        }
+    }
+
     public void turnPage(bool right)
     {
         if (inventory.documentInventory.Count != 0)

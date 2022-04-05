@@ -98,12 +98,14 @@ public class autoCombineScript : MonoBehaviour
                     {
                         if (autoCombineItemsList[k].itemParts[j] == inventoryScript.itemInventory[i])
                         {
+                            UIManager.Instance.removeItemImage(i);
                             inventoryScript.itemInventory[i] = null;
                             inInventory[k][j] = false;
                         }
                     }
 
                 }
+                
                 inventoryScript.addItem(autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data);
                 autoCombineItemsList[k].instance.GetComponent<HoldableItem>().data.id = Database.current.itemsInScene.Count;
                 Database.current.itemsInScene.Add(autoCombineItemsList[k].instance.GetComponent<HoldableItem>());
