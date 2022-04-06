@@ -13,7 +13,7 @@ public class CodeLock : MonoBehaviour
     public string code = "";
     public string attemptedCode;
 
-    public GameObject toOpen;
+    //public GameObject toOpen;
     public string AudioClipName;
 
     public GameObject anim;

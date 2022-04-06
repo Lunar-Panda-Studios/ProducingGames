@@ -44,7 +44,6 @@ public class JournalMenuToggle : MonoBehaviour
                     print("Cursor is visible");
                     MrCapsule.canLook = false;
                     JournalMenu.SetActive(true);
-                    UIManager.Instance.UpdateJournal();
                     pickup.enabled = false;
                     Time.timeScale = 0f;
 

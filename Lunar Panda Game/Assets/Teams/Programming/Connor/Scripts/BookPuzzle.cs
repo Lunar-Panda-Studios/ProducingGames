@@ -55,6 +55,7 @@ public class BookPuzzle : MonoBehaviour
             {
                 if (evilBook.transform.localScale.x < maxSize)
                 {
+                    bookWeight++;
                     evilBook.transform.localScale += cubeVector;
                 }
             }
@@ -67,10 +68,15 @@ public class BookPuzzle : MonoBehaviour
             {
                 if (evilBook.transform.localScale.x > minSize)
                 {
+                    bookWeight--;
                     evilBook.transform.localScale -= cubeVector;
                 }
             }
         }
+    }
+    public float GetWeight()
+    {
+        return bookWeight;
     }
 }
 

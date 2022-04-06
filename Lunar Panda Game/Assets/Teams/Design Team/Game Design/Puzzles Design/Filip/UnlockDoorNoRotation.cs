@@ -27,12 +27,17 @@ public class UnlockDoorNoRotation : MonoBehaviour
                 {
                     if (key == inventory.itemInventory[inventory.selectedItem])
                     {
-                        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClip);
-                        interactAnimation.enabled = true;
-                        this.enabled = false;
+                        Unlock();
                     }
                 }
             }
         }
+    }
+
+    public void Unlock()
+    {
+        SoundEffectManager.GlobalSFXManager.PlaySFX(audioClip);
+        interactAnimation.enabled = true;
+        this.enabled = false;
     }
 }

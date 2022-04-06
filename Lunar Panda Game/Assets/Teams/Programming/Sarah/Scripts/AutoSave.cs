@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class AutoSave : MonoBehaviour
 {
-    public bool shouldSave = false;
-    public bool mainSave = false;
-
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player") && shouldSave)
+        if (other.CompareTag("Player"))
         {
             UIManager.Instance.autoSavingPromptShow();
-            GameManager.Instance.save(mainSave);
+            GameManager.Instance.save(true);
             gameObject.SetActive(false);
 
         }
     }
-
 }

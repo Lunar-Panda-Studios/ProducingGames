@@ -11,4 +11,5 @@ public class ToolTipType : ScriptableObject
     public string buttonName;
     public Sprite GamePadSprite;
     public Sprite KeyboardSprite;
+    public float fadeTime = 1f;
 }
