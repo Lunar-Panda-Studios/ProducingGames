@@ -47,7 +47,7 @@ public class GlowWhenLookedAt : MonoBehaviour
         {
             for (int i = 0; i < childrenThatNeedGlow.Count; i++)
             {
-                childrenThatNeedGlow[i].material = isGlowing ? childrenFresnelMat[i] : childrenBaseMat[i];
+                childrenThatNeedGlow[i].materials[0] = isGlowing ? childrenFresnelMat[i] : childrenBaseMat[i];
             }
         }
     }

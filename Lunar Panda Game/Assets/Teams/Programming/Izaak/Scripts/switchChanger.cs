@@ -32,9 +32,9 @@ public class switchChanger : MonoBehaviour
             return false;
     }
 
-    public void changeSwitchState()
+    public void changeSwitchState(bool ignoreAnim)
     {
-        if(!AnimatorIsPlaying())
+        if(!AnimatorIsPlaying() || ignoreAnim)
         {
             switchMode = !switchMode;
             if (switchMode && anim != null)

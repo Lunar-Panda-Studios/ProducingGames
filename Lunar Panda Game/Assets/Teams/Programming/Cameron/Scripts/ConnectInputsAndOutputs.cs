@@ -112,7 +112,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             {
                 if (hit.transform.gameObject == button)
                 {
-                    button.GetComponent<switchChanger>().changeSwitchState();
+                    button.GetComponent<switchChanger>().changeSwitchState(false);
 
                     if (CheckCombination())
                     {
@@ -244,9 +244,12 @@ public class ConnectInputsAndOutputs : MonoBehaviour
             button.GetComponent<switchChanger>().TurnPowerOff();
             PuzzleData.current.completedEvents[id] = false;
             PuzzleData.current.isCompleted[id - 1] = false;
-            passLight.enabled = false;
-            passLight1.enabled = false;
-            failLight.enabled = false;
+            if (passLight != null)
+                passLight.enabled = false;
+            if(passLight1 != null)
+                passLight1.enabled = false;
+            if (failLight != null)
+                failLight.enabled = false;
         }
     }
 

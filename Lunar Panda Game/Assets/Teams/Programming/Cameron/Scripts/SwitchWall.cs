@@ -120,7 +120,7 @@ public class SwitchWall : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<switchChanger>() && hit.transform.gameObject == button.gameObject)
                     {
-                        button.changeSwitchState();
+                        button.changeSwitchState(false);
                     }
                 }
                 //if the submit button is pressed, Check the current combination. Turn on the tubes whos combos have been completed
@@ -132,7 +132,7 @@ public class SwitchWall : MonoBehaviour
                     {
                         if (button.getSwitchState())
                         {
-                            button.changeSwitchState();
+                            button.changeSwitchState(true);
                         }
                     }
                     labMachine.TurnTubeOn(x);
