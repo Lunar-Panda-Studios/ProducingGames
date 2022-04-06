@@ -7,7 +7,8 @@ public class tooltipController : MonoBehaviour
     public enum controlTypes
     {
         NONE, MOVE, JUMP, SPRINT, CROUCH, FLASHLIGHT,
-        OPENINV, CLOSEINV, OPENJRN, CLOSEJRN, TURNPAGEJRN
+        OPENINV, CLOSEINV, OPENJRN, CLOSEJRN, TURNPAGEJRN,
+        ITEMSTORE
     }
     [Header("Controls")]
     [Tooltip("The action you must complete to get rid of the tooltip")]
@@ -129,6 +130,14 @@ public class tooltipController : MonoBehaviour
                             {
                                 deactivateTooltip();
                             }
+                        }
+                    }
+                    break;
+                case controlTypes.ITEMSTORE:
+                    {
+                        if (Input.GetKey("PutAway"))
+                        {
+                                deactivateTooltip();
                         }
                     }
                     break;
