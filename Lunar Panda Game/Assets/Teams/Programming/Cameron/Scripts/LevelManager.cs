@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour
         }
         //if the current level is not the cabin, increase the level, if it is the cabin, we're going back to the main menu so set it back to 0
         //not a very elegant solution, but it works for now i guess
-        if(GameManager.Instance.currentRoom != Room.CABIN && GameManager.Instance.currentRoom != Room.CUTSCENE)
+        if(GameManager.Instance.currentRoom != Room.CABIN)
             GameManager.Instance.currentLevel(GameManager.Instance.whichLevel + 1);
         else
             GameManager.Instance.currentLevel(0);
