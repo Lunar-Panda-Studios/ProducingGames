@@ -5314,6 +5314,7 @@ GameObject:
   - component: {fileID: 518989285}
   - component: {fileID: 518989284}
   - component: {fileID: 518989283}
+  - component: {fileID: 518989286}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -5397,6 +5398,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518989281}
   m_Mesh: {fileID: 4300002, guid: 1585cbd1e4512a245b1657178702397d, type: 3}
+--- !u!114 &518989286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518989281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d45f575807806849a73c08c9abf5e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlowing: 0
+  baseMaterial: {fileID: 0}
+  glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!4 &519634180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010773931528, guid: 2a79153a0e896724caa73afa19f708c8, type: 3}
@@ -15667,7 +15689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e2a4819072a1b4f8358466150d3226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerSwitch: {fileID: 0}
+  powerSwitch: {fileID: 4216313120462160041}
   lightsToTurnOn: {fileID: 1792747125}
   lightsToTurnOn2: {fileID: 0}
 --- !u!1001 &1488731278
