@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class VideoManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class VideoManager : MonoBehaviour
     float time;
     public float maxTime = 5f;
     bool hasLoaded = false;
+    [SerializeField] Slider skipSlider;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class VideoManager : MonoBehaviour
             if (Input.GetButton("Skip"))
             {                
                 time += Time.deltaTime;
+                skipSlider.value = time / maxTime;
                 if (time > maxTime)
                 {
                     hasLoaded = true;
@@ -43,7 +46,8 @@ public class VideoManager : MonoBehaviour
             }
             else if (Input.GetButtonUp("Skip"))
             {
-                time = 0f;                
+                time = 0f;
+                skipSlider.value = 0;
             }
         }
     }
