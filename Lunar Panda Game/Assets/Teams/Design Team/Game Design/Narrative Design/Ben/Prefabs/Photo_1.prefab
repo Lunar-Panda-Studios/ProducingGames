@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 786957961211519605}
   - component: {fileID: 3952933768210370153}
   - component: {fileID: 5105975031359094169}
+  - component: {fileID: 526771854}
   m_Layer: 0
   m_Name: Photo_1
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4575760167024041552}
-  m_LocalRotation: {x: -0, y: -0.6565547, z: -0, w: 0.7542784}
+  m_LocalRotation: {x: 0, y: -0.6565528, z: 0, w: 0.7542801}
   m_LocalPosition: {x: 0.08323765, y: -3.0002394, z: 5.7088027}
   m_LocalScale: {x: 0.016530002, y: 0.01653, z: 0.00891}
   m_Children: []
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd145477d8b5c814ab15491b8d094870, type: 2}
+  - {fileID: 2100000, guid: c3cbf953415bbb84ba2553703d1f55ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,3 +112,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9af16f9545988594581e035209b88b83, type: 2}
   keyText: 0
+--- !u!114 &526771854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575760167024041552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d45f575807806849a73c08c9abf5e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlowing: 0
+  baseMaterial: {fileID: 0}
+  glowingMaterial: {fileID: 2100000, guid: cd9855a1dc0a44a48ac64e148ef4fafb, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []

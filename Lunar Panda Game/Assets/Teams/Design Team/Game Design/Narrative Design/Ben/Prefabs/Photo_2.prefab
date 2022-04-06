@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6298261526291669866}
   - component: {fileID: 525167595694436070}
   - component: {fileID: 4340796063022005083}
+  - component: {fileID: 1038467774}
+  - component: {fileID: 1038467775}
   m_Layer: 0
   m_Name: Photo_2
   m_TagString: Untagged
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3814551784125109335}
-  m_LocalRotation: {x: -0, y: -0.2660238, z: -0, w: 0.9639665}
+  m_LocalRotation: {x: 0, y: -0.26602724, z: 0, w: 0.96396554}
   m_LocalPosition: {x: -0.05746174, y: -3.0002394, z: 5.6011024}
   m_LocalScale: {x: 0.016529998, y: 0.01653, z: 0.009439999}
   m_Children: []
@@ -60,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0602462278622ff498d52c29dff7ecb1, type: 2}
+  - {fileID: 2100000, guid: f8c3e37205a1bd14fa8d9f73fc24c724, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,3 +98,34 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1038467774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814551784125109335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d45f575807806849a73c08c9abf5e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlowing: 0
+  baseMaterial: {fileID: 0}
+  glowingMaterial: {fileID: 2100000, guid: 3869b1e1acfaeb84494abe78ae7c1719, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
+--- !u!114 &1038467775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814551784125109335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b02a9a039054154da189b6c0bc5eec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 721eb86c82e33a443b9f647a220ea729, type: 2}
+  keyText: 0
