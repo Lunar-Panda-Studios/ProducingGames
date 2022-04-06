@@ -22,6 +22,7 @@ public class DocumentData : ScriptableObject
 
 public enum Room
 {
+    CUTSCENE,
     CRASHEDTRAIN,
     TRAIN,
     HOSPITAL,
