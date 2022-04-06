@@ -34,9 +34,11 @@ public class GameManager : MonoBehaviour
     internal int saveFile = 1;
     internal string currentScene;
     internal bool subtitles;
+    internal List<DocumentData> docInventory;
 
     private void Awake()
     {
+        docInventory = new List<DocumentData>();
         if (Instance == null)
         {
             Instance = this;
