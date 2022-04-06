@@ -17,6 +17,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     [SerializeField] ToolTipType tooltip;
     [SerializeField] Text tooltipTxt;
     [SerializeField] CanvasGroup tooltipGroup;
+    PlayerPickup pickup;
     [SerializeField] float waitTime = 0.5f;
 
     bool isFading = false;
@@ -24,6 +25,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     void Awake()
     {
         baseMaterial = gameObject.GetComponent<MeshRenderer>().material;
+        pickup = FindObjectOfType<PlayerPickup>();
         for (int i = 0; i < childrenThatNeedGlow.Count; i++)
         {
             childrenBaseMat.Add(childrenThatNeedGlow[i].material);
@@ -34,7 +36,7 @@ public class GlowWhenLookedAt : MonoBehaviour
     public void ToggleGlowingMat()
     {
         isGlowing = !isGlowing;
-        if (isGlowing && !isFading)
+        if (isGlowing && !isFading && tooltip != null && pickup.heldItem == null)
         {
             isFading = true;
             StartCoroutine(FadeTooltips());
@@ -45,7 +47,7 @@ public class GlowWhenLookedAt : MonoBehaviour
         {
             for (int i = 0; i < childrenThatNeedGlow.Count; i++)
             {
-                childrenThatNeedGlow[i].material = isGlowing ? childrenFresnelMat[i] : childrenBaseMat[i];
+                childrenThatNeedGlow[i].materials[0] = isGlowing ? childrenFresnelMat[i] : childrenBaseMat[i];
             }
         }
     }
@@ -62,20 +64,24 @@ public class GlowWhenLookedAt : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         while(InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
         {
-            if (hit.transform.gameObject == gameObject)
+            if (hit.transform.gameObject == gameObject && pickup.heldItem == null)
             {
                 yield return new WaitForEndOfFrame();
+                yield return null;
             }
-            break;
+            else
+            {
+                break;
+            }
         }
-
+        isFading = false;
         for (float t = 0f; t < tooltip.fadeTime; t += Time.deltaTime)
         {
             float normalizedTime = t / tooltip.fadeTime;
             tooltipGroup.alpha = Mathf.Lerp(1, 0, normalizedTime);
             yield return null;
         }
-        isFading = false;
+        tooltipGroup.alpha = 0;
         yield return null;
     }
 }
