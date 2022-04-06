@@ -20,7 +20,6 @@ public enum GameState //Only Basic states
 
 public class GameManager : MonoBehaviour
 {
-    //Need help with creating a Singleton
     public static GameManager Instance;
 
     public GameState gameStates;
@@ -35,16 +34,18 @@ public class GameManager : MonoBehaviour
     internal int saveFile = 1;
     internal string currentScene;
     internal bool subtitles;
+    internal List<DocumentData> docInventory;
 
     private void Awake()
     {
+        docInventory = new List<DocumentData>();
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
         DontDestroyOnLoad(this.gameObject);

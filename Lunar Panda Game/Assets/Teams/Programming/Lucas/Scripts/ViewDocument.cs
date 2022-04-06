@@ -40,6 +40,7 @@ public class ViewDocument : MonoBehaviour
                 {
                     UIManager.Instance.toggleMenuVariables();
                     UIManager.Instance.showDocument(data, this);
+                    UIManager.Instance.activeImage(data);
                     inInventory = true;
                     player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                     player.enabled = false;

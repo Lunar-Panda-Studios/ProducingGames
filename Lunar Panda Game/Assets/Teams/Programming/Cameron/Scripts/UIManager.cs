@@ -45,14 +45,32 @@ public class UIManager : MonoBehaviour
 
     [Header("Journal UI")]
     internal Room currentTab;
-    public Text leftPageTxt;
-    public Text rightPageTxt;
-    public Image leftPageImagePortrait;
-    public Image rightPageImagePortrait;
-    public Image leftPageImageLandscape;
-    public Image rightPageImageLandscape;
-    internal int leftPage = 0;
-    internal int rightPage = 1;
+    public GameObject trainSection;
+    public GameObject hospitalSection;
+    public GameObject hotelSection;
+    public GameObject cabinSection;
+
+    [System.Serializable]
+    public class Page
+    {
+        public GameObject mainPage;
+        public List<GameObject> documents;
+    }
+
+    public List<Page> pagesTrain;
+    public List<Page> pagesHospital;
+    public List<Page> pagesHotel;
+    public List<Page> pagesCabin;
+
+    public GameObject tabHospital;
+    public GameObject tabHotel;
+    public GameObject tabCabin;
+
+    int currentPage = 0;
+    int trainPage = 0;
+    int hospitalPage = 0;
+    int hotelPage = 0;
+    int cabinPage = 0;
 
     [Header("Objective UI")]
     public Text objectText;
@@ -98,6 +116,43 @@ public class UIManager : MonoBehaviour
         inventoryMenuToggle = FindObjectOfType<InventoryMenuToggle>();
         journalMenuToggle = FindObjectOfType<JournalMenuToggle>();
         pauseButtonToggle = FindObjectOfType<PauseButtonToggle>();
+
+        for (int i = 0; i < inventory.documentInventory.Count; i++)
+        {
+            activeImage(inventory.documentInventory[i]);
+        }
+
+        switch(GameManager.Instance.whichLevel)
+        {
+            case 2:
+                {
+                    tabHospital.SetActive(false);
+                    tabHotel.SetActive(false);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 3:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(false);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 4:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(true);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 5:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(true);
+                    tabCabin.SetActive(true);
+                    break;
+                }
+        }
     }
 
     private void Update()
@@ -379,48 +434,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void turnPage(bool right)
-    {
-        if (inventory.documentInventory.Count != 0)
-        {
-            if (right)
-            {
-                leftPage += 2;
-                if (leftPage >= inventory.documentInventory.Count)
-                {
-                    leftPage -= 2;
-                }
-            }
-            else
-            {
-                leftPage -= 2;
-                if (leftPage < 0)
-                {
-                    leftPage = 0;
-                }
-            }
-
-            if (right)
-            {
-                rightPage += 2;
-                if (rightPage >= inventory.documentInventory.Count)
-                {
-                    rightPage -= 2;
-                }
-            }
-            else
-            {
-                rightPage -= 2;
-                if (rightPage < 1)
-                {
-                    rightPage = 1;
-                }
-            }
-
-            updatePages();
-        }
-    }
-
     public void changeTab(int newTab)
     {
         switch(newTab)
@@ -428,25 +441,37 @@ public class UIManager : MonoBehaviour
             case 1:
                 {
                     currentTab = Room.TRAIN;
-                    UpdateJournal();
+                    trainSection.SetActive(true);
+                    hospitalSection.SetActive(false);
+                    hotelSection.SetActive(false);
+                    cabinSection.SetActive(false);
                     break;
                 }
             case 2:
                 {
                     currentTab = Room.HOSPITAL;
-                    UpdateJournal();
+                    trainSection.SetActive(false);
+                    hospitalSection.SetActive(true);
+                    hotelSection.SetActive(false);
+                    cabinSection.SetActive(false);
                     break;
                 }
             case 3:
                 {
                     currentTab = Room.HOTEL;
-                    UpdateJournal();
+                    trainSection.SetActive(false);
+                    hospitalSection.SetActive(false);
+                    hotelSection.SetActive(true);
+                    cabinSection.SetActive(false);
                     break;
                 }
             case 4:
                 {
                     currentTab = Room.CABIN;
-                    UpdateJournal();
+                    trainSection.SetActive(false);
+                    hospitalSection.SetActive(false);
+                    hotelSection.SetActive(false);
+                    cabinSection.SetActive(true);
                     break;
                 }
             default:
@@ -455,77 +480,8 @@ public class UIManager : MonoBehaviour
                 }
         }
 
-    }
+        currentPage = 0;
 
-    public void UpdateJournal()
-    {
-        for(int i = leftPage; i < inventory.documentInventory.Count; i++)
-        {
-            if(inventory.documentInventory[i].roomGottenIn == currentTab)
-            {
-                leftPage = i;
-                break;
-            }
-        }
-
-        rightPage = leftPage + 1;
-
-        updatePages();
-    }
-
-    public void updatePages()
-    {
-        print(leftPage);
-        print(rightPage);
-
-        if (leftPage < inventory.documentInventory.Count && leftPage >= 0)
-        {
-            if (inventory.documentInventory[leftPage].isLandscape)
-            {
-                leftPageImageLandscape.sprite = inventory.documentInventory[leftPage].documentImage;
-                leftPageImageLandscape.color = new Color(1, 1, 1, 1);
-                leftPageImagePortrait.color = new Color(0, 0, 0, 0);
-            }
-            else
-            {
-                leftPageImagePortrait.sprite = inventory.documentInventory[leftPage].documentImage;
-                leftPageImagePortrait.color = new Color(1, 1, 1, 1);
-                leftPageImageLandscape.color = new Color(0, 0, 0, 0);
-            }
-        }
-        else
-        {
-            print("None");
-            leftPageImagePortrait.sprite = null;
-            leftPageImageLandscape.sprite = null;
-            leftPageImageLandscape.color = new Color(0, 0, 0, 0);
-            leftPageImagePortrait.color = new Color(0, 0, 0, 0);
-        }
-
-
-        if (rightPage < inventory.documentInventory.Count && rightPage > 0)
-        {
-
-                if (inventory.documentInventory[leftPage].isLandscape)
-                {
-                    rightPageImageLandscape.sprite = inventory.documentInventory[rightPage].documentImage;
-                    rightPageImageLandscape.color = new Color(1, 1, 1, 1);
-                    rightPageImagePortrait.color = new Color(0, 0, 0, 0);
-                }
-                else
-                {
-                    rightPageImagePortrait.sprite = inventory.documentInventory[rightPage].documentImage;
-                    rightPageImagePortrait.color = new Color(1, 1, 1, 1);
-                    rightPageImageLandscape.color = new Color(0, 0, 0, 0);
-                }
-        }
-        else
-        {
-            rightPageImagePortrait.sprite = null;
-            rightPageImageLandscape.sprite = null;
-            rightPageImageLandscape.color = new Color(0, 0, 0, 0);
-            rightPageImagePortrait.color = new Color(0, 0, 0, 0);
-        }
     }
 
     public void updateObject()
@@ -552,5 +508,155 @@ public class UIManager : MonoBehaviour
         inventoryMenuToggle.canOpen = !inventoryMenuToggle.canOpen;
         journalMenuToggle.canOpen = !journalMenuToggle.canOpen;
         pauseButtonToggle.canOpen = !pauseButtonToggle.canOpen;
+    }
+
+    public void turningPage(bool right)
+    {
+        switch(currentTab)
+        {
+            case Room.TRAIN:
+            {
+                    if(right)
+                    {
+                        pagesTrain[currentPage].mainPage.SetActive(false);
+                        currentPage++;
+                        trainPage++;
+                        pagesTrain[currentPage].mainPage.SetActive(true);
+                    }
+                    else
+                    {
+                        pagesTrain[currentPage].mainPage.SetActive(false);
+                        currentPage--;
+                        trainPage--;
+                        pagesTrain[currentPage].mainPage.SetActive(true);
+                    }
+                break;
+            }
+            case Room.HOSPITAL:
+                {
+                    if (right)
+                    {
+                        pagesHospital[currentPage].mainPage.SetActive(false);
+                        currentPage++;
+                        hospitalPage++;
+                        pagesHospital[currentPage].mainPage.SetActive(true);
+                    }
+                    else
+                    {
+                        pagesHospital[currentPage].mainPage.SetActive(false);
+                        currentPage--;
+                        hospitalPage--;
+                        pagesHospital[currentPage].mainPage.SetActive(true);
+                    }    
+                    break;
+                }
+            case Room.HOTEL:
+                {
+                    if (right)
+                    {
+                        pagesHotel[currentPage].mainPage.SetActive(false);
+                        currentPage++;
+                        hotelPage++;
+                        pagesHotel[currentPage].mainPage.SetActive(true);
+                    }
+                    else
+                    {
+                        pagesHotel[currentPage].mainPage.SetActive(false);
+                        currentPage--;
+                        hotelPage--;
+                        pagesHotel[currentPage].mainPage.SetActive(true);
+                    }
+                    break;
+                }
+            case Room.CABIN:
+                {
+                    if (right)
+                    {
+                        pagesCabin[currentPage].mainPage.SetActive(false);
+                        currentPage++;
+                        cabinPage++;
+                        pagesCabin[currentPage].mainPage.SetActive(true);
+                    }
+                    else
+                    {
+                        pagesCabin[currentPage].mainPage.SetActive(false);
+                        currentPage--;
+                        cabinPage--;
+                        pagesCabin[currentPage].mainPage.SetActive(true);
+                    }
+                    break;
+                }
+        }
+    }
+
+    public void activeImage(DocumentData data)
+    {
+        switch (data.roomGottenIn)
+        {
+            case Room.TRAIN:
+                {
+                    for(int i = 0; i < pagesTrain.Count; i++)
+                    {
+                        for(int j = 0; j < pagesTrain[i].documents.Count; j++)
+                        {
+                            if (pagesTrain[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
+                            {
+                                pagesTrain[i].documents[j].SetActive(true);
+                                currentPage = trainPage;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            case Room.HOSPITAL:
+                {
+                    for (int i = 0; i < pagesHospital.Count; i++)
+                    {
+                        for (int j = 0; j < pagesHospital[i].documents.Count; j++)
+                        {
+                            if (pagesHospital[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
+                            {
+                                pagesHospital[i].documents[j].SetActive(true);
+                                currentPage = hospitalPage;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            case Room.HOTEL:
+                {
+                    for (int i = 0; i < pagesHotel.Count; i++)
+                    {
+                        for (int j = 0; j < pagesHotel[i].documents.Count; j++)
+                        {
+                            if (pagesHotel[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
+                            {
+                                pagesHotel[i].documents[j].SetActive(true);
+                                currentPage = hotelPage;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            case Room.CABIN:
+                {
+                    for (int i = 0; i < pagesCabin.Count; i++)
+                    {
+                        for (int j = 0; j < pagesCabin[i].documents.Count; j++)
+                        {
+                            if (pagesCabin[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
+                            {
+                                pagesCabin[i].documents[j].SetActive(true);
+                                currentPage = cabinPage;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+        }
     }
 }

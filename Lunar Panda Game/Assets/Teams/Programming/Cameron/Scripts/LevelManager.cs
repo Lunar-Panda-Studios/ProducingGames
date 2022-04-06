@@ -8,24 +8,28 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup loadingScreen;
     [SerializeField] float fadeTime;
-/*    private static LevelManager _instance;
+    playerMovement movement;
+    PlayerCrouch crouch;
+    /*private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } }*/
 
     void Awake()
     {
-        /*        if (_instance != null && _instance != this)
-                {
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    _instance = this;
-                }*/
+        /*if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }*/
         //StartCoroutine(LoadConnectorScene());
         transform.parent = null;
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(this);
-        
+        if (FindObjectOfType<playerMovement>())
+            movement = FindObjectOfType<playerMovement>();
+        if (FindObjectOfType<PlayerCrouch>())
+            crouch = FindObjectOfType<PlayerCrouch>();
     }
 
     /*IEnumerator LoadConnectorScene()
@@ -63,6 +67,11 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator FadeLoadingScreen(string sceneName)
     {
+        if (movement != null)
+            movement.enabled = false;
+        if (crouch != null)
+            crouch.enabled = false;
+        //maybe have to unlock mouse and object stuff
         loadingScreen.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
@@ -85,7 +94,6 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-        print("test");
         StartCoroutine(FadeOut());
     }
 }

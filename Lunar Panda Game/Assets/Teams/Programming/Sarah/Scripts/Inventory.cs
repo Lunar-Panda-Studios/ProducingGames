@@ -26,6 +26,14 @@ public class Inventory : MonoBehaviour
     float timer = 0;
     public float maxTime = 1;
 
+    private void Awake()
+    {
+        if (GameManager.Instance.docInventory.Count != 0)
+        {
+            documentInventory = GameManager.Instance.docInventory;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,24 +116,37 @@ public class Inventory : MonoBehaviour
 
     public void addItem(ItemData data)
     {
-        for(int i = 0; i < itemInventory.Count; i++)
+        bool notInInventory = true; 
+        for (int i = 0; i < itemInventory.Count; i++)
         {
-            if(itemInventory[i] == null)
+            if(itemInventory[i] == data)
             {
-                itemInventory[i] = data;
-                UIManager.Instance.inventoryItemAdd(data, i);
-                itemsIn++;
-                break;
+                notInInventory = false;
             }
         }
-        data.beenPickedUp = true;
-        UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
-        UIManager.Instance.itemEquip(itemInventory[selectedItem]);
+
+        if (notInInventory)
+        {
+            for (int i = 0; i < itemInventory.Count; i++)
+            {
+                if (itemInventory[i] == null)
+                {
+                    itemInventory[i] = data;
+                    UIManager.Instance.inventoryItemAdd(data, i);
+                    itemsIn++;
+                    break;
+                }
+            }
+            data.beenPickedUp = true;
+            UIManager.Instance.inventoryItemSelected(itemInventory[selectedItem], selectedItem);
+            UIManager.Instance.itemEquip(itemInventory[selectedItem]);
+        }
     }
 
     public void addItem(DocumentData data)
     {
         documentInventory.Add(data);
+        GameManager.Instance.docInventory.Add(data);
         data.beenPickedUp = true;
     }
 
