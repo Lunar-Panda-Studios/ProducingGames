@@ -13,6 +13,7 @@ public class HoldableItem : MonoBehaviour
     {
         pickup = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPickup>();
         startLocation = transform.position;
+        
     }
     /*
     void OnCollisionEnter(Collision col)

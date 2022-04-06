@@ -156,7 +156,6 @@ GameObject:
   - component: {fileID: 1764206285}
   - component: {fileID: 1764206284}
   - component: {fileID: 1764206283}
-  - component: {fileID: 1764206282}
   - component: {fileID: 1764206281}
   - component: {fileID: 1764206280}
   m_Layer: 0
@@ -226,10 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75299a58d8bf164f95e1604230a34b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipName: 
   animator: {fileID: 1764206285}
   closed: 1
   waitFor: 0.5
+  InteractSound: Electric_Switch
 --- !u!114 &1764206283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,19 +242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 0
---- !u!114 &1764206282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764206279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb0bfddcb5fa004a9ce9680ea600ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClipName: Electric_Switch
 --- !u!114 &1764206281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +449,6 @@ GameObject:
   - component: {fileID: 571595908}
   - component: {fileID: 571595912}
   - component: {fileID: 919132148210496575}
-  - component: {fileID: 919132148210496574}
   m_Layer: 0
   m_Name: Box to Lights (Box1) - new
   m_TagString: Untagged
@@ -531,10 +516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75299a58d8bf164f95e1604230a34b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipName: 
   animator: {fileID: 571595907}
   closed: 1
   waitFor: 0.5
+  InteractSound: Electric_Switch
 --- !u!114 &571595912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,19 +553,6 @@ MonoBehaviour:
   linkedDoor4: {fileID: 0}
   LinkedLights:
   - {fileID: 0}
---- !u!114 &919132148210496574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148210496573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb0bfddcb5fa004a9ce9680ea600ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClipName: Electric_Switch
 --- !u!1 &2642410445667658884
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +647,6 @@ GameObject:
   - component: {fileID: 7204772847320276722}
   - component: {fileID: 5813533390979834065}
   - component: {fileID: 5994297336102588721}
-  - component: {fileID: 4209294688463321987}
   - component: {fileID: 8576313759466210980}
   - component: {fileID: 2458331151710150539}
   m_Layer: 0
@@ -745,10 +716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75299a58d8bf164f95e1604230a34b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipName: 
   animator: {fileID: 7204772847320276722}
   closed: 1
   waitFor: 0.5
+  InteractSound: Electric_Switch
 --- !u!114 &5994297336102588721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,19 +733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 0
---- !u!114 &4209294688463321987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3761380366412862307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb0bfddcb5fa004a9ce9680ea600ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClipName: Electric_Switch
 --- !u!114 &8576313759466210980
 MonoBehaviour:
   m_ObjectHideFlags: 0

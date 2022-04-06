@@ -20,23 +20,38 @@ public class switchChanger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void changeSwitchState()
+    bool AnimatorIsPlaying()
     {
-        switchMode = !switchMode;
-        if (switchMode && anim != null)
+        
+        if (anim != null)
         {
-            anim.SetTrigger("Up");
-            if(SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            print(anim.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            return anim.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }   
+        else
+            return false;
+    }
+
+    public void changeSwitchState(bool ignoreAnim)
+    {
+        if(!AnimatorIsPlaying() || ignoreAnim)
+        {
+            switchMode = !switchMode;
+            if (switchMode && anim != null)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                anim.SetTrigger("Up");
+                if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+                {
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                }
             }
-        }
-        else if (anim != null)
-        {
-            anim.SetTrigger("Down"); 
-            if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            else if (anim != null)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                anim.SetTrigger("Down");
+                if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+                {
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                }
             }
         }
     }
@@ -48,7 +63,6 @@ public class switchChanger : MonoBehaviour
 
     public void TurnPowerOn()
     {
-
         if (!isPowerOn)
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);

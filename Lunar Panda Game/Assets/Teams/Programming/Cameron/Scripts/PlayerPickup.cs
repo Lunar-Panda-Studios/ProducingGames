@@ -39,6 +39,7 @@ public class PlayerPickup : MonoBehaviour
     [Tooltip("The distance away from the camera that rotatable items are put")]
     [SerializeField] float rotDist;
     internal bool holdingNarrative = false;
+    playerMovement pMovement;
 
     Transform player;
     InteractRaycasting playerPickupRay;
@@ -51,6 +52,7 @@ public class PlayerPickup : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerPickupRay = player.GetComponent<InteractRaycasting>();
         startingHoldDist = holdDist;
+        pMovement = FindObjectOfType<playerMovement>();
     }
 
     void Update()
@@ -103,9 +105,12 @@ public class PlayerPickup : MonoBehaviour
                 GameObject tempHeld = heldItem;
                 heldItem = null;
                 tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                tempHeld.transform.rotation = tempHeld.GetComponent<RotatableItem>().startRotation;
                 tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
                 player.GetComponent<playerMovement>().enabled = true;
                 FindObjectOfType<lockMouse>().canLook = true;
+                heldItem.GetComponent<Rigidbody>().useGravity = true;
+                heldItem.GetComponent<Rigidbody>().freezeRotation = false;
                 UIManager.Instance.toggleMenuVariables();
             }
             else
@@ -169,6 +174,8 @@ public class PlayerPickup : MonoBehaviour
             heldItem.transform.localRotation = Quaternion.identity;
             heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
             itemStartRotation = heldItem.transform.rotation;
+            pMovement.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            pMovement.enabled = false;
             //this should only be a temp fix. Better fix needed
             if(!FindObjectOfType<PauseButtonToggle>().IsPaused)
             {
@@ -194,12 +201,14 @@ public class PlayerPickup : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 playerCameraTransform.GetComponent<lockMouse>().canLook = true;
+
             }
             
             if (heldItem)
             {
                 heldItem.transform.localRotation = Quaternion.identity;
                 heldItem.transform.eulerAngles = new Vector3(heldItem.transform.localEulerAngles.x, heldItem.transform.localEulerAngles.y + transform.localEulerAngles.y, heldItem.transform.localEulerAngles.z);
+                pMovement.enabled = true;
             }
         }
         //controller support

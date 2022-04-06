@@ -11,6 +11,7 @@ public class BookPressurePlate : MonoBehaviour
     public float weightNeeded;
     private float bookWeight;
     public GameObject evilBook;
+    public BookPuzzle book;
 
 
     void Start()
@@ -20,13 +21,14 @@ public class BookPressurePlate : MonoBehaviour
 
     void Update()
     {
+        book = FindObjectOfType<BookPuzzle>();
         bookWeight = evilBook.transform.localScale.x * 10;
     }
 
     void OnCollisionEnter(Collision collision)
     {
         print("COllision");
-        if (collision.gameObject.name == "EvilBook Variant" && bookWeight >= weightNeeded)
+        if (collision.gameObject.name == "EvilBook Variant" && book.GetWeight() >= weightNeeded)
         {
             print("Completed");
             ship.MoveShip();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CodeLock : MonoBehaviour
 {
@@ -13,10 +14,13 @@ public class CodeLock : MonoBehaviour
     public string code = "";
     public string attemptedCode;
 
-    public GameObject toOpen;
+    //public GameObject toOpen;
     public string AudioClipName;
 
     public GameObject anim;
+
+
+    public TextMeshPro CodeScreen;
 
     public void Start()
     {
@@ -24,6 +28,10 @@ public class CodeLock : MonoBehaviour
         GameEvents.current.puzzleCompleted += puzzleComplete;
     }
 
+    public void Update()
+    {
+        CodeScreen.text = attemptedCode;
+    }
 
     void CheckCode()
     {
