@@ -37,7 +37,7 @@ public class JournalMenuToggle : MonoBehaviour
                 {
                     IsOnMenu = true;
 
-                    //  BarOfStamina.SetActive(false);
+                    //  BarOfStamina.SetActive(false); 
 
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
@@ -54,20 +54,24 @@ public class JournalMenuToggle : MonoBehaviour
                 }
                 else if (IsOnMenu == true)
                 {
-                    JournalMenu.SetActive(false);
-                    IsOnMenu = false;
-                    //    BarOfStamina.SetActive(true);
-                    Cursor.lockState = CursorLockMode.Locked;
-                    MrCapsule.canLook = true;
-                    Cursor.visible = false;
-                    pickup.enabled = true;
-                    Time.timeScale = 1f;
-                    if (Analysis.current != null)
-                    {
-                        Analysis.current.menuOpen = false;
-                    }
+                    JournalOff();
                 }
             }
+        }
+    }
+    public void JournalOff()
+    {
+        JournalMenu.SetActive(false);
+        IsOnMenu = false;
+        //BarOfStamina.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        MrCapsule.canLook = true;
+        Cursor.visible = false;
+        pickup.enabled = true;
+        Time.timeScale = 1f;
+        if (Analysis.current != null)
+        {
+            Analysis.current.menuOpen = false;
         }
     }
 }
