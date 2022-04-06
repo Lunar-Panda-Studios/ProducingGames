@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2802a438f48964248b74f3226c2376c0, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -14177,7 +14177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80da0efcc7839cf49801911293023b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toOpenPan: {fileID: 498559737}
+  doorPivot: {fileID: 0}
   AudioClipName: Door_Open
   DoOnce: 0
 --- !u!1001 &1758524884
@@ -20098,6 +20098,7 @@ MonoBehaviour:
   attemptedCode: 
   toOpen: {fileID: 1202303346}
   AudioClipName: Door_Open
+  anim: {fileID: 0}
 --- !u!114 &4044556678317273073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21857,6 +21858,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313120268925086
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22219,6 +22222,7 @@ MonoBehaviour:
   switchMode: 1
   amogus: {fileID: 4216313120734476793}
   isPowerOn: 0
+  isLightsOn: 0
   leverSound: 
   nameSound: 
 --- !u!23 &4216313120462160044
@@ -22285,6 +22289,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!135 &4216313120462160047
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -22328,6 +22334,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 6fe492403e4d83a4fa31b5c34ed5c9d0, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313120482177315
 GameObject:
   m_ObjectHideFlags: 0
@@ -22556,6 +22564,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: dfc6a546112d8094a9009a9ae8cb6c49, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313120710376498
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22668,6 +22678,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!4 &4216313120734476786
 Transform:
   m_ObjectHideFlags: 0
@@ -22789,6 +22801,7 @@ MonoBehaviour:
   passLight: {fileID: 407094901005151190}
   passLight1: {fileID: 0}
   failLight: {fileID: 4033992257449301433}
+  maxPlayerDist: 2
 --- !u!65 &4216313120734476799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22949,6 +22962,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!114 &4216313120847263680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22979,6 +22994,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313120847263682
 GameObject:
   m_ObjectHideFlags: 0
@@ -23190,6 +23207,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!65 &4216313121503539904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23273,6 +23292,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313121503539910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23380,6 +23401,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!65 &4216313121511172237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23577,6 +23600,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313121799413606
 GameObject:
   m_ObjectHideFlags: 0
