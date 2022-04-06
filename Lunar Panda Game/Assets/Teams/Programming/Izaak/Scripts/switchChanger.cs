@@ -63,7 +63,6 @@ public class switchChanger : MonoBehaviour
 
     public void TurnPowerOn()
     {
-
         if (!isPowerOn)
         {
             SoundEffectManager.GlobalSFXManager.PlaySFX(audioClipName);

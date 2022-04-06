@@ -8,19 +8,32 @@ public class InteractAnimation : MonoBehaviour
 
     [SerializeField] bool closed = true;
     [SerializeField] float waitFor;
+    Animator anim;
+    [SerializeField] string InteractSound = "Electric_Switch";
 
     bool canInteract = true;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Interact"))
         {
-            if (canInteract)
+            if (canInteract && !AnimatorIsPlaying())
             {
                 StartCoroutine(playAnimation());
             }
         }
+    }
+
+    bool AnimatorIsPlaying()
+    {
+
+        if (anim != null)
+        {
+            print(animator.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            return animator.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }
+        else
+            return false;
     }
 
     IEnumerator playAnimation()
@@ -30,6 +43,7 @@ public class InteractAnimation : MonoBehaviour
         {
             if (hit.transform.gameObject == gameObject)
             {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(InteractSound);
                 if (closed)
                 {
                     animator.SetTrigger("Open");
