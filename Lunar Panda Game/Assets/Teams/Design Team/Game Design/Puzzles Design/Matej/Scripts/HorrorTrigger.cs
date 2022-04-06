@@ -278,7 +278,7 @@ public class HorrorTrigger : MonoBehaviour
     }
     public void ActivateTriggerCollider(bool value)
     {
-        this.gameObject.GetComponent<BoxCollider>().enabled = value;
+        this.gameObject.GetComponent<MeshCollider>().enabled = value;
         doneEvents++;
     }
     public void PlaySound(string clipName)
