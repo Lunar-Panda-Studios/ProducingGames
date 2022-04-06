@@ -10199,6 +10199,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----UI----
       objectReference: {fileID: 0}
+    - target: {fileID: 1219732638679829967, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219732638679829967, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219732638679829967, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219732638679829967, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219732638679829967, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664682941955177597, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664682941955177597, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
 --- !u!1001 &1030927416
@@ -11262,7 +11290,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 543450653460988112}
-  m_RootOrder: 35
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1221305811
 AudioSource:
@@ -14889,6 +14917,7 @@ MonoBehaviour:
   m_Script: {fileID: 1746668888}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &1637143087
 Transform:
   m_ObjectHideFlags: 19
@@ -21201,7 +21230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3580633676423312538}
   m_LocalRotation: {x: -0.7071068, y: -0.000000029802322, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1.225, y: -0.061, z: -0.569}
+  m_LocalPosition: {x: -1.225, y: -0.061, z: -1.099}
   m_LocalScale: {x: 2.54, y: 2.54, z: 2.5399997}
   m_Children:
   - {fileID: 7778453221590981118}
@@ -21593,6 +21622,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!33 &4216313120268925086
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22024,6 +22057,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!135 &4216313120462160047
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -22069,6 +22106,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: 6fe492403e4d83a4fa31b5c34ed5c9d0, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!1 &4216313120482177315
 GameObject:
   m_ObjectHideFlags: 0
@@ -22299,6 +22340,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: dfc6a546112d8094a9009a9ae8cb6c49, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!33 &4216313120710376498
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22413,6 +22458,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!4 &4216313120734476786
 Transform:
   m_ObjectHideFlags: 0
@@ -22700,6 +22749,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!114 &4216313120847263680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22732,6 +22785,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!1 &4216313120847263682
 GameObject:
   m_ObjectHideFlags: 0
@@ -22945,6 +23002,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &4216313121503539904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23030,6 +23091,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!33 &4216313121503539910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23139,6 +23204,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!65 &4216313121511172237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23338,6 +23407,10 @@ MonoBehaviour:
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
   childrenThatNeedGlow: []
   childrenFresnelMat: []
+  tooltip: {fileID: 0}
+  tooltipTxt: {fileID: 0}
+  tooltipGroup: {fileID: 0}
+  waitTime: 0.5
 --- !u!1 &4216313121799413606
 GameObject:
   m_ObjectHideFlags: 0
