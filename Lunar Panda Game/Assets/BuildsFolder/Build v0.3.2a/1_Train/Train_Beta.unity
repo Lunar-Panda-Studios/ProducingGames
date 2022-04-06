@@ -2251,7 +2251,6 @@ MonoBehaviour:
   id: 2
   code: 3423
   attemptedCode: 
-  toOpen: {fileID: 1202303346}
   AudioClipName: Door_Open
   anim: {fileID: 1202303342}
 --- !u!1001 &173489795
@@ -7960,7 +7959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipNames.Array.data[11]
-      value: Swtich_On/Off
+      value: Switch_On/Off
       objectReference: {fileID: 0}
     - target: {fileID: 7127609796813435145, guid: f411a9ce540ef7144bdef31f15bd1d01, type: 3}
       propertyPath: ClipNames.Array.data[12]
@@ -9825,7 +9824,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752791746}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.6426911, y: 1.5690753, z: 1}
@@ -12332,7 +12331,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4602651993765252631}
-  - {fileID: 543450653388177270}
   - {fileID: 1557066699112448021}
   m_Father: {fileID: 111481408}
   m_RootOrder: 2
@@ -17824,7 +17822,6 @@ MonoBehaviour:
   m_Script: {fileID: 1746668888}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &1637143087
 Transform:
   m_ObjectHideFlags: 19
@@ -24730,11 +24727,6 @@ Transform:
   m_Father: {fileID: 4216313120734476786}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
---- !u!4 &543450653388177270 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-  m_PrefabInstance: {fileID: 3031758792539062253}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &543450653615205338
 Transform:
   m_ObjectHideFlags: 0
@@ -25315,67 +25307,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &3031758792539062253
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1016334856}
-    m_Modifications:
-    - target: {fileID: 2797739630322162209, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_Name
-      value: WeddingRing
-      objectReference: {fileID: 0}
-    - target: {fileID: 2797739630322162209, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.069441
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3659
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.321
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.1150184
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.6518394
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.6976898
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.2740533
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -13.442
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 147.835
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285448437915631771, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f76ffcf39e90a5847ae75e647676d150, type: 3}
 --- !u!114 &3048509601646842442 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9089006301406063433, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
@@ -28310,7 +28241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2883316564453856456, guid: c5f4353db53c9fb4198f960f2fb39046, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2883316564453856456, guid: c5f4353db53c9fb4198f960f2fb39046, type: 3}
       propertyPath: m_LocalScale.x
