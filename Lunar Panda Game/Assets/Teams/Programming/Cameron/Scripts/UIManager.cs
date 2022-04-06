@@ -62,7 +62,15 @@ public class UIManager : MonoBehaviour
     public List<Page> pagesHotel;
     public List<Page> pagesCabin;
 
+    public GameObject tabHospital;
+    public GameObject tabHotel;
+    public GameObject tabCabin;
+
     int currentPage = 0;
+    int trainPage = 0;
+    int hospitalPage = 0;
+    int hotelPage = 0;
+    int cabinPage = 0;
 
     [Header("Objective UI")]
     public Text objectText;
@@ -112,6 +120,38 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < inventory.documentInventory.Count; i++)
         {
             activeImage(inventory.documentInventory[i]);
+        }
+
+        switch(GameManager.Instance.whichLevel)
+        {
+            case 2:
+                {
+                    tabHospital.SetActive(false);
+                    tabHotel.SetActive(false);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 3:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(false);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 4:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(true);
+                    tabCabin.SetActive(false);
+                    break;
+                }
+            case 5:
+                {
+                    tabHospital.SetActive(true);
+                    tabHotel.SetActive(true);
+                    tabCabin.SetActive(true);
+                    break;
+                }
         }
     }
 
@@ -480,12 +520,14 @@ public class UIManager : MonoBehaviour
                     {
                         pagesTrain[currentPage].mainPage.SetActive(false);
                         currentPage++;
+                        trainPage++;
                         pagesTrain[currentPage].mainPage.SetActive(true);
                     }
                     else
                     {
                         pagesTrain[currentPage].mainPage.SetActive(false);
                         currentPage--;
+                        trainPage--;
                         pagesTrain[currentPage].mainPage.SetActive(true);
                     }
                 break;
@@ -496,12 +538,14 @@ public class UIManager : MonoBehaviour
                     {
                         pagesHospital[currentPage].mainPage.SetActive(false);
                         currentPage++;
+                        hospitalPage++;
                         pagesHospital[currentPage].mainPage.SetActive(true);
                     }
                     else
                     {
                         pagesHospital[currentPage].mainPage.SetActive(false);
                         currentPage--;
+                        hospitalPage--;
                         pagesHospital[currentPage].mainPage.SetActive(true);
                     }    
                     break;
@@ -512,12 +556,14 @@ public class UIManager : MonoBehaviour
                     {
                         pagesHotel[currentPage].mainPage.SetActive(false);
                         currentPage++;
+                        hotelPage++;
                         pagesHotel[currentPage].mainPage.SetActive(true);
                     }
                     else
                     {
                         pagesHotel[currentPage].mainPage.SetActive(false);
                         currentPage--;
+                        hotelPage--;
                         pagesHotel[currentPage].mainPage.SetActive(true);
                     }
                     break;
@@ -528,12 +574,14 @@ public class UIManager : MonoBehaviour
                     {
                         pagesCabin[currentPage].mainPage.SetActive(false);
                         currentPage++;
+                        cabinPage++;
                         pagesCabin[currentPage].mainPage.SetActive(true);
                     }
                     else
                     {
                         pagesCabin[currentPage].mainPage.SetActive(false);
                         currentPage--;
+                        cabinPage--;
                         pagesCabin[currentPage].mainPage.SetActive(true);
                     }
                     break;
@@ -554,6 +602,7 @@ public class UIManager : MonoBehaviour
                             if (pagesTrain[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
                             {
                                 pagesTrain[i].documents[j].SetActive(true);
+                                currentPage = trainPage;
                                 break;
                             }
                         }
@@ -569,6 +618,7 @@ public class UIManager : MonoBehaviour
                             if (pagesHospital[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
                             {
                                 pagesHospital[i].documents[j].SetActive(true);
+                                currentPage = hospitalPage;
                                 break;
                             }
                         }
@@ -584,6 +634,7 @@ public class UIManager : MonoBehaviour
                             if (pagesHotel[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
                             {
                                 pagesHotel[i].documents[j].SetActive(true);
+                                currentPage = hotelPage;
                                 break;
                             }
                         }
@@ -599,6 +650,7 @@ public class UIManager : MonoBehaviour
                             if (pagesCabin[i].documents[j].GetComponent<Image>().sprite == data.documentImage)
                             {
                                 pagesCabin[i].documents[j].SetActive(true);
+                                currentPage = cabinPage;
                                 break;
                             }
                         }
