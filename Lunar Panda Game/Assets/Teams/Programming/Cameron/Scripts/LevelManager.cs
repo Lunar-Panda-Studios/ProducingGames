@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour
             movement.enabled = false;
         if (crouch != null)
             crouch.enabled = false;
+        //maybe have to unlock mouse and object stuff
         loadingScreen.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
         yield return new WaitForSeconds(2f);
