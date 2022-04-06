@@ -8,24 +8,22 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup loadingScreen;
     [SerializeField] float fadeTime;
-/*    private static LevelManager _instance;
+    /*private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } }*/
 
     void Awake()
     {
-        /*        if (_instance != null && _instance != this)
-                {
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    _instance = this;
-                }*/
+        /*if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }*/
         //StartCoroutine(LoadConnectorScene());
         transform.parent = null;
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(this);
-        
     }
 
     /*IEnumerator LoadConnectorScene()
@@ -85,7 +83,6 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-        print("test");
         StartCoroutine(FadeOut());
     }
 }
