@@ -103,9 +103,12 @@ public class PlayerPickup : MonoBehaviour
                 GameObject tempHeld = heldItem;
                 heldItem = null;
                 tempHeld.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                tempHeld.transform.rotation = tempHeld.GetComponent<RotatableItem>().startRotation;
                 tempHeld.transform.position = tempHeld.GetComponent<RotatableItem>().startLocation;
                 player.GetComponent<playerMovement>().enabled = true;
                 FindObjectOfType<lockMouse>().canLook = true;
+                heldItem.GetComponent<Rigidbody>().useGravity = true;
+                heldItem.GetComponent<Rigidbody>().freezeRotation = false;
                 UIManager.Instance.toggleMenuVariables();
             }
             else

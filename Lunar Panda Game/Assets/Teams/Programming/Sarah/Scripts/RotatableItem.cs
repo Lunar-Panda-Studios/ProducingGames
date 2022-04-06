@@ -9,10 +9,12 @@ public class RotatableItem : MonoBehaviour
 
     PlayerPickup pickup;
     internal Vector3 startLocation;
+    internal Quaternion startRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         startLocation = transform.position;
+        startRotation = transform.rotation;
     }
 }
