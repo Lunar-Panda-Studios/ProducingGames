@@ -8,7 +8,6 @@ public class VideoManager : MonoBehaviour
 {
     VideoPlayer videoPlayer;
     LevelManager levelManager;
-    GameManager gameManager;
     [SerializeField] string nextScene;
 
     float time;
@@ -20,7 +19,6 @@ public class VideoManager : MonoBehaviour
     {
         videoPlayer = GetComponent<VideoPlayer>();
         levelManager = FindObjectOfType<LevelManager>();
-        gameManager = FindObjectOfType<GameManager>();
         videoPlayer.loopPointReached += LoadScene;
     }
 
@@ -54,6 +52,7 @@ public class VideoManager : MonoBehaviour
 
     void LoadScene(VideoPlayer vp)
     {
+        GameManager.Instance.currentLevel(GameManager.Instance.whichLevel - 1);
         StartCoroutine(levelManager.FadeLoadingScreen(nextScene));
     }
 }

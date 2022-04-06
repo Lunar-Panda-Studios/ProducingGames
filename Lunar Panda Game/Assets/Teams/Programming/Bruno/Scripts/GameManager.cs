@@ -20,7 +20,6 @@ public enum GameState //Only Basic states
 
 public class GameManager : MonoBehaviour
 {
-    //Need help with creating a Singleton
     public static GameManager Instance;
 
     public GameState gameStates;
