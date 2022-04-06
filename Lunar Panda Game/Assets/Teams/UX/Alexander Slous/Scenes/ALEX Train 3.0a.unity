@@ -10595,42 +10595,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325764, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325786, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
-    - target: {fileID: 3105130969647325786, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325786, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325786, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325787, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325787, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325787, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -536
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105130969647325787, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 712
-      objectReference: {fileID: 0}
     - target: {fileID: 3548961325664470538, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10696,11 +10660,6 @@ PrefabInstance:
 --- !u!1 &1030836352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3105130969647325764, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
-  m_PrefabInstance: {fileID: 1030836351}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1030836353 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3105130969647325787, guid: 6ce7dca3884463c4aa2498c316e9fe44, type: 3}
   m_PrefabInstance: {fileID: 1030836351}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1030927416
@@ -16259,81 +16218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipName: Jacket_On
   endPosition: {fileID: 1213021419}
---- !u!1 &1741565342
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1741565343}
-  - component: {fileID: 1741565345}
-  - component: {fileID: 1741565344}
-  m_Layer: 5
-  m_Name: TooltipBG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1741565343
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741565342}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1030836353}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1741565344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741565342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6117647}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1741565345
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741565342}
-  m_CullTransparentMesh: 1
 --- !u!115 &1746668888
 MonoScript:
   m_ObjectHideFlags: 0
@@ -22495,6 +22379,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 321736469d4ba70428db6703ff8890e4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313120268925086
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22924,6 +22810,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!135 &4216313120462160047
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -22967,6 +22855,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 6fe492403e4d83a4fa31b5c34ed5c9d0, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313120482177315
 GameObject:
   m_ObjectHideFlags: 0
@@ -23195,6 +23085,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: dfc6a546112d8094a9009a9ae8cb6c49, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313120710376498
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23307,6 +23199,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!4 &4216313120734476786
 Transform:
   m_ObjectHideFlags: 0
@@ -23431,6 +23325,7 @@ MonoBehaviour:
   passLight: {fileID: 407094901005151190}
   passLight1: {fileID: 734653766}
   failLight: {fileID: 4033992257449301433}
+  maxPlayerDist: 2
 --- !u!65 &4216313120734476799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23591,6 +23486,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!114 &4216313120847263680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23621,6 +23518,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 757a634b43df6314bbd5f564895d7cd1, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313120847263682
 GameObject:
   m_ObjectHideFlags: 0
@@ -23832,6 +23731,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!65 &4216313121503539904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23915,6 +23816,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!33 &4216313121503539910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24022,6 +23925,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: ff68f2a950455b04596af633233954a4, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!65 &4216313121511172237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24219,6 +24124,8 @@ MonoBehaviour:
   isGlowing: 0
   baseMaterial: {fileID: 0}
   glowingMaterial: {fileID: 2100000, guid: 25f8f99a773928f45bb1618209434f45, type: 2}
+  childrenThatNeedGlow: []
+  childrenFresnelMat: []
 --- !u!1 &4216313121799413606
 GameObject:
   m_ObjectHideFlags: 0
