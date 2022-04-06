@@ -20,23 +20,38 @@ public class switchChanger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    bool AnimatorIsPlaying()
+    {
+        
+        if (anim != null)
+        {
+            print(anim.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            return anim.GetCurrentAnimatorStateInfo(0).length > anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }   
+        else
+            return false;
+    }
+
     public void changeSwitchState()
     {
-        switchMode = !switchMode;
-        if (switchMode && anim != null)
+        if(!AnimatorIsPlaying())
         {
-            anim.SetTrigger("Up");
-            if(SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            switchMode = !switchMode;
+            if (switchMode && anim != null)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                anim.SetTrigger("Up");
+                if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+                {
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                }
             }
-        }
-        else if (anim != null)
-        {
-            anim.SetTrigger("Down"); 
-            if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+            else if (anim != null)
             {
-                SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                anim.SetTrigger("Down");
+                if (SoundEffectManager.GlobalSFXManager != null && leverSound != null)
+                {
+                    SoundEffectManager.GlobalSFXManager.PlaySFX(leverSound);
+                }
             }
         }
     }
