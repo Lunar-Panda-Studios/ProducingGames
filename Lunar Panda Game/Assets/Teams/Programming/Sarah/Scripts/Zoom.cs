@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.UI;
 
 public class Zoom : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class Zoom : MonoBehaviour
     float timer = 0;
     public float delay = 1.5f;
     bool canZoom;
+
+    [SerializeField] Text zoomText;
 
     private void Start()
     {
@@ -51,7 +54,8 @@ public class Zoom : MonoBehaviour
             {
                 if (hit.transform.gameObject == gameObject && (!isZoomed && !zoomOut) && canZoom)
                 {
-                    print("hit");
+                    if (zoomText != null)
+                        zoomText.enabled = true;
                     isZoomed = true;
                     canZoom = false;
                     UIManager.Instance.toggleMenuVariables();
@@ -116,6 +120,8 @@ public class Zoom : MonoBehaviour
 
     public void unZoom()
     {
+        if (zoomText != null)
+            zoomText.enabled = false;
         zoomOut = true;
         UIManager.Instance.toggleMenuVariables();
     }
