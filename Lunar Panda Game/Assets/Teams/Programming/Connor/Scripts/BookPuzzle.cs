@@ -31,10 +31,12 @@ public class BookPuzzle : MonoBehaviour
     {
         pickUp = GameObject.FindObjectOfType<PlayerPickup>();
         pressurePlate.SetActive(false);
+        cameraRotate = FindObjectOfType<Camera>().gameObject;
     }
 
     void Update()
     {
+        
         rotation = cameraRotate.transform.localRotation.eulerAngles.x;
 
         if (pickUp.heldItem == gameObject)
