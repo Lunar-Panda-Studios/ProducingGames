@@ -50,7 +50,10 @@ public class InventoryMenuToggle : MonoBehaviour
 
                     if (Analysis.current != null)
                     {
-                        Analysis.current.menuOpen = true;
+                        if (Analysis.current.consent)
+                        {
+                            Analysis.current.menuOpen = true;
+                        }
                     }
                 }
                 //if the inventory ui is already on screen
@@ -65,7 +68,10 @@ public class InventoryMenuToggle : MonoBehaviour
                     Time.timeScale = 1f;
                     if (Analysis.current != null)
                     {
-                        Analysis.current.menuOpen = false;
+                        if (Analysis.current.consent)
+                        {
+                            Analysis.current.menuOpen = false;
+                        }
                     }
                 }
             }

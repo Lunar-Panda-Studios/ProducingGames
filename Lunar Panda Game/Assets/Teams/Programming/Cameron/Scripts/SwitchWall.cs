@@ -82,7 +82,10 @@ public class SwitchWall : MonoBehaviour
 
             if (Analysis.current != null)
             {
-                Analysis.current.failCounterAntidote++;
+                if (Analysis.current.consent)
+                {
+                    Analysis.current.failCounterAntidote++;
+                }
             }
         }
         return completedCombinations;

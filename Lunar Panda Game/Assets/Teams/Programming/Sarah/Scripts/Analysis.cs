@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Analysis : MonoBehaviour
 {
     internal static Analysis current;
-    internal bool consent = true;
+    internal bool consent = false;
 
     internal Dictionary<string, object> parameters = new Dictionary<string, object>();
     internal Dictionary<string, object> timers = new Dictionary<string, object>();
