@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PianoSequenceCheck : MonoBehaviour
 {
+    [SerializeField] Collider keyCollider;
+
     [Tooltip("id in relation to the event manager")]
     public int id;
 
@@ -82,6 +84,7 @@ public class PianoSequenceCheck : MonoBehaviour
     {
         SoundEffectManager.GlobalSFXManager.PlaySFX(openSound);
         toOpen.Rotate(new Vector3(0, 0, -54), Space.World);
+        keyCollider.enabled = true;
 
         yield return new WaitForSeconds(4); //In case we want something to happen after uncomment bellow 
 
