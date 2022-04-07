@@ -162,12 +162,12 @@ public class UIManager : MonoBehaviour
 
     public void autoSavingPromptShow()
     {
-        autoSavingSection.SetActive(true);
+        //autoSavingSection.SetActive(true);
     }
 
     public void autoSavingPromptHide()
     {
-        autoSavingSection.SetActive(false);
+        //autoSavingSection.SetActive(false);
     }
 
     public void toolTipInteract(ToolTipType type)
