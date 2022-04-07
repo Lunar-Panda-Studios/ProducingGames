@@ -45,7 +45,10 @@ public class PianoSequenceCheck : MonoBehaviour
         {
             if (Analysis.current != null)
             {
-                Analysis.current.failCounterPiano++;
+                if (Analysis.current.consent)
+                {
+                    Analysis.current.failCounterPiano++;
+                }
             }
             SoundEffectManager.GlobalSFXManager.PlaySFX(resetSound);
             Debug.Log("Wrong Code");

@@ -25,10 +25,13 @@ public class HearSeeSayController : MonoBehaviour
 
         door.GetComponent<OpenDoor>().canOpen = true;
         SoundEffectManager.GlobalSFXManager.PlaySFX(completeClip);
-        if (Analysis.current.consent)
+        if (Analysis.current != null)
         {
-            Analysis.current.resetTimer("HearSeeSay");
-            Analysis.current.sendFinal();
+            if (Analysis.current.consent)
+            {
+                Analysis.current.resetTimer("HearSeeSay");
+                Analysis.current.sendFinal();
+            }
         }
     }
 }

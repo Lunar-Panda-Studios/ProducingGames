@@ -67,7 +67,10 @@ public class bikeLock : MonoBehaviour
             {
                 if (Analysis.current != null)
                 {
-                    Analysis.current.failCounterBikeLock++;
+                    if (Analysis.current.consent)
+                    {
+                        Analysis.current.failCounterBikeLock++;
+                    }
                 }
 
                 puzzleSolved = false;
