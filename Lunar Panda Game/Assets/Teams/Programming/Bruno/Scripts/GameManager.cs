@@ -99,12 +99,7 @@ public class GameManager : MonoBehaviour
         if(whichLevel != data.whichLevel)
         {
             whichLevel = data.whichLevel;
-            AsyncOperation loadScene = SceneManager.LoadSceneAsync(data.sceneName);
-
-            while (!loadScene.isDone)
-            {
-                yield return null;
-            }
+            StartCoroutine(FindObjectOfType<LevelManager>().FadeLoadingScreen(data.sceneName));
 
             yield return new WaitForEndOfFrame();
 
