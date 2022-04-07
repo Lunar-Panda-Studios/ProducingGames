@@ -81,6 +81,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1704424592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780458350867628925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 846c102d1f0e1c54f930d46e3da3a42a, type: 2}
 --- !u!82 &2127525933
 AudioSource:
   m_ObjectHideFlags: 0
@@ -193,23 +210,6 @@ MonoBehaviour:
   buffer: 0.1
   typeOfFloor: 0
   soundEffectManager: {fileID: 0}
---- !u!114 &1704424592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2780458350867628925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 846c102d1f0e1c54f930d46e3da3a42a, type: 2}
 --- !u!1001 &2780458349666270901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,6 +220,10 @@ PrefabInstance:
     - target: {fileID: 906557146, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: clipName
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 973075566, guid: d3daebf205d28d244948c2179be01d89, type: 3}
+      propertyPath: rotDist
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1218166218, guid: d3daebf205d28d244948c2179be01d89, type: 3}
       propertyPath: m_Depth
