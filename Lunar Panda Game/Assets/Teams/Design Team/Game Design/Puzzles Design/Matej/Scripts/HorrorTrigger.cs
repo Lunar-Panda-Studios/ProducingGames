@@ -99,7 +99,7 @@ public class HorrorTrigger : MonoBehaviour
                         Time.deltaTime * damping);
             camera.transform.localEulerAngles = new Vector3(Mathf.Lerp(camera.transform.localEulerAngles.x, 0, Time.deltaTime), 0, 0);
         }
-        if (doneEvents == numberOfEvents && coroutineDone) GetComponent<BoxCollider>().enabled = false;
+        if (doneEvents == numberOfEvents && coroutineDone) GetComponent<MeshCollider>().enabled = false;
 
     }
     private void OnTriggerEnter(Collider other)
