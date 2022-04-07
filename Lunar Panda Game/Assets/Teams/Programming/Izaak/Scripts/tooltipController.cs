@@ -30,10 +30,16 @@ public class tooltipController : MonoBehaviour
     [Tooltip("Drag in the InventoryMenu object if it is an inventory-related tooltip")]
     public GameObject inventoryMenu;
 
+    public GameObject FLTriggerBox;
+    public GameObject torch;
+
     // Update is called once per frame
     void Update()
     {
         checkControls();
+
+        
+
     }
 
     void checkControls()
@@ -72,7 +78,9 @@ public class tooltipController : MonoBehaviour
                         if (Input.GetButton("Flashlight"))
                         {
                             deactivateTooltip();
+                            FLTriggerBox.SetActive(false);
                         }
+
                     }
                     break;
                 case controlTypes.SPRINT:
@@ -155,7 +163,7 @@ public class tooltipController : MonoBehaviour
         }
     }
 
-    private void deactivateTooltip()
+    public void deactivateTooltip()
     {
         inRange = false;
         UITip.GetComponent<tooltipDisplay>().changeText(" ");

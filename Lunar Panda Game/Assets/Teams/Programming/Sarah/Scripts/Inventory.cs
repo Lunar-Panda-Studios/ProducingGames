@@ -7,7 +7,8 @@ public class Inventory : MonoBehaviour
 {
     //inventory system that can hold multiple items 
     [SerializeField] 
-    internal List<ItemData> itemInventory;
+    //internal List<ItemData> itemInventory;
+    public List<ItemData> itemInventory;
     [SerializeField] 
     internal List<DocumentData> documentInventory;
     [SerializeField]
@@ -25,6 +26,10 @@ public class Inventory : MonoBehaviour
     Camera cam;
     float timer = 0;
     public float maxTime = 1;
+
+
+
+
 
     private void Awake()
     {

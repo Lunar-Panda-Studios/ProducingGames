@@ -62,7 +62,7 @@ public class InteractRaycasting : MonoBehaviour
                     {
                         if (hit.transform.CompareTag("Flashlight"))
                         {
-                            flashlight.enabled = true;
+                            //flashlight.enabled = true;
                             //hit.transform.gameObject.SetActive(false);
                         }
                         return true;
@@ -94,7 +94,7 @@ public class InteractRaycasting : MonoBehaviour
                     {
                         if (hit.transform.CompareTag("Flashlight"))
                         {
-                            flashlight.enabled = true;
+                            //flashlight.enabled = true;
                             //hit.transform.gameObject.SetActive(false);
                         }
                         return true;
