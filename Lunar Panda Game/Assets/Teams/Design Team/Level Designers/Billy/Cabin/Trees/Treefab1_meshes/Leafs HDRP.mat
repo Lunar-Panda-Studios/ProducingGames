@@ -9,13 +9,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Leafs HDRP
   m_Shader: {fileID: 4800000, guid: d0b0b1ecc7c9d1547b28a143112aad6d, type: 3}
-  m_ShaderKeywords: _ADD_PRECOMPUTED_VELOCITY _DOUBLESIDED_ON
+  m_ShaderKeywords: _ADD_PRECOMPUTED_VELOCITY _ALPHATEST_ON _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2450
   stringTagMap:
     MotionVector: User
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - TransparentBackface
   m_SavedProperties:
@@ -40,7 +41,7 @@ Material:
     m_Floats:
     - _AddPrecomputedVelocity: 1
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
@@ -60,13 +61,13 @@ Material:
     - _GlobalWindInfluence: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Hue: -0.5
+    - _Hue: 0.299
     - _Metallic: 0
-    - _OcclusionStrength: 0.6
+    - _OcclusionStrength: 0.493
     - _ReceivesSSR: 1
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Saturation: 1
+    - _Saturation: 2
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -92,14 +93,14 @@ Material:
     - _TransparentZWrite: 1
     - _UseShadowThreshold: 0
     - _Value: 1
-    - _WindModeLeaves: 0
+    - _WindModeLeaves: 3
     - _ZTestDepthEqualForOpaque: 3
-    - _ZTestGBuffer: 4
+    - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     - _DiffusionProfile_asset: {r: -6.315383e-37, g: -7.0622125e-27, b: 4.6171996e-22, a: -8.3853756e-30}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
