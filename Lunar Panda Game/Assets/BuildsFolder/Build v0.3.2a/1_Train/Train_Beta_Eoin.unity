@@ -14235,10 +14235,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4538703226022299733, guid: c74bde1990f8c414ebd12347dedce9ee, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4664682941955177597, guid: c74bde1990f8c414ebd12347dedce9ee, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -18110,6 +18106,10 @@ PrefabInstance:
       propertyPath: TorchSpotLight
       value: 
       objectReference: {fileID: 1604577577}
+    - target: {fileID: 905222720821141336, guid: d1f4def3798604c4da2efbcd87be640e, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 905222720876237636}
     - target: {fileID: 2780458349005540562, guid: d1f4def3798604c4da2efbcd87be640e, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -18169,6 +18169,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 905222721003889337, guid: d1f4def3798604c4da2efbcd87be640e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d1f4def3798604c4da2efbcd87be640e, type: 3}
+--- !u!136 &905222720876237636 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 9037258027316668137, guid: d1f4def3798604c4da2efbcd87be640e, type: 3}
+  m_PrefabInstance: {fileID: 905222720876237635}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &919132147903724300
 GameObject:
   m_ObjectHideFlags: 0

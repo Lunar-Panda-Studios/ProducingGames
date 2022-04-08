@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerCrouch : MonoBehaviour
 {
-    protected CapsuleCollider playerCollider;
+    [SerializeField] CapsuleCollider playerCollider;
     
     protected bool isCrouching = false;
 
     public CrouchTrigger crouchTrigger;
     void Start()
     {
-        playerCollider = GetComponent<CapsuleCollider>();
+        //playerCollider = GetComponent<CapsuleCollider>();
     }
     void Update()
     {
