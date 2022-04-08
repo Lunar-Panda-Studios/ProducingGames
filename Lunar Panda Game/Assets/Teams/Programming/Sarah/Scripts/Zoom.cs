@@ -112,7 +112,7 @@ public class Zoom : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.C) && isZoomed)
+        if(Input.GetKeyDown(KeyCode.Escape) && isZoomed)
         {
             unZoom();
         }
