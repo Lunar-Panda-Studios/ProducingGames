@@ -79,7 +79,7 @@ public class pressurePlate : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
-        if (col.tag == ("Player"))
+        if (col.tag == ("TipCollider"))
         {
             moving = true;
             pressing = true;
@@ -89,7 +89,7 @@ public class pressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("TipCollider"))
         {
             stayOn = false;
         }

@@ -33,15 +33,17 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.Instance.docInventory.Count != 0)
-        {
-            documentInventory = GameManager.Instance.docInventory;
-        }
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (GameManager.Instance.docInventory.Count != 0)
+        {
+            documentInventory = GameManager.Instance.docInventory;
+        }
+
         player = FindObjectOfType<playerMovement>().gameObject;
         pickupControl = FindObjectOfType<PlayerPickup>();
         itemInventory = new List<ItemData>();
