@@ -76,7 +76,7 @@ public class Analysis : MonoBehaviour
         {
             sprintingTime += Time.deltaTime;
         }
-        if (light.powerOn)
+        if (light.onOff)
         {
             flashlightTime += Time.deltaTime;
         }
