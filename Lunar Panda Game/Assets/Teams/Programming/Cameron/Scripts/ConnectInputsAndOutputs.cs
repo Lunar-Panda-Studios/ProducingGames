@@ -34,7 +34,7 @@ public class ConnectInputsAndOutputs : MonoBehaviour
 
         foreach (Light light in completionLights)
         {
-            light.enabled = false;
+            //light.enabled = false;
         }
         //Invert the layer mask so that it targets everything apart from the layer its set to
         cableMask = ~cableMask;

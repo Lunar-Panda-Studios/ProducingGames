@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractRaycasting : MonoBehaviour
 {
     Transform player;
-    Flashlight flashlight;
+    //Flashlight flashlight;
     Transform playerCamera;
     JournalMenuToggle Journal;
     PauseButtonToggle Pause;
@@ -19,7 +19,7 @@ public class InteractRaycasting : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerCamera = Camera.main.transform;
-        flashlight = FindObjectOfType<Flashlight>();
+        //flashlight = FindObjectOfType<Flashlight>();
         //flashlight.enabled = false;
 
         //setting up singleton
@@ -48,26 +48,28 @@ public class InteractRaycasting : MonoBehaviour
         {
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
-                if (flashlight.enabled)
-                {
-                    return true;
-                }
-                else
-                {
-                    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        if (hit.transform.CompareTag("Flashlight"))
-                        {
-                            //flashlight.enabled = true;
-                            //hit.transform.gameObject.SetActive(false);
-                        }
-                        return true;
-                    }
-                }
+                return true;
+
+                //if (flashlight.enabled)
+                //{
+                //    return true;
+                //}
+                //else
+                //{
+                //    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
+                //    {
+                //        return false;
+                //    }
+                //    else
+                //    {
+                //        if (hit.transform.CompareTag("Flashlight"))
+                //        {
+                //            //flashlight.enabled = true;
+                //            //hit.transform.gameObject.SetActive(false);
+                //        }
+                //        return true;
+                //    }
+                //}
             }
             return false;
         }
@@ -80,26 +82,28 @@ public class InteractRaycasting : MonoBehaviour
         {
             if (hit.transform != null && !Journal.IsOnMenu && !Feedback.IsOnFeedbackMenu && !Inventory.IsOnInventory && !Pause.IsPaused)
             {
-                if (flashlight.enabled)
-                {
-                    return true;
-                }
-                else
-                {
-                    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        if (hit.transform.CompareTag("Flashlight"))
-                        {
-                            //flashlight.enabled = true;
-                            //hit.transform.gameObject.SetActive(false);
-                        }
-                        return true;
-                    }
-                }
+                return true;
+
+                //if (flashlight.enabled)
+                //{
+                //    return true;
+                //}
+                //else
+                //{
+                //    if (!hit.transform.CompareTag("Flashlight") && !hit.transform.CompareTag("BorisBox"))
+                //    {
+                //        return false;
+                //    }
+                //    else
+                //    {
+                //        if (hit.transform.CompareTag("Flashlight"))
+                //        {
+                //            //flashlight.enabled = true;
+                //            //hit.transform.gameObject.SetActive(false);
+                //        }
+                //        return true;
+                //    }
+                //}
             }
             return false;
         }

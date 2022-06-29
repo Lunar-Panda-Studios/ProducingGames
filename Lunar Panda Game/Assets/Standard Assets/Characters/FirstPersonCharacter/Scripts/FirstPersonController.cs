@@ -1,8 +1,13 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+
+
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -28,6 +33,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
+        [SerializeField] public bool canLook; // stops the camera from moving.
+
+        //[SerializeField] public bool isCrouching = false;
+
+
+        //private CrouchTrigger crouchTrigger;
+
+
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -42,6 +55,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+
+        void Awake()
+        {
+            canLook = true;
+        }
+
         // Use this for initialization
         private void Start()
         {
@@ -55,13 +74,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            //crouchTrigger = gameObject.GetComponent<CrouchTrigger>();
         }
 
 
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
+            if (canLook)
+            {
+                RotateView();
+            }
+
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -81,6 +106,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            //Crouch();
         }
 
 
@@ -253,5 +280,35 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        //private void Crouch()
+        //{
+
+        //    //Set the key for crouch
+        //    var crouchButton = Input.GetKey(KeyCode.LeftControl);
+
+
+        //    if (!isCrouching && Input.GetButtonDown("Crouch"))
+        //    {
+        //        //Set player height to 0.5 when holding crouch key and center to 0.25
+        //        m_CharacterController.height = 1f;
+        //        //playerCollider.center = new Vector3(playerCollider.center.x, 0.25f, playerCollider.center.z);
+        //        isCrouching = true;
+        //    }
+        //    else
+        //        if (isCrouching && Input.GetButtonDown("Crouch") && crouchTrigger.isObjectAbove == false)
+        //    {
+        //        //var cantStandUp = Physics.Raycast(transform.position, Vector3.up, 2f);
+
+        //        //Checks if player can stand up
+        //        //if(!cantStandUp)
+        //        //{
+        //        //Sets player height back to 2 and resets center back to 0
+        //        playerCollider.height = 2.4f;
+        //        //playerCollider.center = new Vector3(playerCollider.center.x, 0f, playerCollider.center.z);
+        //        isCrouching = false;
+        //        //}
+        //    }
+        //}
     }
 }

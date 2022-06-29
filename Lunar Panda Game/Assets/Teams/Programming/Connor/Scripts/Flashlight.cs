@@ -11,7 +11,7 @@ public class Flashlight : MonoBehaviour
     const float maxBatteryLife = 60; //total battery life 
     float batteryLife = maxBatteryLife; //current battery life will change this later after designers say what they want
 
-    internal bool powerOn = false; //Flashlight starts disabled this manages battery consumption 
+    internal bool onOff = false; //Flashlight starts disabled this manages battery consumption 
 
 
     //Matej changes - just flickering :)
@@ -44,9 +44,18 @@ public class Flashlight : MonoBehaviour
     {
         if (Input.GetButtonDown("Flashlight"))
         {
-            SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
-            powerOn = !powerOn;
-            lightSource.enabled = powerOn;
+            onOff = !onOff;
+
+            if (onOff)
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                lightSource.enabled = true;
+            }
+            else
+            {
+                SoundEffectManager.GlobalSFXManager.PlaySFX(clipName);//Matej changes
+                lightSource.enabled = false;
+            }
         }
     }
 
@@ -54,7 +63,7 @@ public class Flashlight : MonoBehaviour
     {
         while (true)
         {
-            if(powerOn)
+            if(onOff)
             {
                 if (isOn)
                 {
