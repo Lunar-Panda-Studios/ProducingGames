@@ -6314,6 +6314,7 @@ MonoBehaviour:
   L: {fileID: 235469718}
   M: {fileID: 850461338}
   S: {fileID: 1129732339}
+  codeLock: {fileID: 0}
   theCode: 
 --- !u!43 &1717385891
 Mesh:
@@ -7869,11 +7870,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 508059705516891221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!33 &652126346840947638
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7911,11 +7910,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 682006610546835463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!33 &834704587219770232
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7953,11 +7950,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1001408996611706299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!23 &1001515205411615456
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8056,11 +8051,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1254213644122635502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!23 &1258405362486705342
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8213,11 +8206,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1647131918508723865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!114 &2020209527659591077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8883,24 +8874,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3371282432326374675}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3371282432340563967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4932613216589707030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d2b52426d1ff84d9bcf146eec10857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 2
-  code: 3423
-  attemptedCode: 
-  AudioClipName: Door_Open
-  anim: {fileID: 670930507}
-  CodeScreen: {fileID: 3371282433532605025}
 --- !u!65 &3371282432883304965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9152,11 +9125,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3386684593232499620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!114 &4095348592199001999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9783,7 +9754,7 @@ GameObject:
   - component: {fileID: 8668394902546318090}
   - component: {fileID: 8132625623669616779}
   - component: {fileID: 1347478437337769637}
-  - component: {fileID: 3371282432340563967}
+  - component: {fileID: 4932613216589707031}
   m_Layer: 0
   m_Name: Keypad
   m_TagString: NumberCode
@@ -9791,6 +9762,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4932613216589707031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4932613216589707030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808686a2058c9194d83cdd6fb07ddc66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  code: 
+  attemptedCode: 
+  AudioClipName: 
+  anim: {fileID: 0}
+  CodeScreen: {fileID: 0}
 --- !u!33 &5137604077345389261
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10175,11 +10163,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6815377528169208067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!4 &7416608699672094168
 Transform:
   m_ObjectHideFlags: 0
@@ -10223,11 +10209,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7442116575315885742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!23 &7774930177452439430
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10521,11 +10505,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8536772003390781185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}
 --- !u!33 &8538040453307032563
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10589,8 +10571,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9038759352319392130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ff4a60682e1734faa500dff3bf9060, type: 3}
+  m_Script: {fileID: 11500000, guid: eb080c2e5a9849c478a0f98ccfa88461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsActiveBtnToWork: 0
-  buttonNeeded: {fileID: 0}

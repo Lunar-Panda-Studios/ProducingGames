@@ -6,7 +6,7 @@ using TMPro;
 
 public class Disc : MonoBehaviour
 {
-    //Author : Matej Gajdos - Gameplay Designer
+    //Author : Matej Gajdos - Gameplay Design
     //When editing please use comments to mark the changes
     //This script is used in logic and animation of the food chain puzzle
 
@@ -125,10 +125,10 @@ public class Disc : MonoBehaviour
         if (InteractRaycasting.Instance.raycastInteract(out RaycastHit hit))
         {
             if (hit.transform.gameObject == gameObject)
-                {
+            {
                 print(size + " has been hit");
                 brain.TurnDiscs(size);
-                }
+            }
         }
     }
     public void Rotate()

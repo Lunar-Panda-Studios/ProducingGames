@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class FoodChainBrain : MonoBehaviour
 {
+    //Author: Matej Gajdos - Game Design
+
     [Header("Code & Animation")]
     public Disc X;
     public Disc L;
     public Disc M;
     public Disc S;
+
+    [Header("Lock")]
+    public SimplifiedCodeLock codeLock; 
 
     int firstNumber;
     int secondNumber;
@@ -17,8 +22,6 @@ public class FoodChainBrain : MonoBehaviour
 
     public string theCode;
 
-
-
     public void Start()
     {
         firstNumber = X.GetNumber();
@@ -26,6 +29,7 @@ public class FoodChainBrain : MonoBehaviour
         thirdNumber = M.GetNumber();
         fourthNumber = S.GetNumber();
         theCode = firstNumber + "" + secondNumber + "" + thirdNumber + "" + fourthNumber;
+        codeLock.writeCode(theCode);
     }
     public void TurnDiscs(char size)
     {
